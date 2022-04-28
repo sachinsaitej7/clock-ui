@@ -1,0 +1,163 @@
+.reviewordercard {
+  height: 200px;
+  position: relative;
+  background: #ffffff;
+  /* Neutral/900 */
+
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  border-radius: 2px;
+  margin-bottom: 20px;
+
+  .scimage {
+    left: 20px;
+    top: 20px;
+    width: 118px;
+    height: 160px;
+    position: absolute;
+  }
+
+  .scproductname {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 150%;
+    /* identical to box height, or 30px */
+
+    letter-spacing: 0.01612em;
+
+    position: absolute;
+    left: 158px;
+    top: 20px;
+    bottom: 150px;
+    right: 41;
+    width: 400px;
+  }
+  .scinstock {
+    position: absolute;
+
+    left: 158px;
+    top: 54px;
+    width: 100px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+
+    letter-spacing: 0.01612em;
+
+    /* Green 1 */
+
+    color: #219653;
+  }
+  .properties {
+    position: absolute;
+
+    left: 160px;
+    top: 83px;
+    width: 150px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.01612em;
+
+    /* Neutral/100 */
+
+    color: #191919;
+  }
+  .properties2 {
+    position: absolute;
+    width: 150px;
+    left: 160px;
+    top: 100px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.01612em;
+
+    /* Neutral/100 */
+
+    color: #191919;
+  }
+  .scpricing {
+    position: absolute;
+    left: 87%;
+    top: 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+    text-align: right;
+    letter-spacing: 0.01612em;
+
+    /* P/S8 */
+
+    color: #001210;
+  }
+
+  .scquantity {
+    position: absolute;
+    width: 90px;
+    height: 26px;
+    left: 158px;
+    top: 148px;
+    background: #ffffff;
+    /* Neutral/500 */
+
+    border: 1px solid #808080;
+    box-sizing: border-box;
+    border-radius: 4px;
+    .item1 {
+      position: absolute;
+      left: 10px;
+      top: 5px;
+      cursor: pointer;
+    }
+    .item2 {
+      position: absolute;
+      left: 64px;
+      top: 5px;
+      cursor: pointer;
+    }
+    .count {
+      position: absolute;
+      left: 40px;
+      top: 1.5px;
+    }
+    img:hover {
+      background: rgba(247, 246, 246, 0.8);
+    }
+  }
+  .del {
+    position: absolute;
+    left: 260px;
+    top: 150px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+
+    text-align: right;
+    letter-spacing: 0.01612em;
+    text-decoration-line: underline;
+    cursor: pointer;
+
+    /* Neutral/500 */
+
+    color: #808080;
+  }
+}

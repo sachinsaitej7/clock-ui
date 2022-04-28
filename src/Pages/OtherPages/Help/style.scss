@@ -1,0 +1,104 @@
+.answer {
+  margin: 35px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  /* or 24px */
+
+  letter-spacing: 0.01612em;
+
+  /* Neutral/300 */
+
+  color: #4c4c4c;
+}
+h1 {
+  margin-top: 50px;
+  margin-left: 7.5%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height */
+
+  letter-spacing: 0.01612em;
+
+  /* P/S8 */
+
+  color: #001210;
+}
+h4 {
+  margin-left: 7.5%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+
+  letter-spacing: 0.01612em;
+
+  /* Neutral/200 */
+
+  color: #333333;
+}
+.bottom {
+  margin-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  font-family: Poppins;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height */
+
+  letter-spacing: 0.01612em;
+
+  /* P/S8 */
+
+  color: #001210;
+}
+.desctext {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.01612em;
+  color: #333333;
+}
+
+.contactUsBtn {
+  width: 260px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  background: #015850;
+  border-radius: 2px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  .btnText {
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 50px;
+    text-align: center;
+    letter-spacing: 0.01612em;
+    text-transform: uppercase;
+
+    color: #ffffff;
+  }
+}

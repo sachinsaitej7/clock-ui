@@ -1,0 +1,164 @@
+
+
+  .productDeetails {
+    
+    padding: 10px 18px 10px 18px;
+    min-width: 500px;
+    width: 94%;
+    height: fit-content;
+    border: 2px solid #e6e6e6;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    .image {
+      img {
+        width: 145px;
+        height: 215px;
+      }
+    }
+    .notImage {
+      margin-left: 2%;
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .horizontalFlex {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .productVerticalFlex {
+          width: 100%;
+          height: fit-content;
+          .productNameandPrice {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            .productName {
+              width: 500px;
+              cursor: pointer;
+              font-family: Poppins;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 22px;
+              line-height: 60px;
+              letter-spacing: 0.01612em;
+              color: #0555bb;
+            }
+            .price {
+              font-family: Roboto;
+              font-style: 500;
+              font-weight: 500;
+              font-size: 24px;
+              line-height: 60px;
+              text-align: right;
+              letter-spacing: 0.01612em;
+            }
+          }
+          .colorandSize {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 30px;
+            /* identical to box height, or 24px */
+            letter-spacing: 0.01612em;
+            b {
+              font-size: 18px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+      .buttonsandStoreName {
+        padding: 10px 10px 10px 5px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .price {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 22px;
+          line-height: 30px;
+          /* identical to box height, or 30px */
+
+          letter-spacing: 0.01612em;
+        }
+        .buttons {
+          width: fit-content;
+          display: flex;
+          .button {
+            cursor: pointer;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            text-align: right;
+            letter-spacing: 0.01612em;
+            text-decoration-line: underline;
+            color: #808080;
+          }
+        }
+        text {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 150%;
+          /* identical to box height, or 24px */
+
+          letter-spacing: 0.01612em;
+        }
+        .storeName {
+          cursor: pointer;
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 19px;
+          line-height: 30px;
+          /* identical to box height, or 24px */
+
+          letter-spacing: 0.01612em;
+
+          /* Support/Blue */
+
+          color: #0555bb;
+        }
+      }
+    }
+  }
+
+.green {
+  position: relative;
+  z-index: 0;
+  top: -10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+  /* identical to box height, or 21px */
+
+  letter-spacing: 0.01612em;
+
+  /* Green 1 */
+
+  color: #219653;
+}
+.red {
+  position: relative;
+  z-index: 0;
+  top: -10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+  /* identical to box height, or 21px */
+
+  letter-spacing: 0.01612em;
+
+  /* Green 1 */
+
+  color: #EB5757;
+}

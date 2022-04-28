@@ -1,0 +1,43 @@
+.numberip {
+  display: flex;
+
+  .nbox {
+    border: 0.002em solid #666666;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 80%;
+    width: 10%;
+
+    padding-left: 4%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    color: #666666;
+  }
+  .searchbar {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 2%;
+    width: 100%;
+    border: 1% solid #666666;
+
+    text {
+      width: 50%;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      /* identical to box height */
+
+      letter-spacing: 0.01612em;
+
+      /* Neutral/600 */
+
+      color: #999999;
+    }
+
+    placeholder {
+    }
+  }
+}

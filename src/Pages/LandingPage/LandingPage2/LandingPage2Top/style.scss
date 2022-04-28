@@ -1,0 +1,66 @@
+.tops {
+  .span {
+    margin-left: 1%;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .item-1 {
+      width: 24%;
+    }
+    .item-2 {
+      width: 24%;
+    }
+    .item-3 {
+      width: 24%;
+    }
+    .item-4 {
+      width: 24%;
+    }
+  }
+  .Showmore {
+    padding-top: 1.6%;
+    padding-left: 45%;
+  }
+  .userLoc {
+    transform: scale(1.1);
+    margin-left: 5.25%;
+    margin-top: 30px;
+    margin-bottom: 18px;
+  }
+  .adCard {
+    margin: 60px 1%;
+    width: 98%;
+    height: inherit;
+    margin-bottom: 30px;
+  }
+  .trending {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 40%;
+    margin-bottom: 150px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 51px;
+    text-align: center;
+    letter-spacing: 0.01612em;
+    text-transform: uppercase;
+    color: #000908;
+  }
+  .spanStoreCard {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 99%;
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .item {
+      width: 19%;
+      margin-bottom: 30px;
+    }
+  }
+}

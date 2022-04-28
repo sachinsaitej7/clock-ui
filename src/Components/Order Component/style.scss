@@ -1,0 +1,91 @@
+.orderComponent {
+  height: fit-content;
+  width: 70%;
+  margin: 25px 0px 0px 0px;
+  .orderDetails {
+    padding: 10px 20px 10px 20px;
+    min-width: 500px;
+    width: 100%;
+    height: fit-content;
+
+    background-color: #f6f6f6;
+    table {
+      display: flex;
+      justify-content: space-between;
+      text-align: left;
+      td {
+        align-content: flex-start;
+        th {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 18px;
+          line-height: 30px;
+          color: #4c4c4c;
+          letter-spacing: 0.01612em;
+        }
+        .dateandTime {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          letter-spacing: 0.01612em;
+        }
+        .orderNo {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          letter-spacing: 0.01612em;
+          color: #0555bb;
+        }
+        .totalPrice {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          letter-spacing: 0.01612em;
+        }
+        .noofProducts {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          letter-spacing: 0.01612em;
+        }
+      }
+    }
+  }
+  .orderDetailsButton {
+    display: flex;
+    margin-left: 65%;
+    width: 250px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #0555bb;
+    text-align: center;
+    text-decoration-line: underline;
+    .downArrow {
+      margin-top: 7.5px;
+      img {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+}
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}

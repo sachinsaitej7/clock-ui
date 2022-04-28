@@ -1,0 +1,125 @@
+.mcproduct-card {
+  width: 100%;
+  height: 140px;
+  margin: 5px auto;
+  position: relative;
+
+  .mcimage {
+    left: 0px;
+    top: 0px;
+    width: 118px;
+    height: 140px;
+    position: absolute;
+  }
+
+  .productname {
+    position: absolute;
+    height: 48px;
+    left: 123px;
+    top: 0px;
+    text-align: left;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 50%;
+    /* or 24px */
+
+    letter-spacing: 0.01612em;
+
+    /* Neutral/200 */
+
+    color: #333333;
+  }
+  .instock {
+    position: absolute;
+
+    left: 123px;
+    top: 54px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+
+    letter-spacing: 0.01612em;
+
+    /* Green 1 */
+
+    color: #219653;
+  }
+  .properties {
+    position: absolute;
+
+    left: 123px;
+    top: 75px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.01612em;
+    color: #333333;
+
+    /* Neutral/100 */
+
+    // color: #191919;
+  }
+  .pricing {
+    position: absolute;
+
+    left: 123px;
+    top: 129px;
+  }
+
+  .deleteimg {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    img:hover {
+      background: rgba(247, 246, 246, 0.8);
+    }
+  }
+  .quantity {
+    position: absolute;
+    width: 90px;
+    height: 32px;
+    right: 10px;
+    bottom: 10px;
+    background: #ffffff;
+    /* Neutral/500 */
+
+    border: 1px solid #808080;
+    box-sizing: border-box;
+    border-radius: 4px;
+    .item1 {
+      position: absolute;
+      left: 10px;
+      top: 7px;
+      cursor: pointer;
+    }
+    .item2 {
+      position: absolute;
+      left: 64px;
+      top: 7px;
+      cursor: pointer;
+    }
+    .count {
+      position: absolute;
+      left: 40px;
+      top: 3px;
+    }
+    img:hover {
+      background: rgba(247, 246, 246, 0.8);
+    }
+  }
+}

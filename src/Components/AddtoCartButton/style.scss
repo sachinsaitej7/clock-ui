@@ -1,0 +1,42 @@
+.addtoCart {
+  position: relative;
+  width: 380px;
+  height: 60px;
+  left: 150px;
+  top: 188px;
+
+  /* Primary/Base */
+
+  background: #015850;
+  border-radius: 2px;
+
+  .text {
+    position: absolute;
+    top: 15.5px;
+    left: 145px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 28px;
+    /* identical to box height */
+    letter-spacing: 0.01612em;
+    text-transform: uppercase;
+    color: #ffffff;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 10px;
+  }
+
+  .image {
+    left: 105px;
+    top: 15.5px;
+    position: absolute;
+    margin: 0px 10px;
+  }
+}
+.addtoCart:hover {
+  background: #05645b;
+  cursor: pointer;
+}

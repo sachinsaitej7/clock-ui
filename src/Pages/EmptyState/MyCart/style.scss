@@ -1,0 +1,428 @@
+.templateDiv {
+      width: 100%;
+    margin: 0px auto;
+  
+  .PCclass {
+    width: 95.5%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-top: 3.55%;
+    padding-left: 2.08%;
+    padding-right: 2.08%;
+    padding-bottom: 2.08%;
+    cursor: pointer;
+  }
+  .text {
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height */
+
+    letter-spacing: 0.01612em;
+
+    /* P/S8 */
+
+    color: #001210;
+  }
+  .emptyImage {
+    width: 100%;
+    margin: 90px 0px 30px 0px;
+    .Image {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .button {
+    margin: 50px 0px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-around;
+    width: 300px;
+    .rectangle {
+      text-align: center;
+      height: 60px;
+      background: #015850;
+      border-radius: 5px;
+      .buttonText {
+        // padding-top: 20px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 21px;
+        line-height: 60px;
+        /* identical to box height */
+        letter-spacing: 0.01612em;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        color: #ffffff;
+      }
+    }
+  }
+  .cart-items{
+    width: 80%;
+    margin: 2% auto;
+  }
+
+  .revieworder1 {
+  position: relative;
+  height: 1000px;
+  li {
+    text-align: right;
+  }
+
+  .logo {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    left: 1%;
+    top: 1%;
+  }
+  .line {
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    border: 5% solid #839694;
+    background-color: #839694;
+  }
+  .line3 {
+    position: absolute;
+    margin-left: 1%;
+    top: 132px;
+    width: 98%;
+    border: 0 solid #839694;
+    background-color: #839694;
+  }
+
+  .txt1 {
+    position: absolute;
+    top: 80px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    left: 2%;
+    font-size: 180%;
+  }
+  .disp1 {
+    display: flex;
+    position: absolute;
+    top: 80px;
+    left: 37%;
+  }
+
+  .txt2 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    position: absolute;
+    top: 140px;
+    left: 2%;
+    font-size: 105%;
+    letter-spacing: 0.01612em;
+    font-weight: 400;
+    width: 90%;
+  }
+
+  .firstcont {
+    position: absolute;
+    width: 73%;
+    top: 180px;
+    left: 2%;
+    .pinbox {
+      position: absolute;
+      border: 1px solid #e6e6e6;
+      box-sizing: border-box;
+      width: 100%;
+      height: 35px;
+      .txt3 {
+        position: absolute;
+        left: 1%;
+        top: 2px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 120%;
+        color: #191919;
+      }
+
+      img {
+        position: absolute;
+        top: 10%;
+        left: 210px;
+      }
+
+      button {
+        position: absolute;
+        margin-top: 0.5%;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-bottom: 0.3%;
+        padding-top: 0.3%;
+        left: 89.4%;
+        color: #0555bb;
+        background: #ffffff;
+        font-weight: 600;
+        /* Neutral/700 */
+
+        border: 1px solid #b3b3b3;
+        box-sizing: border-box;
+        border-radius: 2px;
+        text-transform: uppercase;
+        font-size: 70%;
+      }
+    }
+    .addressbox {
+      position: absolute;
+      width: 100%;
+      top: 35px;
+    }
+  }
+  .Summary {
+    position: absolute;
+    width: 22%;
+    height: 235px;
+    top: 180px;
+    left: 77%;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    box-sizing: border-box;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    font-size: 100%;
+    .b1 {
+      position: absolute;
+      left: 12px;
+      top: 20px;
+
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 30px;
+      /* identical to box height */
+
+      letter-spacing: 0.01612em;
+    }
+    .Headings {
+      position: absolute;
+      left: 12px;
+      top: 60px;
+      li {
+        list-style-type: none;
+        height: 30px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        text-align: left;
+
+        color: #808080;
+      }
+    }
+    .values {
+      position: absolute;
+      left: 75%;
+      top: 60px;
+      li {
+        margin-bottom: 2px;
+        list-style-type: none;
+        height: 30px;
+
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        /* identical to box height, or 30px */
+        letter-spacing: 0.01612em;
+        color: #001210;
+      }
+    }
+
+    .linesum {
+      position: absolute;
+      top: 170px;
+      width: 100%;
+      border: 5% solid #839694;
+      background-color: #839694;
+    }
+    .totalamount {
+      position: absolute;
+      left: 12px;
+      top: 183px;
+      .total {
+        position: absolute;
+
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        /* identical to box height */
+
+        letter-spacing: 0.01612em;
+
+        /* P/S8 */
+
+        color: #001210;
+      }
+    }
+  }
+
+  .litotal {
+    position: absolute;
+    left: 75%;
+    top: 183px;
+    li {
+      list-style-type: none;
+
+      height: 30px;
+
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 600;
+      /* identical to box height, or 30px */
+      letter-spacing: 0.01612em;
+      color: #001210;
+    }
+  }
+
+  .secondcont {
+    position: absolute;
+    width: 73%;
+    top: 400px;
+    left: 2%;
+
+    .pinbox {
+      position: absolute;
+      border: 1px solid #e6e6e6;
+      box-sizing: border-box;
+      width: 100%;
+      height: 50px;
+      padding-top: 2px;
+      padding-bottom: 5px;
+      .txt3 {
+        position: absolute;
+        left: 1%;
+        top: 2px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 120%;
+        color: #191919;
+      }
+
+      img {
+        position: absolute;
+        top: 10%;
+        left: 370px;
+      }
+
+      button {
+        position: absolute;
+        margin-top: 0.5%;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-bottom: 0.3%;
+        padding-top: 0.3%;
+        left: 89.4%;
+        border: 1px solid #b3b3b3;
+        color: #0555bb;
+        background: #ffffff;
+        font-weight: 600;
+        /* Neutral/700 */
+
+        border: 1px solid #b3b3b3;
+        box-sizing: border-box;
+        border-radius: 2px;
+        text-transform: uppercase;
+        font-size: 70%;
+      }
+    }
+    .cards {
+      position: absolute;
+      width: 100%;
+      left: 0%;
+      top: 2.1rem;
+    }
+  }
+  .butt1 {
+    position: absolute;
+    left: 77%;
+    top: 425px;
+    width: 22%;
+    height: 50px;
+    background: #015850;
+    border-radius: 2px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 28px;
+    /* identical to box height */
+    border: none;
+    text-align: center;
+    cursor: pointer;
+  }
+  .deliverytime {
+    position: absolute;
+    left: 77%;
+    width: 22%;
+    top: 485px;
+    height: 50px;
+    background: #ffffff;
+    /* Orange */
+
+    border: 1px solid #f2994a;
+    box-sizing: border-box;
+    border-radius: 6px;
+    img {
+      position: absolute;
+      width: 4.5%;
+
+      left: 2%;
+      top: 15px;
+
+      /* Orange */
+
+      border: 1.66667px solid #f2994a;
+    }
+    text {
+      top: 20px;
+      position: absolute;
+      left: 12%;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 90%;
+      top: 10px;
+      line-height: 150%;
+      /* identical to box height, or 24px */
+
+      letter-spacing: 0.01612em;
+
+      /* Orange */
+
+      color: #f2994a;
+    }
+  }
+  .line2 {
+    position: absolute;
+    top: 1400px;
+    width: 100%;
+    border: 3% solid #839694;
+    background-color: #839694;
+  }
+  .foot {
+    width: 100%;
+    position: absolute;
+    top: 1404px;
+  }
+}
+}

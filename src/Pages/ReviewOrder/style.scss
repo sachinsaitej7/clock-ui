@@ -1,0 +1,289 @@
+.review-order-final {
+  width: 90%;
+  max-width: 1200px;
+  margin: 10px auto;
+
+  .line {
+    width: 100%;
+    border: 5% solid #839694;
+    background-color: #839694;
+  }
+  .line3 {
+    width: 100%;
+    border: 0 solid #839694;
+    background-color: #839694;
+  }
+
+  .txt1 {
+     /* margin-top: 1.5%; */
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    /* margin-left: 0.85%; */
+    font-size: 24px;
+    width: 45%;
+  }
+  .disp1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0px;
+  }
+
+  .txt2 {
+    margin-top: 1%;
+    font-size: 105%;
+    letter-spacing: 0.01612em;
+    font-weight: 400;
+    width: 100%;
+  }
+
+  .butt1 {
+      background: #015850;
+      border-radius: 2px;
+      color: #ffffff;
+      width: 21%;
+      height: 50px;
+      padding-top: 0.7%;
+      padding-bottom: 0.7%;
+      cursor: pointer;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 100%;
+      line-height: 20px;
+      /* identical to box height */
+
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+  
+ 
+  .container {
+    margin-top: 1%;
+    width: 100%;
+     .txt3 {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+
+        letter-spacing: 0.01612rem;
+
+        color: #191919;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+      }
+    .pinbox {
+      margin-top: 1%;
+      border: 1px solid #e6e6e6;
+      margin-left: 4.08%;
+      box-sizing: border-box;
+      width: 100%;
+      padding-left: 1%;
+      padding-top: 10px;
+      padding-bottom: 15px;
+      display: flex;
+      position: relative;
+ 
+
+      img {
+        margin-left: 1rem;
+      }
+
+      button {
+        position: absolute;
+        width: 130px;
+        height: 30px;
+        margin-left: 85%;
+        color: #0555bb;
+        background: #ffffff;
+        font-weight: 600;
+        border: 1px solid #b3b3b3;
+        box-sizing: border-box;
+        border-radius: 2px;
+      }
+    }
+
+    form {
+      // margin-left: 4.08%;
+      border: 1px solid #e6e6e6;
+      width: 100%;
+      padding-bottom: 5%;
+      border-radius: 4px;
+
+      .line1 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 95%;
+        padding: 10px;
+        .inputing1 {
+          width: 49%;
+
+          label {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+          }
+          input {
+            width: 100%;
+            height: 30px;
+            padding-left: 1%;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #e7e7e7;
+          }
+        }
+        .inputing2 {
+          width: 49%;
+          label {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+          }
+          input {
+           width: 100%;
+            height: 30px;
+            padding-left: 1%;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #e6e6e6;
+          }
+        }
+        .inputing1c {
+          margin-top: 1%;
+          margin-left: 1%;
+          width: 49%;
+
+          label {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+          }
+          input {
+                width: 100%;
+            height: 30px;
+            padding-left: 1%;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #e6e6e6;
+          }
+        }
+        .inputing2c {
+         width: 49%;
+          margin-top: 1%;
+
+          label {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+          }
+          input {
+            width: 100%;
+            height: 30px;
+            padding-left: 1%;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #e6e6e6;
+          }
+        }
+      }
+
+      .linelast {
+        display: flex;
+        margin-top: 0.5%;
+        .inputing1 {
+          margin-top: 1%;
+          margin-left: 1%;
+
+          label {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+          }
+          input {
+                    width: 100%;
+            height: 30px;
+            padding-left: 1%;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #e6e6e6;
+          }
+        }
+        .inputing2 {
+          margin-left: 50px;
+          margin-top: 1%;
+          label {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+          }
+          input {
+            margin-top: 5px;
+            width: 450px;
+            height: 30px;
+            padding-left: 1%;
+            padding-top: 3px;
+            padding-bottom: 3px;
+          }
+        }
+      }
+      .inputing {
+        width: 90%;
+           margin-left: 1%;
+        label {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+        }
+        textarea {
+          resize: none;
+          width: 90%;
+          padding-left: 1%;
+          padding-top: 2%;
+          padding-bottom: 2%;
+          height: 80px;
+             border-radius: 4px;
+            
+                  border-radius: 4px;
+            border: 1px solid #e6e6e6;
+        }
+      }
+    }
+  }
+  .butt2 {
+    color: #0555bb;
+    background: #ffffff;
+    width: 75%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-weight: 500;
+    font-size: 120%;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    border: #191919;
+  }
+
+  .line2 {
+    margin-top: 10%;
+    width: 100%;
+    border: 3% solid #839694;
+    background-color: #839694;
+  }
+}

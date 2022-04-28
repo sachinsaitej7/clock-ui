@@ -1,0 +1,72 @@
+.BottomLP2 {
+    position: relative;
+    padding: 0%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    margin: 10px auto;
+
+  .txt1 {
+    font-family: Poppins;
+    font-style: normal;
+    /* identical to box height */
+    font-weight: 600;
+    font-size: 200%;
+    line-height: 100%;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 1.612%;
+    text-transform: uppercase;
+    margin: 20px auto;
+
+    /* P/S9 */
+
+    color: #000908;
+  }
+  .PCclass {
+    width: 100%;
+    max-width: 1400px;
+    /* height: 80%; */
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* padding-top: 3.55%; */
+    /* padding-left: 2.08%; */
+    /* padding-right: 2.08%; */
+    /* padding-bottom: 2.08%; */
+    cursor: pointer;
+    margin: 10px auto;
+
+  }
+
+  .txt2 {
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 300%;
+    /* identical to box height */
+    display: inline-block;
+    letter-spacing: 0.01612em;
+    text-transform: uppercase;
+    color: #000908;
+    margin: 20px auto;
+  }
+
+  .rectangle {
+    background: #f6f6f6;
+    margin: 2% 2%;
+    width: 90%;
+    height: 100%;
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1400px;
+  }
+  .Bottom {
+    padding-top: 4%;
+  }
+}

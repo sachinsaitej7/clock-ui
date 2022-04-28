@@ -1,0 +1,25 @@
+.gbutton {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  padding-top: 0.65%;
+  padding-bottom: 0.65%;
+  cursor: pointer;
+
+  /* Primary/White */
+
+  background: #015850;
+  /* P/T4 */
+
+  text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #ffffff;
+  }
+}

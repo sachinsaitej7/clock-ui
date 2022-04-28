@@ -1,0 +1,17 @@
+.singleip {
+  display: flex;
+
+  .searchbar {
+    padding-left: 2%;
+    border-left-color: white;
+    border-top-color: white;
+    border-right-color: rgb(255, 255, 255);
+    border-bottom-color: #666666;
+
+    text {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
+}

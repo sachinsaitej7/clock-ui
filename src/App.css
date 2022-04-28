@@ -1,0 +1,21 @@
+.App {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  font-family: "Poppins" "Roboto";
+
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(116, 124, 117);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(214, 214, 214);
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}

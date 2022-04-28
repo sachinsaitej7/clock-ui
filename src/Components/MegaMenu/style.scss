@@ -1,0 +1,53 @@
+.menu {
+  z-index: 1;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: absolute;
+  // left: 50%;
+  justify-content: space-evenly;
+  display: inline-flex;
+  flex-flow: row;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0px auto;
+  background-color: white;
+  top: 69px;
+  box-shadow: 0 4px 6px -6px rgba(32, 30, 30, 0.15);
+  transition: my-anim 2s;
+  p {
+    text-align: left;
+
+    text {
+      margin-left: 18%;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      /* identical to box height */
+
+      letter-spacing: 0.01612em;
+
+      /* Orange */
+
+      color: #f2994a;
+    }
+    a {
+      text-decoration: none;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 25px;
+      /* identical to box height */
+
+      letter-spacing: 0.01612em;
+
+      /* Neutral/200 */
+
+      color: #333333;
+    }
+  }
+}

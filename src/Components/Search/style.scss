@@ -1,0 +1,28 @@
+.search {
+  z-index: 0;
+
+  display: flex;
+  .searchbar {
+    width: 260px;
+    height: 30px;
+
+    /* Primary/White */
+
+    background: #ffffff;
+    /* Neutral/400 */
+
+    border: 1px solid #666666;
+    box-sizing: border-box;
+    border-radius: 24px;
+    placeholder {
+      left: 10px;
+    }
+  }
+  img {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: -30px;
+    top: 5px;
+  }
+}

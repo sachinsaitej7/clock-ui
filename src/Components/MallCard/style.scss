@@ -1,0 +1,46 @@
+.Mall {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .image {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    // width: 100%;
+    width: 400px;
+    height: 200px;
+  }
+  .Rectangle2 {
+    height: 45px;
+    margin-top: -4px;
+    width: 100%;
+    background: #c4c4c4;
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-end-end-radius: 6px;
+    border-end-start-radius: 6px;
+
+    .item-1 {
+      margin-top: 8px;
+      margin-left: 5%;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.01612em;
+      text-transform: uppercase;
+      color: #000908;
+    }
+    .item-2 {
+      margin-right: 5%;
+      margin-top: 8px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      text-transform: uppercase;
+      color: #000908;
+    }
+  }
+}

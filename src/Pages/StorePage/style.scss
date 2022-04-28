@@ -1,0 +1,182 @@
+.productPage {
+  // margin: 0% 1%;
+  // padding: 0%;
+  .topPart {
+    padding-left: 1.5%;
+    border-bottom: 2px solid #b3b3b3;
+    width: 98.5%;
+    .heading {
+      margin-top: 50px;
+      width: fit-content;
+      display: flex;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 35px;
+      letter-spacing: 0.01612em;
+      color: #000000;
+
+      .noOfStores {
+        color: #9999;
+      }
+    }
+    .flex {
+      display: flex;
+      flex-direction: row;
+
+      line-height: 50px;
+      .filters {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        letter-spacing: 0.01612em;
+        text-transform: uppercase;
+      }
+      .red {
+        margin-top: 22px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        letter-spacing: 0.01612em;
+        text-transform: uppercase;
+        color: #eb5757;
+        
+      }
+      .red:hover{
+        
+        cursor: pointer;
+        font-weight: 650;
+        letter-spacing: -0.00010em;
+      }
+      .sort {
+        width: 60px;
+        padding-right: 35px;
+        margin-top: 15px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0.01612em;
+        margin-right: 20px;
+        background-image: url("../../assets/png/store-page/down.png");
+        background-position: right;
+        background-position-y: -6px;
+        background-size: 35px;
+        background-repeat: no-repeat;
+      }
+      .search {
+        margin-right: 40px;
+        z-index: 0;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .mainPart {
+    width: 100%;
+    margin-top: 2%;
+    display: flex;
+
+    .sideBar {
+      width: 18%;
+      border-right: 1px solid #b3b3b3;
+
+      .listContainer {
+        .listName {
+          display: flex;
+          justify-content: space-between;
+          width: 87%;
+          margin-left: 9%;
+          padding: 11px 0px;
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 450;
+          font-size: 21px;
+          line-height: 50px;
+          letter-spacing: 0.01612em;
+          img{
+        
+            
+            margin-top: 13px;
+            width: 27px;
+            height: 27px;
+          }
+        }
+        .listContents {
+          padding-left: 9%;
+          .categories {
+            display: flex;
+            height: 45px;
+            img {
+              width: 25px;
+              height: 25px;
+            }
+            .label {
+              font-family: Poppins;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 17px;
+              letter-spacing: 0.01612em;
+              margin-left: 5px;
+              .noOfProducts {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                /* identical to box height */
+
+                letter-spacing: 0.01612em;
+
+                /* Neutral/700 */
+
+                color: #b3b3b3;
+              }
+            }
+          }
+        }
+        .moreCategories {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 22px;
+          /* identical to box height */
+          margin-left: 10%;
+          text-align: center;
+          letter-spacing: 0.01612em;
+          text-decoration-line: underline;
+          cursor: pointer;
+          /* Primary/Base */
+
+          color: #015850;
+        }
+        .linee {
+          margin: 20px 0px;
+          border-bottom: 1.5px solid #b3b3b3;
+          width: 100%;
+        }
+      }
+    }
+    .pageContent {
+      width: 80%;
+
+      .storeCardFlex {
+display: flex;
+    /* padding-top: 5%; */
+    flex-direction: row;
+    margin-bottom: 5%;
+    /* padding-left: 2%; */
+    flex-wrap: wrap;
+    width: 100%;
+        .storeCard {
+          margin: 0% 2% 1%;
+          width: 22.5%;
+        }
+      }
+    }
+  }
+}

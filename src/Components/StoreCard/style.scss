@@ -1,0 +1,60 @@
+
+.storeCard {
+  
+  background: #fff;
+  border: 2px solid #ccc;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 12px;
+  .image{
+    max-width: 200px;
+    max-height: 250px;
+    margin: 12px;
+  }
+
+
+  .chevron{
+    position: relative;
+    top: -80px;
+    left: 85%;
+    cursor: pointer;
+  }
+  .text {
+    margin-top: 20px;
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    letter-spacing: 0.01612em;
+  }
+  .texth {
+    margin-top: -8px;
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    letter-spacing: 0.01612em;
+  }
+  .offerFlex{
+    display: flex;
+    width: 100%;
+  .offerImage{
+    
+    width: 80%;
+    
+    margin-bottom: 16.25%;
+  }
+  .chevronLeft{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 1;
+    top: 150px;
+    
+  }
+}
+}
