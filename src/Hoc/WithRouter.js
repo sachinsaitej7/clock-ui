@@ -2,7 +2,7 @@ import React from "react";
 import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 
 function withRouter(Element) {
-  return function children(props) {
+  return function Children(props) {
     const [searchParams, setSearchParams] = useSearchParams();
     const params = useParams();
     const navigate = useNavigate();

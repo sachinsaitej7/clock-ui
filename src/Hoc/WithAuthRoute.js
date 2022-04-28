@@ -6,7 +6,7 @@ import OverlayLoader from "../Components/OverlayLoader";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { getAuth } from "firebase/auth";
 
-export default function withAuthRoute({ children }) {
+export default function WithAuthRoute({ children }) {
   let navigate = useNavigate();
   const { user } = useContext(AuthContext);
   // const [, loading] = useAuthState(getAuth());
