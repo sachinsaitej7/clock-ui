@@ -8,7 +8,7 @@ class CategoryCard extends Component {
     const { Data } = this.props;
     const { image: Image, name:title, id } = Data;
     return (
-      <Link to={"/product?category=" + id}>
+      <Link to={"/product?category=" + id} style={{ textDecoration: "none" }}>
         <div className="card">
           <img src={Image} className="circular--landscape" />
           <div className="cont">

@@ -77,7 +77,7 @@ class TopBar extends Component {
           </div>
           <div className="item-3">
             <img src={search} alt="Error" className="ite-1" />
-            <Link to="/wishlist">
+            <Link to="/wishlist" style={{ textDecoration: "none" }}>
               <img
                 src={heart}
                 alt="Error"
@@ -92,7 +92,7 @@ class TopBar extends Component {
               onClick={this.showOverlay}
             />
             {user ? (
-              <Link to="/profile">
+              <Link to="/profile" style={{ textDecoration: "none" }}>
                 <img src={person} alt="Error" className="ite-4" />
               </Link>
             ) : (

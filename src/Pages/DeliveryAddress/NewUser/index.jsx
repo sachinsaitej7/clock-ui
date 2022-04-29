@@ -328,7 +328,7 @@ class NU extends Component {
           {!user.address?.length ? (
             <button className="butt1">Continue</button>
           ) : (
-            <Link to="/address">
+            <Link to="/address" style={{ textDecoration: "none" }}>
               <button className="butt1">Continue</button>
             </Link>
           )}

@@ -30,13 +30,13 @@ export function SendOtp(props) {
       </div>
       <div className="agreelinks">
         By proceeding, you agree to{" "}
-        <Link to={"./privacy"}>
+        <Link to={"./privacy"} style={{ textDecoration: "none" }}>
           <span style={{ color: "blue", cursor: "pointer" }}>
             Privacy policy
           </span>{" "}
         </Link>
         and{" "}
-        <Link to={"./tnc"}>
+        <Link to={"./tnc"} style={{ textDecoration: "none" }}>
           <span style={{ color: "blue", cursor: "pointer" }}>
             Terms & Conditions{" "}
           </span>
@@ -190,7 +190,9 @@ export function CompleteProfile(props) {
         <div>
           <text className="txt2">
             {" "}
-            {`Complete the below details to ${user.name ? "Update":"create"} your account`}
+            {`Complete the below details to ${
+              user.name ? "Update" : "create"
+            } your account`}
           </text>
         </div>
         <form>
@@ -248,13 +250,13 @@ export function CompleteProfile(props) {
           </div>
           <div className="agreelinks">
             By proceeding, you agree to{" "}
-            <Link to={"privacy"}>
+            <Link to={"privacy"} style={{ textDecoration: "none" }}>
               <span style={{ color: "blue", cursor: "pointer" }}>
                 Privacy policy
               </span>{" "}
             </Link>
             and{" "}
-            <Link to={"/tnc"}>
+            <Link to={"/tnc"} style={{ textDecoration: "none" }}>
               <span style={{ color: "blue", cursor: "pointer" }}>
                 Terms & Conditions{" "}
               </span>

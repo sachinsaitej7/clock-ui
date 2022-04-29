@@ -94,7 +94,7 @@ class EU extends Component {
         </div>
 
         <div style={{ marginTop: "1%" }}>
-          <Link to="/add-new-address">
+          <Link to="/add-new-address" style={{ textDecoration: "none" }}>
             <button className="butt2" style={{ border: "1px solid black" }}>
               Add New Address
             </button>

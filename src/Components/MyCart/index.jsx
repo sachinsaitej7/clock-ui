@@ -98,7 +98,7 @@ const MyCart = () => {
         </div>
 
         <div className="buttons">
-          <Link to={"/my-cart"}>
+          <Link to={"/my-cart"} style={{ textDecoration: "none" }}>
             <button
               className="buttonbox"
               style={{
@@ -110,7 +110,7 @@ const MyCart = () => {
             </button>
           </Link>
           {/* <Link to={"/my-cart"}> */}
-            {/* <button
+          {/* <button
               className="buttonbox"
               style={{
                 background: "#FFFFFF",

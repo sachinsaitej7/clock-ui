@@ -46,7 +46,11 @@ class StoreCard extends Component {
       id,
     } = storeCardData;
     return (
-      <Link to={`/product?${isStore ? "store": "brand"}=${id}`} className="storeCard">
+      <Link
+        to={`/product?${isStore ? "store" : "brand"}=${id}`}
+        style={{ textDecoration: "none" }}
+        className="storeCard"
+      >
         <div onMouseEnter={this.revealChevron} onMouseLeave={this.resetStates}>
           {hasOffer === true ? (
             <>

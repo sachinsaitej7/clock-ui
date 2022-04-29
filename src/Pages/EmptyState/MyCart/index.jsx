@@ -69,7 +69,7 @@ class MyCart extends Component {
               <img src={emptyStateImage} alt="error" className="Image" />
             </div>
             <div className="text">You&apos;ll also love</div>
-            <Link to="/">
+            <Link to="/" style={{ textDecoration: "none" }}>
               <div className="button">
                 <div className="rectangle">
                   <text className="buttonText">Continue Shopping</text>

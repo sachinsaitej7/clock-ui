@@ -42,7 +42,7 @@ class ProductCard extends React.Component {
 
     return (
       <div id={id} className="product-card" style={{ margin: "1%" }}>
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${id}`} style={{ textDecoration: "none" }}>
           <div className="product-card-header">
             <img src={Image} className="img1" />
             {!isEmpty(tagData) && <div className="tag">{tagData.name}</div>}
@@ -56,7 +56,7 @@ class ProductCard extends React.Component {
             )}
           </div>
           <div className="product-card-body">
-            <h4>{title}</h4>
+            <h5>{title}</h5>
             <div
               className="product-card-description"
               dangerouslySetInnerHTML={{ __html: description }}

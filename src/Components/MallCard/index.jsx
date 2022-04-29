@@ -12,7 +12,7 @@ class MallCard extends Component {
       id,
     } = mallCardData;
     return (
-      <Link to={`/malls/${id}`}>
+      <Link to={`/malls/${id}`} style={{ textDecoration: "none" }}>
         <div className="Mall">
           <div>
             <img src={Image} className="image" />

@@ -24,38 +24,38 @@ class Minicart extends Component {
         open={true}
       >
         {/* <div className="wholePage"> */}
-          <div className="miniCart">
-            <div className="blackRectangle">
-              <text className="text1">My Cart</text>
-              <img
-                src={CloseButtonImage}
-                alt="error"
-                className="xButton"
-                onClick={this.props.triggerMinicart}
-              />
-            </div>
-            {items.length > 0 ? (
-              <MyCart />
-            ) : (
-              <>
-                <div className="emptyImage">
-                  <img src={EmptyCartImage} alt="error" className="Image" />
-                </div>
-                <div className="text2">
-                  <p>Your shopping cart is Empty</p>
-                </div>
-                <div onClick={this.props.triggerMinicart}>
-                  <Link to="/">
-                    <div className="button">
-                      <div className="rectangle">
-                        <text className="buttonText">Continue Shopping</text>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </>
-            )}
+        <div className="miniCart">
+          <div className="blackRectangle">
+            <text className="text1">My Cart</text>
+            <img
+              src={CloseButtonImage}
+              alt="error"
+              className="xButton"
+              onClick={this.props.triggerMinicart}
+            />
           </div>
+          {items.length > 0 ? (
+            <MyCart />
+          ) : (
+            <>
+              <div className="emptyImage">
+                <img src={EmptyCartImage} alt="error" className="Image" />
+              </div>
+              <div className="text2">
+                <p>Your shopping cart is Empty</p>
+              </div>
+              <div onClick={this.props.triggerMinicart}>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                  <div className="button">
+                    <div className="rectangle">
+                      <text className="buttonText">Continue Shopping</text>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </>
+          )}
+        </div>
         {/* </div> */}
       </Backdrop>
     );

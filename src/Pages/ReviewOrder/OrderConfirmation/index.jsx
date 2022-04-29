@@ -71,7 +71,7 @@ class OrderConfirmation extends Component {
           you registered mail address.
         </text>
 
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: "none" }}>
           <button className="continueshopping">Continue Shopping</button>
         </Link>
         <div className="deliverybox">
