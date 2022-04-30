@@ -1,103 +1,22 @@
 import React, { Component } from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 import SearchBar from "../../Components/Search";
 import ProductCard from "../../Components/ProductCard";
-// import ProductImage from "../../assets/png/image 29.png";
-// import Campus from "../../assets/png/ProductPage/Campus.png";
-// import Mast from "../../assets/png/ProductPage/Mast.png";
-// import Shoe from "../../assets/png/ProductPage/Shoe.png";
-// import Shorts from "../../assets/png/ProductPage/Shorts.png";
-// import product from "../../assets/png/ProductPage/product.png";
 import MoreFilters from "../../Components/Popups/MoreFilters";
 import withRouter from "../../Hoc/WithRouter";
+import OverlayLoader from "../../Components/OverlayLoader";
 
 import checkedImage from "../../assets/png/store-page/checked.png";
 import uncheckedImage from "../../assets/png/store-page/unchecked.png";
 import axios from "axios";
 
-// const CategoryPageDataMax = [
-//   {
-//     id: 0,
-//     imageUrl: Shorts,
-//     tagData: {
-//       name: "NEW",
-//     },
-//     likeData: {
-//       isVisible: true,
-//     },
-//     title: "Domyos by Decatholon",
-//     description: "Men Regular Fit Sports Shorts",
-//     mrp: "1999",
-//     price: "499",
-//     discount: "50",
-//   },
-//   {
-//     id: 1,
-//     imageUrl: Mast,
-//     tagData: {
-//       name: "NEW",
-//     },
-//     likeData: {
-//       isVisible: true,
-//     },
-//     title: "Mast and Habour",
-//     description: "Colour Blocked Pullover",
-//     mrp: "1999",
-//     price: "999",
-//     discount: "50",
-//   },
-//   {
-//     id: 2,
-//     imageUrl: Campus,
-//     tagData: {
-//       name: "NEW",
-//     },
-//     likeData: {
-//       isVisible: true,
-//     },
-//     title: "Campus Sutra",
-//     description: "Men Regular Fit Casual Shits",
-//     mrp: "1999",
-//     price: "999",
-//     discount: "50",
-//   },
-//   {
-//     id: 3,
-//     imageUrl: product,
-//     tagData: {
-//       name: "NEW",
-//     },
-//     likeData: {
-//       isVisible: true,
-//     },
-//     title: "Max Lifestyle",
-//     description: "MAX Stonewashed Slim Fit Denim Shirt in light faded",
-//     mrp: "1999",
-//     price: "999",
-//     discount: "50",
-//   },
-//   {
-//     id: 4,
-//     imageUrl: Shoe,
-//     tagData: {
-//       name: "NEW",
-//     },
-//     likeData: {
-//       isVisible: true,
-//     },
-//     title: "Roadster",
-//     description: "Men Slip on Sneakers",
-//     mrp: "1999",
-//     price: "999",
-//     discount: "50",
-//   },
-// ];
-// import ProductImage from "./assets/png/image 29.png";
 class CategoryPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       filter1: [
         { category: "Men", isSelected: true, noOfProducts: 20, id: 1 },
         { category: "Women", isSelected: false, noOfProducts: 20, id: 2 },
@@ -145,15 +64,18 @@ class CategoryPage extends Component {
   }
 
   fetchProducts = async (payload) => {
+    this.setState({ loading: true });
     try {
       let res = await axios.get(
         "https://clockapi.theclock.xyz/product/",
         payload
       );
       // let data = await res.json();
-      if (res.data.success) this.setState({ products: res.data.data || [] });
+      if (res.data.success)
+        this.setState({ products: res.data.data || [], loading: false });
     } catch (err) {
-      console.log(err.message);
+      this.setState({ loading: false });
+      toast.error("error in fetching the collection");
     }
   };
 
@@ -185,8 +107,10 @@ class CategoryPage extends Component {
     }
   };
   render() {
-    const { filter1, filter2, filter3, filter4, products = [] } = this.state;
+    const { filter1, filter2, filter3, filter4, products = [], loading } = this.state;
     const collectionName = this.getCollectionName();
+    if (loading)
+      return <OverlayLoader />;
 
     return (
       <div className="productPage">

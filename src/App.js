@@ -19,6 +19,8 @@ import DeliveryAddress from "./Pages/DeliveryAddress/NewUser";
 import WithAuthRoute from "./Hoc/WithAuthRoute";
 import NotFoundPage from "./Pages/NotFoundPage";
 import DeskTopOnlyPage from "./Pages/DeskTopOnlyPage";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 // eslint-disable-next-line no-unused-vars
 import { app } from "./firebase-config";
 import { CartContext } from "./CartContext";
@@ -56,6 +58,8 @@ function App() {
   let unsubscribe1 = () => {};
   let unsubscribe2 = () => {};
 
+  const [firebaseUser, authLoading, authError] = useAuthState(getAuth());
+
   // const [fireBaseUser, loading] = useAuthState(getAuth());
 
   const saveItems = (items) => {
@@ -74,7 +78,27 @@ function App() {
   };
 
   useEffect(() => {
-    fetchAuthToken();
+    firebaseUser &&
+      firebaseUser.getIdToken().then((idToken) => {
+        const {
+          email: email_id,
+          displayName: name,
+          phoneNumber: phone_number,
+          uuid: id,
+        } = firebaseUser;
+        const user = {
+          email_id,
+          name,
+          phone_number,
+          id,
+        };
+        setUser(user);
+        localStorage.setItem("id_token", idToken);
+        fetchAuthToken();
+      });
+  }, [firebaseUser]);
+
+  useEffect(() => {
     const items = localStorage.getItem("items");
     const address = localStorage.getItem("address");
     setItems(items ? JSON.parse(items) : []);
@@ -93,7 +117,8 @@ function App() {
   }, [user?.id]);
 
   useEffect(() => {
-    if (user?.id) setUser({ ...user, orders: [...orders], address: [...address] });
+    if (user?.id)
+      setUser({ ...user, orders: [...orders], address: [...address] });
   }, [orders, address]);
 
   const addItem = (item) => {
@@ -377,9 +402,11 @@ function App() {
               path="/wishlist"
               exact
               element={
-                <WithTemplate>
-                  <EmptyStatesPages />
-                </WithTemplate>
+                <WithAuthRoute>
+                  <WithTemplate>
+                    <EmptyStatesPages />
+                  </WithTemplate>
+                </WithAuthRoute>
               }
             />
             <Route path="/deliveryAddress" exact element={<NotMap />} />

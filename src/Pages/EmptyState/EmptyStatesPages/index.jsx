@@ -12,6 +12,7 @@ import discountImage from "../../../assets/svg/Icon/NotificationBar/discount_gre
 import SearchBar from "../../../Components/Search/index";
 import ReturnItemPopup from "../../../Components/Popups/Return";
 import { Link } from "react-router-dom";
+import UpdateProfile from "../../../Components/UpdateProfile";
 
 const addressDetails = [
   {
@@ -330,8 +331,10 @@ class EmptyStatesPages extends Component {
           </div>
         ) : null}
         {this.state.activeState == "profile" &&
-        this.state.isProfilePageEmpty === true ? (
-          <>
+          this.state.isProfilePageEmpty === true ? (
+                    <UpdateProfile/>)
+        : null}
+          {/* <>
             <div className="navbar">
               <div className="header">
                 <div className="text">Your Profile</div>
@@ -401,8 +404,7 @@ class EmptyStatesPages extends Component {
             >
               update changes
             </button>
-          </>
-        ) : null}
+          </> */}
       </div>
     );
   }
@@ -489,4 +491,6 @@ EmptyStatesPages.propTypes = {
   emailId: PropTypes.string.isRequired,
   gender: PropTypes.string.isRequired,
 };
+
+
 export default EmptyStatesPages;
