@@ -16,7 +16,13 @@ import { toast } from "react-toastify";
 import CartSummary from "../../Components/CartSummary/CartSummary";
 import axios from "axios";
 import { isEqual } from "lodash";
-import { doc, updateDoc, getFirestore } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  getFirestore,
+  setDoc,
+  collection,
+} from "firebase/firestore";
 
 const loadScript = (src) => {
   return new Promise((resolve) => {
@@ -70,12 +76,23 @@ class ReviewOrder extends Component {
   };
 
   updateFirebaseOrder = async (orderId, payload) => {
+    const { user } = this.props;
+    const { activeAddress, items } = this.context;
     const db = getFirestore();
     const orderRef = doc(db, "orders", orderId);
+    const newMessageRef = doc(collection(db, "messages"));
+    const messageData = {
+      order_id: orderId,
+      // prettier-ignore
+      body: `Order placed by ${user.name}.\nAddress: ${activeAddress.address}, pincode: ${activeAddress.pincode}.\nMobile: ${activeAddress.mobileNo}\nAlternative Number: ${activeAddress.alternativeNo || user.phone_number}\nProducts: ${items.map((item) =>`Name: ${item.name}\nSize: ${item.selectedSizeVariant.variant_name || "NA"}\nColor: ${item.selectedColorVariant.variant_name || "NA"}\nQuantity: ${item.quantity}\nPrice: ${item.price}\nLink: https://theclock.xyz/product/${item.id},`).join("\n")}`,
+      timestamp: new Date(),
+      to: "+919952974048",
+    };
 
     await updateDoc(orderRef, {
       ...payload,
     });
+    await setDoc(newMessageRef, { ...messageData });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -141,7 +158,7 @@ class ReviewOrder extends Component {
 
     return (
       <div className="review-order-final">
-        <img className="line" src={Seperator} />
+        <img alt="error-loading" className="line" src={Seperator} />
         <div className="disp1">
           <div style={{ width: "30%" }}>
             <text className="txt1">Review Your Order</text>
@@ -153,15 +170,15 @@ class ReviewOrder extends Component {
               alignItems: "center",
             }}
           >
-            <img src={Img1} className="img1" />
-            <img src={line} className="lin1" />
-            <img src={Img2} className="img2" />
-            <img src={line} className="lin2" />
-            <img src={Img3} className="img3" />
+            <img alt="error-loading" src={Img1} className="img1" />
+            <img alt="error-loading" src={line} className="lin1" />
+            <img alt="error-loading" src={Img2} className="img2" />
+            <img alt="error-loading" src={line} className="lin2" />
+            <img alt="error-loading" src={Img3} className="img3" />
           </div>
         </div>
 
-        <img className="line3" src={Seperator} />
+        <img alt="error-loading" className="line3" src={Seperator} />
         <div className="txt2">
           By placing your Order, you agree to Clock’s{" "}
           <span
@@ -215,7 +232,7 @@ class ReviewOrder extends Component {
             />
           </div>
         </div>
-        <img className="line2" src={Seperator} />
+        <img alt="error-loading" className="line2" src={Seperator} />
       </div>
     );
   }
