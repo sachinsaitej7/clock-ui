@@ -7,13 +7,14 @@
     position: relative;
     padding-top: 10px;
     margin-left: 20px;
+    display: flex;
     :itemss-1 {
       top: 1;
     }
 
     :hover {
       cursor: pointer;
-      background-color: #7eb9b4;
+      // background-color: #7eb9b4;
     }
   }
 

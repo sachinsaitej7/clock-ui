@@ -197,7 +197,7 @@ class ProductPage extends Component {
         return {
           price: Number(variant.sale_price),
           mrp: Number(variant.regular_price),
-          discount: 30,
+          discount: 0,
         };
       }
       return acc;

@@ -27,7 +27,7 @@ class ProductCard extends React.Component {
       thumbnail: Image,
       name: title,
       description,
-      discount = 10,
+      discount = 0,
       tagData,
       likeData,
       price_head = [],

@@ -61,7 +61,7 @@ const CartSummary = (props) => {
           </div>
           <div className="cart-summary-items">
             <p>Discount</p>
-            <b>-₹{seperator(30)}</b>
+            <b>-₹{seperator(0)}</b>
           </div>
           <div className="cart-summary-items">
             <p>Delivery Charges</p>
@@ -76,7 +76,7 @@ const CartSummary = (props) => {
           <img className="linesum" src={Seperator} />
           <div className="cart-summary-items">
             <p>Total</p>
-            <b>₹{seperator(a - 30)}</b>
+            <b>₹{seperator(a - 0)}</b>
           </div>
         </div>
         <button className="butt1" onClick={handleProceedToCheckout}>

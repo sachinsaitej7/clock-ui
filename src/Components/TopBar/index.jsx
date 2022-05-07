@@ -11,6 +11,7 @@ import search from "../../assets/svg/TopBar/search.svg";
 import person from "../../assets/svg/TopBar/person.svg";
 import shopping from "../../assets/svg/TopBar/shopping-cart.svg";
 import logo from "../../assets/svg/TopBar/Logo-Full.svg";
+import beta from "../../assets/svg/beta.svg";
 import PropTypes from "prop-types";
 
 class TopBar extends Component {
@@ -64,6 +65,7 @@ class TopBar extends Component {
           <Link to="/">
             <div className="item-1">
               <img className="itemss-1" src={logo} alt="Error" />
+              <img className="itemss-2" src={beta} alt="Error" />
             </div>
           </Link>
           <div className="item-2">
