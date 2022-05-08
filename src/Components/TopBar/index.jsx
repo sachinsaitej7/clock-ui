@@ -3,9 +3,9 @@ import "react-slidedown/lib/slidedown.css";
 import { Link } from "react-router-dom";
 
 import "./style.scss";
-import MegaMenu from "../MegaMenu/index";
-import MiniCart from "../../Pages/EmptyState/MiniCart/index";
-import LoginPages from "../../Pages/LoginPage";
+// import MegaMenu from "../MegaMenu/index";
+import MiniCart from "../../pages/EmptyState/MiniCart/index";
+import LoginPages from "../../pages/LoginPage";
 import heart from "../../assets/svg/TopBar/heart.svg";
 import search from "../../assets/svg/TopBar/search.svg";
 import person from "../../assets/svg/TopBar/person.svg";
@@ -13,6 +13,7 @@ import shopping from "../../assets/svg/TopBar/shopping-cart.svg";
 import logo from "../../assets/svg/TopBar/Logo-Full.svg";
 import beta from "../../assets/svg/beta.svg";
 import PropTypes from "prop-types";
+import { ProductContext } from "../../context/ProductContext";
 
 class TopBar extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class TopBar extends Component {
       showMenuActive: !prevState.showMenuActive,
     }));
   };
+
   showOverlay = () => {
     this.setState((prevState) => ({
       showMinicart: !prevState.showMinicart,
@@ -59,6 +61,7 @@ class TopBar extends Component {
 
   render() {
     const { user, showLoginPopup } = this.props;
+    const { categories } = this.context;
     return (
       <div id="blur">
         <div className="topbar">
@@ -69,13 +72,21 @@ class TopBar extends Component {
             </div>
           </Link>
           <div className="item-2">
-            <div className="items-1" onClick={this.showMenu}>
-              Men
-            </div>
-            {this.state.showMenuActive ? <MegaMenu /> : null}
-            <div className="items-2">Women</div>
-            <div className="items-3">Kids</div>
-            <div className="items-4">Sale</div>
+            {categories.map((category) => {
+              return (
+                <Link
+                  to={"/product?category=" + category.id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="items-1">{category.name}</div>
+                </Link>
+              );
+            })}
+
+            {/* {this.state.showMenuActive ? <MegaMenu /> : null} */}
+            {/* <div className="items-2">Women</div> */}
+            {/* <div className="items-3">Kids</div>
+            <div className="items-4">Sale</div> */}
           </div>
           <div className="item-3">
             <img src={search} alt="Error" className="ite-1" />
@@ -118,6 +129,8 @@ class TopBar extends Component {
     );
   }
 }
+
+TopBar.contextType = ProductContext;
 
 TopBar.propTypes = {
   onClick: PropTypes.func.isRequired,

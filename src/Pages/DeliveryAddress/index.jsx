@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { AuthContext } from "../../AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import ExistingUser from "./ExistingUser";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,6 @@ DeliveryPage.propTypes = {
 function DeliveryPage() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log("user", user);
   const { address = [] } = user;
 
   useEffect(() => {

@@ -481,7 +481,6 @@ class EmptyStatesPages extends Component {
     });
   };
   handleButtonClicked() {
-    console.log(this.state.yourProfile);
   }
 }
 EmptyStatesPages.propTypes = {

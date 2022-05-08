@@ -2,28 +2,28 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import NotMap from "./Pages/DeliveryAddress/NotMap";
+import NotMap from "./pages/DeliveryAddress/NotMap";
 import { Route, Routes } from "react-router-dom";
-import EmptyStatesPages from "./Pages/EmptyState/EmptyStatesPages";
-import LandingPageHome from "./Pages/LandingPage/LandingPageHome";
-import StorePage from "./Pages/StorePage";
-import CategoryPage from "./Pages/CategoryPage";
-import ProductPage from "./Pages/ProductPage";
-import MyCart from "./Pages/EmptyState/MyCart";
+import EmptyStatesPages from "./pages/EmptyState/EmptyStatesPages";
+import LandingPageHome from "./pages/LandingPage/LandingPageHome";
+import StorePage from "./pages/StorePage";
+import CategoryPage from "./pages/CategoryPage";
+import ProductPage from "./pages/ProductPage";
+import MyCart from "./pages/EmptyState/MyCart";
 // import ReviewOrder1 from "./pages/ReviewOrder/ReviewOrder1";
-import WithTemplate from "./Hoc/WithTemplate";
-import { AuthContext } from "./AuthContext";
+import WithTemplate from "./hoc/WithTemplate";
+import { AuthContext } from "./context/AuthContext";
 import ScrollToTop from "./Components/ScrollToTop";
-import ProfilePage from "./Pages/ProfilePage";
-import DeliveryAddress from "./Pages/DeliveryAddress/NewUser";
-import WithAuthRoute from "./Hoc/WithAuthRoute";
-import NotFoundPage from "./Pages/NotFoundPage";
-import DeskTopOnlyPage from "./Pages/DeskTopOnlyPage";
+import ProfilePage from "./pages/ProfilePage";
+import DeliveryAddress from "./pages/DeliveryAddress/NewUser";
+import WithAuthRoute from "./hoc/WithAuthRoute";
+import NotFoundPage from "./pages/NotFoundPage";
+import DeskTopOnlyPage from "./pages/DeskTopOnlyPage";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 // eslint-disable-next-line no-unused-vars
 import { app } from "./firebase-config";
-import { CartContext } from "./CartContext";
+import { CartContext } from "./context/CartContext";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -42,9 +42,9 @@ import {
   onSnapshot,
   getFirestore,
 } from "firebase/firestore";
-import DeliveryPage from "./Pages/DeliveryAddress";
-import ReviewOrder from "./Pages/ReviewOrder";
-import OrderConfirmation from "./Pages/ReviewOrder/OrderConfirmation";
+import DeliveryPage from "./pages/DeliveryAddress";
+import ReviewOrder from "./pages/ReviewOrder";
+import OrderConfirmation from "./pages/ReviewOrder/OrderConfirmation";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -275,7 +275,6 @@ function App() {
         size: "invisible",
         callback: (response) => {
           // reCAPTCHA solved, allow signInWithPhoneNumber.
-          console.log(response, "captcha");
         },
       },
       auth

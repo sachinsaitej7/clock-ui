@@ -9,52 +9,14 @@ import ShopLocation from "./ShopLocation";
 import separator from "../../utils/numberWithCommas";
 import { Link } from "react-router-dom";
 // import MCProductImage from "../../assets/png/your-orders/productImage.png";
-import { CartContext } from "../../CartContext";
+import { CartContext } from "../../context/CartContext";
 import { Divider } from "@mui/material";
 
-const MyCart = () => {
+const MyCart = (props) => {
   const { items, removeItem, changeQuantity } = useContext(CartContext);
-  // const mcCardData = [
-  //   {
-  //     id: 0,
-  //     icon: MCProductImage,
-  //     title: "MAX Stonewashed Slim Fit Denim Shirt",
-  //     available: "In stock",
-  //     description: "Blue, L",
-  //     price1: "₹ ",
-  //     price: 1499.0,
-  //   },
-  //   {
-  //     id: 1,
-  //     icon: MCProductImage,
-  //     title: "MAX Stonewashed Slim Fit Denim Shirt",
-  //     available: "In stock",
-  //     description: "Blue, L",
-  //     price1: "₹ ",
-  //     price: 1499.0,
-  //   },
-  //   {
-  //     id: 2,
-  //     icon: MCProductImage,
-  //     title: "MAX Stonewashed Slim Fit Denim Shirt",
-  //     available: "In stock",
-  //     description: "Blue, L",
-  //     price1: "₹ ",
-  //     price: 1499.0,
-  //   },
-  //   {
-  //     id: 3,
-  //     icon: MCProductImage,
-  //     title: "MAX Stonewashed Slim Fit Denim Shirt",
-  //     available: "In stock",
-  //     description: "Blue, L",
-  //     price1: "₹ ",
-  //     price: 1499.0,
-  //   },
-  // ];
   const UserData = {
     description: "Products from ",
-    link: "Max Lifestyle, VR Mall",
+    link: "Forum Mall",
   };
   let a = 0;
   items.forEach((item) => {
@@ -97,7 +59,7 @@ const MyCart = () => {
           </div>
         </div>
 
-        <div className="buttons">
+        <div className="buttons" onClick={props.closeCart}>
           <Link to={"/my-cart"} style={{ textDecoration: "none" }}>
             <button
               className="buttonbox"
@@ -127,6 +89,7 @@ const MyCart = () => {
 
 ShopLocation.propTypes = {
   inputs: PropTypes.object.isRequired,
+  closeCart: PropTypes.func.isRequired,
 };
 
 export default MyCart;

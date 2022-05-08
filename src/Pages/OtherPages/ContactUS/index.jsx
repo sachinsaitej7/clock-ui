@@ -178,7 +178,6 @@ export default class ContactUs extends Component {
   };
 
   submitDetails() {
-    console.log(this.state.contactUs);
     window.alert("Thank you for contact us. We will soon get back to you.");
   }
 }

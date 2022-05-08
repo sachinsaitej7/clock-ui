@@ -75,7 +75,7 @@
   
     .mainPart {
       width: 100%;
-      display: flex;
+      // display: flex;
       .sideBar {
         width: 18%;
         border-right: 1px solid #b3b3b3;
@@ -157,14 +157,13 @@
         }
       }
       .pageContent {
-        width: 80%;
+        width: 100%;
         
         .PCclass {
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: flex-start;
           margin-bottom: 5%;
-          padding-left: 2%;
           flex-wrap: wrap;
           width: 100%;
         }

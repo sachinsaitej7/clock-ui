@@ -23,9 +23,9 @@ import heart from "../../assets/png/ProductPage/heart.png";
 //   { size: "XXL", isAvailable: false, isActive: true },
 // ];
 
-import withRouter from "../../Hoc/WithRouter";
+import withRouter from "../../hoc/WithRouter";
 import OverlayLoader from "../../Components/OverlayLoader";
-import { CartContext } from "../../CartContext";
+import { CartContext } from "../../context/CartContext";
 import { toast } from "react-toastify";
 
 class ProductPage extends Component {
@@ -46,23 +46,23 @@ class ProductPage extends Component {
       },
       availableLocations: [
         {
-          storeName: "Max Lifestyle",
-          mallName: "",
-          location: "Porur",
-          distance: "2.6",
-        },
-        {
-          storeName: "Max Lifestyle",
-          mallName: "",
-          location: "Virugampakkam",
-          distance: "2.6",
-        },
-        {
-          storeName: "Max Lifestyle",
+          storeName: "",
           mallName: "Forum Mall",
           location: "Vadapalani",
-          distance: "2.4",
+          distance: "<10 km",
         },
+        // {
+        //   storeName: "Max Lifestyle",
+        //   mallName: "",
+        //   location: "Virugampakkam",
+        //   distance: "2.6",
+        // },
+        // {
+        //   storeName: "Max Lifestyle",
+        //   mallName: "Forum Mall",
+        //   location: "Vadapalani",
+        //   distance: "2.4",
+        // },
       ],
     };
   }
@@ -208,7 +208,7 @@ class ProductPage extends Component {
     const {
       deliveryDetails,
       availableLocations,
-      productLiked = false,
+      // productLiked = false,
       productData,
       productImages = [],
       sizeVariant,
@@ -220,7 +220,7 @@ class ProductPage extends Component {
 
     if (loading) return <OverlayLoader />;
     const { brand = {}, name = "" } = productData;
-    const { mrp, discount, price } = this.generatePrice();
+    const {  price } = this.generatePrice();
     return (
       <div className="productPage">
         <div className="mainPart row">
@@ -244,10 +244,10 @@ class ProductPage extends Component {
               {price ? (
                 <div className="priceDetails">
                   <div className="currentPrice">&#8377;{price}</div>
-                  <div className="originalPrice">
+                  {/* <div className="originalPrice">
                     <del>&#8377;{mrp}</del>
                   </div>
-                  <div className="offer">{discount}%&nbsp;off</div>
+                  <div className="offer">{discount}%&nbsp;off</div> */}
                   <div className="read">Inclusive of all taxes</div>
                 </div>
               ) : (
@@ -255,7 +255,7 @@ class ProductPage extends Component {
               )}
             </div>
 
-            <div className="offers">
+            {/* <div className="offers">
               <div className="title">Offers:</div>
               <div className="offersAvailable">
                 Get 6% discount on in-store purchase
@@ -263,11 +263,11 @@ class ProductPage extends Component {
               <div className="offersAvailable">
                 Get additional 5% discount on HDFC Cards
               </div>
-            </div>
+            </div> */}
             <div className="sizes">
               <div className="header">
                 <div className="titleName">Select Size:</div>
-                <div className="guide">size guide</div>
+                {/* <div className="guide">size guide</div> */}
               </div>
               <div className="sizesAvailable">
                 {sizeVariant?.variant &&
@@ -288,7 +288,7 @@ class ProductPage extends Component {
             </div>
             <div className="colours">
               <div className="title">
-                Select Colour : <b>{selectedColorVariant.variant_name}</b>
+                Select Colour : <b>{selectedColorVariant.variant_name || "NA"}</b>
               </div>
               <div className="coloursAvailable">
                 {colorVariant?.variant &&
@@ -312,12 +312,12 @@ class ProductPage extends Component {
               </div>
             </div>
             <div className="deliveryDetails">
-              <div className="title">
+              {/* <div className="title">
                 Selected delivery location : <text>Change</text>
               </div>
               <div className="location">
                 {deliveryDetails.currentDeliveryAddress}
-              </div>
+              </div> */}
               <div className="deliveryType">{deliveryDetails.deliveryType}</div>
             </div>
             <div className="buttons">
@@ -325,14 +325,14 @@ class ProductPage extends Component {
                 <img src={shoppingCart} className="image" />
                 Add to Cart
               </button>
-              <div className="box">
+              {/* <div className="box">
                 <img
                   src={productLiked ? heartLiked : heart}
                   alt=""
                   className={productLiked ? "likedSize" : "size"}
                   onClick={this.likeProduct}
                 />
-              </div>
+              </div> */}
             </div>
             <div className="availableLocations">
               <div className="title">
@@ -342,7 +342,7 @@ class ProductPage extends Component {
               {availableLocations.map((divData, index) => (
                 <div className="stores" key={index}>
                   <div className="storeName">
-                    {divData.storeName}, {divData.mallName}, {divData.location}
+                    {divData.storeName} {divData.mallName}, {divData.location}
                   </div>
                   <div>
                     <img src={Plane} alt="" className="image" />
@@ -353,8 +353,8 @@ class ProductPage extends Component {
             </div>
             <div className="line" />
             <div className="productDetails">
-              <div className="title">Brand Details :</div>
-              <div className="desc">{brand.description}</div>
+              {/* <div className="title">Brand Details :</div>
+              <div className="desc">{brand.description}</div> */}
             </div>
             {/* {this.state.productDetailsList.map((productDetailsList, index) => (
               <div className="productDetails" key={index}>

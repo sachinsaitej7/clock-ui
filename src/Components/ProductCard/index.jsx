@@ -64,8 +64,8 @@ class ProductCard extends React.Component {
             <div className="pricing">
               <div className="show">
                 <span id="price">{`₹ ${price || 0}`}</span>
-                <span id="strike">{`₹ ${mrp || 0}`}</span>
-                <span id="percent">{`(${discount}% off)`}</span>
+                {/* <span id="strike">{`₹ ${mrp || 0}`}</span>
+                <span id="percent">{`(${discount}% off)`}</span> */}
               </div>
             </div>
           </div>

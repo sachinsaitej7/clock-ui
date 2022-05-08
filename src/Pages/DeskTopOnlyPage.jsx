@@ -14,10 +14,10 @@ export default function SimpleContainer() {
           <Box sx={{ textAlign: "center" }}>
             <MobileOffIcon fontSize="large" />
             <Typography variant="h4" gutterBottom>
-              Mobile site is not available
+              We are working here!
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
-              Please use desktop version
+              You won't find the above message on your desktop, try now !
             </Typography>
           </Box>
         </Box>

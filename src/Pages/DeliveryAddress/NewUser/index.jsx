@@ -9,8 +9,8 @@ import Seperator from "../../../assets/png/separator.png";
 import { toast } from "react-toastify";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 
-import withRouter from "../../../Hoc/WithRouter";
-import { AuthContext } from "../../../AuthContext";
+import withRouter from "../../../hoc/WithRouter";
+import { AuthContext } from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
 
 class NU extends Component {
@@ -153,14 +153,12 @@ class NU extends Component {
 
       toast.success("Address Successfully added!!!");
     } catch (e) {
-
       toast.error("Please login!!!");
     }
   }
 
   render() {
     const { user } = this.context;
-    console.log(user, "new_user");
     return (
       <div className="newuser">
         <img className="line" src={Seperator} />

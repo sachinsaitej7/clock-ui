@@ -5,12 +5,13 @@ import { toast } from "react-toastify";
 import SearchBar from "../../Components/Search";
 import ProductCard from "../../Components/ProductCard";
 import MoreFilters from "../../Components/Popups/MoreFilters";
-import withRouter from "../../Hoc/WithRouter";
+import withRouter from "../../hoc/WithRouter";
 import OverlayLoader from "../../Components/OverlayLoader";
 
 import checkedImage from "../../assets/png/store-page/checked.png";
 import uncheckedImage from "../../assets/png/store-page/unchecked.png";
 import axios from "axios";
+import { isEqual } from "lodash";
 
 class CategoryPage extends Component {
   constructor(props) {
@@ -63,6 +64,20 @@ class CategoryPage extends Component {
     this.fetchProducts({ params: payload });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { searchParams } = this.props;
+    if (!isEqual(prevProps.searchParams, this.props.searchParams)) {
+      const keyValues = searchParams.entries();
+      const payload = {};
+      for (const [key, value] of keyValues) {
+        if (key === "brand") {
+          payload["brand_id"] = value;
+        } else payload[key] = value;
+      }
+      this.fetchProducts({ params: payload });
+    }
+  }
+
   fetchProducts = async (payload) => {
     this.setState({ loading: true });
     try {
@@ -72,7 +87,8 @@ class CategoryPage extends Component {
       );
       // let data = await res.json();
       if (res.data.success)
-        this.setState({ products: res.data.data || [], loading: false });
+        return this.setState({ products: res.data.data || [], loading: false });
+      this.setState({ loading: false, products: [] });
     } catch (err) {
       this.setState({ loading: false });
       toast.error("error in fetching the collection");
@@ -107,10 +123,16 @@ class CategoryPage extends Component {
     }
   };
   render() {
-    const { filter1, filter2, filter3, filter4, products = [], loading } = this.state;
+    const {
+      filter1,
+      filter2,
+      filter3,
+      filter4,
+      products = [],
+      loading,
+    } = this.state;
     const collectionName = this.getCollectionName();
-    if (loading)
-      return <OverlayLoader />;
+    if (loading) return <OverlayLoader />;
 
     return (
       <div className="productPage">
@@ -121,7 +143,7 @@ class CategoryPage extends Component {
               &nbsp;&nbsp;&bull;&nbsp;{`${products.length} Items`}
             </text>
           </text>
-          <div className="flex">
+          {/* <div className="flex">
             <text
               className="filters"
               style={{ marginRight: window.innerWidth < 1281 ? "3%" : "7%" }}
@@ -141,10 +163,10 @@ class CategoryPage extends Component {
               Sort&nbsp;by<text className="chevron"></text>
             </text>
             <SearchBar className="" />
-          </div>
+          </div> */}
         </div>
         <div className="mainPart">
-          <div className="sideBar">
+          {/* <div className="sideBar">
             <div className="listContainer">
               <div className="listName">For</div>
               <form className="listContents">
@@ -246,9 +268,9 @@ class CategoryPage extends Component {
               </form>
               <div className="linee"></div>
             </div>
-          </div>
+          </div> */}
           <div className="pageContent">
-            <div className={this.state.hovering ? "red" : "storeCardFlex"}>
+            <div>
               <div className="PCclass">
                 {products.map((cardData) => (
                   <ProductCard key={cardData.id} Data={cardData} />
@@ -257,9 +279,9 @@ class CategoryPage extends Component {
             </div>
           </div>
         </div>
-        {this.state.showPopup ? (
+        {/* {this.state.showPopup ? (
           <MoreFilters triggerPopup={this.togglePopup} />
-        ) : null}
+        ) : null} */}
       </div>
     );
   }

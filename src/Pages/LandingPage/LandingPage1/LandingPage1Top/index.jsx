@@ -19,61 +19,13 @@ import "./style.scss";
 
 //Constants
 const notificationBarData =
-  "Get 6% Discount on all Products on in-store Purchase";
-// const mallCardOneData = {
-//   title: "VR",
-//   imageUrl: MallCardImageVR,
-//   distance: "2.6km",
-// };
-// const mallCardTwoData = {
-//   title: "Forum Vijaya Mall",
-//   imageUrl: MallCardImageForum,
-//   distance: "3.0km",
-// };
-// const mallCardThreeData = {
-//   title: "Phoenix Mall",
-//   imageUrl: MallCardImagePhoenix,
-//   distance: "4.1km",
-// };
-// const mallCardFourData = {
-//   title: "VR Mall",
-//   imageUrl: MallCardImageVR,
-//   distance: "2.6km",
-// };
+  "Delivery is available in your area. You can now order from the store.";
 
-//StoreCard
-// const storeCardAdidasData = {
-//   imageUrl: StoreCardImageAdidas,
-//   name: "Adidas",
-//   width: "60",
-// };
-// const storeCardAllenData = {
-//   imageUrl: StoreCardImageAllen,
-//   name: "Adidas",
-//   width: "45",
-//   height: "40",
-// };
-// const storeCardBasicsData = {
-//   imageUrl: StoreCardImageBasics,
-//   name: "Basics",
-//   width: "60",
-// };
-// const storeCardNikeData = {
-//   imageUrl: StoreCardImageNike,
-//   name: "Nike",
-//   width: "55",
-// };
-//UserLocation
 const UserLocationData = {
   description: "Showing Malls near",
   link: "Chennai",
 };
 
-// const OtherMallsinChennai = {
-//   description: "Other malls in",
-//   link: "Chennai",
-// };
-//Code
 class Top extends Component {
   constructor(props) {
     super(props);

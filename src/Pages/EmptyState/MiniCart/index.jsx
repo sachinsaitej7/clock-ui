@@ -6,7 +6,7 @@ import EmptyCartImage from "../../../assets/png/EmptyStates/Cart.png";
 import CloseButtonImage from "../../../assets/png/EmptyStates/Close.png";
 // import MyCart from "../MyCart";
 import MyCart from "../../../Components/MyCart";
-import { CartContext } from "../../../CartContext";
+import { CartContext } from "../../../context/CartContext";
 import Backdrop from "@mui/material/Backdrop";
 
 class Minicart extends Component {
@@ -35,7 +35,7 @@ class Minicart extends Component {
             />
           </div>
           {items.length > 0 ? (
-            <MyCart />
+            <MyCart closeCart={this.props.triggerMinicart}/>
           ) : (
             <>
               <div className="emptyImage">
