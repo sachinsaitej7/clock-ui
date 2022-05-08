@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./style.scss";
 import adCardImage from "../../assets/png/image-removebg-preview 1.png";
+import { Link } from "react-router-dom";
 class AdCard extends Component {
   render() {
     <meta
@@ -19,7 +20,9 @@ class AdCard extends Component {
           <br />
           Near You
         </pre>
-        <pre className="button"> Grab the Deal </pre>
+        <Link to="/product" style={{ textDecoration: "none" }}>
+          <pre className="button"> Grab the Deal </pre>
+        </Link>
       </div>
     );
   }

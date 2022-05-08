@@ -93,9 +93,11 @@ class OrderConfirmation extends Component {
           <div className="contacttext">
             Feel free to{" "}
             <span style={{ color: "blue", cursor: "pointer" }}>
-              <a href="mailto:reached.clock@gmail.com">Contact us</a>
+              <a href="mailto:reached.clock@gmail.com">
+                reached.clock@gmail.com
+              </a>
             </span>{" "}
-            with any questions regarding your purchase
+            with any questions regarding your purchase or return
           </div>
         </div>
       </div>

@@ -31,6 +31,7 @@ class Top extends Component {
     super(props);
     this.state = { showMoreActive: false, mallsData: [], brandsData: [] };
   }
+  
   fetchMalls = async () => {
     try {
       let res = await fetch("https://clockapi.theclock.xyz/malls/");

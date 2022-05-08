@@ -297,7 +297,7 @@ class NU extends Component {
                 </div>
               </div>
               {/* Last two Landmark and alternate mobileno */}
-              <div className="linelast">
+              {/* <div className="linelast">
                 <div className="inputing1">
                   <label>Landmark(optional)</label>{" "}
                   <div>
@@ -320,7 +320,7 @@ class NU extends Component {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </form>
           </div>
           {!user.address?.length ? (

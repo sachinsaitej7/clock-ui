@@ -89,21 +89,26 @@ class TopBar extends Component {
             <div className="items-4">Sale</div> */}
           </div>
           <div className="item-3">
-            <img src={search} alt="Error" className="ite-1" />
-            <Link to="/wishlist" style={{ textDecoration: "none" }}>
+            {/* <img src={search} alt="Error" className="ite-1" /> */}
+            {/* <Link to="/wishlist" style={{ textDecoration: "none" }}>
               <img
                 src={heart}
                 alt="Error"
                 className="ite-2"
                 onClick={this.showNavbarWishlist}
               />
-            </Link>
-            <img
-              src={shopping}
-              alt="Error"
-              className="ite-3"
-              onClick={this.showOverlay}
-            />
+            </Link> */}
+            <div className="cart-items">
+              <img
+                src={shopping}
+                alt="Error"
+                className="ite-3"
+                onClick={this.showOverlay}
+              />
+              <div className="cart-items-count">
+                {this.props.itemsCount}
+              </div>
+            </div>
             {user ? (
               <Link to="/profile" style={{ textDecoration: "none" }}>
                 <img src={person} alt="Error" className="ite-4" />
@@ -137,6 +142,7 @@ TopBar.propTypes = {
   user: PropTypes.object.isRequired,
   showLoginPopup: PropTypes.bool.isRequired,
   setShowLoginPopup: PropTypes.func.isRequired,
+  itemsCount: PropTypes.number.isRequired,
 };
 
 export default TopBar;
