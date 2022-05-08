@@ -12,7 +12,7 @@ import ProductPage from "./Pages/ProductPage";
 import MyCart from "./Pages/EmptyState/MyCart";
 // import ReviewOrder1 from "./Pages/ReviewOrder/ReviewOrder1";
 import WithTemplate from "./Hoc/WithTemplate";
-import { AuthContext } from "./Context/AuthContext";
+import { AuthContext } from "./Contexts/AuthContext";
 import ScrollToTop from "./Components/ScrollToTop";
 import ProfilePage from "./Pages/ProfilePage";
 import DeliveryAddress from "./Pages/DeliveryAddress/NewUser";
@@ -23,7 +23,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 // eslint-disable-next-line no-unused-vars
 import { app } from "./firebase-config";
-import { CartContext } from "./Context/CartContext";
+import { CartContext } from "./Contexts/CartContext";
 import {
   getAuth,
   signInWithEmailAndPassword,

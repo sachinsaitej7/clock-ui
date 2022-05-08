@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 import ExistingUser from "./ExistingUser";
 import { useNavigate } from "react-router-dom";
 

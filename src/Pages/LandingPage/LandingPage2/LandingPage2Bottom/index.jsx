@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ProductCard from "../../../../Components/ProductCard";
 // import ProductImage from "../../../../assets/png/image 29.png";
 import CategoryCard from "../../../../Components/CategoryCard";
-import { ProductContext } from "../../../../Context/ProductContext";
+import { ProductContext } from "../../../../Contexts/ProductContext";
 
 const LP2Bottom = () => {
   const [products, setProducts] = useState([]);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 class UpdateProfile extends Component {
   constructor(props) {

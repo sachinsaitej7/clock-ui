@@ -13,7 +13,7 @@ import shopping from "../../assets/svg/TopBar/shopping-cart.svg";
 import logo from "../../assets/svg/TopBar/Logo-Full.svg";
 import beta from "../../assets/svg/beta.svg";
 import PropTypes from "prop-types";
-import { ProductContext } from "../../Context/ProductContext";
+import { ProductContext } from "../../Contexts/ProductContext";
 
 class TopBar extends Component {
   constructor(props) {

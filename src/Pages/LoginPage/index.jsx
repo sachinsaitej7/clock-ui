@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
 import Close from "../../assets/svg/close.svg";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 import OverlayLoader from "../../Components/OverlayLoader";
 import Backdrop from "@mui/material/Backdrop";
 

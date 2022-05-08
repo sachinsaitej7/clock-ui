@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../Contexts/AuthContext";
 import OverlayLoader from "../Components/OverlayLoader";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { getAuth } from "firebase/auth";

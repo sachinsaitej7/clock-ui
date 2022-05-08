@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 
 import withRouter from "../../../Hoc/WithRouter";
-import { AuthContext } from "../../../Context/AuthContext";
+import { AuthContext } from "../../../Contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 class NU extends Component {

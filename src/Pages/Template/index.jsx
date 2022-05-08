@@ -2,9 +2,9 @@ import React, {useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import TopBar from "../../Components/TopBar/index";
 import Footer from "../../Components/Footer/index";
-import { AuthContext } from "../../Context/AuthContext";
-import { ProductContext } from "../../Context/ProductContext";
-import { CartContext } from "../../Context/CartContext";
+import { AuthContext } from "../../Contexts/AuthContext";
+import { ProductContext } from "../../Contexts/ProductContext";
+import { CartContext } from "../../Contexts/CartContext";
 import axios from "axios";
 
 const Template = (props) => {

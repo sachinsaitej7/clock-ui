@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ProductCard from "../../../Components/ProductCard/index";
 import PropTypes from "prop-types";
 import emptyStateImage from "../../../assets/png/EmptyStates/Cart.png";
-import { CartContext } from "../../../Context/CartContext";
+import { CartContext } from "../../../Contexts/CartContext";
 import withRouter from "../../../Hoc/WithRouter";
 
 import CartSummary from "../../../Components/CartSummary/CartSummary";

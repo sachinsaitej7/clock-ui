@@ -5,7 +5,7 @@ import Seperator from "../../assets/png/separator.png";
 import seperator from "../../utils/numberWithCommas";
 import Vector from "../../assets/svg/Vector.svg";
 import "./style.scss";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 const CartSummary = (props) => {
   const { user, setShowLoginPopup } = useContext(AuthContext);

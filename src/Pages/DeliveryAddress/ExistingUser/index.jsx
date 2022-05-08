@@ -7,7 +7,7 @@ import line from "../../../assets/svg/Line 18.svg";
 import PropTypes from "prop-types";
 import Seperator from "../../../assets/png/separator.png";
 
-import { CartContext } from "../../../Context/CartContext";
+import { CartContext } from "../../../Contexts/CartContext";
 import { Link } from "react-router-dom";
 import DeliveryAddressComponent from "../../../Components/AddressComponentDelivery";
 import withRouter from "../../../Hoc/WithRouter";

@@ -9,7 +9,7 @@ import logo from "../../assets/svg/TopBar/Logo-Full.svg";
 import PropTypes from "prop-types";
 import Seperator from "../../assets/png/separator.png";
 
-import { CartContext } from "../../Context/CartContext";
+import { CartContext } from "../../Contexts/CartContext";
 import ReviewAddressComponent from "../../Components/ReviewOrderAddress";
 import withRouter from "../../Hoc/WithRouter";
 import { toast } from "react-toastify";
