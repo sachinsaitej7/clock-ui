@@ -42,7 +42,7 @@ class ProductPage extends Component {
       ],
       deliveryDetails: {
         currentDeliveryAddress: "Venkateshwara street, Vadapalani, Chennai",
-        deliveryType: "Free Delivery within a day",
+        deliveryType: "Order before 5 PM for sameday delivery.",
       },
       availableLocations: [
         {
@@ -322,7 +322,7 @@ class ProductPage extends Component {
             </div>
             <div className="buttons">
               <button className="addtoCart" onClick={() => this.addToCart()}>
-                <img src={shoppingCart} className="image" />
+                <img src={shoppingCart} className="image" alt="error"/>
                 Add to Cart
               </button>
               {/* <div className="box">

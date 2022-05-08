@@ -84,7 +84,7 @@ const CartSummary = (props) => {
         </button>{" "}
         <div className="deliverytime">
           <img src={Vector} />
-          <text> Delivery by 4 pm to 8 pm Today </text>
+          <text> Order before 5 PM for sameday delivery </text>
         </div>
       </div>
     </div>

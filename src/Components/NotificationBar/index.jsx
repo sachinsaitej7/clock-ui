@@ -20,9 +20,7 @@ class NotificationBar extends Component {
             </div>
             <text className="desc1">{notificationBarData}</text>
           </div>
-          <div className="button">
-            more details
-          </div>
+          <div className="button">Order before 5 PM for sameday delivery</div>
           {this.state.offerVisible ? (
             <>
               <MoreDetailsPopup triggerClose={this.showOffer} />

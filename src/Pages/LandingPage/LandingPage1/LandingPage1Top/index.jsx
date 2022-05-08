@@ -18,8 +18,7 @@ import UserLocation from "../../../../Components/UserLocation/index";
 import "./style.scss";
 
 //Constants
-const notificationBarData =
-  "Delivery is available in your area. You can now order from the store.";
+const notificationBarData = "Delivered to Ashok Nagar, KK Nagar, Ramapuram.";
 
 const UserLocationData = {
   description: "Showing Malls near",
@@ -31,7 +30,7 @@ class Top extends Component {
     super(props);
     this.state = { showMoreActive: false, mallsData: [], brandsData: [] };
   }
-  
+
   fetchMalls = async () => {
     try {
       let res = await fetch("https://clockapi.theclock.xyz/malls/");

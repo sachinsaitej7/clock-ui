@@ -162,16 +162,16 @@
       }
     }
     .pageContent {
-      width: 80%;
+      width: 100%;
 
       .storeCardFlex {
-display: flex;
-    /* padding-top: 5%; */
-    flex-direction: row;
-    margin-bottom: 5%;
-    /* padding-left: 2%; */
-    flex-wrap: wrap;
-    width: 100%;
+        display: flex;
+        /* padding-top: 5%; */
+        flex-direction: row;
+        margin-bottom: 5%;
+        /* padding-left: 2%; */
+        flex-wrap: wrap;
+        width: 100%;
         .storeCard {
           margin: 0% 2% 1%;
           width: 22.5%;
