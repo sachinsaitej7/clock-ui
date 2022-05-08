@@ -9,8 +9,8 @@ import Seperator from "../../../assets/png/separator.png";
 import { toast } from "react-toastify";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 
-import withRouter from "../../../hoc/WithRouter";
-import { AuthContext } from "../../../context/AuthContext";
+import withRouter from "../../../Hoc/WithRouter";
+import { AuthContext } from "../../../Context/AuthContext";
 import { Link } from "react-router-dom";
 
 class NU extends Component {

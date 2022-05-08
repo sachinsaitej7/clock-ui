@@ -9,7 +9,7 @@ import ShopLocation from "./ShopLocation";
 import separator from "../../utils/numberWithCommas";
 import { Link } from "react-router-dom";
 // import MCProductImage from "../../assets/png/your-orders/productImage.png";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../Context/CartContext";
 import { Divider } from "@mui/material";
 
 const MyCart = (props) => {

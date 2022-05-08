@@ -3,7 +3,7 @@ import "./style.scss";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import ProductCard from "../../Components/ProductCard";
-import withRouter from "../../hoc/WithRouter";
+import withRouter from "../../Hoc/WithRouter";
 import OverlayLoader from "../../Components/OverlayLoader";
 
 import axios from "axios";

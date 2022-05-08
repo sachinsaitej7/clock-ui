@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DAFooter from "../Delivery Adress Footer";
-import Help from "../../../pages/Other_Pages/Help";
+import Help from "../../../Pages/Other_Pages/Help";
 
 class NeedHelpControl extends Component {
   constructor(props) {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // import OCImage from "../../../assets/svg/orderconfirmationimage.svg";
 import OrderConfirmationCard from "../OrderConfirmationCard";
 import DeliveryCard from "../../../Components/DeliveryDetailsCard";
-import withRouter from "../../../hoc/WithRouter";
+import withRouter from "../../../Hoc/WithRouter";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import OverlayLoader from "../../../Components/OverlayLoader";

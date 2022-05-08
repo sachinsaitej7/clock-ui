@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import ReviewOrderCard from "../../pages/ReviewOrder/ReviewOrderCard";
+import ReviewOrderCard from "../../Pages/ReviewOrder/ReviewOrderCard";
 import Seperator from "../../assets/png/separator.png";
 import seperator from "../../utils/numberWithCommas";
 import Vector from "../../assets/svg/Vector.svg";
 import "./style.scss";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 const CartSummary = (props) => {
   const { user, setShowLoginPopup } = useContext(AuthContext);

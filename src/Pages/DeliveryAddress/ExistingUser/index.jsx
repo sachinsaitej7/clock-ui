@@ -7,10 +7,10 @@ import line from "../../../assets/svg/Line 18.svg";
 import PropTypes from "prop-types";
 import Seperator from "../../../assets/png/separator.png";
 
-import { CartContext } from "../../../context/CartContext";
+import { CartContext } from "../../../Context/CartContext";
 import { Link } from "react-router-dom";
 import DeliveryAddressComponent from "../../../Components/AddressComponentDelivery";
-import withRouter from "../../../hoc/WithRouter";
+import withRouter from "../../../Hoc/WithRouter";
 import { toast } from "react-toastify";
 
 class EU extends Component {

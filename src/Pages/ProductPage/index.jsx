@@ -23,9 +23,9 @@ import heart from "../../assets/png/ProductPage/heart.png";
 //   { size: "XXL", isAvailable: false, isActive: true },
 // ];
 
-import withRouter from "../../hoc/WithRouter";
+import withRouter from "../../Hoc/WithRouter";
 import OverlayLoader from "../../Components/OverlayLoader";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../Context/CartContext";
 import { toast } from "react-toastify";
 
 class ProductPage extends Component {

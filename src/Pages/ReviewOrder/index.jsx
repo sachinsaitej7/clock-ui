@@ -9,9 +9,9 @@ import logo from "../../assets/svg/TopBar/Logo-Full.svg";
 import PropTypes from "prop-types";
 import Seperator from "../../assets/png/separator.png";
 
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../Context/CartContext";
 import ReviewAddressComponent from "../../Components/ReviewOrderAddress";
-import withRouter from "../../hoc/WithRouter";
+import withRouter from "../../Hoc/WithRouter";
 import { toast } from "react-toastify";
 import CartSummary from "../../Components/CartSummary/CartSummary";
 import axios from "axios";

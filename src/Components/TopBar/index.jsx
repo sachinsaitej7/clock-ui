@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 import "./style.scss";
 // import MegaMenu from "../MegaMenu/index";
-import MiniCart from "../../pages/EmptyState/MiniCart/index";
-import LoginPages from "../../pages/LoginPage";
+import MiniCart from "../../Pages/EmptyState/MiniCart/index";
+import LoginPages from "../../Pages/LoginPage";
 import heart from "../../assets/svg/TopBar/heart.svg";
 import search from "../../assets/svg/TopBar/search.svg";
 import person from "../../assets/svg/TopBar/person.svg";
@@ -13,7 +13,7 @@ import shopping from "../../assets/svg/TopBar/shopping-cart.svg";
 import logo from "../../assets/svg/TopBar/Logo-Full.svg";
 import beta from "../../assets/svg/beta.svg";
 import PropTypes from "prop-types";
-import { ProductContext } from "../../context/ProductContext";
+import { ProductContext } from "../../Context/ProductContext";
 
 class TopBar extends Component {
   constructor(props) {

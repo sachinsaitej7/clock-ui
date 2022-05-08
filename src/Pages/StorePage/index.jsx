@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import SearchBar from "../../Components/Search";
 import StoreCard from "../../Components/StoreCard";
 import MoreFilters from "../../Components/Popups/MoreFilters";
-import withRouter from "../../hoc/WithRouter";
+import withRouter from "../../Hoc/WithRouter";
 
 import checkedImage from "../../assets/png/store-page/checked.png";
 import uncheckedImage from "../../assets/png/store-page/unchecked.png";

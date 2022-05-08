@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 import "./LoginPage/style.scss";
 import OverlayLoader from "../Components/OverlayLoader";
 import PropTypes from "prop-types";

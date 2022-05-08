@@ -4,7 +4,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 // import OTPInput from "./OTPInput";
-import LoginPages from "../pages/LoginPage";
+import LoginPages from "../Pages/LoginPage";
 
 export function BasicButtons({ title, handleAction }) {
   return (
