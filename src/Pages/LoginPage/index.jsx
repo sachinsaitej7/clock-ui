@@ -38,7 +38,7 @@ class LoginPages extends Component {
   };
 
   handleClose = () => {
-    this.context.setLoginState("SEND_OTP");
+    // this.context.setLoginState("SEND_OTP");
     this.props.handleClose();
   };
 
@@ -83,7 +83,12 @@ class LoginPages extends Component {
           className="logincontentotpnew logincontent logincontentotpexis 
         logincontent1 logincontentreset logincontentcompletesignup"
         >
-          <img src={Close} onClick={this.handleClose} className="xButton" />
+          <img
+            src={Close}
+            onClick={this.handleClose}
+            className="xButton"
+            alt="seperator"
+          />
           {this.renderChild(loginState)}
         </div>
       </Backdrop>

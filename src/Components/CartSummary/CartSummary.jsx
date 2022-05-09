@@ -73,7 +73,7 @@ const CartSummary = (props) => {
               )}
             </b>
           </div>
-          <img className="linesum" src={Seperator} />
+          <img className="linesum" src={Seperator} alt="seperator" />
           <div className="cart-summary-items">
             <p>Total</p>
             <b>₹{seperator(a - 0)}</b>
@@ -83,7 +83,7 @@ const CartSummary = (props) => {
           Proceed to Buy
         </button>{" "}
         <div className="deliverytime">
-          <img src={Vector} />
+          <img src={Vector} alt="seperator-vector" />
           <text> Order before 5 PM for sameday delivery </text>
         </div>
       </div>

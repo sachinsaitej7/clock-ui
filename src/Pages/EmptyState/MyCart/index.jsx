@@ -29,6 +29,7 @@ class MyCart extends Component {
   };
 
   handleClick = () => { 
+    console.log("clicked");
     const { navigate } = this.props;
     navigate("/address");
   };
@@ -42,9 +43,9 @@ class MyCart extends Component {
         setQuantity={changeQuantity}
         triggerDelete={removeItem}
         onClick={this.handleClick}
-        // renderHeader={() => <div className="cart-header">
-        //   <p>{`${items.length} items from Forum mall`}</p>
-        // </div>}
+        renderHeader={() => <div className="cart-header" style={{paddingLeft: "24px"}}>
+          <p>{`${items.length} items from Forum mall`}</p>
+        </div>}
       />
     );
   };

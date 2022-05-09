@@ -78,7 +78,7 @@ function App() {
   };
 
   useEffect(() => {
-    firebaseUser &&
+    if (firebaseUser) {
       firebaseUser.getIdToken().then((idToken) => {
         const {
           email: email_id,
@@ -92,11 +92,20 @@ function App() {
           phone_number,
           id,
         };
-        setUser(user);
-        localStorage.setItem("id_token", idToken);
-        fetchAuthToken();
+        if (!user.email_id || !user.name) setLoginState("COMPLETE_PROFILE");
+        else {
+          setUser(user);
+          setLoginState("LOGGED_IN");
+          localStorage.setItem("id_token", idToken);
+          fetchAuthToken();
+        }
       });
-  }, [firebaseUser]);
+    } else if (!authLoading) {
+      localStorage.removeItem("id_token");
+      setUser(firebaseUser);
+      setLoginState("SEND_OTP");
+    }
+  }, [firebaseUser, authLoading]);
 
   useEffect(() => {
     const items = localStorage.getItem("items");
@@ -232,24 +241,9 @@ function App() {
   const handleSignInWithEmail = async (email, password) => {
     const auth = getAuth();
     try {
-      toast.success("Veriying, Please wait...");
-      const result = await signInWithEmailAndPassword(auth, email, password);
-      const {
-        email: email_id,
-        displayName: name,
-        phoneNumber: phone_number,
-        uuid: id,
-      } = result.user;
-      const user = {
-        email_id,
-        name,
-        phone_number,
-        id,
-      };
-      const idToken = await result.user.getIdToken();
-
-      localStorage.setItem("id_token", idToken);
-      setUser(user);
+      toast.info("Veriying, Please wait...");
+      await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Login Successful");
     } catch (error) {
       if (error.code === "auth/wrong-password") {
         toast.error("Please check the Password");
@@ -281,7 +275,7 @@ function App() {
     );
     const appVerifier = window.recaptchaVerifier;
     try {
-      toast.success("Sending Otp, Please wait...");
+      toast.info("Sending Otp, Please wait...");
       const result = await signInWithPhoneNumber(
         auth,
         validPhoneNumber,
@@ -303,7 +297,14 @@ function App() {
 
   const updateUserProfile = async (displayName, email, password) => {
     const user = getAuth().currentUser;
+    const localUser = {
+      email_id: email,
+      name: displayName,
+      phone_number: user.phoneNumber,
+      id: user.uid,
+    };
     try {
+      toast.info("Creating, Please wait...");
       await updateProfile(user, {
         displayName,
       });
@@ -311,8 +312,8 @@ function App() {
       await updatePassword(user, password);
       toast.success("Profile created Successfully");
       setLoginState("LOGGED_IN");
+      setUser(localUser);
     } catch (error) {
-      console.log(error);
       toast.error("Error saving the details");
     }
   };
@@ -320,27 +321,8 @@ function App() {
   const verifyOtp = async (code) => {
     try {
       toast.info("Verifying Otp, Please wait...");
-      const result = await window.confirmationResult.confirm(code);
-      // const user = result.user;
-      const {
-        email: email_id,
-        displayName: name,
-        phoneNumber: phone_number,
-        uid: id,
-      } = result.user;
-      const user = {
-        email_id,
-        name,
-        phone_number,
-        id,
-      };
-      const idToken = await result.user.getIdToken();
-      localStorage.setItem("id_token", idToken);
-      if (!user.email_id || !user.name) {
-        setLoginState("COMPLETE_PROFILE");
-      } else {
-        setUser(user);
-      }
+      await window.confirmationResult.confirm(code);
+      toast.success("Otp Verified Successfully");
     } catch (error) {
       toast.error("Error verifying the code");
     }
@@ -349,8 +331,6 @@ function App() {
   const handleSignOut = async () => {
     try {
       await getAuth().signOut();
-      setUser(null);
-      localStorage.removeItem("id_token");
     } catch (error) {
       console.log(error);
     }
