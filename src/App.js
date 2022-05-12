@@ -45,7 +45,6 @@ import {
 import DeliveryPage from "./Pages/DeliveryAddress";
 import ReviewOrder from "./Pages/ReviewOrder";
 import OrderConfirmation from "./Pages/ReviewOrder/OrderConfirmation";
-import TermsandConditionsControl from "./Pages/OtherPages/Terms&ConditionsControl";
 import TnCPages from './Pages/TnC/index';
 
 function App() {
