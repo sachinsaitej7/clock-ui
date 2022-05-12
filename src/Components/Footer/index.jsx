@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./style.scss";
 import Logo from "../../assets/png/Logo Full (GBG).png";
 import Seperator from "../../assets/png/separator.png";
+import { Link } from "react-router-dom";
 
 class Footer extends Component {
   render() {
@@ -47,9 +48,11 @@ class Footer extends Component {
                 </div>
                 <div className="item3">
                   <li>Contact Us</li>
-                  <li>Privacy Policies</li>
-                  <li>Return Policies</li>
-                  <li>Terms & Conditions</li>
+                  <Link to="/tnc" style={{textDecoration: "none", color: "white"}}>
+                    <li>Privacy Policies</li>
+                    <li>Return Policies</li>
+                    <li>Terms & Conditions</li>
+                  </Link>
                 </div>
               </div>
             </div>
