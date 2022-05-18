@@ -47,8 +47,11 @@ class Footer extends Component {
                   <text>Info</text>
                 </div>
                 <div className="item3">
-                  <li>Contact Us</li>
-                  <Link to="/tnc" style={{textDecoration: "none", color: "white"}}>
+                  <Link
+                    to="/tnc"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    <li>Contact Us</li>
                     <li>Privacy Policies</li>
                     <li>Return Policies</li>
                     <li>Terms & Conditions</li>

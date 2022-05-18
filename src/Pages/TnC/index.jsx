@@ -5,7 +5,8 @@ import DocumentViewer from "./DocumentViewer";
 const StatePathMap = {
   terms: "./ClockTnC.pdf",
   privacy: "./ClockPrivacyPolicy.pdf",
-  return: "./ClockReturnPolicy.pdf",
+  return: "./ReturnRefund&Shipping.pdf",
+  contact: "./ContactInformation.pdf",
 };
 
 class TnCPages extends Component {
@@ -48,7 +49,15 @@ class TnCPages extends Component {
             }`}
             onClick={() => this.handleClick("return")}
           >
-            <p>Return Policy</p>
+            <p>Return & Shipping Policy</p>
+          </div>
+          <div
+            className={`left-item ${
+              this.state.activeState === "contact" ? "active" : ""
+            }`}
+            onClick={() => this.handleClick("contact")}
+          >
+            <p>Contact Us</p>
           </div>
         </div>
         <div className="right-container">
