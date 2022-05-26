@@ -1,0 +1,208 @@
+{
+  "id": 13,
+  "name": "UNITED COLORS OF BENETTON Men Graphic Print Regular Fit Crew Neck T-shirt",
+  "product_code": "UCB-0001",
+  "product_code_type": "UPC",
+  "category": {
+    "id": 5,
+    "name": "Men",
+    "description": "",
+    "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/oftheoYPuNAFn1ogaiYcrX.webp",
+    "banner": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/8H7Dhh7E5bu95TeyUTyEL4.webp",
+    "parent_id": null,
+    "commission": "0.00",
+    "created_at": "2022-04-27T15:11:49.001Z",
+    "created_by": "2",
+    "updated_at": "2022-04-27T15:11:49.001Z"
+  },
+  "brand": {
+    "id": 6,
+    "name": "United Colors of Benetton",
+    "description": "",
+    "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/7j1pSii5VJmGAVLsUbLXxm.png",
+    "user_id": "BR_UCB_003",
+    "password": "FSJW4CH9",
+    "created_at": "2022-05-04T18:29:22.901Z",
+    "updated_at": "2022-05-04T18:29:22.902Z"
+  },
+  "description": "<p>Printed, Crew-Neck, Half Sleeves, Cotton, Regular</p><p><br></p>",
+  "thumbnail": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/kEcNK2Xd3CszVY92T2EP8B.jpeg",
+  "published": false,
+  "apporval_status": "approved",
+  "status": true,
+  "created_by": "barathms15@gmail.com",
+  "created_at": "2022-05-04T19:32:42.027Z",
+  "updated_at": "2022-05-04T19:32:42.027Z",
+  "attribute_types": [
+    {
+      "variant_type_id": 1,
+      "variant_type_name": "Size",
+      "variant": [
+        {
+          "variant_id": 10,
+          "variant_name": "L"
+        },
+        {
+          "variant_id": 11,
+          "variant_name": "XL"
+        },
+        {
+          "variant_id": 2,
+          "variant_name": "S"
+        },
+        {
+          "variant_id": 3,
+          "variant_name": "M"
+        }
+      ]
+    }
+  ],
+  "product_images": [
+    {
+      "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/kEcNK2Xd3CszVY92T2EP8B.jpeg",
+      "created_at": "2022-05-04T19:32:42.033Z",
+      "updated_at": "2022-05-04T19:32:42.033Z",
+      "id": 61
+    },
+    {
+      "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/gF7stT6XFS5jVnZDQuvtme.jpeg",
+      "created_at": "2022-05-04T19:32:42.033Z",
+      "updated_at": "2022-05-04T19:32:42.034Z",
+      "id": 62
+    },
+    {
+      "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/fQNjeLeqsmU7764bS6XCEm.jpeg",
+      "created_at": "2022-05-04T19:32:42.034Z",
+      "updated_at": "2022-05-04T19:32:42.034Z",
+      "id": 63
+    },
+    {
+      "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/aVEL4HPmXTtyNB5oncKSPo.jpeg",
+      "created_at": "2022-05-04T19:32:42.034Z",
+      "updated_at": "2022-05-04T19:32:42.034Z",
+      "id": 64
+    },
+    {
+      "image": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/qoZYBVyjpT6h71CyfQdXQq.jpeg",
+      "created_at": "2022-05-04T19:32:42.034Z",
+      "updated_at": "2022-05-04T19:32:42.034Z",
+      "id": 65
+    }
+  ],
+  "product_features": [],
+  "price_head": [
+    {
+      "product": 13,
+      "image1": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/i2wzumZxQg7kug5qh9ZkLt.jpeg",
+      "image2": "",
+      "image3": "",
+      "image4": "",
+      "image5": "",
+      "regular_price": "0.00",
+      "sale_price": "1699.00",
+      "product_variant_id": "UCB-0001-S",
+      "product_variant_id_type": "UPC",
+      "updated_at": "2022-05-04T19:32:42.045Z",
+      "status": true,
+      "created_at": "2022-05-04T19:32:42.045Z",
+      "price_line": [
+        {
+          "product": 13,
+          "head_id": 51,
+          "variant_id": 2,
+          "variant_name": "S",
+          "variant_type_id": 1,
+          "variant_type_name": "Size",
+          "updated_at": "2022-05-04T19:32:42.080Z",
+          "status": true,
+          "created_at": "2022-05-04T19:32:42.080Z"
+        }
+      ]
+    },
+    {
+      "product": 13,
+      "image1": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/x5rwmrwpKvycMyA5DocesM.jpeg",
+      "image2": "",
+      "image3": "",
+      "image4": "",
+      "image5": "",
+      "regular_price": "0.00",
+      "sale_price": "1699.00",
+      "product_variant_id": "UCB-0001-M",
+      "product_variant_id_type": "UPC",
+      "updated_at": "2022-05-04T19:32:42.055Z",
+      "status": true,
+      "created_at": "2022-05-04T19:32:42.055Z",
+      "price_line": [
+        {
+          "product": 13,
+          "head_id": 52,
+          "variant_id": 3,
+          "variant_name": "M",
+          "variant_type_id": 1,
+          "variant_type_name": "Size",
+          "updated_at": "2022-05-04T19:32:42.080Z",
+          "status": true,
+          "created_at": "2022-05-04T19:32:42.080Z"
+        }
+      ]
+    },
+    {
+      "product": 13,
+      "image1": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/oRfQbAGfj4RQYdtyQHj58d.jpeg",
+      "image2": "",
+      "image3": "",
+      "image4": "",
+      "image5": "",
+      "regular_price": "0.00",
+      "sale_price": "1699.00",
+      "product_variant_id": "UCB-0001-L",
+      "product_variant_id_type": "UPC",
+      "updated_at": "2022-05-04T19:32:42.063Z",
+      "status": true,
+      "created_at": "2022-05-04T19:32:42.063Z",
+      "price_line": [
+        {
+          "product": 13,
+          "head_id": 53,
+          "variant_id": 10,
+          "variant_name": "L",
+          "variant_type_id": 1,
+          "variant_type_name": "Size",
+          "updated_at": "2022-05-04T19:32:42.080Z",
+          "status": true,
+          "created_at": "2022-05-04T19:32:42.081Z"
+        }
+      ]
+    },
+    {
+      "product": 13,
+      "image1": "https://clock-storage.s3.ap-south-1.amazonaws.com/admin/hYEX3BgKk3v7Mow15P5oQ1.jpeg",
+      "image2": "",
+      "image3": "",
+      "image4": "",
+      "image5": "",
+      "regular_price": "0.00",
+      "sale_price": "1699.00",
+      "product_variant_id": "UCB-0001-XL",
+      "product_variant_id_type": "UPC",
+      "updated_at": "2022-05-04T19:32:42.073Z",
+      "status": true,
+      "created_at": "2022-05-04T19:32:42.073Z",
+      "price_line": [
+        {
+          "product": 13,
+          "head_id": 54,
+          "variant_id": 11,
+          "variant_name": "XL",
+          "variant_type_id": 1,
+          "variant_type_name": "Size",
+          "updated_at": "2022-05-04T19:32:42.081Z",
+          "status": true,
+          "created_at": "2022-05-04T19:32:42.081Z"
+        }
+      ]
+    }
+  ],
+  "product_rejection_reason": []
+}
