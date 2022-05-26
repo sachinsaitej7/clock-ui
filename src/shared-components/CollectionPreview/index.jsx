@@ -55,6 +55,7 @@ const CollectionPreview = ({
             fontWeight: theme.fontWeights.semibold,
             marginRight: theme.space[2],
             fontSize: theme.fontSizes[3],
+            cursor: "pointer",
           }}
           onClick={onClick}
         >

@@ -109,17 +109,6 @@ function App() {
                   }
                 />
                 <Route
-                  path="/add-new-address"
-                  exact
-                  element={
-                    <WithAuthRoute>
-                      <WithTopAndBottom>
-                        <AddressPage />
-                      </WithTopAndBottom>
-                    </WithAuthRoute>
-                  }
-                />
-                <Route
                   path="/address"
                   exact
                   element={

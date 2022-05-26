@@ -78,7 +78,7 @@ const SaveAddressPage = ({
           <AddressCard
             key={item.id}
             address={item}
-            active={item.id === activeAddress.id}
+            active={item.id === activeAddress?.id}
             onClick={setActiveAddress}
           />
         );

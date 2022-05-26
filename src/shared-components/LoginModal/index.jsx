@@ -80,7 +80,6 @@ const LoginModal = ({
   const onSendOtp = () => {
     setLoading(true);
     const phoneNumber = inputRef.current.input.value;
-    console.log(phoneNumber);
     sendOtp(phoneNumber)
       .then(() => {
         setLoading(false);
@@ -157,7 +156,7 @@ const LoginModal = ({
                 </Form.Item>
               )}
               {step === 1 && (
-                <Form.Item name="send-otp" showUpdate={true}>
+                <Form.Item name="send-otp">
                   <StyledButton
                     onClick={onSendOtp}
                     id="sign-in-button"

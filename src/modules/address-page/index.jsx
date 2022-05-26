@@ -32,7 +32,6 @@ const AddressPage = () => {
   const onNext = () => {
     if (activeAddress) navigate("/review-order");
   };
-
   return searchParams.get("new") || address.length === 0 ? (
     <NewAddressPage onSubmit={handleSubmit} />
   ) : (

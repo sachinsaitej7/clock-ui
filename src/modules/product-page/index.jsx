@@ -82,6 +82,11 @@ const StyledButton = styled(Button)`
     line-height: 24px;
     font-weight: ${(props) => props.theme.fontWeights.semibold};
   }
+  :hover,
+  :focus {
+    border-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.bg[props.type || "default"]};
+  }
 `;
 
 const ProductPage = () => {
@@ -208,7 +213,7 @@ const ProductPage = () => {
           </VariantContainer>
         )}
         <div style={{ display: "flex" }}>
-          <StyledButton onClick={addToCart}>Add to Cart</StyledButton>
+          <StyledButton type="primary" onClick={addToCart}>Add to Cart</StyledButton>
         </div>
         <TrustTags />
         <Divider className="divider" />

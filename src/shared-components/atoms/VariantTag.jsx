@@ -15,6 +15,7 @@ const Tag = styled.div`
     props.active ? props.theme.bg.primary : props.theme.bg.default};
   font-size: ${(props) => props.theme.fontSizes[1]};
   font-weight: ${(props) => props.theme.fontWeights.normal};
+  cursor: pointer ;
 `;
 
 const VariantTag = ({ title, active, onClick = () => {} }) => {

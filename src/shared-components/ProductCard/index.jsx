@@ -8,6 +8,7 @@ const StyledCard = styled(Card)`
   width: ${(props) => (props.variant === "small" ? "104px" : "164px")};
   height: ${(props) => (props.variant === "small" ? "237px" : "312px")};
   border: none;
+  cursor: pointer;
   .ant-card-body {
     padding: 0px;
   }

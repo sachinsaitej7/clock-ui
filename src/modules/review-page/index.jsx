@@ -68,26 +68,26 @@ const ITEMS = [
 ];
 
 const { AuthContext, CartContext } = Store;
-const loadScript = (src) => {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => {
-      resolve(true);
-    };
-    script.onerror = () => {
-      resolve(false);
-    };
-    document.body.appendChild(script);
-  });
-};
+// const loadScript = (src) => {
+//   return new Promise((resolve) => {
+//     const script = document.createElement("script");
+//     script.src = src;
+//     script.onload = () => {
+//       resolve(true);
+//     };
+//     script.onerror = () => {
+//       resolve(false);
+//     };
+//     document.body.appendChild(script);
+//   });
+// };
 
 const ReviewPage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { activeAddress, user, removeAllItems, updateOrder, orders } =
     useContext(AuthContext);
-    console.log(orders, "orders");
+  console.log(orders, "orders");
 
   const { items, removeItem, changeQuantity } = useContext(CartContext);
 
@@ -98,9 +98,9 @@ const ReviewPage = () => {
   const { data: razarpayData, isLoading } = mutation;
   const { order_id, razorpay_order } = razarpayData?.data.data || {};
 
-  useEffect(() => {
-    loadScript("https://checkout.razorpay.com/v1/checkout.js");
-  }, []);
+  // useEffect(() => {
+  //   loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  // }, []);
 
   const handleRazorpayResponse = useCallback(
     async (response) => {
@@ -141,8 +141,10 @@ const ReviewPage = () => {
           contact: user.phoneNumber,
         },
       };
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
+      if (window.Razorpay) {
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      }
     }
   }, [razorpay_order, user, order_id, handleRazorpayResponse]);
 

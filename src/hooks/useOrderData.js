@@ -17,18 +17,18 @@ export function useOrderData(user) {
   const id = user?.uid;
   const [orders, setOrders] = useState([]);
   const [address, setAddress] = useState([]);
-  const [activeAddress, setActiveAddress] = useState(null);
+  const [activeAddress, setActiveAddress] = useState();
 
   const orderUnSubscription = useRef(() => {});
   const addressUnSubscription = useRef(() => {});
 
   useEffect(() => {
     const address = localStorage.getItem("address");
-    setActiveAddress(address ? JSON.parse(address) : null);
-    // return () => {
-    //   orderUnSubscription.current();
-    //   addressUnSubscription.current();
-    // };
+    setActiveAddress(address ? JSON.parse(address) : undefined);
+    return () => {
+      orderUnSubscription.current();
+      addressUnSubscription.current();
+    };
   }, []);
 
   useEffect(() => {
