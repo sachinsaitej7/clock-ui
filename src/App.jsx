@@ -16,6 +16,7 @@ import CartPage from "./modules/cart-page";
 import AddressPage from "./modules/address-page";
 import ReviewPage from "./modules/review-page";
 import OrderPage from "./modules/order-page";
+import ProfilePage from "./modules/other-pages/profile-page";
 
 import { useCartData } from "./hooks/useCartData";
 import { useAuthData } from "./hooks/useAuthData";
@@ -92,7 +93,7 @@ function App() {
                   element={
                     <WithAuthRoute>
                       <WithTopAndBottom>
-                        {/* <ProfilePage /> */}
+                        <ProfilePage />
                       </WithTopAndBottom>
                     </WithAuthRoute>
                   }

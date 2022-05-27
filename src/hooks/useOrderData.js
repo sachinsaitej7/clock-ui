@@ -23,8 +23,16 @@ export function useOrderData(user) {
   const addressUnSubscription = useRef(() => {});
 
   useEffect(() => {
-    const address = localStorage.getItem("address");
-    setActiveAddress(address ? JSON.parse(address) : undefined);
+    try {
+      const address = JSON.parse(localStorage.getItem("address"));
+      console.log(address);
+      setActiveAddress(address ? address : undefined);
+    }
+    catch (e) {
+      localStorage.removeItem("address");
+      console.log(e);
+    }
+
     return () => {
       orderUnSubscription.current();
       addressUnSubscription.current();

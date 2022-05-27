@@ -1,6 +1,6 @@
 import React from "react";
-import Carousel from "react-bootstrap/Carousel";
 import styled from "styled-components";
+import { Carousel } from "antd";
 
 import { ReactComponent as ArrowLeft } from "../../assets/common/arrow-right-bg.svg";
 import { ReactComponent as ArrowRight } from "../../assets/common/arrow-left-bg.svg";
@@ -18,21 +18,38 @@ const Image = styled.img`
   }
 `;
 
+const StyledCarousel = styled(Carousel)`
+  .slick-prev {
+    left: ${(props) => props.theme.space[3]};
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+  };
+  .slick-next {
+    right: ${(props) => props.theme.space[3]};
+    width: 32px;
+    height: 32px;
+  };
+`;
+
 const ProductCarousal = ({ images=[]}) => {
   return (
     <Container>
-      <Carousel nextIcon={<ArrowLeft />} prevIcon={<ArrowRight />}>
+      <StyledCarousel
+        nextArrow={<ArrowLeft />}
+        prevArrow={<ArrowRight />}
+        arrows={true}
+      >
         {images.map((image, index) => {
           return (
-            <Carousel.Item key={image.id}>
-              <Image
-                src={image.image}
-                alt={`slide number ${index}`}
-              />
-            </Carousel.Item>
+            <Image
+              key={image.id}
+              src={image.image}
+              alt={`slide number ${index}`}
+            />
           );
         })}
-      </Carousel>
+      </StyledCarousel>
     </Container>
   );
 };

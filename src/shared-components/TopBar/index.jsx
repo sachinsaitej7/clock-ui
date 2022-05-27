@@ -47,7 +47,13 @@ const StyledDrawer = styled(Drawer)`
   height: 100%;
 `;
 
-const TopBar = ({ itemsCount, clickHandler = () => {}, openLogin = false, authHandler={} }) => {
+const TopBar = ({
+  itemsCount,
+  clickHandler = () => {},
+  openLogin = false,
+  authHandler = {},
+  menuItems = [],
+}) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const theme = useTheme();
   const handleMenu = () => {
@@ -105,7 +111,13 @@ const TopBar = ({ itemsCount, clickHandler = () => {}, openLogin = false, authHa
             paddingTop: theme.space[5],
           }}
         >
-          <TopMenu />
+          <TopMenu
+            items={menuItems}
+            onClick={(key) => {
+              clickHandler("menu", { key });
+              handleMenu();
+            }}
+          />
         </StyledDrawer>
       )}
       {openLogin && (

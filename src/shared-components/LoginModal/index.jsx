@@ -1,10 +1,14 @@
 import React, { useState, useRef } from "react";
 import styled, { useTheme } from "styled-components";
 import { Modal, Button, Form, Input, Typography } from "antd";
-import { toast } from "react-toastify";
+
 
 // images
 import { ReactComponent as CCloseIcon } from "../../assets/common/close-circle.svg";
+import { CheckCircleOutlined } from "@ant-design/icons";
+
+
+import NotificationAPI from "../NotificationAPI";
 
 const StyledButton = styled(Button)`
   width: 100%;
@@ -86,8 +90,13 @@ const LoginModal = ({
         setStep(2);
       })
       .catch(() => {
+        NotificationAPI({
+          type: "error",
+          message: "Something went wrong, try again later",
+          title: "Error",
+          placement: "top",
+        });
         setLoading(false);
-        toast.error("Something went wrong");
       });
   };
 
@@ -99,7 +108,12 @@ const LoginModal = ({
         setLoading(false);
       })
       .catch(() => {
-        toast.error("Invalid OTP");
+        NotificationAPI({
+          type: "warning",
+          message: "Invalid OTP, try again",
+          title: "Warning",
+          placement: "top",
+        });
         setLoading(false);
       });
   };
@@ -120,6 +134,7 @@ const LoginModal = ({
             <>
               <Form.Item
                 name="phone"
+                validateFirst={true}
                 rules={[
                   {
                     required: true,
@@ -133,6 +148,9 @@ const LoginModal = ({
                   autoFocus={step === 1}
                   type="number"
                   ref={inputRef}
+                  prefix={"+91"}
+                  suffix={step === 2 && <CheckCircleOutlined />}
+                  disabled={step === 2 && true}
                 />
               </Form.Item>
               <Text>Promise, we don't spam</Text>

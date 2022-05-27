@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
-import { toast } from "react-toastify";
 import { Divider, Button, Input, Form, Typography } from "antd";
 
 import ProgressBar from "../../shared-components/ProgressBar";
+import NotificationAPI from "../../shared-components/NotificationAPI";
 
 
 const Container = styled.div`
@@ -93,7 +93,6 @@ const NewAddressPage = ({ onSubmit }) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (newAddress) => {
-    console.log(newAddress);
     const { landMark, city, state, pincode, mobileNo="", email="" } = newAddress;
     const payload = {
       name: newAddress.fname + " " + newAddress.lname,
@@ -111,7 +110,12 @@ const NewAddressPage = ({ onSubmit }) => {
       },
       (error) => {
         setLoading(false);
-        toast.error(error.message);
+        NotificationAPI({
+          type: "error",
+          message: error.message,
+          title: "Error",
+          placement: "top"
+        })
       }
     );
   };

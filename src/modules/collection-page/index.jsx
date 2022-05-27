@@ -96,7 +96,7 @@ const CollectionPage = () => {
         <p>
           {collectionName ? `${collectionName}’s Collection`: `All Products`}
           <span style={{ fontSize: theme.fontSizes[2] }}>{`(${
-            productsData?.data.data.length || 0
+            productsData?.data.data?.length || 0
           })`}</span>
         </p>
         <div>
@@ -115,7 +115,7 @@ const CollectionPage = () => {
         ></div>
       </div>
       <Collections>
-        {productsData?.data.data.slice(0, STEP * page).map((product) => {
+        {productsData?.data.data?.slice(0, STEP * page).map((product) => {
           return (
             <ProductCard
               key={product.id}
@@ -126,7 +126,7 @@ const CollectionPage = () => {
           );
         })}
       </Collections>
-      {productsData?.data.data.length > STEP * page && (
+      {productsData?.data.data?.length > STEP * page && (
         <div
           style={{
             display: "flex",
