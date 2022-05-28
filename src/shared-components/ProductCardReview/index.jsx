@@ -9,8 +9,8 @@ import separator from "../../utils/numberWithCommas";
 const Container = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
   .left-container {
     margin-right: ${(props) => props.theme.space[5]};
     display: flex;
@@ -19,10 +19,12 @@ const Container = styled.div`
     img {
       width: 104px;
       height: 141px;
+      cursor: pointer;
     }
   }
 
   .right-container {
+    margin-top: ${(props) => props.theme.space[2]};
     h3 {
       font-size: ${(props) => props.theme.fontSizes[3]};
       line-height: 24px;
@@ -70,6 +72,7 @@ const ProductCardReview = ({
   nonEditable,
   removeItem = () => {},
   changeQuantity = () => {},
+  onClick = () => {},
   ...rest
 }) => {
   const theme = useTheme();
@@ -77,7 +80,7 @@ const ProductCardReview = ({
   return (
     <Container>
       <div className="left-container">
-        <img src={thumbnail} alt="product"></img>
+        <img src={thumbnail} alt="product" onClick={onClick}></img>
         {!nonEditable && (
           <Counter>
             <MinusIcon onClick={() => changeQuantity(item, false)} />

@@ -122,7 +122,7 @@ const TopBar = ({
       )}
       {openLogin && (
         <LoginModal
-          handleClose={() => clickHandler("login")}
+          handleClose={() => clickHandler("login", {})}
           {...authHandler}
         />
       )}

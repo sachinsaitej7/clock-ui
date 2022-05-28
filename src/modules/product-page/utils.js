@@ -27,7 +27,6 @@ export const generatePrice = (
 };
 
 export const checkItemInList = (items, { color = {}, size = {}, id }) => {
-  console.log(items, color, size, id);
   return items.find((item) => {
     return (
       item.id === Number(id) &&

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, } from "react";
 import {
   getAuth,
   signInWithPhoneNumber,
@@ -6,30 +6,33 @@ import {
 } from "firebase/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
-import { verifyToken } from "../apis/auth";
+// import { verifyToken } from "../apis/auth";
 
 export function useAuthData() {
   const [user, authLoading, authError] = useAuthState(getAuth());
   const [openLogin, setOpenLogin] = useState(false);
-  const validateToken = useCallback(async () => {
-    const token = await user.getIdToken();
-    try {
-      const response = await verifyToken(token);
-      if (response.status !== 200) getAuth().signOut();
-    } catch (error) {
-      getAuth().signOut();
-    }
-  }, [user]);
+  const [ callbacks, setCallbacks ] = useState([]);
+  // const validateToken = useCallback(async () => {
+  //   if(!user) return;
+  //   const token = await user.getIdToken();
+  //   try {
+  //     const response = await verifyToken(token);
+  //     if (response.status !== 200) getAuth().signOut();
+  //   } catch (error) {
+  //     getAuth().signOut();
+  //   }
+  // }, [user]);
 
-  const handleLoginModal = () => {
+  const handleLoginModal = (callback) => {
     setOpenLogin(!openLogin);
+    if(callback) setCallbacks([...callbacks,callback]);
   };
 
-  useEffect(() => {
-    if (user && !authLoading) {
-      validateToken();
-    }
-  }, [user, authLoading, validateToken]);
+  // useEffect(() => {
+  //   if (user && !authLoading) {
+  //     validateToken();
+  //   }
+  // }, [user, authLoading, validateToken]);
 
   const handleSignInWithPhone = async (phoneNumber) => {
     let validPhoneNumber = phoneNumber.replace(/[^\d]/g, "");
@@ -43,9 +46,6 @@ export function useAuthData() {
         "sign-in-button",
         {
           size: "invisible",
-          callback: (response) => {
-            // reCAPTCHA solved, allow signInWithPhoneNumber.
-          },
         },
         auth
       );
@@ -67,6 +67,10 @@ export function useAuthData() {
     try {
       await window.confirmationResult.confirm(code);
       handleLoginModal();
+      callbacks.forEach(callback => {
+        callback && callback();
+      });
+      setCallbacks([]);
     } catch (error) {
       console.log(error);
       throw error;

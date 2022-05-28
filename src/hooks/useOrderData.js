@@ -21,18 +21,20 @@ export function useOrderData(user) {
 
   const orderUnSubscription = useRef(() => {});
   const addressUnSubscription = useRef(() => {});
-
-  useEffect(() => {
+  
+  const loadAddress = async () => {
     try {
-      const address = JSON.parse(localStorage.getItem("address"));
-      console.log(address);
-      setActiveAddress(address ? address : undefined);
-    }
-    catch (e) {
+      let localAddress = await localStorage.getItem("address");
+      localAddress = localAddress ? JSON.parse(localAddress) : null;
+      setActiveAddress(localAddress);
+    } catch (e) {
       localStorage.removeItem("address");
       console.log(e);
     }
+  };
 
+  useEffect(() => {
+    loadAddress();
     return () => {
       orderUnSubscription.current();
       addressUnSubscription.current();

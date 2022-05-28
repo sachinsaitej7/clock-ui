@@ -38,7 +38,6 @@ const AddressCard = ({
 }) => {
 
   const handleClick = () => {
-    console.log("handleClick");
     if (!notClickable) onClick(address);
   };
 

@@ -29,6 +29,18 @@ const WithTopAndBottom = ({ children }) => {
     '5': () => navigation("/products?category=6"),
   };
 
+  const footerMap = {
+    tnc: () => navigation("/tnc?tab=1"),
+    privacy: () => navigation("/tnc?tab=2"),
+    return: () => navigation("/tnc?tab=3"),
+    contact: () => navigation("/tnc?tab=4"),
+    cart: () => navigation("/cart"),
+    profile: () => navigation("/profile"),
+    home: () => navigation("/"),
+    shipping: () => navigation("/tnc?tab=3"),
+    help: () => navigation("/tnc?tab=4"),
+  };
+
   const MENU_ITEMS = [
     {
       key: "1",
@@ -85,6 +97,11 @@ const WithTopAndBottom = ({ children }) => {
     }
   };
 
+
+  const handleFooterClick = (type, info) => {
+    return footerMap[type] ? footerMap[type] : () => {};
+  };
+
   return (
     <>
       <TopBar
@@ -95,7 +112,7 @@ const WithTopAndBottom = ({ children }) => {
         menuItems={MENU_ITEMS}
       />
       {children}
-      <Footer />
+      <Footer clickHandlers={handleFooterClick}/>
     </>
   );
 };

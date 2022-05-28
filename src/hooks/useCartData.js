@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 export function useCartData() {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    const items = localStorage.getItem("items");
+  const loadItems = async () => { 
+    const items = await localStorage.getItem("items");
     setItems(items ? JSON.parse(items) : []);
+  };
+
+  useEffect(() => {
+    loadItems();
   }, []);
 
   useEffect(() => {

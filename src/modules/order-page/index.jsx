@@ -101,7 +101,9 @@ const OrderPage = () => {
           Thanks for shopping with us! You will receive an order confirmation
           mail to your registered mail address.
         </p>
-        <StyledButton type="primary" onClick={() => navigate("/")}>Continue Shopping</StyledButton>
+        <StyledButton type="primary" onClick={() => navigate("/")}>
+          Continue Shopping
+        </StyledButton>
       </div>
       <Divider className="divider" />
       <p>Order Number</p>
@@ -118,7 +120,11 @@ const OrderPage = () => {
       <SummaryCard items={items} />
       {items.map((item) => (
         <div key={item.id} style={{ margin: theme.space[5] + " 0px" }}>
-          <ProductCardReview {...item} nonEditable />
+          <ProductCardReview
+            {...item}
+            nonEditable
+            onClick={() => navigate(`/products/${item.id}`)}
+          />
         </div>
       ))}
 

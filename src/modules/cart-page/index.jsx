@@ -65,8 +65,9 @@ const CartPage = () => {
   const { total } = getSummaryData(items);
 
   const onClick = () => {
+    const callback = () => navigate("/address");
     if (!user) {
-      handleLoginModal();
+      handleLoginModal(callback);
     } else navigate("/address");
   };
 
@@ -91,6 +92,7 @@ const CartPage = () => {
                 {...item}
                 removeItem={removeItem}
                 changeQuantity={changeQuantity}
+                onClick={() => navigate(`/products/${item.id}`)}
               />
               <Divider
                 style={{

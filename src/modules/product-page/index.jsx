@@ -139,7 +139,7 @@ const ProductPage = () => {
   );
 
   const addToCart = () => {
-    !checkItemInList(items, { color, size, id }) &&
+    !checkItemInList(items, { color, size, id }) ?
       addItem({
         ...product,
         price,
@@ -148,7 +148,7 @@ const ProductPage = () => {
         discount,
         quantity: 1,
         mrp,
-      });
+      }): navigate("/cart");
   };
 
   if (isLoading) return <Spinner />;
@@ -213,7 +213,12 @@ const ProductPage = () => {
           </VariantContainer>
         )}
         <div style={{ display: "flex" }}>
-          <StyledButton type="primary" onClick={addToCart}>Add to Cart</StyledButton>
+          <StyledButton type="primary" onClick={addToCart}>
+            {" "}
+            {checkItemInList(items, { color, size, id })
+              ? "Go to Cart"
+              : "Add to Cart"}{" "}
+          </StyledButton>
         </div>
         <TrustTags />
         <Divider className="divider" />

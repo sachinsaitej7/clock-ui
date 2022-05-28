@@ -17,6 +17,9 @@ import AddressPage from "./modules/address-page";
 import ReviewPage from "./modules/review-page";
 import OrderPage from "./modules/order-page";
 import ProfilePage from "./modules/other-pages/profile-page";
+import TnCPages from "./modules/other-pages/tnc";
+import NotFoundPage from "./modules/other-pages/not-found-page";
+
 
 import { useCartData } from "./hooks/useCartData";
 import { useAuthData } from "./hooks/useAuthData";
@@ -140,6 +143,23 @@ function App() {
                         <OrderPage />
                       </WithTopAndBottom>
                     </WithAuthRoute>
+                  }
+                />
+                <Route
+                  path="/tnc"
+                  exact
+                  element={
+                    <WithTopAndBottom>
+                      <TnCPages />
+                    </WithTopAndBottom>
+                  }
+                />
+                <Route
+                  path="*"
+                  element={
+                    <WithTopAndBottom>
+                      <NotFoundPage />
+                    </WithTopAndBottom>
                   }
                 />
               </Routes>

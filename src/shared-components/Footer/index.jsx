@@ -41,26 +41,26 @@ const Company = () => {
   );
 };
 
-const MetaLinks = () => {
+const MetaLinks = ({ clickHandlers }) => {
   return (
     <div className="meta-links">
-      <p>Home</p>
-      <p>Shipping</p>
-      <p>About</p>
-      <p>FAQs</p>
-      <p>Help</p>
-      <p>Terms and Conditions</p>
-      <p>Contact Us</p>
-      <p>Privacy Policy</p>
+      <p onClick={clickHandlers("home")}>Home</p>
+      <p onClick={clickHandlers("shipping")}>Shipping</p>
+      <p onClick={clickHandlers("about")}>About</p>
+      <p onClick={clickHandlers("faq")}>FAQs</p>
+      <p onClick={clickHandlers("help")}>Help</p>
+      <p onClick={clickHandlers("tnc")}>Terms and Conditions</p>
+      <p onClick={clickHandlers("contact")}>Contact Us</p>
+      <p onClick={clickHandlers("privacy")}>Privacy Policy</p>
     </div>
   );
 };
 
-const Footer = () => {
+const Footer = ({ clickHandlers = () => {} }) => {
   return (
     <FooterContainer>
       <Company />
-      <MetaLinks />
+      <MetaLinks clickHandlers={clickHandlers} />
     </FooterContainer>
   );
 };
