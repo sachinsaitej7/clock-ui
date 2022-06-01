@@ -126,9 +126,9 @@ const ProductPage = () => {
   useEffect(() => {
     if (!isEmpty(product)) {
       setColor(
-        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[0]
+        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[1]
       );
-      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0]);
+      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[1]);
     }
   }, [isLoading, product, setSize, setColor, sizeVariants, colorVariants]);
 
@@ -175,7 +175,7 @@ const ProductPage = () => {
           <p style={{ fontSize: theme.fontSizes[3], lineHeight: "20px" }}>
             MRP:{" "}
             <span style={{ fontWeight: theme.fontWeights.bold }}>
-              Rs. {price}
+              Rs. {price || "NA"}
             </span>
           </p>
           <p style={{ color: theme.text.light, fontSize: theme.fontSizes[1] }}>
@@ -213,7 +213,7 @@ const ProductPage = () => {
           </VariantContainer>
         )}
         <div style={{ display: "flex" }}>
-          <StyledButton type="primary" onClick={addToCart}>
+          <StyledButton type="primary" disabled={!price} onClick={addToCart}>
             {" "}
             {checkItemInList(items, { color, size, id })
               ? "Go to Cart"
@@ -239,6 +239,8 @@ const ProductPage = () => {
               }
               products={products.data.data}
               onClick={() => navigate("/products")}
+              itemClick={(productId) => () =>
+                navigate(`/products/${productId}`)}
             />
           </div>
         )}

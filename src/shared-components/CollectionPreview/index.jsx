@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import ProductCard from "../ProductCard";
 
@@ -27,18 +27,29 @@ const CollectionPreview = ({
   products = [],
   header,
   backgroundColor,
-  startIndex = 0,
-  endIndex = 3,
-  onClick = () => { },
-  itemClick = () => { }
+  startIndex,
+  endIndex,
+  onClick = () => {},
+  itemClick = () => {},
 }) => {
   const theme = useTheme();
+  const [start,] = useState(
+    startIndex
+      ? startIndex
+      : Math.floor(Math.random() * (products.length - 3))
+  );
+
   return (
     <ProductsContainer backgroundColor={backgroundColor}>
       {header ? header : <Header>Available Products</Header>}
       <div className="products">
-        {products.slice(startIndex, endIndex).map((product) => (
-          <ProductCard key={product.id} {...product} variant="small" onClick={itemClick(product.id)} />
+        {products.slice(start, start+3).map((product) => (
+          <ProductCard
+            key={product.id}
+            {...product}
+            variant="small"
+            onClick={itemClick(product.id)}
+          />
         ))}
       </div>
       <div
@@ -61,7 +72,7 @@ const CollectionPreview = ({
         >
           View All{" "}
         </p>
-        <ArrowRight width="24px"/>
+        <ArrowRight width="24px" />
       </div>
     </ProductsContainer>
   );
