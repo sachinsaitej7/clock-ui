@@ -93,7 +93,7 @@ const CollectionSlider = () => {
   const theme = useTheme();
 
   return (
-    <StyledCarousel>
+    <StyledCarousel autoPlay>
       <StyledImageContainer key={1}>
         <TextContainer>
           <p>Delivering Your Favourite Fashion Products From Store To Door!</p>
