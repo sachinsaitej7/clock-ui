@@ -3,71 +3,18 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 
-import { Button } from "antd";
-
 // images
-import LandingImage from "../../assets/home/wardrobe.jpg";
 import { ReactComponent as TruckIcon } from "../../assets/common/truck.svg";
 
 import { fetchBrands, fetchProducts } from "../../apis/home-page";
 import BrandCarousal from "../../shared-components/BrandCarousal";
+import CollectionSlider from "./collection-slider";
 import CollectionPreview from "../../shared-components/CollectionPreview";
 import Spinner from "../../shared-components/Spinner";
 
 const HomePageContainer = styled.div`
   width: 100%;
   font-family: ${(props) => props.theme.fonts.primary};
-`;
-
-const StyledImageContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: stretch;
-  flex-direction: column;
-  padding: 0px;
-`;
-
-const TextContainer = styled.div`
-  background: linear-gradient(90.46deg, #eaeceb -2.84%, #e6e8e7 102.98%);
-  padding: ${(props) => props.theme.space[5]};
-  padding-top: ${(props) => props.theme.space[9]};
-  p {
-    font-size: ${(props) => props.theme.fontSizes[4]};
-    font-weight: ${(props) => props.theme.fontWeights.medium};
-    line-height: 24px;
-    color: ${(props) => props.theme.text.black};
-  }
-`;
-
-const StyledButton = styled(Button)`
-  margin-top: ${(props) => props.theme.space[7]};
-  color: ${(props) => props.theme.text.white};
-  background-color: ${(props) => props.theme.colors.primary};
-  border: none;
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  font-size: ${(props) => props.theme.fontSizes[3]};
-  line-height: 24px;
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
-  padding: ${(props) => `${props.theme.space[2]} ${props.theme.space[4]}`};
-  background-color: ${(props) => props.theme.bg[props.type || "default"]};
-  span {
-    color: ${(props) =>
-      props.theme.text[props.type === "primary" ? "white" : "primary"]};
-    font-size: ${(props) => props.theme.fontSizes[4]};
-    line-height: 20px;
-    font-weight: ${(props) => props.theme.fontWeights.semibold};
-  }
-  :hover,
-  :focus {
-    border-color: ${(props) => props.theme.colors.primary};
-    background-color: ${(props) => props.theme.bg[props.type || "default"]};
-  }
-`;
-
-const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 const StyledNotification = styled.div`
@@ -115,15 +62,7 @@ const HomePage = () => {
       <StyledNotification>
         <p>Delivery Within 24 Hours After Placing The Order</p>
       </StyledNotification>
-      <StyledImageContainer>
-        <TextContainer>
-          <p>Delivering Your Favourite Fashion Products From Store To Door!</p>
-          <StyledButton type="primary" onClick={() => navigate("/products")}>Explore Products</StyledButton>
-        </TextContainer>
-        <div>
-          <StyledImg src={LandingImage}></StyledImg>
-        </div>
-      </StyledImageContainer>
+      <CollectionSlider />
       <StyledDeliveryLocation
         backgroundColor={theme.bg.secondary}
         color={theme.text.dark}

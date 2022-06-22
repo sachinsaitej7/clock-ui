@@ -2,34 +2,32 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
-import { Button } from "antd";
+import { Button, Divider } from "antd";
 
 //images
-import { ReactComponent as FilterIcon } from "../../assets/collection-page/filter.svg";
+import { ReactComponent as MuffinIcon } from "../../assets/collection-page/muffin.svg";
+import { ReactComponent as F1Icon } from "../../assets/collection-page/f1.svg";
+import { ReactComponent as PrideTextIcon } from "../../assets/collection-page/pride-text.svg";
+// import BakerCollectionImg from "../../assets/collection-page/baker-collection.svg";
+// import F1CollectionImg from "../../assets/collection-page/f1-collection.svg";
+// import PrideCollectionImg from "../../assets/collection-page/pride-collection.svg";
 
 import { fetchProducts } from "../../apis/home-page";
-import BrandCarousal from "../../shared-components/BrandCarousal";
 import ProductCard from "../../shared-components/ProductCard";
 import Spinner from "../../shared-components/Spinner";
-import SpecialCollectionPage from "./special-collection-page";
 
-import {
-  getUniqueBrands,
-  getParams,
-  getQueryString,
-  getCollectionName,
-} from "./utils";
+import { getParams, getQueryString } from "./utils";
 
 const CollectionPageContainer = styled.div`
   width: 100%;
-  padding-bottom: ${(props) => props.theme.space[5]};
+  padding: ${(props) => props.theme.space[5]};
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${(props) => props.theme.space[5]};
+  padding: ${(props) => props.theme.space[5] + " " + props.theme.space[0]};
   p {
     font-size: ${(props) => props.theme.fontSizes[5]};
     font-weight: ${(props) => props.theme.fontWeights.medium};
@@ -40,11 +38,8 @@ const Header = styled.div`
 const Collections = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: ${(props) => props.theme.space[3]};
-  align-content: center;
   gap: ${(props) => props.theme.space[3]};
   @media (min-width: 330px) {
-    padding: ${(props) => props.theme.space[5]};
     gap: ${(props) => props.theme.space[5]};
   }
 
@@ -52,6 +47,20 @@ const Collections = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
+
+// const OtherCollections = styled.div`
+//   margin-top: ${(props) => props.theme.space[5]};
+//   p {
+//     font-size: ${(props) => props.theme.fontSizes[2]};
+//     font-weight: ${(props) => props.theme.fontWeights.medium};
+//     color: ${(props) => props.theme.text.light};
+//     margin-bottom: ${(props) => props.theme.space[5]};
+//   }
+//   img {
+//     margin-bottom: ${(props) => props.theme.space[5]};
+//     width: 100%;
+//   }
+// `;
 
 const StyledButton = styled(Button)`
   border: 1px solid ${(props) => props.theme.colors.primary};
@@ -73,6 +82,39 @@ const StyledButton = styled(Button)`
 
 const STEP = 10;
 
+const getHeader = (type) => {
+  switch (type) {
+    case "pride":
+      return (
+        <Header>
+          <p>
+            <PrideTextIcon />
+          </p>
+        </Header>
+      );
+    case "f1":
+      return (
+        <Header>
+          <p>Formula 1 T-Shirts</p>
+          <div>
+            <F1Icon />
+          </div>
+        </Header>
+      );
+    case "baker":
+      return (
+        <Header>
+          <p>For Home Bakers</p>
+          <div>
+            <MuffinIcon />
+          </div>
+        </Header>
+      );
+    default:
+      return null;
+  }
+};
+
 const CollectionPage = () => {
   const [page, setPage] = useState(1);
   const theme = useTheme();
@@ -85,38 +127,10 @@ const CollectionPage = () => {
     () => fetchProducts(params)
   );
 
-  const collectionName = getCollectionName(
-    searchParams,
-    productsData?.data.data
-  );
-
-  const brands = getUniqueBrands(productsData?.data.data);
   if (productsLoading) return <Spinner />;
-  if(params.type) return <SpecialCollectionPage />;
   return (
     <CollectionPageContainer>
-      <Header>
-        <p>
-          {collectionName ? `${collectionName}’s Collection`: `All Products`}
-          <span style={{ fontSize: theme.fontSizes[2] }}>{`(${
-            productsData?.data.data?.length || 0
-          })`}</span>
-        </p>
-        <div>
-          <FilterIcon />
-        </div>
-      </Header>
-      <div>
-        <BrandCarousal noTitle variant="medium" data={brands} />
-        <div
-          style={{
-            background:
-              "linear-gradient(90.25deg, #015850 -4.74%, #076754 49.71%, #8EC2B4 102.73%)",
-            height: "40px",
-            marginTop: "-34px",
-          }}
-        ></div>
-      </div>
+      {getHeader(params.type)}
       <Collections>
         {productsData?.data.data?.slice(0, STEP * page).map((product) => {
           return (
@@ -143,6 +157,19 @@ const CollectionPage = () => {
           </StyledButton>
         </div>
       )}
+      <Divider />
+      {/* <OtherCollections>
+        <p>Other special categories to choose from</p>
+        {params.type !== "f1" && (
+          <img src={F1CollectionImg} alt="f1-collection" />
+        )}
+        {params.type !== "baker" && (
+          <img src={BakerCollectionImg} alt="baker-collection" />
+        )}
+        {params.type !== "pride" && (
+          <img src={PrideCollectionImg} alt="pride-collection" />
+        )}
+      </OtherCollections> */}
     </CollectionPageContainer>
   );
 };
