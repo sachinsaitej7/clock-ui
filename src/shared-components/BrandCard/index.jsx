@@ -7,23 +7,24 @@ const CardContainer = styled(Card)`
   overflow: hidden;
   cursor: pointer;
   transition: all 250ms ease-in-out;
-  padding: ${(props) => props.theme.space[3] + " " + props.theme.space[5]};
-  width: 110px;
-  max-height: 60px;
+  height: 120px;
+  width: 140px;
+  padding: ${(props) => props.theme.space[5] + " " + props.theme.space[4]};
   background-color: ${(props) => props.theme.bg.default};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   border-radius: ${(props) => props.theme.borderRadius[1]};
-  margin: ${(props) => `${props.theme.space[2]} ${props.theme.space[3]}`};
+  margin: ${(props) => props.theme.space[4]};
+  margin-left: ${(props) => `${props.theme.space[0]}`};
   display: flex;
   justify-content: center;
   align-items: center;
-  .ant-card-body{
+  .ant-card-body {
     padding: 0px;
   }
 
   img {
-    width: 80px;
-    height: 45px;
+    width: 117px;
+    height: 65px;
   }
 
   &:hover {
@@ -32,18 +33,15 @@ const CardContainer = styled(Card)`
   }
 `;
 
-const Title = styled.p`
-  font-size: ${(props) => props.theme.fontSizes[1]};
-  line-height: 18px;
-`;
-
 const BrandCard = ({ name, image, noTitle, onClick }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }} onClick={onClick}>
+    <div
+      style={{ display: "flex", flexDirection: "column", width: "100%" }}
+      onClick={onClick}
+    >
       <CardContainer>
         <img src={image} alt={name} />
       </CardContainer>
-      {!noTitle && <Title>{name}</Title>}
     </div>
   );
 };

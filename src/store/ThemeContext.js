@@ -26,7 +26,7 @@ export const ThemeContext = createContext({
   },
 
   fonts: {
-    primary: "Poppins",
+    primary: "Lato",
     secondary: "Roboto",
   },
 

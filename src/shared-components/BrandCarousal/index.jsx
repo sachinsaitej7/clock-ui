@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 
 import BrandCard from "../BrandCard";
 
@@ -14,17 +14,17 @@ const CardsContainer = styled.div`
   }
 `;
 
-const Header = styled.h5`
+const Header = styled.h4`
   font-weight: ${(props) => props.theme.fontWeights.semibold};
-  font-size: ${(props) => props.theme.fontSizes[3]};
-  margin: ${(props) => `${props.theme.space[5]} 0px`};
+  font-size: ${(props) => props.theme.fontSizes[5]};
+  margin: ${(props) => props.theme.space[4] + " 0px 0px"};
+  line-height: 24px ;
 `;
 
 const BrandCarousal = ({ noTitle = false, data = [], onClick = () => {} }) => {
-  const theme = useTheme();
   return (
-    <div style={{ textAlign: "center", padding: `${theme.space[3]} 0px` }}>
-      {!noTitle && <Header>Our Brands</Header>}
+    <div>
+      <Header>Available Brands</Header>
       <CardsContainer>
         {data.map((card) => {
           return (

@@ -24,12 +24,12 @@ const StyledCarousel = styled(Carousel)`
     width: 32px;
     height: 32px;
     z-index: 10;
-  };
+  }
   .slick-next {
     right: ${(props) => props.theme.space[3]};
     width: 32px;
     height: 32px;
-  };
+  }
 `;
 
 const ProductCarousal = ({ images=[]}) => {
@@ -40,7 +40,7 @@ const ProductCarousal = ({ images=[]}) => {
         prevArrow={<ArrowRight />}
         arrows={true}
       >
-        {images.map((image, index) => {
+        {images.filter(image => image?.image).map((image, index) => {
           return (
             <Image
               key={image.id}

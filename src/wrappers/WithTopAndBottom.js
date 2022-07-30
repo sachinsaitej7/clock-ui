@@ -111,8 +111,8 @@ const WithTopAndBottom = ({ children }) => {
         authHandler={authHandler}
         menuItems={MENU_ITEMS}
       />
-      {children}
-      <Footer clickHandlers={handleFooterClick}/>
+      <div style={{marginTop: "52px" }}>{children}</div>
+      <Footer clickHandlers={handleFooterClick} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import ProgressBar from "../../shared-components/ProgressBar";
@@ -85,10 +85,13 @@ const loadScript = (src) => {
 const ReviewPage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { activeAddress, user, removeAllItems, updateOrder } =
+  const [pincodeData, setPincodeData] = useState();
+  const [cod, setCod] = useState(false);
+
+  const { activeAddress, user, updateOrder, fetchPincodeData } =
     useContext(AuthContext);
 
-  const { items, removeItem, changeQuantity } = useContext(CartContext);
+  const { items, removeItem, removeAllItems, changeQuantity } = useContext(CartContext);
 
   const payload = usePayload(items, user, activeAddress);
 
@@ -99,7 +102,30 @@ const ReviewPage = () => {
 
   useEffect(() => {
     loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    activeAddress &&
+      fetchPincodeData(activeAddress.pincode).then((data) => {
+        setPincodeData(data);
+      });
   }, []);
+
+  const handleCodOrder = useCallback(async () => {
+    const razorpay_payment_id = "1";
+    const razorpay_signature = "COD";
+    const payload = {
+      razorpay_payment_id,
+      razorpay_signature,
+      amount_paid: 0,
+      status: "cod",
+      amount_due: razorpay_order.amount,
+    };
+    try {
+      await updateOrder(order_id, payload, items);
+      navigate("/order/" + order_id);
+      removeAllItems();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [order_id, razorpay_order, navigate, removeAllItems, updateOrder]);
 
   const handleRazorpayResponse = useCallback(
     async (response) => {
@@ -113,7 +139,7 @@ const ReviewPage = () => {
         amount_due: 0,
       };
       try {
-        await updateOrder(order_id, payload);
+        await updateOrder(order_id, payload, items);
         navigate("/order/" + order_id);
         removeAllItems();
       } catch (error) {
@@ -140,9 +166,13 @@ const ReviewPage = () => {
           contact: user.phoneNumber,
         },
       };
-      if (window.Razorpay) {
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
+      if (!cod) {
+        if (window.Razorpay) {
+          const paymentObject = new window.Razorpay(options);
+          paymentObject.open();
+        }
+      } else {
+        handleCodOrder();
       }
     }
   }, [razorpay_order, user, order_id, handleRazorpayResponse]);
@@ -178,12 +208,25 @@ const ReviewPage = () => {
 
         <StyledButton
           type="primary"
-          loading={isLoading}
+          loading={!cod && isLoading}
           disabled={items.length === 0}
           onClick={() => mutation.mutate(payload)}
         >
           Proceed To Payment
         </StyledButton>
+        {pincodeData?.cod && (
+          <StyledButton
+            type="default"
+            loading={isLoading}
+            disabled={items.length === 0}
+            onClick={() => {
+              setCod(true);
+              mutation.mutate(payload);
+            }}
+          >
+            Cash on delivery
+          </StyledButton>
+        )}
         <TrustTags />
       </div>
     </Container>

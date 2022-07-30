@@ -8,6 +8,7 @@ import {
   getFirestore,
   addDoc,
   getDoc,
+  getDocs,
   doc,
   updateDoc,
   setDoc,
@@ -21,7 +22,7 @@ export function useOrderData(user) {
 
   const orderUnSubscription = useRef(() => {});
   const addressUnSubscription = useRef(() => {});
-  
+
   const loadAddress = async () => {
     try {
       let localAddress = await localStorage.getItem("address");
@@ -117,9 +118,7 @@ export function useOrderData(user) {
     }
   };
 
-  const updateOrder = async (orderId, payload) => {
-    const { user } = this.props;
-    const { activeAddress, items } = this.context;
+  const updateOrder = async (orderId, payload, items=[]) => {
     const db = getFirestore();
     const orderRef = doc(db, "orders", orderId);
     const newMessageRef = doc(collection(db, "messages"));
@@ -157,6 +156,22 @@ export function useOrderData(user) {
     }
   };
 
+  const fetchPincodeData = async (pincode) => {
+    const db = getFirestore();
+    try {
+      const q = query(
+        collection(db, "pincode-checker"),
+        where("pincode", "==", +pincode)
+      );
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      return data[0];
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
+
   return {
     orders,
     address,
@@ -165,5 +180,6 @@ export function useOrderData(user) {
     setActiveAddress,
     updateOrder,
     fetchOrderData,
+    fetchPincodeData,
   };
 }

@@ -1,28 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
-import { Button } from "antd";
+import { Button, Input } from "antd";
+import lunr from "lunr";
 
 //images
-import { ReactComponent as FilterIcon } from "../../assets/collection-page/filter.svg";
+import { ReactComponent as SearchIcon } from "../../assets/collection-page/search-normal.svg";
+import { ReactComponent as CCloseIcon } from "../../assets/common/close-circle.svg";
 
 import { fetchProducts } from "../../apis/home-page";
-import BrandCarousal from "../../shared-components/BrandCarousal";
 import ProductCard from "../../shared-components/ProductCard";
 import Spinner from "../../shared-components/Spinner";
 import SpecialCollectionPage from "./special-collection-page";
 
-import {
-  getUniqueBrands,
-  getParams,
-  getQueryString,
-  getCollectionName,
-} from "./utils";
+import { getParams, getQueryString, getCollectionName } from "./utils";
 
 const CollectionPageContainer = styled.div`
   width: 100%;
   padding-bottom: ${(props) => props.theme.space[5]};
+  min-height: 100vh;
 `;
 
 const Header = styled.div`
@@ -34,6 +31,12 @@ const Header = styled.div`
     font-size: ${(props) => props.theme.fontSizes[5]};
     font-weight: ${(props) => props.theme.fontWeights.medium};
     line-height: 24px;
+  }
+  svg {
+    cursor: pointer;
+    :hover {
+      transform: scale(1.2);
+    }
   }
 `;
 
@@ -50,6 +53,18 @@ const Collections = styled.div`
 
   @media (min-width: 430px) {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
+
+const StyledInput = styled(Input)`
+  border-radius: ${(props) => props.theme.borderRadius[1]};
+  width: 90%;
+  :focus {
+    border-color: ${(props) => props.theme.colors.primary};
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.secondary};
+  }
+  ::placeholder {
+    color: ${(props) => props.theme.colors.grey};
   }
 `;
 
@@ -73,8 +88,27 @@ const StyledButton = styled(Button)`
 
 const STEP = 10;
 
+function initializeSearch(products) {
+  return lunr(function () {
+    this.ref("id");
+    this.field("name");
+    this.field("description");
+    this.field("brand");
+    this.field("category");
+    products.forEach((doc) => {
+      this.add({...doc, brand: doc.brand?.name, category: doc.category?.name});
+    });
+  });
+}
+
 const CollectionPage = () => {
   const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
+  const [searchMode, setSearchMode] = useState(false);
+  const [searchApi, setSearchApi] = useState(null);
+  const [filterIds, setFilterIds] = useState([]);
+  const [searching, setSearching] = useState(false);
+
   const theme = useTheme();
   const navigate = useNavigate();
   let [searchParams] = useSearchParams();
@@ -84,63 +118,116 @@ const CollectionPage = () => {
     ["products", getQueryString(params)],
     () => fetchProducts(params)
   );
+  const products = productsData?.data.data;
 
-  const collectionName = getCollectionName(
-    searchParams,
-    productsData?.data.data
-  );
+  useEffect(() => {
+    if (products) initializeSearch(products);
+  }, []);
 
-  const brands = getUniqueBrands(productsData?.data.data);
+  useEffect(() => {
+    if (products) setSearchApi(initializeSearch(products));
+  }, [products]);
+
+  useEffect(() => {
+    if (searchApi && query.length > 2) {
+      setSearching(true);
+      const filterIds = searchApi.search(`${query}*`).map((result) => +result.ref);
+      setFilterIds(filterIds);
+      setSearching(false);
+    }
+  }, [query, searchApi]);
+
+
   if (productsLoading) return <Spinner />;
-  if(params.type) return <SpecialCollectionPage />;
+  if (params.type) return <SpecialCollectionPage />;
+  if (!products)
+    return (
+      <div
+        style={{ height: "60vh", textAlign: "center", padding: theme.space[5] }}
+      >
+        No products found
+      </div>
+    );
+
+  const collectionName = getCollectionName(searchParams, products);
+  const filteredProducts =
+    query.length > 2
+      ? products.filter((product) => filterIds.includes(product.id))
+      : products;
+
   return (
     <CollectionPageContainer>
       <Header>
-        <p>
-          {collectionName ? `${collectionName}’s Collection`: `All Products`}
-          <span style={{ fontSize: theme.fontSizes[2] }}>{`(${
-            productsData?.data.data?.length || 0
-          })`}</span>
-        </p>
+        {searchMode ? (
+          <StyledInput
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoFocus
+            placeholder={
+              collectionName
+                ? `Search ${collectionName}’s Collection`
+                : `Search All Products`
+            }
+          />
+        ) : (
+          <p>
+            {collectionName ? `${collectionName}’s Collection` : `All Products`}
+            <span
+              style={{ fontSize: theme.fontSizes[2] }}
+            >{`(${products.length})`}</span>
+          </p>
+        )}
         <div>
-          <FilterIcon />
+          {searchMode ? (
+            <CCloseIcon
+              onClick={() => {
+                setSearchMode(false);
+                setQuery("");
+              }}
+            />
+          ) : (
+            <SearchIcon onClick={() => setSearchMode(true)} />
+          )}
         </div>
       </Header>
-      <div>
-        <BrandCarousal noTitle variant="medium" data={brands} />
+      {filteredProducts.length ? (
+        <>
+          <Collections>
+            {filteredProducts.slice(0, STEP * page).map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  {...product}
+                  variant="medium"
+                  onClick={() => navigate(`/products/${product.id}`)}
+                />
+              );
+            })}
+          </Collections>
+          {filteredProducts.length > STEP * page && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: `${theme.space[5]} auto`,
+              }}
+            >
+              <StyledButton onClick={() => setPage(page + 1)}>
+                Load More Products
+              </StyledButton>
+            </div>
+          )}
+        </>
+      ) : (
         <div
           style={{
-            background:
-              "linear-gradient(90.25deg, #015850 -4.74%, #076754 49.71%, #8EC2B4 102.73%)",
-            height: "40px",
-            marginTop: "-34px",
-          }}
-        ></div>
-      </div>
-      <Collections>
-        {productsData?.data.data?.slice(0, STEP * page).map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              {...product}
-              variant="medium"
-              onClick={() => navigate(`/products/${product.id}`)}
-            />
-          );
-        })}
-      </Collections>
-      {productsData?.data.data?.length > STEP * page && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: `${theme.space[5]} auto`,
+            height: "60vh",
+            textAlign: "center",
+            padding: theme.space[5],
           }}
         >
-          <StyledButton onClick={() => setPage(page + 1)}>
-            Load More Products
-          </StyledButton>
+        {searching ? "Searching" : "No products found"}
         </div>
       )}
     </CollectionPageContainer>

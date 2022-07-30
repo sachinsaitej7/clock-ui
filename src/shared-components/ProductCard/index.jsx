@@ -9,9 +9,13 @@ const StyledCard = styled(Card)`
   height: auto;
   border: none;
   cursor: pointer;
+  .ant-card-meta-detail > div:not(:last-child){
+    margin-bottom: ${props => props.theme.space[1]} ;
+  } 
   .ant-card-body {
     padding: 0px;
   }
+
   .ant-card-cover img {
     border-radius: ${(props) => props.theme.borderRadius[2]};
     width: ${(props) => (props.variant === "small" ? "104px" : "164px")};
@@ -21,13 +25,26 @@ const StyledCard = styled(Card)`
 
 const ImageContainer = styled.img``;
 
-const DescriptionCard = ({ title, price }) => {
+const DescriptionCard = ({ title, price, variant }) => {
   const theme = useTheme();
   return (
     <>
-      <p style={{ color: theme.text.dark }}>{title}</p>
       <p
-        style={{ fontWeight: theme.fontWeights.bold, color: theme.text.black }}
+        style={{
+          color: theme.text.light,
+          fontSize: theme.fontSizes[1],
+          lineHeight: "16px",
+        }}
+      >
+        {title}
+      </p>
+      <p
+        style={{
+          fontWeight: theme.fontWeights.bold,
+          color: theme.text.black,
+          fontSize: variant === "small" ? theme.fontSizes[2] : theme.fontSizes[3],
+          marginTop: variant === "small" ? theme.space[1] : theme.space[2],
+        }}
       >
         Rs.{price}
       </p>
@@ -46,7 +63,7 @@ const StyledMeta = styled(Meta)`
       props.variant === "small"
         ? props.theme.fontSizes[1]
         : props.theme.fontSizes[2]};
-    line-height: ${(props) => (props.variant === "small" ? "18px" : "21px")};
+    line-height: ${(props) => (props.variant === "small" ? "16px" : "18px")};
   }
 `;
 
@@ -80,9 +97,11 @@ const ProductCard = ({
         title={
           <p
             style={{
-              color: theme.text.light,
+              color: theme.text.dark,
               fontSize:
-                variant === "small" ? theme.fontSizes[0] : theme.fontSizes[1],
+                variant === "small" ? theme.fontSizes[1] : theme.fontSizes[2],
+              fontWeight: theme.fontWeights.bold,
+              lineHeight: variant === "small" ? "14px" : "18px",
             }}
           >
             {brand.name}

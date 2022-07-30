@@ -5,7 +5,7 @@ import isEmpty from "lodash/isEmpty";
 import styled, { useTheme } from "styled-components";
 
 import { VariantTag } from "../../shared-components/atoms";
-import { Button, Divider } from "antd";
+import { Button, Divider, Collapse } from "antd";
 
 import Store from "../../store";
 import { fetchProduct } from "../../apis/product-page";
@@ -15,28 +15,39 @@ import ProductCarousal from "../../shared-components/ProductCarousal";
 import CollectionPreview from "../../shared-components/CollectionPreview";
 import TrustTags from "../../shared-components/TrustTags";
 import Spinner from "../../shared-components/Spinner";
+import PincodeChecker from "../../shared-components/PincodeChecker/index";
+
+//images
+import { ReactComponent as MouseSquare } from "../../assets/product/mouse-square.svg";
+import { ReactComponent as ArrowDownIcon } from "../../assets/product/arrow-down.svg";
+import { ReactComponent as ArrowUpIcon } from "../../assets/product/arrow-up.svg";
 
 import { generatePrice, checkItemInList } from "./utils";
 
 const { CartContext } = Store;
+const { Panel } = Collapse;
 
 const Container = styled.div`
   padding: ${(props) => props.theme.space[5]};
   .divider {
-    margin: ${(props) => props.theme.space[5]} 0px;
-    border-top: 1px solid #999999;
+    margin: ${(props) => props.theme.space[7]} 0px;
+    border-top: 1px solid #292929;
+    opacity: 0.12;
   }
   .product-details {
     h6 {
-      font-size: ${(props) => props.theme.fontSizes[2]};
-      font-weight: ${(props) => props.theme.fontWeights.semibold};
+      font-size: ${(props) => props.theme.fontSizes[3]};
+      font-weight: ${(props) => props.theme.fontWeights.bold};
+      line-height: 20px;
       padding: ${(props) => props.theme.space[2]} 0px;
+      margin: ${(props) => props.theme.space[0]};
+      color: ${(props) => props.theme.text.primary};
     }
-    &.product-details * {
-      font-size: ${(props) => props.theme.fontSizes[1]};
-      line-height: 18px;
-      letter-spacing: 0.01612em;
-      color: #333333;
+    .ant-collapse-header {
+      padding: ${(props) => props.theme.space[0]};
+    }
+    .ant-collapse-content-box {
+      padding: ${(props) => props.theme.space[5]} 0px;
     }
   }
 `;
@@ -50,9 +61,10 @@ const VariantContainer = styled.div`
 `;
 
 const Brand = styled.p`
-  font-size: ${(props) => props.theme.fontSizes[2]};
-  color: ${(props) => props.theme.text.light};
-  line-height: 18px;
+  font-size: ${(props) => props.theme.fontSizes[3]};
+  color: ${(props) => props.theme.text.dark};
+  line-height: 20px;
+  font-weight: ${(props) => props.theme.fontWeights.bold};
 `;
 
 const Variants = styled.div`
@@ -68,24 +80,49 @@ const Variants = styled.div`
   }
 `;
 
+const StoreContainer = styled.div`
+  h5 {
+    color: ${(props) => props.theme.colors.primary};
+    font-weight: ${(props) => props.theme.fontWeights.bold};
+    font-size: ${(props) => props.theme.fontSizes[3]};
+    line-height: 20px;
+    margin: ${(props) => props.theme.space[0]};
+  }
+  p {
+    color: ${(props) => props.theme.text.light};
+    font-size: ${(props) => props.theme.fontSizes[1]};
+    margin-top: ${(props) => props.theme.space[3]};
+  }
+  svg {
+    margin-right: ${(props) => props.theme.space[4]};
+    width: ${(props) => props.theme.space[6]};
+  }
+`;
+
 const StyledButton = styled(Button)`
   margin-top: ${(props) => props.theme.space[5]};
-  background-color: ${(props) => props.theme.colors.primary};
-  border: none;
+  background-color: ${(props) => props.theme.bg[props.type || "default"]};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.borderRadius[2]};
-  padding: ${(props) => `${props.theme.space[3]} ${props.theme.space[4]}`};
-  width: 100%;
-  height: 40px;
+  padding: ${(props) => `${props.theme.space[2]} ${props.theme.space[4]}`};
+  width: 49%;
+  height: 34px;
+  vertical-align: middle;
   span {
-    color: ${(props) => props.theme.text.white};
+    color: ${(props) =>
+      props.theme.text[props.type === "primary" ? "white" : "primary"]};
     font-size: ${(props) => props.theme.fontSizes[3]};
-    line-height: 24px;
+    line-height: 20px;
     font-weight: ${(props) => props.theme.fontWeights.semibold};
   }
   :hover,
   :focus {
     border-color: ${(props) => props.theme.colors.primary};
     background-color: ${(props) => props.theme.bg[props.type || "default"]};
+  }
+  &.ant-btn[disabled] {
+    background-color: ${(props) => props.theme.bg[props.type || "default"]};
+    border-color: ${(props) => props.theme.colors.primary};
   }
 `;
 
@@ -139,16 +176,17 @@ const ProductPage = () => {
   );
 
   const addToCart = () => {
-    !checkItemInList(items, { color, size, id }) ?
-      addItem({
-        ...product,
-        price,
-        selectedColorVariant: color,
-        selectedSizeVariant: size,
-        discount,
-        quantity: 1,
-        mrp,
-      }): navigate("/cart");
+    !checkItemInList(items, { color, size, id })
+      ? addItem({
+          ...product,
+          price,
+          selectedColorVariant: color,
+          selectedSizeVariant: size,
+          discount,
+          quantity: 1,
+          mrp,
+        })
+      : navigate("/cart");
   };
 
   if (isLoading) return <Spinner />;
@@ -162,10 +200,12 @@ const ProductPage = () => {
         <div>
           <h6
             style={{
-              fontWeight: theme.fontWeights.medium,
-              fontSize: theme.fontSizes[4],
-              lineHeight: "27px",
+              fontWeight: theme.fontWeights.normal,
+              fontSize: theme.fontSizes[3],
+              lineHeight: "20px",
               letterSpacing: "0.01612em",
+              color: theme.text.light,
+              marginBottom: theme.space[1],
             }}
           >
             {name}
@@ -173,7 +213,9 @@ const ProductPage = () => {
         </div>
         <div style={{ margin: `${theme.space[5]} 0px ` }}>
           <p style={{ fontSize: theme.fontSizes[3], lineHeight: "20px" }}>
-            MRP:{" "}
+            <span style={{ fontSize: theme.fontSizes[2], lineHeight: "18px" }}>
+              MRP:{" "}
+            </span>
             <span style={{ fontWeight: theme.fontWeights.bold }}>
               Rs. {price || "NA"}
             </span>
@@ -212,38 +254,82 @@ const ProductPage = () => {
             </Variants>
           </VariantContainer>
         )}
-        <div style={{ display: "flex" }}>
-          <StyledButton type="primary" disabled={!price} onClick={addToCart}>
-            {" "}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <StyledButton
+            disabled={!price}
+            onClick={addToCart}
+          >
             {checkItemInList(items, { color, size, id })
               ? "Go to Cart"
-              : "Add to Cart"}{" "}
+              : "Add to Cart"}
+          </StyledButton>
+          <StyledButton
+            type="primary"
+            disabled={!price}
+            onClick={() => {
+              addToCart();
+              navigate("/cart");
+            }}
+          >
+            Buy Now
           </StyledButton>
         </div>
-        <TrustTags />
+        <Divider className="divider" />
+        <PincodeChecker />
+        <Divider className="divider" />
+        <StoreContainer>
+          <h5>
+            <MouseSquare />
+            Store Details
+          </h5>
+          <p>Max store, Forum Vijaya Mall, Vadapalani, Chennai, TN</p>
+        </StoreContainer>
         <Divider className="divider" />
         <div className="product-details">
-          <h6>Product Details:</h6>
-          <p
-            dangerouslySetInnerHTML={{ __html: product.description || "NA" }}
-          ></p>
+          <Collapse
+            expandIconPosition="end"
+            ghost
+            bordered={false}
+            expandIcon={({ isActive }) => {
+              if (isActive) return <ArrowUpIcon />;
+              return <ArrowDownIcon />;
+            }}
+          >
+            <Panel header={<h6>Product Details:</h6>} key="1">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: product.description || "NA",
+                }}
+              ></p>
+            </Panel>
+          </Collapse>
         </div>
-
+        <Divider className="divider" />
         {!isEmpty(products) && (
-          <div style={{ marginTop: theme.space[7] }}>
-            <CollectionPreview
-              header={
-                <h6 style={{ padding: theme.space[5] + " 0px" }}>
-                  You May Also Like
-                </h6>
-              }
-              products={products.data.data}
-              onClick={() => navigate("/products")}
-              itemClick={(productId) => () =>
-                navigate(`/products/${productId}`)}
-            />
-          </div>
+          <>
+            <div style={{ marginTop: theme.space[7] }}>
+              <CollectionPreview
+                header={
+                  <h6
+                    style={{
+                      padding: theme.space[5] + " 0px",
+                      fontWeight: theme.fontWeights.bold,
+                    }}
+                  >
+                    You May Also Like
+                  </h6>
+                }
+                products={products.data.data}
+                onClick={() => navigate("/products")}
+                itemClick={(productId) => () =>
+                  navigate(`/products/${productId}`)}
+              />
+            </div>
+            <Divider className="divider" />
+          </>
         )}
+
+        <TrustTags />
       </div>
     </Container>
   );

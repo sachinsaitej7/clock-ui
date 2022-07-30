@@ -8,6 +8,7 @@ import LandingImage from "../../assets/home/wardrobe.jpg";
 // import BakerImage from "../../assets/home/baker.jpg";
 // import F1Image from "../../assets/home/f1.jpg";
 import PrideImage from "../../assets/home/pride.jpg";
+import SareeImage from "../../assets/home/saree-main.svg";
 
 const StyledCarousel = styled(Carousel)`
   width: 100%;
@@ -47,6 +48,20 @@ const StyledImageContainer = styled.div`
   }
 `;
 
+const SareeContainer = styled.div`
+  padding: ${(props) => props.theme.space[5]};
+  letter-spacing: 0.02em;
+  h3 {
+    font-size: ${(props) => props.theme.fontSizes[6]};
+  }
+  p {
+    font-size: ${(props) => props.theme.fontSizes[3]};
+    line-height: 20px;
+    color: ${(props) => props.theme.text.dark};
+    opacity: 0.5;
+  }
+`;
+
 const TextContainer = styled.div`
   background: linear-gradient(90.46deg, #eaeceb -2.84%, #e6e8e7 102.98%);
   padding: ${(props) => props.theme.space[5]};
@@ -61,20 +76,22 @@ const TextContainer = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  margin-top: ${(props) => props.theme.space[7]};
+  margin-top: ${(props) => props.theme.space[4]};
+  margin-bottom: ${(props) => props.theme.space[8]};
+
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
   background-color: ${(props) =>
     props.color || props.theme.bg[props.type || "default"]};
   padding: ${(props) => props.theme.space[3] + " " + props.theme.space[8]};
-  height: 40px;
+  height: 34px;
   span {
     color: ${(props) =>
       props.textColor ||
       props.theme.text[props.type === "primary" ? "white" : "primary"]};
-    font-size: ${(props) => props.theme.fontSizes[4]};
-    line-height: 24px;
-    font-weight: ${(props) => props.theme.fontWeights.semibold};
+    font-size: ${(props) => props.theme.fontSizes[3]};
+    line-height: 20px;
+    font-weight: ${(props) => props.theme.fontWeights.bold};
   }
   :hover,
   :focus {
@@ -94,8 +111,28 @@ const CollectionSlider = () => {
 
   return (
     <StyledCarousel autoPlay>
+      <SareeContainer key={0}>
+        <StyledImg
+          src={SareeImage}
+          style={{ width: "100%", height: "100%", maxHeight: "720px" }}
+        ></StyledImg>
+        <div>
+          <h3
+            style={{ marginTop: theme.space[4], marginBottom: theme.space[2] }}
+          >
+            Kanjeevaram Silk
+          </h3>
+          <p>premium saree collection</p>
+          <StyledButton
+            type="primary"
+            onClick={() => navigate("/products?category=12")}
+          >
+            Shop Now
+          </StyledButton>
+        </div>
+      </SareeContainer>
       <StyledImageContainer key={1}>
-        <TextContainer>
+        <TextContainer style={{ paddingBottom: theme.space[8] }}>
           <p>Delivering Your Favourite Fashion Products From Store To Door!</p>
           <StyledButton type="primary" onClick={() => navigate("/products")}>
             See what’s New

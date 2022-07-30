@@ -113,7 +113,7 @@ const OrderPage = () => {
         style={{ marginBottom: theme.space[5], fontSize: theme.fontSizes[2] }}
         className="address"
       >
-        Today ({getTodayDate()})
+        {getTodayDate()}
       </p>
       <p style={{ marginBottom: theme.space[0] }}>Shipping To</p>
       <AddressCard notClickable address={deliveryAddress} />
@@ -145,6 +145,7 @@ const OrderPage = () => {
               fontWeight: theme.fontWeights.medium,
               textDecoration: "underline",
             }}
+            onClick={() => navigate("/tnc?tab=4")}
           >
             Contact us
           </span>{" "}

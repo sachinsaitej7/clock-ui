@@ -44,6 +44,7 @@ const Container = styled.div`
       p {
         font-weight: ${(props) => props.theme.fontWeights.medium};
         margin-bottom: ${(props) => props.theme.space[4]};
+        margin-right: ${(props) => props.theme.space[4]};
         span {
           font-weight: ${(props) => props.theme.fontWeights.normal};
         }
@@ -109,7 +110,7 @@ const ProductCardReview = ({
         <div className="variant">
           <p>
             Colour:{" "}
-            <span>{item.selectedColorVariant.variant_name || "NA"}</span>
+            <span>{item.selectedColorVariant.variant_name || "NA"}</span>,
           </p>
           <p>
             Size: <span>{item.selectedSizeVariant.variant_name || "NA"}</span>
