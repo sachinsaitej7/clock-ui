@@ -143,21 +143,34 @@ const ProductPage = () => {
     name = "",
     attribute_types,
     product_images,
+    price_head,
   } = product || {};
 
   const colorVariants = useMemo(
     () =>
-      attribute_types?.find(
-        (variant) => variant.variant_type_name === "Colour"
-      ) || {},
-    [attribute_types]
+      attribute_types
+        ?.filter((variant) => {
+          return price_head.find((price) => {
+            return price.price_line.find(
+              (product) => product.variant_type_id === variant.variant_type_id
+            );
+          });
+        })
+        .find((variant) => variant.variant_type_name === "Colour") || {},
+    [attribute_types, price_head]
   );
   const sizeVariants = useMemo(
     () =>
-      attribute_types?.find((variant) =>
-        variant.variant_type_name.includes("Size")
-      ) || {},
-    [attribute_types]
+      attribute_types
+        ?.filter((variant) => {
+          return price_head.find((price) => {
+            return price.price_line.find(
+              (product) => product.variant_type_id === variant.variant_type_id
+            );
+          });
+        })
+        .find((variant) => variant.variant_type_name.includes("Size")) || {},
+    [attribute_types, price_head]
   );
 
   useEffect(() => {
