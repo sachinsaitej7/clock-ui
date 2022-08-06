@@ -125,7 +125,7 @@ const CollectionSlider = () => {
           <p>premium saree collection</p>
           <StyledButton
             type="primary"
-            onClick={() => navigate("/products?category=12")}
+            onClick={() => navigate("/products?feature=Cotton")}
           >
             Shop Now
           </StyledButton>

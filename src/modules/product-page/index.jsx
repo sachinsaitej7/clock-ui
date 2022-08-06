@@ -146,39 +146,47 @@ const ProductPage = () => {
     price_head,
   } = product || {};
 
+  const checkVariant = (variant_id) => {
+    return price_head.find((price) => {
+      return price.price_line.find(
+        (product) => variant_id === product.variant_id
+      );
+    });
+  };
+
   const colorVariants = useMemo(
-    () =>
-      attribute_types
-        ?.filter((variant) => {
-          return price_head.find((price) => {
-            return price.price_line.find(
-              (product) => product.variant_type_id === variant.variant_type_id
-            );
-          });
-        })
-        .find((variant) => variant.variant_type_name === "Colour") || {},
+    () => {
+      const colorVariant = attribute_types?.find(
+        (variantType) => variantType.variant_type_name === "Colour"
+      );
+      if (!colorVariant) return {};
+      colorVariant.variant = colorVariant.variant.filter((item) =>
+        checkVariant(item.variant_id)
+      );
+      return colorVariant;
+    },
     [attribute_types, price_head]
   );
-  const sizeVariants = useMemo(
-    () =>
-      attribute_types
-        ?.filter((variant) => {
-          return price_head.find((price) => {
-            return price.price_line.find(
-              (product) => product.variant_type_id === variant.variant_type_id
-            );
-          });
-        })
-        .find((variant) => variant.variant_type_name.includes("Size")) || {},
-    [attribute_types, price_head]
-  );
+
+
+  
+  const sizeVariants = useMemo(() => {
+    const sizeVariant = attribute_types?.find((variantType) =>
+      variantType.variant_type_name.includes("Size")
+    );
+    if (!sizeVariant) return {};
+    sizeVariant.variant = sizeVariant.variant.filter((item) =>
+      checkVariant(item.variant_id)
+    );
+    return sizeVariant;
+  }, [attribute_types, price_head]);
 
   useEffect(() => {
     if (!isEmpty(product)) {
       setColor(
-        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[1]
+        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[0]
       );
-      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[1]);
+      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0]);
     }
   }, [isLoading, product, setSize, setColor, sizeVariants, colorVariants]);
 
