@@ -169,7 +169,6 @@ const ProductPage = () => {
   );
 
 
-  
   const sizeVariants = useMemo(() => {
     const sizeVariant = attribute_types?.find((variantType) =>
       variantType.variant_type_name.includes("Size")
@@ -184,9 +183,9 @@ const ProductPage = () => {
   useEffect(() => {
     if (!isEmpty(product)) {
       setColor(
-        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[0]
+        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[0] || {}
       );
-      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0]);
+      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0] || {});
     }
   }, [isLoading, product, setSize, setColor, sizeVariants, colorVariants]);
 

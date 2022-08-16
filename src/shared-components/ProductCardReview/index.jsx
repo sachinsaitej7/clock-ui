@@ -110,10 +110,10 @@ const ProductCardReview = ({
         <div className="variant">
           <p>
             Colour:{" "}
-            <span>{item.selectedColorVariant.variant_name || "NA"}</span>,
+            <span>{item.selectedColorVariant?.variant_name || "NA"}</span>,
           </p>
           <p>
-            Size: <span>{item.selectedSizeVariant.variant_name || "NA"}</span>
+            Size: <span>{item.selectedSizeVariant?.variant_name || "NA"}</span>
           </p>
         </div>
         {!nonEditable && (
