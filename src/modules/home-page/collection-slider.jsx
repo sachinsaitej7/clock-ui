@@ -120,12 +120,12 @@ const CollectionSlider = () => {
           <h3
             style={{ marginTop: theme.space[4], marginBottom: theme.space[2] }}
           >
-            Kanjeevaram Silk
+            Trending in Saree
           </h3>
-          <p>premium saree collection</p>
+          <p>Premium Collection</p>
           <StyledButton
             type="primary"
-            onClick={() => navigate("/products?feature=Cotton")}
+            onClick={() => navigate("/products?category=12")}
           >
             Shop Now
           </StyledButton>

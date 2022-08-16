@@ -1,7 +1,5 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import Saree1 from "../../assets/home/saree-1.svg";
-import Saree2 from "../../assets/home/saree-2.svg";
 
 const CardsContainer = styled.div`
   display: flex;
@@ -14,22 +12,22 @@ const CardsContainer = styled.div`
   }
 `;
 
-const CollectionCard = ({ name, image, index }) => {
+const CollectionCard = ({ name, image, onClick }) => {
   const theme = useTheme();
 
   return (
     <div
       style={{
         marginRight: theme.space[4],
-        borderRadius: "4px",
+        borderRadius: theme.borderRadius[1],
         textAlign: "center",
       }}
+      onClick={onClick}
     >
       <img
-        width="150px"
-        height="200px"
-        src={!!index ? Saree1 : Saree2}
-        alt="Saree1"
+        src={image}
+        alt={name}
+        style={{ borderRadius: theme.borderRadius[1] }}
       ></img>
       <p
         style={{

@@ -5,7 +5,7 @@ import styled, { useTheme } from "styled-components";
 
 // images
 import { ReactComponent as TruckIcon } from "../../assets/common/truck.svg";
-import KurthiMain from "../../assets/home/kurthi-main.svg";
+import KurthiMain from "../../assets/home/kurthi-main-2.svg";
 import { ReactComponent as MoneyTick } from "../../assets/home/money-tick.svg";
 import { ReactComponent as Receipt } from "../../assets/home/receipt-2.svg";
 
@@ -14,6 +14,7 @@ import BrandCarousal from "../../shared-components/BrandCarousal";
 import CollectionCarousal from "../../shared-components/CollectionCarousal";
 import CollectionSlider from "./collection-slider";
 import Spinner from "../../shared-components/Spinner";
+import { SAREE_COLLECTION, KURTHI_COLLECTION } from "./constants";
 
 import { Button, Divider } from "antd";
 import CategoryCarousal from "../../shared-components/CategoryCarousal/index";
@@ -39,12 +40,12 @@ const StyledDeliveryLocation = styled.div`
   justify-content: space-between;
   color: ${(props) => props.color};
   background-color: ${(props) => props.backgroundColor};
-  padding: ${(props) => props.theme.space[4] + " " + props.theme.space[8]};
+  padding: ${(props) => props.theme.space[5] + " " + props.theme.space[8]};
   min-height: 56px;
   .message-box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
     p {
       font-size: ${(props) => props.theme.fontSizes[1]};
       line-height: 16px;
@@ -57,7 +58,7 @@ const StyledDeliveryLocation = styled.div`
       font-weight: ${(props) => props.theme.fontWeights.bold};
     }
     p:last-child {
-      color: ${(props) => props.theme.text.black};
+      color: ${(props) => props.theme.text.light};
     }
   }
 `;
@@ -169,7 +170,7 @@ const HomePage = () => {
   return (
     <HomePageContainer>
       <StyledNotification>
-        <p>Delivery Within 24 Hours After Placing The Order</p>
+        <p>Free & Fast Delivery in 60 minutes!</p>
       </StyledNotification>
       <CollectionSlider />
       <StyledDeliveryLocation
@@ -192,28 +193,53 @@ const HomePage = () => {
               color: theme.text.primary,
             }}
           >
-            Ashok Nagar, KK Nagar & Ramapuram.
+            Ashok Nagar, KK Nagar, Nesapakkam & Ramapuram.
           </span>
         </p>
       </StyledDeliveryLocation>
+      <StyledDeliveryLocation
+        backgroundColor={theme.bg.white}
+        color={theme.text.dark}
+      >
+        <div className="message-box">
+          <div style={{ marginRight: theme.space[1] }}>
+            <MoneyTick />
+          </div>
+          <div>
+            <p>Cash On Delivery</p>
+            <p>Available</p>
+          </div>
+        </div>
+        <div className="message-box">
+          <div style={{ marginRight: theme.space[1] }}>
+            <Receipt />
+          </div>
+          <div>
+            <p>Easy Return </p>
+            <p>Sameday</p>
+          </div>
+        </div>
+      </StyledDeliveryLocation>
       <StyledCollections>
         <CollectionCarousal
-          data={brandsData?.data.data}
-          Header={
-            <>
-              <h4>Six Yards Of Elegance</h4>
-              <p>wide variety of saree collection</p>
-            </>
-          }
-        />
-        <CollectionCarousal
-          data={brandsData?.data.data}
+          data={SAREE_COLLECTION}
           Header={
             <>
               <h4>Featured Collections</h4>
               <p>just for you</p>
             </>
           }
+          onClick={(type) => navigate("/products?feature=" + type)}
+        />
+        <CollectionCarousal
+          data={KURTHI_COLLECTION}
+          Header={
+            <>
+              <h4>Ethnics For All Occasions</h4>
+              <p>A Collection of Trending Ethnicwears</p>
+            </>
+          }
+          onClick={(id) => navigate("/products?category=" + id)}
         />
       </StyledCollections>
       <div>
@@ -246,39 +272,16 @@ const HomePage = () => {
                 marginBottom: theme.space[2],
               }}
             >
-              Daily Wear Kurtis
+              Cotton Kurta Sets
             </h3>
-            <p>comfortable throughout the day</p>
-            <StyledButton type="primary" onClick={() => navigate("/products")}>
+            <p>All Day Workwear</p>
+            <StyledButton type="primary" onClick={() => navigate("/products?category=14")}>
               Shop Now
             </StyledButton>
           </div>
         </SareeContainer>
       </div>
-      <StyledDeliveryLocation
-        backgroundColor={theme.bg.secondary}
-        color={theme.text.dark}
-      >
-        <div className="message-box">
-          <div style={{ marginRight: theme.space[4] }}>
-            <MoneyTick />
-          </div>
-          <div>
-            <p>Cash On Delivery</p>
-            <p>on select products</p>
-          </div>
-        </div>
-        <div className="message-box">
-          <div style={{ marginRight: theme.space[3] }}>
-            <Receipt />
-          </div>
-          <div>
-            <p>Free Delivery </p>
-            <p>on all orders</p>
-          </div>
-        </div>
-      </StyledDeliveryLocation>
-      <StyledCategories>
+      {/* <StyledCategories>
         <p>MORE TO EXPLORE</p>
         <CategoryCarousal
           data={brandsData?.data.data}
@@ -288,7 +291,7 @@ const HomePage = () => {
           data={brandsData?.data.data}
           Header={<h4>For Men</h4>}
         />
-      </StyledCategories>
+      </StyledCategories> */}
       <StyledBrands>
         <BrandCarousal
           data={brandsData?.data.data}
