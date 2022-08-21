@@ -139,7 +139,7 @@ export function useOrderData(user) {
               item.selectedColorVariant.variant_name || "NA"
             }\nQuantity: ${item.quantity}\nPrice: ${
               item.price
-            }\nLink: https://theclock.xyz/product/${item.id}`
+            }\nLink: https://theclock.xyz/products/${item.id}`
         )
         .join("\n")}`,
     };
