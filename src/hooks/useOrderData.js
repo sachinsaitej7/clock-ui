@@ -121,19 +121,34 @@ export function useOrderData(user) {
   const updateOrder = async (orderId, payload, items=[]) => {
     const db = getFirestore();
     const orderRef = doc(db, "orders", orderId);
-    const newMessageRef = doc(collection(db, "messages"));
+    const newMessageRef = doc(collection(db, "emails"));
     const messageData = {
-      order_id: orderId,
-      // prettier-ignore
-      body: `Order placed by ${user.name}.\nAddress: ${activeAddress.address}, pincode: ${activeAddress.pincode}.\nMobile: ${activeAddress.mobileNo}\nAlternative Number: ${activeAddress.alternativeNo || user.phone_number}\nProducts: ${items.map((item) =>`Name: ${item.name}\nSize: ${item.selectedSizeVariant.variant_name || "NA"}\nColor: ${item.selectedColorVariant.variant_name || "NA"}\nQuantity: ${item.quantity}\nPrice: ${item.price}\nLink: https://theclock.xyz/product/${item.id},`).join("\n")}`,
-      timestamp: new Date(),
-      to: "+919952974048",
+      subject: `New Order placed by ${user.name || 'New User'} || ${orderId}`,
+      text: `New Order placed by ${user.name || 'New User'}.\nAddress: ${
+        activeAddress.address
+      }, pincode: ${activeAddress.pincode}.\nMobile: ${
+        activeAddress.mobileNo
+      }\nAlternative Number: ${
+        activeAddress.alternativeNo || user.phone_number
+      }\nProducts: ${items
+        .map(
+          (item) =>
+            `Name: ${item.name}\nSize: ${
+              item.selectedSizeVariant.variant_name || "NA"
+            }\nColor: ${
+              item.selectedColorVariant.variant_name || "NA"
+            }\nQuantity: ${item.quantity}\nPrice: ${
+              item.price
+            }\nLink: https://theclock.xyz/product/${item.id}`
+        )
+        .join("\n")}`,
     };
+
 
     await updateDoc(orderRef, {
       ...payload,
     });
-    await setDoc(newMessageRef, { ...messageData });
+    await setDoc(newMessageRef, { message: messageData, to: "barathms13@gmail.com", });
   };
 
   const fetchOrderData = async (orderId) => {
