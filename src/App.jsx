@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Store from "./store";
 
-import HomePage from "./modules/home-page";
+import HomePage from "./modules/home-page/index-new";
 import CollectionPage from "./modules/collection-page";
 import ProductPage from "./modules/product-page";
 import CartPage from "./modules/cart-page";
@@ -29,8 +29,7 @@ import WithTopAndBottom from "./wrappers/WithTopAndBottom";
 import WithScrollToTop from "./wrappers/WithScrollToTop";
 import WithAuthRoute from "./wrappers/WithAuthRoute";
 
-// eslint-disable-next-line no-unused-vars
-import { app } from "./firebase-config";
+import { getFirebase } from "./firebase";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +51,9 @@ function App() {
   const cartData = useCartData();
   const authData = useAuthData();
   const orderData = useOrderData(authData.user);
+  
+  // eslint-disable-next-line no-unused-vars
+  const { app } = getFirebase();
 
   const theme = useContext(ThemeContext);
   return (

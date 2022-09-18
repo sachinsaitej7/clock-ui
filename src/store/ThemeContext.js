@@ -5,8 +5,9 @@ export const ThemeContext = createContext({
     primary: "#015850",
     secondary: "#DAF2F0",
     black: "#000000",
+    yellow: "#F2FFCB",
   },
-  
+
   text: {
     dark: "#292929",
     white: "#FFFFFF",
@@ -26,7 +27,7 @@ export const ThemeContext = createContext({
   },
 
   fonts: {
-    primary: "Lato",
+    primary: "Inter",
     secondary: "Roboto",
   },
 
@@ -42,7 +43,7 @@ export const ThemeContext = createContext({
     "40px",
   ],
 
-  borderRadius: ["0px", "4px", "8px", "16px", "32px"],
+  borderRadius: ["0px", "4px", "8px", "16px", "32px", "64px", "128px"],
   borderWidth: ["0px", "1px", "2px", "4px", "8px"],
   borderColor: ["#FFFFFF", "#E0E0E0", "#BDBDBD", "#9E9E9E", "#757575"],
 
@@ -67,5 +68,6 @@ export const ThemeContext = createContext({
     default: "#FFFFFF",
     primary: "#015850",
     secondary: "#DAF2F0",
+    yellow: "#F2FFCB",
   },
 });

@@ -1,15 +1,17 @@
 import { useState, } from "react";
 import {
-  getAuth,
   signInWithPhoneNumber,
   RecaptchaVerifier,
 } from "firebase/auth";
+
+import { getFirebase } from "../firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 // import { verifyToken } from "../apis/auth";
 
 export function useAuthData() {
-  const [user, authLoading, authError] = useAuthState(getAuth());
+  const { auth } = getFirebase();
+  const [user, authLoading, authError] = useAuthState(auth);
   const [openLogin, setOpenLogin] = useState(false);
   const [ callbacks, setCallbacks ] = useState([]);
   // const validateToken = useCallback(async () => {
@@ -39,7 +41,6 @@ export function useAuthData() {
     // if (validPhoneNumber.length === "10") {
     validPhoneNumber = `+91${validPhoneNumber}`;
     // }
-    const auth = getAuth();
     window.recaptchaVerifier =
       window.recaptchaVerifier ||
       new RecaptchaVerifier(
@@ -79,7 +80,7 @@ export function useAuthData() {
 
   const handleSignOut = async () => {
     try {
-      await getAuth().signOut();
+      await auth.signOut();
     } catch (error) {
       console.log(error);
       throw error;

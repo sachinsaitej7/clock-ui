@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import { Button, Input } from "antd";
-import lunr from "lunr";
 
 //images
 import { ReactComponent as SearchIcon } from "../../assets/collection-page/search-normal.svg";
@@ -88,19 +87,6 @@ const StyledButton = styled(Button)`
 
 const STEP = 10;
 
-function initializeSearch(products) {
-  return lunr(function () {
-    this.ref("id");
-    this.field("name");
-    this.field("description");
-    this.field("brand");
-    this.field("category");
-    products.forEach((doc) => {
-      this.add({...doc, brand: doc.brand?.name, category: doc.category?.name});
-    });
-  });
-}
-
 const CollectionPage = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
@@ -120,13 +106,6 @@ const CollectionPage = () => {
   );
   const products = productsData?.data.data;
 
-  useEffect(() => {
-    if (products) initializeSearch(products);
-  }, []);
-
-  useEffect(() => {
-    if (products) setSearchApi(initializeSearch(products));
-  }, [products]);
 
   useEffect(() => {
     if (searchApi && query.length > 2) {

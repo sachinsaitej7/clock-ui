@@ -42,11 +42,26 @@ const DescriptionCard = ({ title, price, variant }) => {
         style={{
           fontWeight: theme.fontWeights.bold,
           color: theme.text.black,
-          fontSize: variant === "small" ? theme.fontSizes[2] : theme.fontSizes[3],
+          fontSize:
+            variant === "small" ? theme.fontSizes[2] : theme.fontSizes[3],
           marginTop: variant === "small" ? theme.space[1] : theme.space[2],
         }}
       >
         Rs.{price}
+      </p>
+      <p
+        style={{
+          color: "rgba(0, 182, 75, 1)",
+          fontSize: theme.fontSizes[0],
+          fontWeight: theme.fontWeights.semibold,
+          backgroundColor: "rgba(229, 255, 240, 1)",
+          borderRadius: theme.borderRadius[1],
+          display: "inline-block",
+          padding: theme.space[2] + " " + theme.space[3],
+          margin: theme.space[1] + " 0px",
+        }}
+      >
+        IN STOCK
       </p>
     </>
   );

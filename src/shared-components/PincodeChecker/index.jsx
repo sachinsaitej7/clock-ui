@@ -83,7 +83,7 @@ const PincodeTextContainer = ({ data }) => {
               fontWeight: theme.fontWeights.bold,
             }}
           >
-            {data.delivery_time > 60
+            {data.delivery_time > 240 ? `one day` : data.delivery_time > 60
               ? `${Math.ceil(data.delivery_time / 60)} hours, `
               : `${data.delivery_time} minutes`}
           </span>{" "}

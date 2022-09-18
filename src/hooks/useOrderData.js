@@ -5,7 +5,6 @@ import {
   query,
   where,
   onSnapshot,
-  getFirestore,
   addDoc,
   getDoc,
   getDocs,
@@ -14,7 +13,10 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+import { getFirebase } from "../firebase";
+
 export function useOrderData(user) {
+  const { db } = getFirebase();
   const id = user?.uid;
   const [orders, setOrders] = useState([]);
   const [address, setAddress] = useState([]);
@@ -47,8 +49,6 @@ export function useOrderData(user) {
   }, [activeAddress]);
 
   const setUpAddressMeta = useCallback(() => {
-    const db = getFirestore();
-
     const deliveryQuery = query(
       collection(db, "delivery-address"),
       where("uuid", "==", id)
@@ -67,7 +67,6 @@ export function useOrderData(user) {
   }, [id]);
 
   const setUpOrderMeta = useCallback(() => {
-    const db = getFirestore();
     const orderQuery = query(
       collection(db, "orders"),
       where("user_id", "==", id)
@@ -99,7 +98,6 @@ export function useOrderData(user) {
     state,
     mobileNo,
   }) => {
-    const db = getFirestore();
     try {
       await addDoc(collection(db, "delivery-address"), {
         uuid: id,
@@ -119,7 +117,6 @@ export function useOrderData(user) {
   };
 
   const updateOrder = async (orderId, payload, items=[]) => {
-    const db = getFirestore();
     const orderRef = doc(db, "orders", orderId);
     const newMessageRef = doc(collection(db, "emails"));
     const messageData = {
@@ -152,7 +149,6 @@ export function useOrderData(user) {
   };
 
   const fetchOrderData = async (orderId) => {
-    const db = getFirestore();
     try {
       const orderRef = doc(db, "orders", orderId);
       const orderDoc = await getDoc(orderRef);
@@ -172,7 +168,6 @@ export function useOrderData(user) {
   };
 
   const fetchPincodeData = async (pincode) => {
-    const db = getFirestore();
     try {
       const q = query(
         collection(db, "pincode-checker"),

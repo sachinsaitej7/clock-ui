@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "clock-xyz"
-  }
+    "default": "clock-poc-11334",
+    "prod": "clock-poc-11334"
+  },
+  "targets": {},
+  "etags": {}
 }

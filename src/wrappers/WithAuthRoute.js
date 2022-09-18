@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getAuth } from "firebase/auth";
+import { getFirebase } from "../firebase";
 
 import Spinner from "../shared-components/Spinner";
 
 export default function WithAuthRoute({ children }) {
   let navigate = useNavigate();
-  const [user, loading] = useAuthState(getAuth());
+  const { auth } = getFirebase();
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     if (user === null && !loading) {
