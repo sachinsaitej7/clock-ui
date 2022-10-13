@@ -16,6 +16,7 @@ import LoginModal from "../LoginModal";
 
 const TopBarContainer = styled.div`
   width: 100%;
+  max-width: 768px;
   height: 50px;
   background-color: ${(props) => props.theme.bg.default};
   display: flex;
@@ -24,7 +25,7 @@ const TopBarContainer = styled.div`
   padding: ${(props) => `${props.theme.space[2]} ${props.theme.space[5]}`};
   box-sizing: border-box;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.05);
-  position: fixed ;
+  position: fixed;
   top: 0;
   z-index: 100;
 `;
@@ -48,6 +49,8 @@ const StyledLogoContainer = styled.div`
 const StyledDrawer = styled(Drawer)`
   top: 50px;
   height: 100%;
+  max-width: 768px;
+  margin: 0px auto;
 `;
 
 const TopBar = ({

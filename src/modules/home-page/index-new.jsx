@@ -4,7 +4,9 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { fetchProducts } from "../../apis/home-page";
-import { initializeSearch } from "./search-service";
+import { initializeSearch, processResults } from "../../utils/searchService";
+
+import { generateFilters } from "../../utils";
 
 import ProductCard from "../../shared-components/ProductCard";
 import SearchBar from "../../shared-components/SearchBar";
@@ -46,6 +48,8 @@ const Collections = styled.div`
   }
 `;
 
+const DEFAULT_VALUE = { sort: ["relevance"] };
+
 const HomePage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -54,6 +58,7 @@ const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchApi, setSearchApi] = useState(null);
   const [filterIds, setFilterIds] = useState([]);
+  const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
 
   const { isLoading: productsLoading, data: productsData } = useQuery(
     "products",
@@ -76,6 +81,7 @@ const HomePage = () => {
   const onChange = (e) => {
     setSearchMode(true);
     setSearchQuery(e.target.value);
+    setFilterValues(DEFAULT_VALUE);
   };
 
   const onClick = () => {
@@ -100,12 +106,15 @@ const HomePage = () => {
 
   const filteredProducts =
     searchQuery.length > 1
-      ? products.filter((product) => filterIds.includes(product.id))
+      ? processResults(products, filterIds, filterValues)
       : [];
+
+  const filters =
+    searchQuery.length > 1 ? generateFilters(filteredProducts) : [];
 
   return (
     <HomePageContainer>
-      {!searchMode && <Header>Find unique fashion in your city!</Header>}
+      {!searchMode && <Header>Discover women’s fashion in Chennai</Header>}
       <SearchBar
         onChange={onChange}
         onBack={onBack}
@@ -118,9 +127,18 @@ const HomePage = () => {
             label: "Chanderi Cotton",
             onClick: () => navigate("/products?category=12"),
           },
-          { label: "Kurtis", onClick: () => navigate("/products?category=14") },
-          { label: "T-Shirts", onClick: () => navigate("/products?category=16") },
+          {
+            label: "Kurtis",
+            onClick: () => navigate("/products?category=14"),
+          },
+          {
+            label: "T-Shirts",
+            onClick: () => navigate("/products?category=16"),
+          },
         ]}
+        onApply={setFilterValues}
+        values={filterValues}
+        filters={filters}
       />
       {!searchMode && (
         <div
@@ -140,18 +158,29 @@ const HomePage = () => {
         </div>
       )}
       {searchMode && (
-        <Collections>
-          {filteredProducts.map((product) => {
-            return (
-              <ProductCard
-                key={product.id}
-                {...product}
-                variant='medium'
-                onClick={() => navigate(`/products/${product.id}`)}
-              />
-            );
-          })}
-        </Collections>
+        <>
+          <p
+            style={{
+              color: theme.text.light,
+              fontSize: theme.fontSizes[1],
+              margin: theme.space[4] + " 0px",
+            }}
+          >
+            Showing {filteredProducts.length} products
+          </p>
+          <Collections>
+            {filteredProducts.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  {...product}
+                  variant='medium'
+                  onClick={() => navigate(`/products/${product.id}`)}
+                />
+              );
+            })}
+          </Collections>
+        </>
       )}
     </HomePageContainer>
   );

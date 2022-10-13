@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
-import { Button, Input } from "antd";
+import { Button } from "antd";
 
-//images
-import { ReactComponent as SearchIcon } from "../../assets/collection-page/search-normal.svg";
-import { ReactComponent as CCloseIcon } from "../../assets/common/close-circle.svg";
+import { processResults } from "../../utils/searchService";
+
+import { generateFilters } from "../../utils";
 
 import { fetchProducts } from "../../apis/home-page";
+
+import Filters from "../../shared-components/Filters";
 import ProductCard from "../../shared-components/ProductCard";
 import Spinner from "../../shared-components/Spinner";
 import SpecialCollectionPage from "./special-collection-page";
@@ -22,9 +24,6 @@ const CollectionPageContainer = styled.div`
 `;
 
 const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: ${(props) => props.theme.space[5]};
   p {
     font-size: ${(props) => props.theme.fontSizes[5]};
@@ -55,18 +54,6 @@ const Collections = styled.div`
   }
 `;
 
-const StyledInput = styled(Input)`
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  width: 90%;
-  :focus {
-    border-color: ${(props) => props.theme.colors.primary};
-    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.secondary};
-  }
-  ::placeholder {
-    color: ${(props) => props.theme.colors.grey};
-  }
-`;
-
 const StyledButton = styled(Button)`
   border: 1px solid ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.borderRadius[2]};
@@ -86,36 +73,20 @@ const StyledButton = styled(Button)`
 `;
 
 const STEP = 10;
+const DEFAULT_VALUE = { sort: ["relevance"] };
 
 const CollectionPage = () => {
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [searchMode, setSearchMode] = useState(false);
-  const [searchApi, setSearchApi] = useState(null);
-  const [filterIds, setFilterIds] = useState([]);
-  const [searching, setSearching] = useState(false);
-
   const theme = useTheme();
   const navigate = useNavigate();
   let [searchParams] = useSearchParams();
   const params = getParams(searchParams);
-
+  const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
   const { isLoading: productsLoading, data: productsData } = useQuery(
     ["products", getQueryString(params)],
     () => fetchProducts(params)
   );
   const products = productsData?.data.data;
-
-
-  useEffect(() => {
-    if (searchApi && query.length > 2) {
-      setSearching(true);
-      const filterIds = searchApi.search(`${query}*`).map((result) => +result.ref);
-      setFilterIds(filterIds);
-      setSearching(false);
-    }
-  }, [query, searchApi]);
-
 
   if (productsLoading) return <Spinner />;
   if (params.type) return <SpecialCollectionPage />;
@@ -129,55 +100,40 @@ const CollectionPage = () => {
     );
 
   const collectionName = getCollectionName(searchParams, products);
-  const filteredProducts =
-    query.length > 2
-      ? products.filter((product) => filterIds.includes(product.id))
-      : products;
+  const filteredProducts = processResults(products, undefined, filterValues);
+
+  const filters = generateFilters(filteredProducts);
 
   return (
     <CollectionPageContainer>
       <Header>
-        {searchMode ? (
-          <StyledInput
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            autoFocus
-            placeholder={
-              collectionName
-                ? `Search ${collectionName}’s Collection`
-                : `Search All Products`
-            }
-          />
-        ) : (
-          <p>
-            {collectionName ? `${collectionName}’s Collection` : `All Products`}
-            <span
-              style={{ fontSize: theme.fontSizes[2] }}
-            >{`(${products.length})`}</span>
-          </p>
-        )}
-        <div>
-          {searchMode ? (
-            <CCloseIcon
-              onClick={() => {
-                setSearchMode(false);
-                setQuery("");
-              }}
-            />
-          ) : (
-            <SearchIcon onClick={() => setSearchMode(true)} />
-          )}
-        </div>
+        <p style={{marginBottom: theme.space[3]}}>
+          {collectionName ? `${collectionName}’s Collection` : `All Products`}
+        </p>
+        <Filters
+          filters={filters}
+          onApply={setFilterValues}
+          values={filterValues}
+        />
       </Header>
       {filteredProducts.length ? (
         <>
+          <p
+            style={{
+              color: theme.text.light,
+              fontSize: theme.fontSizes[1],
+              margin: "0px " + theme.space[5],
+            }}
+          >
+            Showing {filteredProducts.length} products
+          </p>
           <Collections>
             {filteredProducts.slice(0, STEP * page).map((product) => {
               return (
                 <ProductCard
                   key={product.id}
                   {...product}
-                  variant="medium"
+                  variant='medium'
                   onClick={() => navigate(`/products/${product.id}`)}
                 />
               );
@@ -206,7 +162,7 @@ const CollectionPage = () => {
             padding: theme.space[5],
           }}
         >
-        {searching ? "Searching" : "No products found"}
+          {"No products found"}
         </div>
       )}
     </CollectionPageContainer>

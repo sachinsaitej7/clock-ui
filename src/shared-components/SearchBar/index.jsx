@@ -1,11 +1,13 @@
-// search bar component
 import React from "react";
 import { Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import styled, { useTheme } from "styled-components";
+
 import { ReactComponent as TrendingIcon } from "../../assets/common/trending.svg";
 import { ReactComponent as RightArrow } from "../../assets/common/chevron-right.svg";
 import { ReactComponent as LeftArrow } from "../../assets/common/chevron-left.svg";
+
+import Filters from "../Filters";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -54,6 +56,7 @@ const StyledButton = styled(Button)`
   :focus,
   :active,
   :hover {
+    background-color: ${(props) => props.theme.bg.yellow};
     outline: none;
   }
 `;
@@ -90,6 +93,9 @@ const SearchBar = ({
   onBack,
   notFound = false,
   searchQuery = "",
+  filters,
+  values,
+  onApply,
 }) => {
   const theme = useTheme();
 
@@ -99,10 +105,9 @@ const SearchBar = ({
         placeholder={placeholder}
         allowClear
         size='large'
-        autoFocus={searchMode}
         suffix={searchMode ? null : <SearchOutlined />}
         onChange={onChange}
-        onClick={onClick}
+        onClick={searchMode ? undefined : onClick}
         value={searchQuery}
         prefix={searchMode ? <LeftArrow onClick={onBack} width='16px' /> : null}
       />
@@ -116,36 +121,40 @@ const SearchBar = ({
           style={{ padding: theme.space[6] }}
         >{`We couldn’t find any suggestions for “${searchQuery}”`}</div>
       )}
-      <TrendingContainer searchMode>
-        <div style={{ marginBottom: theme.space[4] }}>
-          <TrendingIcon width='20px' />
-          <span
+      {searchQuery.length > 1 && !notFound ? (
+        <Filters filters={filters} values={values} onApply={onApply} />
+      ) : (
+        <TrendingContainer searchMode={searchMode}>
+          <div style={{ marginBottom: theme.space[4] }}>
+            <TrendingIcon width='20px' />
+            <span
+              style={{
+                fontSize: theme.fontSizes[1],
+                color: theme.text.light,
+                fontWeight: theme.fontWeights.semibold,
+                marginLeft: theme.space[3],
+              }}
+            >
+              Trending in search
+            </span>
+          </div>
+          <div
             style={{
-              fontSize: theme.fontSizes[1],
-              color: theme.text.light,
-              fontWeight: theme.fontWeights.semibold,
-              marginLeft: theme.space[3],
+              display: "flex",
+              flexWrap: "wrap",
+              flex: "1 1 0",
             }}
           >
-            Trending in search
-          </span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            flex: "1 1 0",
-          }}
-        >
-          {trending.map((item, index) => {
-            return (
-              <StyledTag key={index} onClick={item.onClick}>
-                {item.label} <RightArrow width='12px' />
-              </StyledTag>
-            );
-          })}
-        </div>
-      </TrendingContainer>
+            {trending.map((item, index) => {
+              return (
+                <StyledTag key={index} onClick={item.onClick}>
+                  {item.label} <RightArrow width='12px' />
+                </StyledTag>
+              );
+            })}
+          </div>
+        </TrendingContainer>
+      )}
     </StyledContainer>
   );
 };
