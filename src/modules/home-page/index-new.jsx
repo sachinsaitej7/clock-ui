@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styled, { useTheme } from "styled-components";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { isEmpty } from "lodash";
 
 import { fetchProducts } from "../../apis/home-page";
-import { initializeSearch, processResults } from "../../utils/searchService";
+import { processResults, createIndex, index } from "../../utils/searchService";
 
-import { generateFilters } from "../../utils";
+import { generateFilters, getParams } from "../../utils";
 
 import ProductCard from "../../shared-components/ProductCard";
 import SearchBar from "../../shared-components/SearchBar";
@@ -53,48 +54,56 @@ const DEFAULT_VALUE = { sort: ["relevance"] };
 const HomePage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = getParams(searchParams);
+  const searchValue = params["search"] || "";
 
-  const [searchMode, setSearchMode] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchApi, setSearchApi] = useState(null);
-  const [filterIds, setFilterIds] = useState([]);
+  const results = useMemo(
+    () => index.search(searchValue).flatMap((result) => result.result),
+    [searchValue]
+  );
+
+  const [searchMode, setSearchMode] = useState(!!searchValue);
   const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
+  const [filterIds, setFilterIds] = useState(results || []);
 
   const { isLoading: productsLoading, data: productsData } = useQuery(
     "products",
     fetchProducts
   );
+
   const products = productsData?.data.data;
 
   useEffect(() => {
-    if (products) setSearchApi(initializeSearch(products));
+    if (products)
+      createIndex(products).then(() => {
+        const results = index.search(searchValue);
+        setFilterIds(results.flatMap((result) => result.result));
+      });
   }, [products]);
 
   useEffect(() => {
-    if (!searchQuery) return null;
-    const filterIds = searchApi
-      .search(`${searchQuery}*`)
-      .map((result) => +result.ref);
-    setFilterIds(filterIds);
-  }, [searchQuery, searchApi]);
+    setFilterIds(results);
+  }, [results]);
 
   const onChange = (e) => {
     setSearchMode(true);
-    setSearchQuery(e.target.value);
+    setSearchParams({ search: e.target.value });
     setFilterValues(DEFAULT_VALUE);
   };
 
   const onClick = () => {
     setSearchMode(true);
-    setSearchQuery("");
+    setSearchParams({});
   };
 
   const onBack = () => {
     setSearchMode(false);
-    setSearchQuery("");
+    setSearchParams({});
+    setFilterIds([]);
   };
 
-  if (productsLoading) return <Spinner />;
+  if (productsLoading || isEmpty(index.register)) return <Spinner />;
   if (!products)
     return (
       <div
@@ -104,13 +113,14 @@ const HomePage = () => {
       </div>
     );
 
-  const filteredProducts =
-    searchQuery.length > 1
-      ? processResults(products, filterIds, filterValues)
-      : [];
+  const { sortedResults, searchedResults } = processResults(
+    products,
+    filterIds,
+    filterValues
+  );
 
   const filters =
-    searchQuery.length > 1 ? generateFilters(filteredProducts) : [];
+    searchValue.length > 1 ? generateFilters(searchedResults) : [];
 
   return (
     <HomePageContainer>
@@ -120,8 +130,8 @@ const HomePage = () => {
         onBack={onBack}
         onClick={onClick}
         searchMode={searchMode}
-        notFound={searchQuery.length > 1 && filteredProducts.length === 0}
-        searchQuery={searchQuery}
+        notFound={searchValue.length > 1 && sortedResults.length === 0}
+        searchQuery={searchValue}
         trending={[
           {
             label: "Chanderi Cotton",
@@ -157,7 +167,7 @@ const HomePage = () => {
           <p style={{ marginLeft: theme.space[2] }}>Chennai</p>
         </div>
       )}
-      {searchMode && (
+      {searchMode && sortedResults.length > 0 && (
         <>
           <p
             style={{
@@ -166,10 +176,10 @@ const HomePage = () => {
               margin: theme.space[4] + " 0px",
             }}
           >
-            Showing {filteredProducts.length} products
+            Showing {sortedResults.length} products
           </p>
           <Collections>
-            {filteredProducts.map((product) => {
+            {sortedResults.map((product) => {
               return (
                 <ProductCard
                   key={product.id}

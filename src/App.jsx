@@ -20,7 +20,6 @@ import ProfilePage from "./modules/other-pages/profile-page";
 import TnCPages from "./modules/other-pages/tnc";
 import NotFoundPage from "./modules/other-pages/not-found-page";
 
-
 import { useCartData } from "./hooks/useCartData";
 import { useAuthData } from "./hooks/useAuthData";
 import { useOrderData } from "./hooks/useOrderData";
@@ -51,7 +50,7 @@ function App() {
   const cartData = useCartData();
   const authData = useAuthData();
   const orderData = useOrderData(authData.user);
-  
+
   // eslint-disable-next-line no-unused-vars
   const { app } = getFirebase();
 
@@ -66,7 +65,7 @@ function App() {
               <WithScrollToTop />
               <Routes>
                 <Route
-                  path="/"
+                  path='/'
                   exact
                   element={
                     <WithTopAndBottom>
@@ -75,7 +74,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/products"
+                  path='/products'
                   exact
                   element={
                     <WithTopAndBottom>
@@ -84,7 +83,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/products/:id"
+                  path='/products/:id'
                   exact
                   element={
                     <WithTopAndBottom>
@@ -93,7 +92,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/profile"
+                  path='/profile'
                   exact
                   element={
                     <WithAuthRoute>
@@ -104,7 +103,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/cart"
+                  path='/cart'
                   exact
                   element={
                     // <WithAuthRoute>
@@ -115,7 +114,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/address"
+                  path='/address'
                   exact
                   element={
                     <WithAuthRoute>
@@ -126,7 +125,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/review-order"
+                  path='/review-order'
                   exact
                   element={
                     <WithAuthRoute>
@@ -137,7 +136,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/order/:orderId"
+                  path='/order/:orderId'
                   exact
                   element={
                     <WithAuthRoute>
@@ -148,7 +147,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/tnc"
+                  path='/tnc'
                   exact
                   element={
                     <WithTopAndBottom>
@@ -157,7 +156,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="*"
+                  path='*'
                   element={
                     <WithTopAndBottom>
                       <NotFoundPage />

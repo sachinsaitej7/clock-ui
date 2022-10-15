@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import Store from "../store";
 import TopBar from "../shared-components/TopBar";
 import Footer from "../shared-components/Footer";
+import ErrorBoundary from "../shared-components/ErrorBoundary";
 import { useNavigate } from "react-router-dom";
 
 //images
@@ -23,10 +24,10 @@ const WithTopAndBottom = ({ children }) => {
   } = useContext(AuthContext);
 
   const keyMap = {
-    '1': () => (user ? navigation("/profile") : handleLoginModal()),
-    '3': () => navigation("/products"),
-    '4': () => navigation("/products?category=5"),
-    '5': () => navigation("/products?category=6"),
+    1: () => (user ? navigation("/profile") : handleLoginModal()),
+    3: () => navigation("/products"),
+    4: () => navigation("/products?category=5"),
+    5: () => navigation("/products?category=6"),
   };
 
   const footerMap = {
@@ -97,7 +98,6 @@ const WithTopAndBottom = ({ children }) => {
     }
   };
 
-
   const handleFooterClick = (type, info) => {
     return footerMap[type] ? footerMap[type] : () => {};
   };
@@ -111,7 +111,9 @@ const WithTopAndBottom = ({ children }) => {
         authHandler={authHandler}
         menuItems={MENU_ITEMS}
       />
-      <div style={{marginTop: "52px" }}>{children}</div>
+      <ErrorBoundary>
+        <div style={{ marginTop: "52px" }}>{children}</div>
+      </ErrorBoundary>
       <Footer clickHandlers={handleFooterClick} />
     </>
   );

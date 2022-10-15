@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Button } from "antd";
 
+import { removeEmptyKeys } from "../../utils";
 import { FilterContext } from "./FilterContext";
 
 const StyledFooter = styled.div`
@@ -66,7 +67,7 @@ export default function DrawerFooter() {
       </StyledButton>{" "}
       <StyledButton
         type='primary'
-        onClick={() => handleApply(filterValues)}
+        onClick={() => handleApply(removeEmptyKeys(filterValues))}
       >
         Apply
       </StyledButton>

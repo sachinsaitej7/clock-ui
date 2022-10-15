@@ -1,5 +1,6 @@
 import numberWithCommas from "./numberWithCommas";
 import generateFilters from "./generateFilters";
+import removeEmptyKeys from "./removeEmptyKeys";
 
 
 const getSummaryData = (items) => {
@@ -14,4 +15,22 @@ const getSummaryData = (items) => {
   return { total, totalItems, totalDiscount };
 };
 
-export { numberWithCommas, generateFilters, getSummaryData };
+const getParams = (searchParams = {}) => {
+  const keyValues = searchParams.entries();
+  const payload = {};
+  for (const [key, value] of keyValues) {
+    if (key === "brand") {
+      payload["brand_id"] = value;
+    } else payload[key] = value;
+  }
+  return payload;
+};
+
+
+export {
+  numberWithCommas,
+  generateFilters,
+  getSummaryData,
+  getParams,
+  removeEmptyKeys,
+};

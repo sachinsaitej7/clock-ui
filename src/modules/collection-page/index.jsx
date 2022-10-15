@@ -100,14 +100,14 @@ const CollectionPage = () => {
     );
 
   const collectionName = getCollectionName(searchParams, products);
-  const filteredProducts = processResults(products, undefined, filterValues);
+  const { searchedResults, sortedResults } = processResults(products, undefined, filterValues);
 
-  const filters = generateFilters(filteredProducts);
+  const filters = generateFilters(searchedResults);
 
   return (
     <CollectionPageContainer>
       <Header>
-        <p style={{marginBottom: theme.space[3]}}>
+        <p style={{ marginBottom: theme.space[3] }}>
           {collectionName ? `${collectionName}’s Collection` : `All Products`}
         </p>
         <Filters
@@ -116,7 +116,7 @@ const CollectionPage = () => {
           values={filterValues}
         />
       </Header>
-      {filteredProducts.length ? (
+      {sortedResults.length > 0 ? (
         <>
           <p
             style={{
@@ -125,10 +125,10 @@ const CollectionPage = () => {
               margin: "0px " + theme.space[5],
             }}
           >
-            Showing {filteredProducts.length} products
+            Showing {sortedResults.length} products
           </p>
           <Collections>
-            {filteredProducts.slice(0, STEP * page).map((product) => {
+            {sortedResults.slice(0, STEP * page).map((product) => {
               return (
                 <ProductCard
                   key={product.id}
@@ -139,7 +139,7 @@ const CollectionPage = () => {
               );
             })}
           </Collections>
-          {filteredProducts.length > STEP * page && (
+          {sortedResults.length > STEP * page && (
             <div
               style={{
                 display: "flex",
