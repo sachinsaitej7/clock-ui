@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Carousel } from "antd";
+import { Carousel, Image } from "antd";
 
 import { ReactComponent as ArrowLeft } from "../../assets/common/arrow-right-bg.svg";
 import { ReactComponent as ArrowRight } from "../../assets/common/arrow-left-bg.svg";
@@ -9,14 +9,6 @@ const Container = styled.div`
   /* padding: ${(props) => props.theme.space[5]}; */
 `;
 
-const Image = styled.img`
-  width: 380px;
-  max-height: 464px;
-  @media (min-width: 424px) {
-    width: 100%;
-    max-height: 500px;
-  }
-`;
 
 const StyledCarousel = styled(Carousel)`
   .slick-prev {

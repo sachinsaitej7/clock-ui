@@ -4,7 +4,6 @@ import styled, { useTheme } from "styled-components";
 
 //images
 import { ReactComponent as Logo } from "../../assets/common/logo-mobile.svg";
-import { ReactComponent as BetaIcon } from "../../assets/common/beta.svg";
 import { ReactComponent as CartIcon } from "../../assets/common/shopping-cart.svg";
 import { ReactComponent as MenuIcon } from "../../assets/common/menu.svg";
 import { ReactComponent as CCloseIcon } from "../../assets/common/close-circle.svg";
@@ -71,9 +70,6 @@ const TopBar = ({
       <StyledLogoContainer>
         <Link to="/">
           <Logo />
-        </Link>
-        <Link to="/">
-          <BetaIcon />
         </Link>
       </StyledLogoContainer>
       {drawerVisible ? (

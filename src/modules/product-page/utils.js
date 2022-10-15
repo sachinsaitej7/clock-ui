@@ -37,3 +37,32 @@ export const checkItemInList = (items, { color = {}, size = {}, id }) => {
     );
   });
 };
+
+export const fallbackCopyClipboard = (text) => {
+  const el = document.createElement("textarea");
+  el.value = text;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+};
+
+export const copyToClipboard = (text) => {
+  if (!navigator.clipboard) {
+    fallbackCopyClipboard(text);
+    return Promise.resolve();
+  }
+  return navigator.clipboard.writeText(text);
+};
+
+export const handleShare = (data, callback = () => {}) => {
+  if (navigator.share) {
+    navigator.share(data).catch(() => {
+      copyToClipboard(data.url).then(() => {
+        callback("Link Copied to Clipboard");
+      });
+    });
+  } else {
+    copyToClipboard(data.url).then(() => callback("Link Copied to Clipboard"));
+  }
+};

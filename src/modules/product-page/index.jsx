@@ -11,6 +11,7 @@ import Store from "../../store";
 import { fetchProduct } from "../../apis/product-page";
 import { fetchProducts } from "../../apis/home-page";
 
+import NotificationAPI from "../../shared-components/NotificationAPI";
 import ProductCarousal from "../../shared-components/ProductCarousal";
 import CollectionPreview from "../../shared-components/CollectionPreview";
 import TrustTags from "../../shared-components/TrustTags";
@@ -21,19 +22,28 @@ import PincodeChecker from "../../shared-components/PincodeChecker/index";
 import { ReactComponent as MouseSquare } from "../../assets/product/mouse-square.svg";
 import { ReactComponent as ArrowDownIcon } from "../../assets/product/arrow-down.svg";
 import { ReactComponent as ArrowUpIcon } from "../../assets/product/arrow-up.svg";
+import { ReactComponent as ArrowLongLeft } from "../../assets/common/arrow-long-left.svg";
+import { ReactComponent as ArrowLeftOnSquare } from "../../assets/common/arrow-up-on-square.svg";
 
-import { generatePrice, checkItemInList } from "./utils";
+import { generatePrice, checkItemInList, handleShare } from "./utils";
 
 const { CartContext } = Store;
 const { Panel } = Collapse;
 
 const Container = styled.div`
   padding: ${(props) => props.theme.space[5]};
+
   .divider {
     margin: ${(props) => props.theme.space[7]} 0px;
     border-top: 1px solid #292929;
     opacity: 0.12;
   }
+
+  .top-icon {
+    cursor: pointer;
+    width: 24px;
+  }
+
   .product-details {
     h6 {
       font-size: ${(props) => props.theme.fontSizes[3]};
@@ -131,6 +141,7 @@ const ProductPage = () => {
   const theme = useTheme();
   const { addItem, items } = useContext(CartContext);
   const navigate = useNavigate();
+
   const [color, setColor] = useState({});
   const [size, setSize] = useState({});
   const { isLoading, data: productData } = useQuery(["product", id], () =>
@@ -146,6 +157,13 @@ const ProductPage = () => {
     price_head,
   } = product || {};
 
+  const shareData = {
+    title: name,
+    text: "Check out this product",
+    url: window.location.href,
+    files: product_images ? [product_images[0].image] : [],
+  };
+
   const checkVariant = (variant_id) => {
     return price_head.find((price) => {
       return price.price_line.find(
@@ -154,20 +172,16 @@ const ProductPage = () => {
     });
   };
 
-  const colorVariants = useMemo(
-    () => {
-      const colorVariant = attribute_types?.find(
-        (variantType) => variantType.variant_type_name === "Colour"
-      );
-      if (!colorVariant) return {};
-      colorVariant.variant = colorVariant.variant.filter((item) =>
-        checkVariant(item.variant_id)
-      );
-      return colorVariant;
-    },
-    [attribute_types, price_head]
-  );
-
+  const colorVariants = useMemo(() => {
+    const colorVariant = attribute_types?.find(
+      (variantType) => variantType.variant_type_name === "Colour"
+    );
+    if (!colorVariant) return {};
+    colorVariant.variant = colorVariant.variant.filter((item) =>
+      checkVariant(item.variant_id)
+    );
+    return colorVariant;
+  }, [attribute_types, price_head]);
 
   const sizeVariants = useMemo(() => {
     const sizeVariant = attribute_types?.find((variantType) =>
@@ -185,7 +199,9 @@ const ProductPage = () => {
       setColor(
         isEmpty(colorVariants) ? colorVariants : colorVariants.variant[0] || {}
       );
-      setSize(isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0] || {});
+      setSize(
+        isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0] || {}
+      );
     }
   }, [isLoading, product, setSize, setColor, sizeVariants, colorVariants]);
 
@@ -212,6 +228,28 @@ const ProductPage = () => {
   if (isLoading) return <Spinner />;
   return (
     <Container>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "0px 0px " + theme.space[4],
+        }}
+      >
+        <ArrowLongLeft onClick={() => navigate(-1)} className='top-icon' />
+        <ArrowLeftOnSquare
+          className='top-icon'
+          onClick={() =>
+            handleShare(shareData, (text) => {
+              NotificationAPI({
+                type: "success",
+                message: text,
+                title: "Share",
+                placement: "top",
+              });
+            })
+          }
+        />
+      </div>
       <ProductCarousal images={product_images} />
       <div>
         <div style={{ margin: theme.space[5] + " 0px " + theme.space[2] }}>
@@ -275,16 +313,13 @@ const ProductPage = () => {
           </VariantContainer>
         )}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <StyledButton
-            disabled={!price}
-            onClick={addToCart}
-          >
+          <StyledButton disabled={!price} onClick={addToCart}>
             {checkItemInList(items, { color, size, id })
               ? "Go to Cart"
               : "Add to Cart"}
           </StyledButton>
           <StyledButton
-            type="primary"
+            type='primary'
             disabled={!price}
             onClick={() => {
               addToCart();
@@ -294,9 +329,9 @@ const ProductPage = () => {
             Buy Now
           </StyledButton>
         </div>
-        <Divider className="divider" />
+        <Divider className='divider' />
         <PincodeChecker />
-        <Divider className="divider" />
+        <Divider className='divider' />
         <StoreContainer>
           <h5>
             <MouseSquare />
@@ -304,10 +339,10 @@ const ProductPage = () => {
           </h5>
           <p>Max store, Forum Vijaya Mall, Vadapalani, Chennai, TN</p>
         </StoreContainer>
-        <Divider className="divider" />
-        <div className="product-details">
+        <Divider className='divider' />
+        <div className='product-details'>
           <Collapse
-            expandIconPosition="end"
+            expandIconPosition='end'
             ghost
             bordered={false}
             expandIcon={({ isActive }) => {
@@ -315,7 +350,7 @@ const ProductPage = () => {
               return <ArrowDownIcon />;
             }}
           >
-            <Panel header={<h6>Product Details:</h6>} key="1">
+            <Panel header={<h6>Product Details:</h6>} key='1'>
               <p
                 dangerouslySetInnerHTML={{
                   __html: product.description || "NA",
@@ -324,7 +359,7 @@ const ProductPage = () => {
             </Panel>
           </Collapse>
         </div>
-        <Divider className="divider" />
+        <Divider className='divider' />
         {!isEmpty(products) && (
           <>
             <div style={{ marginTop: theme.space[7] }}>
@@ -345,7 +380,7 @@ const ProductPage = () => {
                   navigate(`/products/${productId}`)}
               />
             </div>
-            <Divider className="divider" />
+            <Divider className='divider' />
           </>
         )}
 
