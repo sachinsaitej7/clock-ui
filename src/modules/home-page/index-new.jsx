@@ -130,7 +130,7 @@ const HomePage = () => {
         onBack={onBack}
         onClick={onClick}
         searchMode={searchMode}
-        notFound={searchValue.length > 1 && sortedResults.length === 0}
+        notFound={searchValue.length > 1 && searchedResults.length === 0}
         searchQuery={searchValue}
         trending={[
           {
@@ -167,7 +167,7 @@ const HomePage = () => {
           <p style={{ marginLeft: theme.space[2] }}>Chennai</p>
         </div>
       )}
-      {searchMode && sortedResults.length > 0 && (
+      {searchMode && searchValue && (
         <>
           <p
             style={{
