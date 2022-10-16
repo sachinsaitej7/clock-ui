@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo } from "react";
 import styled, { useTheme } from "styled-components";
 import { useQuery } from "react-query";
-import { useNavigate, useSearchParams, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { isEmpty } from "lodash";
 
 import { fetchProducts } from "../../apis/home-page";
 import { processResults, createIndex, index } from "../../utils/searchService";
 
-import { generateFilters } from "../../utils";
+import { generateFilters, getParams } from "../../utils";
 
 import ProductCard from "../../shared-components/ProductCard";
 import SearchBar from "../../shared-components/SearchBar";
@@ -54,8 +54,8 @@ const DEFAULT_VALUE = { sort: ["relevance"] };
 const HomePage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [, setSearchParams] = useSearchParams();
-  const params = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = getParams(searchParams);
   const searchValue = params["search"] || "";
 
   const results = useMemo(
