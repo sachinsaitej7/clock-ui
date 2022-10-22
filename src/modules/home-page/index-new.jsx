@@ -2,7 +2,8 @@ import React, { useEffect, useState, useMemo } from "react";
 import styled, { useTheme } from "styled-components";
 import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { isEmpty } from "lodash";
+import { isEmpty, debounce } from "lodash";
+import { logAnalyticsEvent } from "../../firebase/utils";
 
 import { fetchProducts } from "../../apis/home-page";
 import { processResults, createIndex, index } from "../../utils/searchService";
@@ -86,9 +87,15 @@ const HomePage = () => {
     setFilterIds(results);
   }, [results]);
 
+  const logEvent = debounce(
+    (name, params) => logAnalyticsEvent(name, params),
+    100
+  );
+
   const onChange = (e) => {
     setSearchMode(true);
     setSearchParams({ search: e.target.value });
+    logEvent("search", { search_term: e.target.value });
     setFilterValues(DEFAULT_VALUE);
   };
 

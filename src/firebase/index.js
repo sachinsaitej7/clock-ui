@@ -53,7 +53,7 @@ export function initialize() {
 }
 
 export function getFirebase() {
-  const existingApp = getApps().at(0);
+  const existingApp = getApps()?.at(0);
   if (existingApp) return initialize();
   const services = connectToEmulators(initialize());
   return enableOffline(services);
