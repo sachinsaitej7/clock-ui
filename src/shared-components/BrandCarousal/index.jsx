@@ -18,7 +18,7 @@ const Header = styled.h4`
   font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: ${(props) => props.theme.fontSizes[5]};
   margin: ${(props) => props.theme.space[4] + " 0px 0px"};
-  line-height: 24px ;
+  line-height: 24px;
 `;
 
 const BrandCarousal = ({ noTitle = false, data = [], onClick = () => {} }) => {

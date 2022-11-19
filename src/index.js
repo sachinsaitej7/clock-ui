@@ -11,7 +11,6 @@ import App from "./App.jsx";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 
-
 if (process.env.NODE_ENV === "production") {
   Sentry.init({
     dsn: "https://c7a27bf5657b4ccea1a2f669c5e53f24@o4503977086418944.ingest.sentry.io/4503977100771328",

@@ -19,15 +19,14 @@ const StyledContainer = styled.div`
 `;
 
 const StyledSearch = styled(Input)`
-  border-radius: ${(props) => props.theme.borderRadius[6]};
+  border-radius: ${(props) => props.theme.borderRadius[2]};
   line-height: 14px;
   font-size: ${(props) => props.theme.fontSizes[1]};
   padding: ${(props) => props.theme.space[5]}};
   cursor: pointer;
 
-  box-shadow: 0px 2px 8px rgba(1, 88, 80, 0.1);
-  border: 1px solid;
-  border-color: ${(props) => props.theme.colors.primary};
+  box-shadow: 0px 4px 16px rgba(41, 41, 41, 0.05);
+  border: 1px solid rgba(41, 41, 41, 0.12);
   margin-bottom: ${(props) => props.theme.space[5]};
 
   .ant-input-lg {
@@ -69,6 +68,7 @@ const TrendingContainer = styled.div`
   text-align: left;
   flex-wrap: wrap;
   margin-bottom: ${(props) => props.theme.space[5]};
+  margin-top: ${(props) => props.theme.space[8]};
 `;
 
 const StyledTag = styled.span`
@@ -111,11 +111,6 @@ const SearchBar = ({
         value={searchQuery}
         prefix={searchMode ? <LeftArrow onClick={onBack} width='16px' /> : null}
       />
-      {!searchMode && (
-        <StyledButton type='primary' size='middle' onClick={onClick}>
-          Search
-        </StyledButton>
-      )}
       {notFound && (
         <div
           style={{ padding: theme.space[6] }}

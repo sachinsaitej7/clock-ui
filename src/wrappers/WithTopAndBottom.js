@@ -112,7 +112,7 @@ const WithTopAndBottom = ({ children }) => {
         menuItems={MENU_ITEMS}
       />
       <ErrorBoundary>
-        <div style={{ marginTop: "52px" }}>{children}</div>
+        <div style={{ marginTop: "52px", minHeight: "85vh" }}>{children}</div>
       </ErrorBoundary>
       <Footer clickHandlers={handleFooterClick} />
     </>

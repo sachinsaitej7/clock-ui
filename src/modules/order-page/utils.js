@@ -7,7 +7,7 @@ export const getTodayDate = () => {
     const yyyy = today.getFullYear();
     return `Today (${dd + "/" + mm + "/" + yyyy})`;
   } else {
-    const tomorrow = new Date(); 
+    const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     const dd = String(tomorrow.getDate()).padStart(2, "0");
     const mm = String(tomorrow.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -16,5 +16,4 @@ export const getTodayDate = () => {
 
     return `Tomorrow (${dd + "/" + mm + "/" + yyyy})`;
   }
-
 };

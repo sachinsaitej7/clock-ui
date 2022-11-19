@@ -160,10 +160,7 @@ const HomePage = () => {
     fetchBrands
   );
 
-  const { isLoading: productsLoading } = useQuery(
-    "products",
-    fetchProducts
-  );
+  const { isLoading: productsLoading } = useQuery("products", fetchProducts);
 
   if (brandsLoading || productsLoading) return <Spinner />;
 
@@ -275,7 +272,10 @@ const HomePage = () => {
               Cotton Kurta Sets
             </h3>
             <p>All Day Workwear</p>
-            <StyledButton type="primary" onClick={() => navigate("/products?category=14")}>
+            <StyledButton
+              type="primary"
+              onClick={() => navigate("/products?category=14")}
+            >
               Shop Now
             </StyledButton>
           </div>

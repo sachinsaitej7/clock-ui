@@ -15,7 +15,7 @@ const StatePathMap = {
 
 const Container = styled.div`
   width: 100%;
-  min-height: 500px ;
+  min-height: 500px;
   padding: ${(props) => props.theme.space[5]};
 `;
 

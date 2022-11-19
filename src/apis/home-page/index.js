@@ -10,7 +10,7 @@ const fetchBrands = () => {
   return axios.get(`${BASE_URL}brand/`);
 };
 
-const fetchProducts = (params={}) => {
+const fetchProducts = (params = {}) => {
   return axios.get(`${BASE_URL}product/`, { params });
 };
 

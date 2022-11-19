@@ -1,8 +1,5 @@
-import { useState, } from "react";
-import {
-  signInWithPhoneNumber,
-  RecaptchaVerifier,
-} from "firebase/auth";
+import { useState } from "react";
+import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 
 import { getFirebase } from "../firebase";
 
@@ -13,7 +10,7 @@ export function useAuthData() {
   const { auth } = getFirebase();
   const [user, authLoading, authError] = useAuthState(auth);
   const [openLogin, setOpenLogin] = useState(false);
-  const [ callbacks, setCallbacks ] = useState([]);
+  const [callbacks, setCallbacks] = useState([]);
   // const validateToken = useCallback(async () => {
   //   if(!user) return;
   //   const token = await user.getIdToken();
@@ -27,7 +24,7 @@ export function useAuthData() {
 
   const handleLoginModal = (callback) => {
     setOpenLogin(!openLogin);
-    if(callback) setCallbacks([...callbacks,callback]);
+    if (callback) setCallbacks([...callbacks, callback]);
   };
 
   // useEffect(() => {
@@ -68,7 +65,7 @@ export function useAuthData() {
     try {
       await window.confirmationResult.confirm(code);
       handleLoginModal();
-      callbacks.forEach(callback => {
+      callbacks.forEach((callback) => {
         callback && callback();
       });
       setCallbacks([]);

@@ -16,10 +16,10 @@ const Tag = styled.div`
     props.active ? props.theme.bg.primary : props.theme.bg.default};
   font-size: ${(props) => props.theme.fontSizes[1]};
   font-weight: ${(props) => props.theme.fontWeights.medium};
-  line-height: 18px ;
+  line-height: 18px;
 `;
 
-const CircleTag = ({ title, active, onClick = () => {}, style={} }) => {
+const CircleTag = ({ title, active, onClick = () => {}, style = {} }) => {
   return (
     <Tag active={active} onClick={onClick} style={style}>
       {title}

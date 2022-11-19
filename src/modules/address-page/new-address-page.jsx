@@ -5,7 +5,6 @@ import { Divider, Button, Input, Form, Typography } from "antd";
 import ProgressBar from "../../shared-components/ProgressBar";
 import NotificationAPI from "../../shared-components/NotificationAPI";
 
-
 const Container = styled.div`
   width: 100%;
   .divider {
@@ -93,7 +92,14 @@ const NewAddressPage = ({ onSubmit }) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (newAddress) => {
-    const { landMark, city, state, pincode, mobileNo="", email="" } = newAddress;
+    const {
+      landMark,
+      city,
+      state,
+      pincode,
+      mobileNo = "",
+      email = "",
+    } = newAddress;
     const payload = {
       name: newAddress.fname + " " + newAddress.lname,
       address: newAddress.address1 + " " + newAddress.address2,
@@ -114,8 +120,8 @@ const NewAddressPage = ({ onSubmit }) => {
           type: "error",
           message: error.message,
           title: "Error",
-          placement: "top"
-        })
+          placement: "top",
+        });
       }
     );
   };
@@ -250,7 +256,9 @@ const NewAddressPage = ({ onSubmit }) => {
           <Form.Item name="email">
             <StyledInput placeholder="Email ID" />
           </Form.Item>
-          <StyledButton htmlType="submit" loading={loading}>Save New Address</StyledButton>
+          <StyledButton htmlType="submit" loading={loading}>
+            Save New Address
+          </StyledButton>
         </StyledForm>
       </div>
     </Container>

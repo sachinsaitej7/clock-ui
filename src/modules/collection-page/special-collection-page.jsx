@@ -138,7 +138,9 @@ const CollectionPage = () => {
               key={product.id}
               {...product}
               variant="medium"
-              onClick={() => navigate(`/products/${product.id}`)}
+              onClick={() =>
+                navigate(`/product-page/${product.slug}?id=${product.id}`)
+              }
             />
           );
         })}

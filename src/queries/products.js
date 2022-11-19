@@ -1,83 +1,186 @@
-import { db } from "../firebase-config";
-import { collection, query, where, orderBy } from "firebase/firestore";
+import { getFirebase } from "../firebase";
+import {
+  collection,
+  collectionGroup,
+  query,
+  where,
+  orderBy,
+  limit,
+  startAfter,
+  getDoc,
+  doc,
+} from "firebase/firestore";
+import { getIdConverter } from "./utils";
 
-export function fetchBrands() {
-  const brandRef = collection(db, "brand");
+const { db } = getFirebase();
+const idConverter = getIdConverter();
+const productRef = collection(db, "product").withConverter(idConverter);
+
+export function fetchBrandsQuery() {
+  const brandRef = collection(db, "brand").withConverter(idConverter);
   const q = query(
     brandRef,
     where("status", "==", true),
-    orderBy("created_at", "desc")
+    orderBy("createdAt", "desc")
   );
   return q;
 }
 
-export function fetchCategories() { 
-    const categoryRef = collection(db, "category");
-    const q = query(
-        categoryRef,
-        where("status", "==", true),
-        orderBy("created_at", "desc")
-    );
-    return q;
+export function fetchCategoriesQuery() {
+  const categoryRef = collection(db, "category").withConverter(idConverter);
+  const q = query(
+    categoryRef,
+    where("status", "==", true),
+    orderBy("createdAt", "desc")
+  );
+  return q;
 }
 
-export function fetchProducts() { 
-    const productRef = collection(db, "product");
-    const q = query(
-        productRef,
-        where("status", "==", true),
-        orderBy("created_at", "desc")
-    );
-    return q;
+export function fetchSubcategoriesQuery() {
+  const subcategoryRef = collectionGroup(db, "subcategory").withConverter(
+    idConverter
+  );
+  const q = query(
+    subcategoryRef,
+    where("status", "==", true),
+    orderBy("createdAt", "desc")
+  );
+  return q;
 }
 
-export function fetchProduct(id) { 
-    const productRef = collection(db, "product");
-    const q = query(
-        productRef,
-        where("status", "==", true),
-        where("id", "==", id)
-    );
-    return q;
+export function fetchProductQuery(id) {
+  const productRef = doc(db, "product", id).withConverter(idConverter);
+  return productRef;
 }
 
-export function fetchProductByCategory(categoryRef) {
-    const productRef = collection(db, "product");
-    const q = query(
+export function fetchProductImagesQuery(id) {
+  const productImagesRef = collection(db, `/product/${id}/images`);
+  const q = query(productImagesRef);
+  return q;
+}
+
+export function fetchProductVariantsQuery(id) {
+  const productVariantRef = collection(db, "productVariant").withConverter(
+    idConverter
+  );
+  const q = query(
+    productVariantRef,
+    where("productId", "==", id),
+    where("status", "==", true),
+    orderBy("createdAt", "desc")
+  );
+  return q;
+}
+
+export function fetchProductVariantImagesQuery(id) {
+  const productImagesRef = collection(db, `/productVariant/${id}/images`);
+  const q = query(productImagesRef);
+  return q;
+}
+
+export function fetchProductsQuery(lastDoc = null, pageLimit = 25) {
+  let q = null;
+  if (lastDoc) {
+    q = query(
       productRef,
       where("status", "==", true),
-      where("category_id", "==", categoryRef)
+      orderBy("createdAt", "desc"),
+      startAfter(lastDoc),
+      limit(pageLimit)
     );
-    return q;
+  } else {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      orderBy("createdAt", "desc"),
+      limit(pageLimit)
+    );
+  }
+  return q;
 }
 
-export function fetchProductByBrand(brandRef) {
-    const productRef = collection(db, "product");
-    const q = query(
-        productRef,
-        where("status", "==", true),
-        where("brand_id", "==", brandRef)
-    );
-    return q;
+export function fetchProductsByBrandQuery(brandRef) {
+  const q = query(
+    productRef,
+    where("status", "==", true),
+    where("brand_id", "==", brandRef)
+  );
+  return q;
 }
 
-export function fetchProductBySearch(search) {
-    const productRef = collection(db, "product");
-    const q = query(
-        productRef,
-        where("status", "==", true),
-        where("name", "==", search)
+export function fetchProductsByCategoryQuery(
+  categoryId,
+  lastDoc = null,
+  pageLimit = 25
+) {
+  let q = null;
+  if (lastDoc) {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("category.id", "==", categoryId),
+      orderBy("createdAt", "desc"),
+      startAfter(lastDoc),
+      limit(pageLimit)
     );
-    return q;
+  } else {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("categoryId", "==", categoryId),
+      orderBy("createdAt", "desc"),
+      limit(pageLimit)
+    );
+  }
+  return q;
 }
 
-export function fetchProductBySubCategory(subCategoryRef) {
-    const productRef = collection(db, "product");
-    const q = query(
-        productRef,
-        where("status", "==", true),
-        where("sub_category_id", "==", subCategoryRef)
+export function fetchProductsBySubcategoryQuery(
+  subcategoryId,
+  lastDoc = null,
+  pageLimit = 25
+) {
+  let q = null;
+  if (lastDoc) {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("subcategory.id", "==", subcategoryId),
+      orderBy("createdAt", "desc"),
+      startAfter(lastDoc),
+      limit(pageLimit)
     );
-    return q;
+  } else {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("subcategory.id", "==", subcategoryId),
+      orderBy("createdAt", "desc"),
+      limit(pageLimit)
+    );
+  }
+  return q;
 }
 
+export function fetchProductsBySearchQuery(search) {
+  const q = query(
+    productRef,
+    where("status", "==", true),
+    where("name", "==", search)
+  );
+  return q;
+}
+
+export function fetchProductsByParamsQuery(
+  params,
+  lastDoc = null,
+  pageLimit = 25
+) {
+  const customQueryConstraints = Object.keys(params).reduce((acc, key) => {
+    return [...acc, where(`${key}.id`, "==", params[key])];
+  }, []);
+  let q = query(productRef, ...customQueryConstraints);
+  if (lastDoc) q = query(q, startAfter(lastDoc), limit(pageLimit));
+  else q = query(q, limit(pageLimit));
+  return q;
+}

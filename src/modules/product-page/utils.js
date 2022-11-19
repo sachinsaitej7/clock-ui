@@ -66,3 +66,13 @@ export const handleShare = (data, callback = () => {}) => {
     copyToClipboard(data.url).then(() => callback("Link Copied to Clipboard"));
   }
 };
+
+export const getShareData = (name, productImages) => {
+  const shareData = {
+    title: name,
+    text: "Check out this product",
+    url: window.location.href,
+    files: productImages ? [productImages[0].url] : [],
+  };
+  return shareData;
+};

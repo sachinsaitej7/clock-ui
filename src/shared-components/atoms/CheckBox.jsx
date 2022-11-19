@@ -7,7 +7,7 @@ const StyledCheckbox = styled(Checkbox)`
     background-color: ${(props) => props.theme.colors.primary};
     border-color: ${(props) => props.theme.colors.primary};
   }
-  .ant-checkbox-checked::after{
+  .ant-checkbox-checked::after {
     border-color: ${(props) => props.theme.colors.primary};
   }
 `;

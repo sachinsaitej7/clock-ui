@@ -86,13 +86,15 @@ const CartPage = () => {
       <div style={{ margin: theme.space[5] + " auto " + theme.space[8] }}>
         {items.map((item) => {
           return (
-            <>
+            <div key={item.id}>
               <ProductCardReview
-                key={item.id}
                 {...item}
+                key={item.id}
                 removeItem={removeItem}
                 changeQuantity={changeQuantity}
-                onClick={() => navigate(`/products/${item.id}`)}
+                onClick={() =>
+                  navigate(`/product-page/${item.slug}?id=${item.id}`)
+                }
               />
               <Divider
                 style={{
@@ -100,7 +102,7 @@ const CartPage = () => {
                   margin: theme.space[5] + " 0px",
                 }}
               />
-            </>
+            </div>
           );
         })}
       </div>

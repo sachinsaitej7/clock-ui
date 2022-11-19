@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Button } from "antd";
 
 import { processResults } from "../../utils/searchService";
 
 import { generateFilters } from "../../utils";
 
-import { fetchProducts } from "../../apis/home-page";
+import { useProductsByParams } from "./hooks";
 
 import Filters from "../../shared-components/Filters";
 import ProductCard from "../../shared-components/ProductCard";
 import Spinner from "../../shared-components/Spinner";
-import SpecialCollectionPage from "./special-collection-page";
+import { ReactComponent as ArrowLongLeft } from "../../assets/common/arrow-long-left.svg";
+import { ReactComponent as ArrowLeftOnSquare } from "../../assets/common/arrow-up-on-square.svg";
 
-import { getParams, getQueryString, getCollectionName } from "./utils";
+import { getParams, getCollectionName } from "./utils";
 
 const CollectionPageContainer = styled.div`
   width: 100%;
@@ -38,7 +39,7 @@ const Header = styled.div`
   }
 `;
 
-const Collections = styled.div`
+const Collections = styled(InfiniteScroll)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: ${(props) => props.theme.space[3]};
@@ -72,25 +73,27 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const STEP = 10;
 const DEFAULT_VALUE = { sort: ["relevance"] };
 
 const CollectionPage = () => {
-  const [page, setPage] = useState(1);
+  const [lastSnapshot, setLastSnapshot] = useState(null);
   const theme = useTheme();
   const navigate = useNavigate();
   let [searchParams] = useSearchParams();
   const params = getParams(searchParams);
+  const [products, setProducts] = useState([]);
   const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
-  const { isLoading: productsLoading, data: productsData } = useQuery(
-    ["products", getQueryString(params)],
-    () => fetchProducts(params)
+  const [productsData, productsLoading, , snapshot] = useProductsByParams(
+    params,
+    lastSnapshot
   );
-  const products = productsData?.data.data;
 
-  if (productsLoading) return <Spinner />;
-  if (params.type) return <SpecialCollectionPage />;
-  if (!products)
+  useEffect(() => {
+    if (productsData) setProducts([...products, ...productsData]);
+  }, [productsData]);
+
+  if (productsLoading && !lastSnapshot) return <Spinner />;
+  if (products.length === 0)
     return (
       <div
         style={{ height: "60vh", textAlign: "center", padding: theme.space[5] }}
@@ -100,14 +103,31 @@ const CollectionPage = () => {
     );
 
   const collectionName = getCollectionName(searchParams, products);
-  const { searchedResults, sortedResults } = processResults(products, undefined, filterValues);
+  const { searchedResults, sortedResults } = processResults(
+    products,
+    undefined,
+    filterValues
+  );
 
-  const filters = generateFilters(searchedResults);
+  const filters = [] || generateFilters(searchedResults);
 
   return (
     <CollectionPageContainer>
       <Header>
-        <p style={{ marginBottom: theme.space[3] }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0px 0px " + theme.space[4],
+          }}
+        >
+          <ArrowLongLeft
+            width="24px"
+            onClick={() => navigate(-1)}
+            className="top-icon"
+          />
+        </div>
+        <p style={{ marginBottom: theme.space[0] }}>
           {collectionName ? `${collectionName}’s Collection` : `All Products`}
         </p>
         <Filters
@@ -127,32 +147,29 @@ const CollectionPage = () => {
           >
             Showing {sortedResults.length} products
           </p>
-          <Collections>
-            {sortedResults.slice(0, STEP * page).map((product) => {
+          <Collections
+            dataLength={products.length}
+            next={() => setLastSnapshot(snapshot)}
+            hasMore={
+              !productsLoading &&
+              productsData.length > 0 &&
+              !products.length < 25
+            }
+            loader={<Spinner />}
+          >
+            {sortedResults.map((product, index) => {
               return (
                 <ProductCard
-                  key={product.id}
+                  key={product.id + "-" + index}
                   {...product}
-                  variant='medium'
-                  onClick={() => navigate(`/products/${product.id}`)}
+                  variant="medium"
+                  onClick={() =>
+                    navigate(`/product-page/${product.slug}?id=${product.id}`)
+                  }
                 />
               );
             })}
           </Collections>
-          {sortedResults.length > STEP * page && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: `${theme.space[5]} auto`,
-              }}
-            >
-              <StyledButton onClick={() => setPage(page + 1)}>
-                Load More Products
-              </StyledButton>
-            </div>
-          )}
         </>
       ) : (
         <div

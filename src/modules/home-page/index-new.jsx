@@ -9,11 +9,14 @@ import { fetchProducts } from "../../apis/home-page";
 import { processResults, createIndex, index } from "../../utils/searchService";
 
 import { generateFilters, getParams } from "../../utils";
+import { useProducts, useSubcategories, useCategories } from "./hooks";
 
 import ProductCard from "../../shared-components/ProductCard";
 import SearchBar from "../../shared-components/SearchBar";
 import Spinner from "../../shared-components/Spinner";
-import { ReactComponent as LocationIcon } from "../../assets/common/location.svg";
+
+import { ReactComponent as SparkIcon } from "../../assets/home/spark.svg";
+import BackgroundHome from "../../assets/home/background-home.jpg";
 
 // images
 
@@ -22,17 +25,25 @@ const HomePageContainer = styled.div`
   font-family: ${(props) => props.theme.fonts.primary};
   background-color: ${(props) => props.theme.bg.white};
   padding: ${(props) => props.theme.space[5]};
-  min-height: 60vh;
 `;
 
 const Header = styled.h2`
   font-size: ${(props) => props.theme.fontSizes[5]};
   font-weight: ${(props) => props.theme.fontWeights.semibold};
-  color: ${(props) => props.theme.text.dark};
-  margin: ${(props) => props.theme.space[9]} 0px
-    ${(props) => props.theme.space[6]};
-  text-align: center;
+  color: ${(props) => props.theme.text.white};
+  margin: ${(props) => props.theme.space[0]} 0px
+    ${(props) => props.theme.space[1]};
   line-height: 140%;
+  letter-spacing: -0.02em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(${BackgroundHome});
+  height: 300px;
+  width: 100%;
+  padding: 0px ${(props) => props.theme.space[5]};
+  padding-top: 50%;
+  text-align: left;
 `;
 
 const Collections = styled.div`
@@ -56,6 +67,7 @@ const HomePage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchCount] = useState(100 + Math.floor(Math.random() * 2000));
   const params = getParams(searchParams);
   const searchValue = params["search"] || "";
 
@@ -72,6 +84,10 @@ const HomePage = () => {
     "products",
     fetchProducts
   );
+
+  const dataHo = useProducts();
+  const [subcategories, subcategoryLoading] = useSubcategories();
+  const dataCat = useCategories();
 
   const products = productsData?.data.data;
 
@@ -110,7 +126,8 @@ const HomePage = () => {
     setFilterIds([]);
   };
 
-  if (productsLoading || isEmpty(index.register)) return <Spinner />;
+  if (productsLoading || subcategoryLoading || isEmpty(index.register))
+    return <Spinner />;
   if (!products)
     return (
       <div
@@ -128,78 +145,106 @@ const HomePage = () => {
 
   const filters =
     searchValue.length > 1 ? generateFilters(searchedResults) : [];
-
+  // [
+  //   {
+  //     label: "Chanderi Cotton",
+  //     onClick: () => navigate("/products?category=12"),
+  //   },
+  //   {
+  //     label: "Kurtis",
+  //     onClick: () => navigate("/products?category=14"),
+  //   },
+  //   {
+  //     label: "T-Shirts",
+  //     onClick: () => navigate("/products?category=16"),
+  //   },
+  // ];
   return (
-    <HomePageContainer>
-      {!searchMode && <Header>Discover women’s fashion in Chennai</Header>}
-      <SearchBar
-        onChange={onChange}
-        onBack={onBack}
-        onClick={onClick}
-        searchMode={searchMode}
-        notFound={searchValue.length > 1 && searchedResults.length === 0}
-        searchQuery={searchValue}
-        trending={[
-          {
-            label: "Chanderi Cotton",
-            onClick: () => navigate("/products?category=12"),
-          },
-          {
-            label: "Kurtis",
-            onClick: () => navigate("/products?category=14"),
-          },
-          {
-            label: "T-Shirts",
-            onClick: () => navigate("/products?category=16"),
-          },
-        ]}
-        onApply={setFilterValues}
-        values={filterValues}
-        filters={filters}
-      />
+    <>
       {!searchMode && (
-        <div
-          style={{
-            display: "flex",
-            color: theme.colors.primary,
-            fontWeight: theme.fontWeights.semibold,
-            fontSize: theme.fontSizes[2],
-            justifyContent: "center",
-            marginTop: theme.space[9],
-            marginBottom: theme.space[4],
-            lineHeight: "140%",
-          }}
-        >
-          <LocationIcon width='16px' />
-          <p style={{ marginLeft: theme.space[2] }}>Chennai</p>
+        <div>
+          <Header>
+            Shop thousands of products from Chennai’s Favorite Boutiques
+          </Header>
         </div>
       )}
-      {searchMode && searchValue && (
-        <>
+      <HomePageContainer>
+        <div style={{ marginTop: !searchMode ? "-40px" : "0px" }}>
+          <SearchBar
+            onChange={onChange}
+            onBack={onBack}
+            onClick={onClick}
+            searchMode={searchMode}
+            notFound={searchValue.length > 1 && searchedResults.length === 0}
+            searchQuery={searchValue}
+            trending={
+              subcategories
+                ? subcategories.map((item) => ({
+                    label: item.name,
+                    value: item.slug,
+                    onClick: () =>
+                      navigate(`/products/${item.slug}?subcategory=${item.id}`),
+                  }))
+                : []
+            }
+            onApply={setFilterValues}
+            values={filterValues}
+            filters={filters}
+          />
+        </div>
+        {!searchMode && (
           <p
             style={{
               color: theme.text.light,
               fontSize: theme.fontSizes[1],
-              margin: theme.space[4] + " 0px",
+              lineHeight: theme.fontSizes[3],
             }}
           >
-            Showing {sortedResults.length} products
+            <SparkIcon
+              width="16px"
+              color={theme.colors.primary}
+              style={{ marginRight: theme.space[2] }}
+            />
+            <span
+              style={{
+                fontWeight: theme.fontWeights.bold,
+                marginRight: theme.space[2],
+              }}
+            >
+              {searchCount}
+            </span>
+            searches made today!
           </p>
-          <Collections>
-            {sortedResults.map((product) => {
-              return (
-                <ProductCard
-                  key={product.id}
-                  {...product}
-                  variant='medium'
-                  onClick={() => navigate(`/products/${product.id}`)}
-                />
-              );
-            })}
-          </Collections>
-        </>
-      )}
-    </HomePageContainer>
+        )}
+        {searchMode && searchValue && (
+          <>
+            <p
+              style={{
+                color: theme.text.light,
+                fontSize: theme.fontSizes[1],
+                margin: theme.space[4] + " 0px",
+              }}
+            >
+              Showing {sortedResults.length} products
+            </p>
+            <Collections>
+              {sortedResults.map((product) => {
+                return (
+                  <ProductCard
+                    key={product.id}
+                    {...product}
+                    variant="medium"
+                    onClick={() =>
+                      navigate(`/product-page/${product.slug}?id=${product.id}`)
+                    }
+                  />
+                );
+              })}
+            </Collections>
+          </>
+        )}
+      </HomePageContainer>
+    </>
   );
 };
 

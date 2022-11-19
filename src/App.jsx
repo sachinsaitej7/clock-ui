@@ -1,10 +1,10 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import styled, { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Store from "./store";
@@ -65,7 +65,7 @@ function App() {
               <WithScrollToTop />
               <Routes>
                 <Route
-                  path='/'
+                  path="/"
                   exact
                   element={
                     <WithTopAndBottom>
@@ -74,7 +74,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/products'
+                  path="/products/*"
                   exact
                   element={
                     <WithTopAndBottom>
@@ -83,7 +83,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/products/:id'
+                  path="/product-page/*"
                   exact
                   element={
                     <WithTopAndBottom>
@@ -92,7 +92,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/profile'
+                  path="/profile"
                   exact
                   element={
                     <WithAuthRoute>
@@ -103,7 +103,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/cart'
+                  path="/cart"
                   exact
                   element={
                     // <WithAuthRoute>
@@ -114,7 +114,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/address'
+                  path="/address"
                   exact
                   element={
                     <WithAuthRoute>
@@ -125,7 +125,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/review-order'
+                  path="/review-order"
                   exact
                   element={
                     <WithAuthRoute>
@@ -136,7 +136,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/order/:orderId'
+                  path="/order/:orderId"
                   exact
                   element={
                     <WithAuthRoute>
@@ -147,7 +147,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='/tnc'
+                  path="/tnc"
                   exact
                   element={
                     <WithTopAndBottom>
@@ -156,7 +156,7 @@ function App() {
                   }
                 />
                 <Route
-                  path='*'
+                  path="*"
                   element={
                     <WithTopAndBottom>
                       <NotFoundPage />

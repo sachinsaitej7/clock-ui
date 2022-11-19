@@ -33,17 +33,15 @@ const CollectionPreview = ({
   itemClick = () => {},
 }) => {
   const theme = useTheme();
-  const [start,] = useState(
-    startIndex
-      ? startIndex
-      : Math.floor(Math.random() * (products.length - 3))
+  const [start] = useState(
+    startIndex ? startIndex : Math.floor(Math.random() * (products.length - 3))
   );
 
   return (
     <ProductsContainer backgroundColor={backgroundColor}>
       {header ? header : <Header>Available Products</Header>}
       <div className="products">
-        {products.slice(start, start+3).map((product) => (
+        {products.slice(start, start + 3).map((product) => (
           <ProductCard
             key={product.id}
             {...product}

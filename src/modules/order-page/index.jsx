@@ -123,7 +123,7 @@ const OrderPage = () => {
           <ProductCardReview
             {...item}
             nonEditable
-            onClick={() => navigate(`/products/${item.id}`)}
+            onClick={() => navigate(`/product-page/${item.slug}?id=${item.id}`)}
           />
         </div>
       ))}

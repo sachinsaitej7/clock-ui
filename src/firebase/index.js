@@ -32,7 +32,6 @@ function enableOffline({ db, app, auth }) {
   return { db, app, auth };
 }
 
-
 // Initialize Firebase
 export function initialize() {
   const app = initializeApp(config.firebase);

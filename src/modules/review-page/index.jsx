@@ -91,7 +91,8 @@ const ReviewPage = () => {
   const { activeAddress, user, updateOrder, fetchPincodeData } =
     useContext(AuthContext);
 
-  const { items, removeItem, removeAllItems, changeQuantity } = useContext(CartContext);
+  const { items, removeItem, removeAllItems, changeQuantity } =
+    useContext(CartContext);
 
   const payload = usePayload(items, user, activeAddress);
 
@@ -199,7 +200,9 @@ const ReviewPage = () => {
               {...item}
               removeItem={removeItem}
               changeQuantity={changeQuantity}
-              onClick={() => navigate(`/products/${item.id}`)}
+              onClick={() =>
+                navigate(`/product-page/${item.slug}?id=${item.id}`)
+              }
             />
           </div>
         ))}

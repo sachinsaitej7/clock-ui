@@ -116,12 +116,12 @@ export function useOrderData(user) {
     }
   };
 
-  const updateOrder = async (orderId, payload, items=[]) => {
+  const updateOrder = async (orderId, payload, items = []) => {
     const orderRef = doc(db, "orders", orderId);
     const newMessageRef = doc(collection(db, "emails"));
     const messageData = {
-      subject: `New Order placed by ${user.name || 'New User'} || ${orderId}`,
-      text: `New Order placed by ${user.name || 'New User'}.\nAddress: ${
+      subject: `New Order placed by ${user.name || "New User"} || ${orderId}`,
+      text: `New Order placed by ${user.name || "New User"}.\nAddress: ${
         activeAddress.address
       }, pincode: ${activeAddress.pincode}.\nMobile: ${
         activeAddress.mobileNo
@@ -130,10 +130,8 @@ export function useOrderData(user) {
       }\nProducts: ${items
         .map(
           (item) =>
-            `Name: ${item.name}\nSize: ${
-              item.selectedSizeVariant.variant_name || "NA"
-            }\nColor: ${
-              item.selectedColorVariant.variant_name || "NA"
+            `Name: ${item.name}\nSize: ${item.size?.values || "NA"}\nColor: ${
+              item.color?.name || "NA"
             }\nQuantity: ${item.quantity}\nPrice: ${
               item.price
             }\nLink: https://theclock.xyz/products/${item.id}`
@@ -141,11 +139,13 @@ export function useOrderData(user) {
         .join("\n")}`,
     };
 
-
     await updateDoc(orderRef, {
       ...payload,
     });
-    await setDoc(newMessageRef, { message: messageData, to: "barathms13@gmail.com", });
+    await setDoc(newMessageRef, {
+      message: messageData,
+      to: "barathms13@gmail.com",
+    });
   };
 
   const fetchOrderData = async (orderId) => {

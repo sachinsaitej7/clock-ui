@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useMemo, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import styled, { useTheme } from "styled-components";
 
@@ -8,8 +7,6 @@ import { VariantTag } from "../../shared-components/atoms";
 import { Button, Divider, Collapse } from "antd";
 
 import Store from "../../store";
-import { fetchProduct } from "../../apis/product-page";
-import { fetchProducts } from "../../apis/home-page";
 
 import NotificationAPI from "../../shared-components/NotificationAPI";
 import ProductCarousal from "../../shared-components/ProductCarousal";
@@ -25,7 +22,8 @@ import { ReactComponent as ArrowUpIcon } from "../../assets/product/arrow-up.svg
 import { ReactComponent as ArrowLongLeft } from "../../assets/common/arrow-long-left.svg";
 import { ReactComponent as ArrowLeftOnSquare } from "../../assets/common/arrow-up-on-square.svg";
 
-import { generatePrice, checkItemInList, handleShare } from "./utils";
+import { getShareData, handleShare } from "./utils";
+import { useProduct, useProductImages, useProductVariants } from "./hooks";
 
 const { CartContext } = Store;
 const { Panel } = Collapse;
@@ -137,95 +135,84 @@ const StyledButton = styled(Button)`
 `;
 
 const ProductPage = () => {
-  const { id } = useParams();
   const theme = useTheme();
-  const { addItem, items } = useContext(CartContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
 
-  const [color, setColor] = useState({});
-  const [size, setSize] = useState({});
-  const { isLoading, data: productData } = useQuery(["product", id], () =>
-    fetchProduct(id)
-  );
-  const { data: products } = useQuery("products", fetchProducts);
-  const product = useMemo(() => productData?.data.data[0], [productData]);
-  const {
-    brand = {},
-    name = "",
-    attribute_types,
-    product_images,
-    price_head,
-  } = product || {};
-
-  const shareData = {
-    title: name,
-    text: "Check out this product",
-    url: window.location.href,
-    files: product_images ? [product_images[0].image] : [],
-  };
-
-  const checkVariant = (variant_id) => {
-    return price_head.find((price) => {
-      return price.price_line.find(
-        (product) => variant_id === product.variant_id
-      );
-    });
-  };
-
-  const colorVariants = useMemo(() => {
-    const colorVariant = attribute_types?.find(
-      (variantType) => variantType.variant_type_name === "Colour"
-    );
-    if (!colorVariant) return {};
-    colorVariant.variant = colorVariant.variant.filter((item) =>
-      checkVariant(item.variant_id)
-    );
-    return colorVariant;
-  }, [attribute_types, price_head]);
-
-  const sizeVariants = useMemo(() => {
-    const sizeVariant = attribute_types?.find((variantType) =>
-      variantType.variant_type_name.includes("Size")
-    );
-    if (!sizeVariant) return {};
-    sizeVariant.variant = sizeVariant.variant.filter((item) =>
-      checkVariant(item.variant_id)
-    );
-    return sizeVariant;
-  }, [attribute_types, price_head]);
+  const [productData, productLoading, ...rest] = useProduct(id);
+  const [productImages] = useProductImages(id);
+  const [productVariants] = useProductVariants(id);
+  const [selectedVariant, setSelectedVariant] = useState(null);
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+  const { addItem, items } = useContext(CartContext);
 
   useEffect(() => {
-    if (!isEmpty(product)) {
-      setColor(
-        isEmpty(colorVariants) ? colorVariants : colorVariants.variant[0] || {}
-      );
-      setSize(
-        isEmpty(sizeVariants) ? sizeVariants : sizeVariants.variant[0] || {}
-      );
-    }
-  }, [isLoading, product, setSize, setColor, sizeVariants, colorVariants]);
+    if (!productVariants) return;
+    if (productVariants.length === 0) return setSelectedVariant(null);
 
-  const { price, discount, mrp } = generatePrice(
-    color,
-    size,
-    product?.price_head
+    const defaultVariant = productVariants[0];
+    setSelectedVariant(defaultVariant);
+    setColor(defaultVariant.color?.name);
+    setSize(defaultVariant.size?.values);
+  }, [productVariants]);
+
+  useEffect(() => {
+    if (productVariants?.length > 0) {
+      const variant = productVariants.find((variant) => {
+        let found = true;
+        if (color) found = found && variant.color?.name === color;
+        if (size) found = found && variant.size?.values === size;
+        return found;
+      });
+      setSelectedVariant(variant);
+    }
+  }, [color, size]);
+
+  const colorVariant = productVariants?.reduce(
+    (acc, variant) => {
+      if (variant.color) acc["values"].add(variant.color.name);
+      return acc;
+    },
+    { name: "Color", values: new Set() }
   );
 
+  const sizeVariant = productVariants?.reduce(
+    (acc, variant) => {
+      acc["name"] = variant.size?.name;
+      if (variant.size) acc["values"].add(variant.size.values);
+      return acc;
+    },
+    { values: new Set() }
+  );
+
+  const { brand = {}, name = "", price } = selectedVariant || productData || {};
+  const products = [];
+
   const addToCart = () => {
-    !checkItemInList(items, { color, size, id })
+    if (!selectedVariant) return;
+    !items.find((item) => item.id === selectedVariant.id)
       ? addItem({
-          ...product,
-          price,
-          selectedColorVariant: color,
-          selectedSizeVariant: size,
-          discount,
+          ...selectedVariant,
           quantity: 1,
-          mrp,
         })
       : navigate("/cart");
   };
 
-  if (isLoading) return <Spinner />;
+  if (productLoading) return <Spinner />;
+  if (!productData)
+    return (
+      <div
+        style={{
+          padding: theme.space[5],
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        Product not found
+      </div>
+    );
   return (
     <Container>
       <div
@@ -235,11 +222,11 @@ const ProductPage = () => {
           padding: "0px 0px " + theme.space[4],
         }}
       >
-        <ArrowLongLeft onClick={() => navigate(-1)} className='top-icon' />
+        <ArrowLongLeft onClick={() => navigate(-1)} className="top-icon" />
         <ArrowLeftOnSquare
-          className='top-icon'
+          className="top-icon"
           onClick={() =>
-            handleShare(shareData, (text) => {
+            handleShare(getShareData(name, productImages), (text) => {
               NotificationAPI({
                 type: "success",
                 message: text,
@@ -250,7 +237,7 @@ const ProductPage = () => {
           }
         />
       </div>
-      <ProductCarousal images={product_images} />
+      <ProductCarousal images={productImages} />
       <div>
         <div style={{ margin: theme.space[5] + " 0px " + theme.space[2] }}>
           <Brand>{brand.name}</Brand>
@@ -275,51 +262,51 @@ const ProductPage = () => {
               MRP:{" "}
             </span>
             <span style={{ fontWeight: theme.fontWeights.bold }}>
-              Rs. {price || "NA"}
+              Rs. {price.currentPrice || "NA"}
             </span>
           </p>
           <p style={{ color: theme.text.light, fontSize: theme.fontSizes[1] }}>
             (inclusive of all taxes)
           </p>
         </div>
-        {!isEmpty(color) && (
+        {!isEmpty(colorVariant?.values) && (
           <VariantContainer>
             <p>Available Colors</p>
             <Variants>
-              {colorVariants.variant.map((variant) => (
+              {Array.from(colorVariant.values).map((variant) => (
                 <VariantTag
-                  key={variant.variant_name}
-                  title={variant.variant_name}
-                  active={color.variant_name === variant.variant_name}
-                  onClick={() => setColor({ ...variant })}
+                  key={variant}
+                  title={variant}
+                  active={selectedVariant?.color?.name === variant}
+                  onClick={() => setColor(variant)}
                 />
               ))}
             </Variants>
           </VariantContainer>
         )}
-        {!isEmpty(size) && (
+        {!isEmpty(sizeVariant?.values) && (
           <VariantContainer>
             <p>Available Sizes</p>
             <Variants>
-              {sizeVariants.variant.map((variant) => (
+              {Array.from(sizeVariant.values).map((variant) => (
                 <VariantTag
-                  key={variant.variant_name}
-                  title={variant.variant_name}
-                  active={size.variant_name === variant.variant_name}
-                  onClick={() => setSize({ ...variant })}
+                  key={variant}
+                  title={variant}
+                  active={selectedVariant?.size?.values === variant}
+                  onClick={() => setSize(variant)}
                 />
               ))}
             </Variants>
           </VariantContainer>
         )}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <StyledButton disabled={!price} onClick={addToCart}>
-            {checkItemInList(items, { color, size, id })
+          <StyledButton disabled={!selectedVariant} onClick={addToCart}>
+            {items.find((item) => item.id === selectedVariant?.id)
               ? "Go to Cart"
               : "Add to Cart"}
           </StyledButton>
           <StyledButton
-            type='primary'
+            type="primary"
             disabled={!price}
             onClick={() => {
               addToCart();
@@ -329,9 +316,9 @@ const ProductPage = () => {
             Buy Now
           </StyledButton>
         </div>
-        <Divider className='divider' />
+        <Divider className="divider" />
         <PincodeChecker />
-        <Divider className='divider' />
+        <Divider className="divider" />
         <StoreContainer>
           <h5>
             <MouseSquare />
@@ -339,10 +326,10 @@ const ProductPage = () => {
           </h5>
           <p>Max store, Forum Vijaya Mall, Vadapalani, Chennai, TN</p>
         </StoreContainer>
-        <Divider className='divider' />
-        <div className='product-details'>
+        <Divider className="divider" />
+        <div className="product-details">
           <Collapse
-            expandIconPosition='end'
+            expandIconPosition="end"
             ghost
             bordered={false}
             expandIcon={({ isActive }) => {
@@ -350,16 +337,16 @@ const ProductPage = () => {
               return <ArrowDownIcon />;
             }}
           >
-            <Panel header={<h6>Product Details:</h6>} key='1'>
+            <Panel header={<h6>Product Details:</h6>} key="1">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: product.description || "NA",
+                  __html: productData.descriptionHtml || "NA",
                 }}
               ></p>
             </Panel>
           </Collapse>
         </div>
-        <Divider className='divider' />
+        <Divider className="divider" />
         {!isEmpty(products) && (
           <>
             <div style={{ marginTop: theme.space[7] }}>
@@ -377,10 +364,10 @@ const ProductPage = () => {
                 products={products.data.data}
                 onClick={() => navigate("/products")}
                 itemClick={(productId) => () =>
-                  navigate(`/products/${productId}`)}
+                  navigate(`/product-page/${productId}`)}
               />
             </div>
-            <Divider className='divider' />
+            <Divider className="divider" />
           </>
         )}
 
