@@ -2,6 +2,7 @@ import React from "react";
 import styled, { useTheme } from "styled-components";
 import { Card } from "antd";
 const { Meta } = Card;
+import { ReactComponent as ImageMock } from "../../assets/home/chanderi-saree.svg";
 
 const StyledCard = styled(Card)`
   background-color: transparent;
@@ -9,9 +10,9 @@ const StyledCard = styled(Card)`
   height: auto;
   border: none;
   cursor: pointer;
-  .ant-card-meta-detail > div:not(:last-child){
-    margin-bottom: ${props => props.theme.space[1]} ;
-  } 
+  .ant-card-meta-detail > div:not(:last-child) {
+    margin-bottom: ${(props) => props.theme.space[1]};
+  }
   .ant-card-body {
     padding: 0px;
   }
@@ -90,21 +91,16 @@ const ProductCard = ({
   thumbnail,
   name,
   brand,
-  price_head = [],
-  variant,
   price,
+  variant,
   onClick = () => {},
 }) => {
-  let finalPrice = 0;
-  if (!price) {
-    const { sale_price } = price_head[0] || {};
-    finalPrice = sale_price;
-  }
-
   const theme = useTheme();
   return (
     <StyledCard
-      cover={<ImageCover imgUrl={thumbnail} variant={variant} />}
+      cover={
+        <ImageMock /> || <ImageCover imgUrl={thumbnail} variant={variant} />
+      }
       variant={variant}
       onClick={onClick}
     >
@@ -123,7 +119,11 @@ const ProductCard = ({
           </p>
         }
         description={
-          <DescriptionCard title={name} price={finalPrice} variant={variant} />
+          <DescriptionCard
+            title={name}
+            price={price.currentPrice}
+            variant={variant}
+          />
         }
         variant={variant}
       ></StyledMeta>

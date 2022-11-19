@@ -1,12 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { useTheme } from "styled-components";
 import { Modal, Button, Form, Input, Typography } from "antd";
-
 
 // images
 import { ReactComponent as CCloseIcon } from "../../assets/common/close-circle.svg";
 import { CheckCircleOutlined } from "@ant-design/icons";
-
 
 import NotificationAPI from "../NotificationAPI";
 
@@ -81,6 +79,12 @@ const LoginModal = ({
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
 
+  useEffect(() => {
+    return () => {
+      inputRef.current = null;
+    };
+  });
+
   const onSendOtp = () => {
     setLoading(true);
     const phoneNumber = inputRef.current.input.value;
@@ -105,6 +109,7 @@ const LoginModal = ({
     setLoading(true);
     verifyOtp(otp)
       .then(() => {
+        if (!inputRef.current) return;
         setLoading(false);
       })
       .catch(() => {

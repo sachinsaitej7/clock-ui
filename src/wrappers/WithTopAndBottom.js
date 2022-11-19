@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import Store from "../store";
 import TopBar from "../shared-components/TopBar";
 import Footer from "../shared-components/Footer";
-import ErrorBoundary from "../shared-components/ErrorBoundary";
+import { ErrorBoundary } from "react-error-boundary";
+import FallbackComponent from "../shared-components/ErrorBoundaryFallBack";
 import { useNavigate } from "react-router-dom";
 
 //images
@@ -111,7 +112,7 @@ const WithTopAndBottom = ({ children }) => {
         authHandler={authHandler}
         menuItems={MENU_ITEMS}
       />
-      <ErrorBoundary>
+      <ErrorBoundary FallbackComponent={FallbackComponent}>
         <div style={{ marginTop: "52px", minHeight: "85vh" }}>{children}</div>
       </ErrorBoundary>
       <Footer clickHandlers={handleFooterClick} />

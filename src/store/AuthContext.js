@@ -3,11 +3,11 @@ import { createContext } from "react";
 export const AuthContext = createContext({
   user: null,
   loginState: "",
-  setLoginState: () => { },
+  setLoginState: () => {},
   showLoginPopup: false,
-  setShowLoginPopup: () => { },
+  setShowLoginPopup: () => {},
   verifyOtp: () => {},
   handleSignInWithPhone: () => {},
-  updateUserProfile: () => { },
-  signOut: () => { },
+  updateUserProfile: () => {},
+  signOut: () => {},
 });

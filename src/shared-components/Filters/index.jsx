@@ -106,9 +106,9 @@ const Filters = ({ filters = [], values = {}, onApply = () => {} }) => {
               key={filter.key}
               active={!!values[filter.key]}
             >
-              <FilterIcon width='12px' style={{ marginRight: "4px" }} />
+              <FilterIcon width="12px" style={{ marginRight: "4px" }} />
               <Text ellipsis>{generateLabel(filter, values)}</Text>
-              <DownArrow width='12px' style={{ marginLeft: "4px" }} />
+              <DownArrow width="12px" style={{ marginLeft: "4px" }} />
             </StyledTag>
           );
         })}

@@ -22,7 +22,7 @@ const FooterContainer = styled.div`
 
 const MetaLinks = ({ clickHandlers }) => {
   return (
-    <div className='meta-links'>
+    <div className="meta-links">
       <p onClick={clickHandlers("about")}>About</p>
       <p onClick={clickHandlers("tnc")}>Terms</p>
       <p onClick={clickHandlers("privacy")}>Privacy Policy</p>

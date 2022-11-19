@@ -4,6 +4,7 @@ import styled, { useTheme } from "styled-components";
 //images
 import { ReactComponent as MinusIcon } from "../../assets/common/minus.svg";
 import { ReactComponent as PlusIcon } from "../../assets/common/plus.svg";
+import { ReactComponent as ImageMock } from "../../assets/home/chanderi-saree.svg";
 import separator from "../../utils/numberWithCommas";
 
 const Container = styled.div`
@@ -44,7 +45,7 @@ const Container = styled.div`
       p {
         font-weight: ${(props) => props.theme.fontWeights.medium};
         margin-bottom: ${(props) => props.theme.space[4]};
-        margin-right: ${(props) => props.theme.space[4]};
+        margin-right: ${(props) => props.theme.space[2]};
         span {
           font-weight: ${(props) => props.theme.fontWeights.normal};
         }
@@ -69,19 +70,20 @@ const Counter = styled.div`
 `;
 
 const ProductCardReview = ({
-  thumbnail,
   nonEditable,
   removeItem = () => {},
   changeQuantity = () => {},
   onClick = () => {},
-  ...rest
+  ...item
 }) => {
   const theme = useTheme();
-  const item = { ...rest, thumbnail };
+  const { thumbnail, name, price, quantity } = item;
   return (
     <Container>
       <div className="left-container">
-        <img src={thumbnail} alt="product" onClick={onClick}></img>
+        {<ImageMock width="104px" height="141px" /> || (
+          <img src={thumbnail} alt="product" onClick={onClick}></img>
+        )}
         {!nonEditable && (
           <Counter>
             <MinusIcon onClick={() => changeQuantity(item, false)} />
@@ -106,14 +108,13 @@ const ProductCardReview = ({
         ) : (
           <p>Sold by : {item.brand.name}</p>
         )}
-        <p className="price">Rs. {separator(item.price)}</p>
+        <p className="price">Rs. {separator(item.price.currentPrice)}</p>
         <div className="variant">
           <p>
-            Colour:{" "}
-            <span>{item.selectedColorVariant?.variant_name || "NA"}</span>,
+            Colour: <span>{item.color?.name || "NA"}</span>,
           </p>
           <p>
-            Size: <span>{item.selectedSizeVariant?.variant_name || "NA"}</span>
+            Size: <span>{item.size?.values || "NA"}</span>
           </p>
         </div>
         {!nonEditable && (

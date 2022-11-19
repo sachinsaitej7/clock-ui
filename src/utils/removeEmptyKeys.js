@@ -1,10 +1,10 @@
 import { isEmpty } from "lodash";
 
 export default function removeEmptyKeys(obj) {
-    const newObj = {};
+  const newObj = {};
   Object.keys(obj).forEach((key) => {
     if (isEmpty(obj[key])) {
-        return;
+      return;
     }
     newObj[key] = obj[key];
   });

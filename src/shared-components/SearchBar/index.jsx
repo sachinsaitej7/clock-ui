@@ -36,27 +36,9 @@ const StyledSearch = styled(Input)`
 
   :focus,
   :active,
-  &:hover{
-    outline: none;
-    border-color: ${(props) => props.theme.colors.primary};
-  }
-`;
-
-const StyledButton = styled(Button)`
-  font-size: ${(props) => props.theme.fontSizes[2]};
-  line-height: 16px;
-  background-color: ${(props) => props.theme.bg.yellow};
-  color: ${(props) => props.theme.text.dark};
-  padding: ${(props) => props.theme.space[3] + " " + props.theme.space[5]};
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  margin-bottom: ${(props) => props.theme.space[5]};
-  cursor: pointer;
-  border: none;
-  :focus,
-  :active,
   :hover {
-    background-color: ${(props) => props.theme.bg.yellow};
     outline: none;
+    border-color: ${(props) => props.theme.colors.primary} !important;
   }
 `;
 
@@ -104,12 +86,12 @@ const SearchBar = ({
       <StyledSearch
         placeholder={placeholder}
         allowClear
-        size='large'
+        size="large"
         suffix={searchMode ? null : <SearchOutlined />}
         onChange={onChange}
         onClick={searchMode ? undefined : onClick}
         value={searchQuery}
-        prefix={searchMode ? <LeftArrow onClick={onBack} width='16px' /> : null}
+        prefix={searchMode ? <LeftArrow onClick={onBack} width="16px" /> : null}
       />
       {notFound && (
         <div
@@ -121,7 +103,7 @@ const SearchBar = ({
       ) : (
         <TrendingContainer searchMode={searchMode}>
           <div style={{ marginBottom: theme.space[4] }}>
-            <TrendingIcon width='20px' />
+            <TrendingIcon width="20px" />
             <span
               style={{
                 fontSize: theme.fontSizes[1],
@@ -143,7 +125,7 @@ const SearchBar = ({
             {trending.map((item, index) => {
               return (
                 <StyledTag key={index} onClick={item.onClick}>
-                  {item.label} <RightArrow width='12px' />
+                  {item.label} <RightArrow width="12px" />
                 </StyledTag>
               );
             })}

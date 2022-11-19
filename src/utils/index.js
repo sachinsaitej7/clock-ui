@@ -2,15 +2,14 @@ import numberWithCommas from "./numberWithCommas";
 import generateFilters from "./generateFilters";
 import removeEmptyKeys from "./removeEmptyKeys";
 
-
 const getSummaryData = (items) => {
   let total = 0;
   let totalItems = 0;
   let totalDiscount = 0;
   items.forEach((item) => {
-    total += item.price * item.quantity;
+    total += item.price.currentPrice * item.quantity;
     totalItems += item.quantity;
-    totalDiscount += item.discount * item.quantity;
+    totalDiscount += (item.price.discount || 0) * item.quantity;
   });
   return { total, totalItems, totalDiscount };
 };
@@ -25,7 +24,6 @@ const getParams = (searchParams = {}) => {
   }
   return payload;
 };
-
 
 export {
   numberWithCommas,

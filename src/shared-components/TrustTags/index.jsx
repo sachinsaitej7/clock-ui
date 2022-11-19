@@ -6,8 +6,7 @@ import { ReactComponent as VerifyIcon } from "../../assets/product/verify.svg";
 import { ReactComponent as ReceiptIcon } from "../../assets/product/receipt.svg";
 import { ReactComponent as TruckIcon } from "../../assets/product/truck-fast.svg";
 
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 const Tag = styled.p`
   margin: ${(props) => props.theme.space[5]} 0px !important;

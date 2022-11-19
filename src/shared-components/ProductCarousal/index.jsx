@@ -4,11 +4,11 @@ import { Carousel, Image } from "antd";
 
 import { ReactComponent as ArrowLeft } from "../../assets/common/arrow-right-bg.svg";
 import { ReactComponent as ArrowRight } from "../../assets/common/arrow-left-bg.svg";
+import { ReactComponent as ImageMock } from "../../assets/home/chanderi-saree.svg";
 
 const Container = styled.div`
   /* padding: ${(props) => props.theme.space[5]}; */
 `;
-
 
 const StyledCarousel = styled(Carousel)`
   .slick-prev {
@@ -24,7 +24,7 @@ const StyledCarousel = styled(Carousel)`
   }
 `;
 
-const ProductCarousal = ({ images=[]}) => {
+const ProductCarousal = ({ images = [] }) => {
   return (
     <Container>
       <StyledCarousel
@@ -32,15 +32,19 @@ const ProductCarousal = ({ images=[]}) => {
         prevArrow={<ArrowRight />}
         arrows={true}
       >
-        {images.filter(image => image?.image).map((image, index) => {
-          return (
-            <Image
-              key={image.id}
-              src={image.image}
-              alt={`slide number ${index}`}
-            />
-          );
-        })}
+        {images
+          .filter((image) => image.url)
+          .map((image, index) => {
+            return (
+              <ImageMock /> || (
+                <Image
+                  key={image.url}
+                  src={image.url}
+                  alt={`slide number ${index}`}
+                />
+              )
+            );
+          })}
       </StyledCarousel>
     </Container>
   );
