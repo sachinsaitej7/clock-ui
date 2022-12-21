@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import algoliasearch from "algoliasearch/lite";
+import { InstantSearch } from "react-instantsearch-hooks-web";
 
 import Store from "./store";
 
@@ -31,6 +33,11 @@ import WithAuthRoute from "./wrappers/WithAuthRoute";
 import { getFirebase } from "./firebase";
 
 const queryClient = new QueryClient();
+const searchClient = algoliasearch(
+  "UDBAYJ6DQU",
+  "dc5a4e9e9349b8a467ee86976e4b9fc2"
+);
+
 
 const Root = styled.div`
   width: 100%;
@@ -57,117 +64,122 @@ function App() {
   const theme = useContext(ThemeContext);
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <AuthContext.Provider value={{ ...authData, ...orderData }}>
-          <CartContext.Provider value={{ ...cartData }}>
-            <Root>
-              <ToastContainer></ToastContainer>
-              <WithScrollToTop />
-              <Routes>
-                <Route
-                  path="/"
-                  exact
-                  element={
-                    <WithTopAndBottom>
-                      <HomePage />
-                    </WithTopAndBottom>
-                  }
-                />
-                <Route
-                  path="/products/*"
-                  exact
-                  element={
-                    <WithTopAndBottom>
-                      <CollectionPage />
-                    </WithTopAndBottom>
-                  }
-                />
-                <Route
-                  path="/product-page/*"
-                  exact
-                  element={
-                    <WithTopAndBottom>
-                      <ProductPage />
-                    </WithTopAndBottom>
-                  }
-                />
-                <Route
-                  path="/profile"
-                  exact
-                  element={
-                    <WithAuthRoute>
+      <InstantSearch
+        searchClient={searchClient}
+        indexName='Products'
+      >
+        <ThemeProvider theme={theme}>
+          <AuthContext.Provider value={{ ...authData, ...orderData }}>
+            <CartContext.Provider value={{ ...cartData }}>
+              <Root>
+                <ToastContainer></ToastContainer>
+                <WithScrollToTop />
+                <Routes>
+                  <Route
+                    path='/'
+                    exact
+                    element={
                       <WithTopAndBottom>
-                        <ProfilePage />
+                        <HomePage />
                       </WithTopAndBottom>
-                    </WithAuthRoute>
-                  }
-                />
-                <Route
-                  path="/cart"
-                  exact
-                  element={
-                    // <WithAuthRoute>
-                    <WithTopAndBottom>
-                      <CartPage />
-                    </WithTopAndBottom>
-                    // </WithAuthRoute>
-                  }
-                />
-                <Route
-                  path="/address"
-                  exact
-                  element={
-                    <WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/products/*'
+                    exact
+                    element={
                       <WithTopAndBottom>
-                        <AddressPage />
+                        <CollectionPage />
                       </WithTopAndBottom>
-                    </WithAuthRoute>
-                  }
-                />
-                <Route
-                  path="/review-order"
-                  exact
-                  element={
-                    <WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/product-page/*'
+                    exact
+                    element={
                       <WithTopAndBottom>
-                        <ReviewPage />
+                        <ProductPage />
                       </WithTopAndBottom>
-                    </WithAuthRoute>
-                  }
-                />
-                <Route
-                  path="/order/:orderId"
-                  exact
-                  element={
-                    <WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/profile'
+                    exact
+                    element={
+                      <WithAuthRoute>
+                        <WithTopAndBottom>
+                          <ProfilePage />
+                        </WithTopAndBottom>
+                      </WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/cart'
+                    exact
+                    element={
+                      // <WithAuthRoute>
                       <WithTopAndBottom>
-                        <OrderPage />
+                        <CartPage />
                       </WithTopAndBottom>
-                    </WithAuthRoute>
-                  }
-                />
-                <Route
-                  path="/tnc"
-                  exact
-                  element={
-                    <WithTopAndBottom>
-                      <TnCPages />
-                    </WithTopAndBottom>
-                  }
-                />
-                <Route
-                  path="*"
-                  element={
-                    <WithTopAndBottom>
-                      <NotFoundPage />
-                    </WithTopAndBottom>
-                  }
-                />
-              </Routes>
-            </Root>
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </ThemeProvider>
+                      // </WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/address'
+                    exact
+                    element={
+                      <WithAuthRoute>
+                        <WithTopAndBottom>
+                          <AddressPage />
+                        </WithTopAndBottom>
+                      </WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/review-order'
+                    exact
+                    element={
+                      <WithAuthRoute>
+                        <WithTopAndBottom>
+                          <ReviewPage />
+                        </WithTopAndBottom>
+                      </WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/order/:orderId'
+                    exact
+                    element={
+                      <WithAuthRoute>
+                        <WithTopAndBottom>
+                          <OrderPage />
+                        </WithTopAndBottom>
+                      </WithAuthRoute>
+                    }
+                  />
+                  <Route
+                    path='/tnc'
+                    exact
+                    element={
+                      <WithTopAndBottom>
+                        <TnCPages />
+                      </WithTopAndBottom>
+                    }
+                  />
+                  <Route
+                    path='*'
+                    element={
+                      <WithTopAndBottom>
+                        <NotFoundPage />
+                      </WithTopAndBottom>
+                    }
+                  />
+                </Routes>
+              </Root>
+            </CartContext.Provider>
+          </AuthContext.Provider>
+        </ThemeProvider>
+      </InstantSearch>
     </QueryClientProvider>
   );
 }

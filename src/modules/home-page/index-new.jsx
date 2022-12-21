@@ -4,12 +4,17 @@ import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { isEmpty, debounce } from "lodash";
 import { logAnalyticsEvent } from "../../firebase/utils";
+import {
+  Hits,
+  SearchBox,
+  useInstantSearch,
+} from "react-instantsearch-hooks-web";
 
 import { fetchProducts } from "../../apis/home-page";
 import { processResults, createIndex, index } from "../../utils/searchService";
 
 import { generateFilters, getParams } from "../../utils";
-import { useProducts, useSubcategories, useCategories } from "./hooks";
+import { useProducts, useSubcategories } from "./hooks";
 
 import ProductCard from "../../shared-components/ProductCard";
 import SearchBar from "../../shared-components/SearchBar";
@@ -87,7 +92,6 @@ const HomePage = () => {
 
   const dataHo = useProducts();
   const [subcategories, subcategoryLoading] = useSubcategories();
-  const dataCat = useCategories();
 
   const products = productsData?.data.data;
 
@@ -145,20 +149,6 @@ const HomePage = () => {
 
   const filters =
     searchValue.length > 1 ? generateFilters(searchedResults) : [];
-  // [
-  //   {
-  //     label: "Chanderi Cotton",
-  //     onClick: () => navigate("/products?category=12"),
-  //   },
-  //   {
-  //     label: "Kurtis",
-  //     onClick: () => navigate("/products?category=14"),
-  //   },
-  //   {
-  //     label: "T-Shirts",
-  //     onClick: () => navigate("/products?category=16"),
-  //   },
-  // ];
   return (
     <>
       {!searchMode && (

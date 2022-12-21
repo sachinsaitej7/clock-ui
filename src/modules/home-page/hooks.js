@@ -1,18 +1,22 @@
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import { ProductQuery } from "../../queries";
+import { getFirebase } from "../../firebase";
+import { getIdConverter } from "../../queries/utils";
+const { db } = getFirebase();
 
+const idConverter = getIdConverter();
 export function useProducts() {
-  return useCollectionData(ProductQuery.fetchProductsQuery());
+  return useCollectionDataOnce(ProductQuery.fetchProductsQuery());
 }
 
 export function useBrands() {
-  return useCollectionData(ProductQuery.fetchBrandsQuery());
+  return useCollectionDataOnce(ProductQuery.fetchBrandsQuery());
 }
 
 export function useCategories() {
-  return useCollectionData(ProductQuery.fetchCategoriesQuery());
+  return useCollectionDataOnce(ProductQuery.fetchCategoriesQuery());
 }
 
 export function useSubcategories() {
-  return useCollectionData(ProductQuery.fetchSubcategoriesQuery());
+  return useCollectionDataOnce(ProductQuery.fetchSubcategoriesQuery());
 }

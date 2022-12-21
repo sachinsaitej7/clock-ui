@@ -18,19 +18,19 @@ service cloud.firestore {
 
     match /product/{productId} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth.uid != null;
       match /images/{imageId} {
         allow read: if true;
-        allow write: if false;
+        allow write: if request.auth.uid != null;
       }
     }
 
     match /productVariant/{productVariantId} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth.uid != null;
       match /images/{imageId} {
         allow read: if true;
-        allow write: if false;
+        allow write: if request.auth.uid != null;
       }
     }
 
@@ -51,7 +51,12 @@ service cloud.firestore {
 
     match /brand/{brandId} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth.uid != null;
+    }
+
+    match /brandUser/{brandId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == request.resource.data.uid;
     }
 
     match /{path=**}/subcategory/{subcategoryId} {

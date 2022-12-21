@@ -19,6 +19,7 @@ import config from "./config";
 
 function connectToEmulators({ app, auth, db }) {
   if (process.env.NODE_ENV === "development") {
+    console.log("Connecting to emulators");
     connectAuthEmulator(auth, "http://localhost:9099", {
       disableWarnings: true,
     });

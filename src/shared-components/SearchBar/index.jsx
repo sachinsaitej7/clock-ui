@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  Hits,
+  SearchBox,
+  useInstantSearch,
+} from "react-instantsearch-hooks-web";
 import { Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import styled, { useTheme } from "styled-components";
@@ -103,7 +108,7 @@ const SearchBar = ({
       ) : (
         <TrendingContainer searchMode={searchMode}>
           <div style={{ marginBottom: theme.space[4] }}>
-            <TrendingIcon width="20px" />
+            <TrendingIcon width='20px' />
             <span
               style={{
                 fontSize: theme.fontSizes[1],
@@ -125,7 +130,7 @@ const SearchBar = ({
             {trending.map((item, index) => {
               return (
                 <StyledTag key={index} onClick={item.onClick}>
-                  {item.label} <RightArrow width="12px" />
+                  {item.label} <RightArrow width='12px' />
                 </StyledTag>
               );
             })}

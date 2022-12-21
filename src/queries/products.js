@@ -28,11 +28,7 @@ export function fetchBrandsQuery() {
 
 export function fetchCategoriesQuery() {
   const categoryRef = collection(db, "category").withConverter(idConverter);
-  const q = query(
-    categoryRef,
-    where("status", "==", true),
-    orderBy("createdAt", "desc")
-  );
+  const q = query(categoryRef, where("status", "==", true));
   return q;
 }
 
@@ -40,11 +36,7 @@ export function fetchSubcategoriesQuery() {
   const subcategoryRef = collectionGroup(db, "subcategory").withConverter(
     idConverter
   );
-  const q = query(
-    subcategoryRef,
-    where("status", "==", true),
-    orderBy("createdAt", "desc")
-  );
+  const q = query(subcategoryRef, where("status", "==", true));
   return q;
 }
 
