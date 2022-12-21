@@ -2,7 +2,6 @@ import React from "react";
 import styled, { useTheme } from "styled-components";
 import { Card } from "antd";
 const { Meta } = Card;
-import { ReactComponent as ImageMock } from "../../assets/home/chanderi-saree.svg";
 
 const StyledCard = styled(Card)`
   background-color: transparent;
@@ -99,7 +98,7 @@ const ProductCard = ({
   return (
     <StyledCard
       cover={
-        <ImageMock /> || <ImageCover imgUrl={thumbnail} variant={variant} />
+        <ImageCover imgUrl={thumbnail} variant={variant} />
       }
       variant={variant}
       onClick={onClick}

@@ -4,7 +4,7 @@ import styled, { useTheme } from "styled-components";
 //images
 import { ReactComponent as MinusIcon } from "../../assets/common/minus.svg";
 import { ReactComponent as PlusIcon } from "../../assets/common/plus.svg";
-import { ReactComponent as ImageMock } from "../../assets/home/chanderi-saree.svg";
+
 import separator from "../../utils/numberWithCommas";
 
 const Container = styled.div`
@@ -80,10 +80,8 @@ const ProductCardReview = ({
   const { thumbnail, name, price, quantity } = item;
   return (
     <Container>
-      <div className="left-container">
-        {<ImageMock width="104px" height="141px" /> || (
-          <img src={thumbnail} alt="product" onClick={onClick}></img>
-        )}
+      <div className='left-container'>
+        <img src={thumbnail} alt='product' onClick={onClick}></img>
         {!nonEditable && (
           <Counter>
             <MinusIcon onClick={() => changeQuantity(item, false)} />
@@ -92,7 +90,7 @@ const ProductCardReview = ({
           </Counter>
         )}
       </div>
-      <div className="right-container">
+      <div className='right-container'>
         <h3>{item.name}</h3>
         {!nonEditable ? (
           <p
@@ -108,8 +106,8 @@ const ProductCardReview = ({
         ) : (
           <p>Sold by : {item.brand.name}</p>
         )}
-        <p className="price">Rs. {separator(item.price.currentPrice)}</p>
-        <div className="variant">
+        <p className='price'>Rs. {separator(item.price.currentPrice)}</p>
+        <div className='variant'>
           <p>
             Colour: <span>{item.color?.name || "NA"}</span>,
           </p>
