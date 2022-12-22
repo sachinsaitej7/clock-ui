@@ -80,13 +80,11 @@ export function sortProducts(products, sort) {
   switch (sort) {
     case "price_asc":
       return products.sort(
-        (a, b) =>
-          Number(a.price_head[0].sale_price) -
-          Number(b.price_head[0].sale_price)
+        (a, b) => Number(a.price.currentPrice) - Number(b.price.currentPrice)
       );
     case "price_desc":
       return products.sort(
-        (a, b) => +b.price_head[0].sale_price - +a.price_head[0].sale_price
+        (a, b) => +b.price.currentPrice - +a.price.currentPrice
       );
     case "discount_asc":
       return products.sort((a, b) => a.discount - b.discount);
@@ -100,18 +98,15 @@ export function sortProducts(products, sort) {
 export function filterProducts(products, filters) {
   if (Object.keys(filters).length < 2) return products;
   return products.filter((product) => {
-    const variants = product.price_head.flatMap(
-      (priceHead) => priceHead.price_line
-    );
-
     return Object.keys(filters).reduce((acc, key) => {
       if (key === "sort" || isEmpty(filters[key])) return acc;
+      const filterValues = filters[key];
+      const productValue = product[key === "colour" ? "color" : key];
+      if (!productValue) return false;
       return (
         acc &&
-        !!variants.find(
-          (v) =>
-            v.variant_type_name.toLowerCase() === key &&
-            filters[key].includes(v.variant_id)
+        filterValues.includes(
+          key !== "size" ? productValue.name : productValue.values
         )
       );
     }, true);

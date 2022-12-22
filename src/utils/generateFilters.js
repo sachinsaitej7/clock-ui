@@ -1,30 +1,22 @@
-import { uniqBy } from "lodash";
+import { uniq } from "lodash";
 
 export default function generateFilters(products) {
-  const allVariants = products
-    .flatMap((product) => product.price_head)
-    .flatMap((priceHead) => priceHead.price_line);
+  const allVariants = products;
 
   const optionsMap = allVariants.reduce((acc, variant) => {
-    if (acc[variant.variant_type_name]) {
-      acc[variant.variant_type_name].push({
-        label: variant.variant_name,
-        value: variant.variant_id,
-      });
-    } else {
-      acc[variant.variant_type_name] = [
-        {
-          label: variant.variant_name,
-          value: variant.variant_id,
-        },
-      ];
-    }
+    if (variant["color"])
+      acc["colour"] = [...(acc["colour"] || []), variant["color"].name];
+    if (variant["size"])
+      acc["size"] = [...(acc["size"] || []), variant["size"].values];
     return acc;
   }, {});
 
   const options = Object.keys(optionsMap).map((key) => ({
     label: key.toLowerCase(),
-    options: uniqBy(optionsMap[key], (i) => i.value),
+    options: uniq(optionsMap[key]).map((value) => ({
+      label: value,
+      value,
+    })),
   }));
 
   return [{ label: "sort" }, ...options];

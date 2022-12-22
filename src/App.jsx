@@ -66,7 +66,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <InstantSearch
         searchClient={searchClient}
-        indexName='Products'
+        indexName='products'
       >
         <ThemeProvider theme={theme}>
           <AuthContext.Provider value={{ ...authData, ...orderData }}>

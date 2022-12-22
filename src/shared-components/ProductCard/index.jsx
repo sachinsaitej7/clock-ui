@@ -97,9 +97,7 @@ const ProductCard = ({
   const theme = useTheme();
   return (
     <StyledCard
-      cover={
-        <ImageCover imgUrl={thumbnail} variant={variant} />
-      }
+      cover={<ImageCover imgUrl={thumbnail} variant={variant} />}
       variant={variant}
       onClick={onClick}
     >

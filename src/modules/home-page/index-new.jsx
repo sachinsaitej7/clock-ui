@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
-import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { isEmpty, debounce } from "lodash";
+import { debounce } from "lodash";
 import { logAnalyticsEvent } from "../../firebase/utils";
 import {
-  Hits,
-  SearchBox,
+  useHits,
   useInstantSearch,
+  useSearchBox,
 } from "react-instantsearch-hooks-web";
 
-import { fetchProducts } from "../../apis/home-page";
-import { processResults, createIndex, index } from "../../utils/searchService";
+import { processResults } from "../../utils/searchService";
 
 import { generateFilters, getParams } from "../../utils";
-import { useProducts, useSubcategories } from "./hooks";
+import { useSubcategories } from "./hooks";
 
 import ProductCard from "../../shared-components/ProductCard";
 import SearchBar from "../../shared-components/SearchBar";
@@ -24,6 +22,10 @@ import { ReactComponent as SparkIcon } from "../../assets/home/spark.svg";
 import BackgroundHome from "../../assets/home/background-home.jpg";
 
 // images
+
+const queryHook = debounce((query, search) => {
+  if (query.length > 2) search(query);
+}, 500);
 
 const HomePageContainer = styled.div`
   width: 100%;
@@ -72,48 +74,32 @@ const HomePage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { status } = useInstantSearch();
+  const { hits: products } = useHits();
   const [searchCount] = useState(100 + Math.floor(Math.random() * 2000));
   const params = getParams(searchParams);
   const searchValue = params["search"] || "";
-
-  const results = useMemo(
-    () => index.search(searchValue).flatMap((result) => result.result),
-    [searchValue]
-  );
+  const { refine } = useSearchBox({
+    queryHook,
+  });
 
   const [searchMode, setSearchMode] = useState(!!searchValue);
   const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
-  const [filterIds, setFilterIds] = useState(results || []);
 
-  const { isLoading: productsLoading, data: productsData } = useQuery(
-    "products",
-    fetchProducts
-  );
-
-  const dataHo = useProducts();
   const [subcategories, subcategoryLoading] = useSubcategories();
-
-  const products = productsData?.data.data;
-
-  useEffect(() => {
-    if (products)
-      createIndex(products).then(() => {
-        const results = index.search(searchValue);
-        setFilterIds(results.flatMap((result) => result.result));
-      });
-  }, [products]);
-
-  useEffect(() => {
-    setFilterIds(results);
-  }, [results]);
 
   const logEvent = debounce(
     (name, params) => logAnalyticsEvent(name, params),
     100
   );
 
+  useEffect(() => {
+    refine(searchValue);
+  }, []);
+
   const onChange = (e) => {
     setSearchMode(true);
+    refine(e.target.value);
     setSearchParams({ search: e.target.value });
     logEvent("search", { search_term: e.target.value });
     setFilterValues(DEFAULT_VALUE);
@@ -130,8 +116,7 @@ const HomePage = () => {
     setFilterIds([]);
   };
 
-  if (productsLoading || subcategoryLoading || isEmpty(index.register))
-    return <Spinner />;
+  if (status === "loading" || subcategoryLoading) return <Spinner />;
   if (!products)
     return (
       <div
@@ -143,7 +128,7 @@ const HomePage = () => {
 
   const { sortedResults, searchedResults } = processResults(
     products,
-    filterIds,
+    undefined,
     filterValues
   );
 
@@ -191,7 +176,7 @@ const HomePage = () => {
             }}
           >
             <SparkIcon
-              width="16px"
+              width='16px'
               color={theme.colors.primary}
               style={{ marginRight: theme.space[2] }}
             />
@@ -223,9 +208,11 @@ const HomePage = () => {
                   <ProductCard
                     key={product.id}
                     {...product}
-                    variant="medium"
+                    variant='medium'
                     onClick={() =>
-                      navigate(`/product-page/${product.slug}?id=${product.id}`)
+                      navigate(
+                        `/product-page/${product.slug}?id=${product.productId}`
+                      )
                     }
                   />
                 );
