@@ -18,6 +18,7 @@ import CartPage from "./modules/cart-page";
 import AddressPage from "./modules/address-page";
 import ReviewPage from "./modules/review-page";
 import OrderPage from "./modules/order-page";
+import BrandPage from "./modules/brand-page";
 import ProfilePage from "./modules/other-pages/profile-page";
 import TnCPages from "./modules/other-pages/tnc";
 import NotFoundPage from "./modules/other-pages/not-found-page";
@@ -37,7 +38,6 @@ const searchClient = algoliasearch(
   "UDBAYJ6DQU",
   "dc5a4e9e9349b8a467ee86976e4b9fc2"
 );
-
 
 const Root = styled.div`
   width: 100%;
@@ -64,10 +64,7 @@ function App() {
   const theme = useContext(ThemeContext);
   return (
     <QueryClientProvider client={queryClient}>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName='products'
-      >
+      <InstantSearch searchClient={searchClient} indexName='products'>
         <ThemeProvider theme={theme}>
           <AuthContext.Provider value={{ ...authData, ...orderData }}>
             <CartContext.Provider value={{ ...cartData }}>
@@ -99,6 +96,15 @@ function App() {
                     element={
                       <WithTopAndBottom>
                         <ProductPage />
+                      </WithTopAndBottom>
+                    }
+                  />
+                  <Route
+                    path='/brand-page/*'
+                    exact
+                    element={
+                      <WithTopAndBottom>
+                        <BrandPage />
                       </WithTopAndBottom>
                     }
                   />

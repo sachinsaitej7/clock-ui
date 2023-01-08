@@ -117,6 +117,7 @@ const PincodeTextContainer = ({ data }) => {
 };
 
 const PincodeChecker = () => {
+  const theme = useTheme();
   const [pincode, setPincode] = useState(localStorage.getItem("pincode"));
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
@@ -143,17 +144,26 @@ const PincodeChecker = () => {
   return (
     <div>
       <div>
+        <label
+          style={{
+            fontSize: theme.fontSizes[1],
+            color: theme.text.dark,
+            marginBottom: theme.space[2],
+          }}
+        >
+          Delivery Options
+        </label>
         <StyledInput
           suffix={
             <CheckTag onClick={() => handleClick()} loading={isLoading}>
               Check
             </CheckTag>
           }
-          placeholder="PINCODE"
+          placeholder='Enter your PIN code'
           onChange={(e) => {
             setPincode(e.target.value);
           }}
-          type="number"
+          type='number'
           value={pincode}
           maxLength={6}
         />

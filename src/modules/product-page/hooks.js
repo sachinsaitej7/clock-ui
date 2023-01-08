@@ -2,10 +2,14 @@ import {
   useDocumentData,
   useCollectionData,
 } from "react-firebase-hooks/firestore";
-import { ProductQuery } from "../../queries";
+import { ProductQuery, BrandQuery } from "../../queries";
 
 export function useProduct(id) {
   return useDocumentData(ProductQuery.fetchProductQuery(id));
+}
+
+export function useBrand(id) {
+  return useDocumentData(BrandQuery.fetchBrandQuery(id));
 }
 
 export function useProductImages(id) {

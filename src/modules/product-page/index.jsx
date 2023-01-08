@@ -4,7 +4,9 @@ import isEmpty from "lodash/isEmpty";
 import styled, { useTheme } from "styled-components";
 
 import { VariantTag } from "../../shared-components/atoms";
-import { Button, Divider, Collapse } from "antd";
+import { Button, Divider, Collapse, Typography } from "antd";
+
+const { Link } = Typography;
 
 import Store from "../../store";
 
@@ -23,7 +25,12 @@ import { ReactComponent as ArrowLongLeft } from "../../assets/common/arrow-long-
 import { ReactComponent as ArrowLeftOnSquare } from "../../assets/common/arrow-up-on-square.svg";
 
 import { getShareData, handleShare } from "./utils";
-import { useProduct, useProductImages, useProductVariants } from "./hooks";
+import {
+  useProduct,
+  useProductImages,
+  useProductVariants,
+  useBrand,
+} from "./hooks";
 
 const { CartContext } = Store;
 const { Panel } = Collapse;
@@ -141,6 +148,7 @@ const ProductPage = () => {
   const id = searchParams.get("id");
 
   const [productData, productLoading, ...rest] = useProduct(id);
+  const [brandData] = useBrand(productData?.brand?.id || "");
   const [productImages] = useProductImages(id);
   const [productVariants] = useProductVariants(id);
   const [selectedVariant, setSelectedVariant] = useState(null);
@@ -222,9 +230,9 @@ const ProductPage = () => {
           padding: "0px 0px " + theme.space[4],
         }}
       >
-        <ArrowLongLeft onClick={() => navigate(-1)} className="top-icon" />
+        <ArrowLongLeft onClick={() => navigate(-1)} className='top-icon' />
         <ArrowLeftOnSquare
-          className="top-icon"
+          className='top-icon'
           onClick={() =>
             handleShare(getShareData(name, productImages), (text) => {
               NotificationAPI({
@@ -239,8 +247,27 @@ const ProductPage = () => {
       </div>
       <ProductCarousal images={productImages} />
       <div>
-        <div style={{ margin: theme.space[5] + " 0px " + theme.space[2] }}>
+        <div
+          style={{
+            margin: theme.space[5] + " 0px " + theme.space[2],
+            display: "flex",
+            justifyContent: "space-between",
+            fontWeight: theme.fontWeights.semibold,
+            alignItems: "center",
+          }}
+        >
           <Brand>{brand.name}</Brand>
+          <Link
+            onClick={() => {
+              navigate(`/brand-page/${brand.name}?id=${brand.id}`);
+            }}
+            style={{
+              color: theme.text.primary,
+              fontSize: theme.fontSizes[2],
+            }}
+          >
+            Visit Store
+          </Link>
         </div>
         <div>
           <h6
@@ -306,7 +333,7 @@ const ProductPage = () => {
               : "Add to Cart"}
           </StyledButton>
           <StyledButton
-            type="primary"
+            type='primary'
             disabled={!price}
             onClick={() => {
               addToCart();
@@ -316,20 +343,24 @@ const ProductPage = () => {
             Buy Now
           </StyledButton>
         </div>
-        <Divider className="divider" />
+        <Divider className='divider' />
         <PincodeChecker />
-        <Divider className="divider" />
+        <Divider className='divider' />
         <StoreContainer>
           <h5>
             <MouseSquare />
             Store Details
           </h5>
-          <p>Max store, Forum Vijaya Mall, Vadapalani, Chennai, TN</p>
+          <p style={{ marginTop: theme.space[2] }}>
+            {Object.values(brandData?.address || {})
+              .filter((item) => item)
+              .join(", ")}
+          </p>
         </StoreContainer>
-        <Divider className="divider" />
-        <div className="product-details">
+        <Divider className='divider' />
+        <div className='product-details'>
           <Collapse
-            expandIconPosition="end"
+            expandIconPosition='end'
             ghost
             bordered={false}
             expandIcon={({ isActive }) => {
@@ -337,7 +368,7 @@ const ProductPage = () => {
               return <ArrowDownIcon />;
             }}
           >
-            <Panel header={<h6>Product Details:</h6>} key="1">
+            <Panel header={<h6>Product Details:</h6>} key='1'>
               <p
                 dangerouslySetInnerHTML={{
                   __html: productData.descriptionHtml || "NA",
@@ -346,7 +377,7 @@ const ProductPage = () => {
             </Panel>
           </Collapse>
         </div>
-        <Divider className="divider" />
+        <Divider className='divider' />
         {!isEmpty(products) && (
           <>
             <div style={{ marginTop: theme.space[7] }}>
@@ -367,7 +398,7 @@ const ProductPage = () => {
                   navigate(`/product-page/${productId}`)}
               />
             </div>
-            <Divider className="divider" />
+            <Divider className='divider' />
           </>
         )}
 

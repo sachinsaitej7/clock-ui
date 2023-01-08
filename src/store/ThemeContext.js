@@ -71,5 +71,6 @@ export const ThemeContext = createContext({
     secondary: "#DAF2F0",
     yellow: "#F2FFCB",
     disabled: "rgba(41, 41, 41, 0.4)",
+    gray: "#EEEEEE",
   },
 });

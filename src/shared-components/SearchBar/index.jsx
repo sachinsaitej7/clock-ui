@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Hits,
-  SearchBox,
-  useInstantSearch,
-} from "react-instantsearch-hooks-web";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import styled, { useTheme } from "styled-components";
 
@@ -83,6 +78,7 @@ const SearchBar = ({
   filters,
   values,
   onApply,
+  loading,
 }) => {
   const theme = useTheme();
 
@@ -90,17 +86,17 @@ const SearchBar = ({
     <StyledContainer>
       <StyledSearch
         placeholder={placeholder}
-        allowClear
-        size="large"
-        suffix={searchMode ? null : <SearchOutlined />}
+        size='large'
+        loading={loading}
+        suffix={searchMode ? null : <SearchOutlined width='16px' />}
         onChange={onChange}
         onClick={searchMode ? undefined : onClick}
         value={searchQuery}
-        prefix={searchMode ? <LeftArrow onClick={onBack} width="16px" /> : null}
+        prefix={searchMode ? <LeftArrow onClick={onBack} width='16px' /> : null}
       />
-      {notFound && (
+      {notFound && !loading && (
         <div
-          style={{ padding: theme.space[6] }}
+          style={{ padding: theme.space[0] }}
         >{`We couldn’t find any suggestions for “${searchQuery}”`}</div>
       )}
       {searchQuery.length > 1 && !notFound ? (

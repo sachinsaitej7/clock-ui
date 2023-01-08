@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const FooterContainer = styled.div`
   color: ${(props) => props.theme.text.dark};
-  padding: ${(props) => `${props.theme.space[5]} ${props.theme.space[8]}`};
+  padding: ${(props) => `${props.theme.space[5]} ${props.theme.space[7]}`};
   p {
     font-weight: ${(props) => props.theme.fontWeights.normal};
-    font-size: ${(props) => props.theme.fontSizes[2]};
+    font-size: ${(props) => props.theme.fontSizes[1]};
     line-height: 20px;
   }
   .meta-links {

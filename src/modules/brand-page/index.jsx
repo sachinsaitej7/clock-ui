@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
+import { Divider } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Button } from "antd";
 
 import { processResults } from "../../utils/searchService";
 
 import { generateFilters } from "../../utils";
 
-import { useProductsByParams } from "./hooks";
+import { useProductsByBrand, useBrand } from "./hooks";
+import { BrandCard } from "./styled";
 
 import Filters from "../../shared-components/Filters";
 import ProductCard from "../../shared-components/ProductCard";
 import Spinner from "../../shared-components/Spinner";
 import { ReactComponent as ArrowLongLeft } from "../../assets/common/arrow-long-left.svg";
 
-import { getParams, getCollectionName } from "./utils";
+import { getParams } from "./utils";
 
-const CollectionPageContainer = styled.div`
+const BrandPageContainer = styled.div`
   width: 100%;
   padding-bottom: ${(props) => props.theme.space[5]};
   min-height: 100vh;
@@ -25,6 +26,8 @@ const CollectionPageContainer = styled.div`
 
 const Header = styled.div`
   padding: ${(props) => props.theme.space[5]};
+  background-color: ${(props) => props.theme.bg.gray};
+  height: 160px;
   p {
     font-size: ${(props) => props.theme.fontSizes[5]};
     font-weight: ${(props) => props.theme.fontWeights.medium};
@@ -54,27 +57,9 @@ const Collections = styled(InfiniteScroll)`
   }
 `;
 
-const StyledButton = styled(Button)`
-  border: 1px solid ${(props) => props.theme.colors.primary};
-  border-radius: ${(props) => props.theme.borderRadius[2]};
-  padding: ${(props) => `${props.theme.space[2]} ${props.theme.space[5]}`};
-  background-color: ${(props) => props.theme.bg[props.type || "default"]};
-  span {
-    color: ${(props) => props.theme.text.primary};
-    font-size: ${(props) => props.theme.fontSizes[1]};
-    line-height: 18px;
-    font-weight: ${(props) => props.theme.fontWeights.semibold};
-  }
-  :hover,
-  :focus {
-    border-color: ${(props) => props.theme.colors.primary};
-    background-color: ${(props) => props.theme.bg[props.type || "default"]};
-  }
-`;
-
 const DEFAULT_VALUE = { sort: ["relevance"] };
 
-const CollectionPage = () => {
+const BrandPage = () => {
   const [lastSnapshot, setLastSnapshot] = useState(null);
   const theme = useTheme();
   const navigate = useNavigate();
@@ -82,10 +67,12 @@ const CollectionPage = () => {
   const params = getParams(searchParams);
   const [products, setProducts] = useState([]);
   const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
-  const [productsData, productsLoading, , snapshot] = useProductsByParams(
-    params,
+
+  const [productsData, productsLoading, error, snapshot] = useProductsByBrand(
+    params.id,
     lastSnapshot
   );
+  const [brandData, brandLoading] = useBrand(params.id);
 
   useEffect(() => {
     if (productsData) setProducts([...products, ...productsData]);
@@ -101,17 +88,16 @@ const CollectionPage = () => {
       </div>
     );
 
-  const collectionName = getCollectionName(searchParams, products);
   const { searchedResults, sortedResults } = processResults(
     products,
     undefined,
     filterValues
   );
 
-  const filters = [] || generateFilters(searchedResults);
+  const filters = generateFilters(searchedResults);
 
   return (
-    <CollectionPageContainer>
+    <BrandPageContainer>
       <Header>
         <div
           style={{
@@ -121,20 +107,30 @@ const CollectionPage = () => {
           }}
         >
           <ArrowLongLeft
-            width="24px"
+            width='24px'
             onClick={() => navigate(-1)}
-            className="top-icon"
+            className='top-icon'
           />
         </div>
-        <p style={{ marginBottom: theme.space[0] }}>
-          {collectionName ? `${collectionName}’s Collection` : `All Products`}
-        </p>
+      </Header>
+      {brandLoading ? (
+        <Spinner />
+      ) : (
+        <BrandCard>
+          <img src={brandData?.logo} alt={brandData?.name} />
+          <h2>{brandData?.name}</h2>
+          <Divider />
+          <p>Free delivery by Clock on orders</p>
+          <p>1 hour delivery for select locations *</p>
+        </BrandCard>
+      )}
+      <div style={{ padding: theme.space[3] }}>
         <Filters
           filters={filters}
           onApply={setFilterValues}
           values={filterValues}
         />
-      </Header>
+      </div>
       {sortedResults.length > 0 ? (
         <>
           <p
@@ -181,8 +177,8 @@ const CollectionPage = () => {
           {"No products found"}
         </div>
       )}
-    </CollectionPageContainer>
+    </BrandPageContainer>
   );
 };
 
-export default CollectionPage;
+export default BrandPage;

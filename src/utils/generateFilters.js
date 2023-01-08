@@ -2,7 +2,6 @@ import { uniq } from "lodash";
 
 export default function generateFilters(products) {
   const allVariants = products;
-
   const optionsMap = allVariants.reduce((acc, variant) => {
     if (variant["color"])
       acc["colour"] = [...(acc["colour"] || []), variant["color"].name];

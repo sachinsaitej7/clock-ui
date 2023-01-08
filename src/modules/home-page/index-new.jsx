@@ -32,12 +32,10 @@ const HomePageContainer = styled.div`
   font-family: ${(props) => props.theme.fonts.primary};
   background-color: ${(props) => props.theme.bg.white};
   padding: ${(props) => props.theme.space[5]};
+  margin-bottom: ${(props) => props.theme.space[8]};
 `;
 
-const Header = styled.h2`
-  font-size: ${(props) => props.theme.fontSizes[5]};
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
-  color: ${(props) => props.theme.text.white};
+const Header = styled.div`
   margin: ${(props) => props.theme.space[0]} 0px
     ${(props) => props.theme.space[1]};
   line-height: 140%;
@@ -49,8 +47,20 @@ const Header = styled.h2`
   height: 300px;
   width: 100%;
   padding: 0px ${(props) => props.theme.space[5]};
-  padding-top: 50%;
+  padding-top: 40%;
   text-align: left;
+
+  h2 {
+    font-weight: ${(props) => props.theme.fontWeights.bold};
+    color: ${(props) => props.theme.text.white};
+  }
+
+  .subtitle {
+    color: ${(props) => props.theme.text.white};
+    font-size: ${(props) => props.theme.fontSizes[2]};
+    font-weight: ${(props) => props.theme.fontWeights.normal};
+    margin-top: ${(props) => props.theme.space[8]};
+  }
 `;
 
 const Collections = styled.div`
@@ -113,10 +123,9 @@ const HomePage = () => {
   const onBack = () => {
     setSearchMode(false);
     setSearchParams({});
-    setFilterIds([]);
   };
 
-  if (status === "loading" || subcategoryLoading) return <Spinner />;
+  if (subcategoryLoading) return <Spinner />;
   if (!products)
     return (
       <div
@@ -139,7 +148,8 @@ const HomePage = () => {
       {!searchMode && (
         <div>
           <Header>
-            Shop thousands of products from Chennai’s Favorite Boutiques
+            <h2>Explore fashion from the boutiques of Chennai.</h2>
+            <p className='subtitle'>Ready to buy? Just search!</p>
           </Header>
         </div>
       )}
@@ -165,6 +175,7 @@ const HomePage = () => {
             onApply={setFilterValues}
             values={filterValues}
             filters={filters}
+            loading={status === "loading"}
           />
         </div>
         {!searchMode && (

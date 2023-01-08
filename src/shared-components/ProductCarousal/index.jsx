@@ -21,6 +21,15 @@ const StyledCarousel = styled(Carousel)`
     width: 32px;
     height: 32px;
   }
+
+  .ant-image{
+    width: 100%;
+  }
+
+  .ant-image-img {
+    width: 100%;
+    max-height: 495px;
+  }
 `;
 
 const ProductCarousal = ({ images = [] }) => {

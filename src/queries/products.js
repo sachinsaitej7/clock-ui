@@ -7,7 +7,6 @@ import {
   orderBy,
   limit,
   startAfter,
-  getDoc,
   doc,
 } from "firebase/firestore";
 import { getIdConverter } from "./utils";
@@ -91,12 +90,30 @@ export function fetchProductsQuery(lastDoc = null, pageLimit = 25) {
   return q;
 }
 
-export function fetchProductsByBrandQuery(brandRef) {
-  const q = query(
-    productRef,
-    where("status", "==", true),
-    where("brand_id", "==", brandRef)
-  );
+export function fetchProductsByBrandQuery(
+  brandId,
+  lastDoc = null,
+  pageLimit = 25
+) {
+  let q = null;
+  if (lastDoc) {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("brand.id", "==", brandId),
+      orderBy("createdAt", "desc"),
+      startAfter(lastDoc),
+      limit(pageLimit)
+    );
+  } else {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("brand.id", "==", brandId),
+      orderBy("createdAt", "desc"),
+      limit(pageLimit)
+    );
+  }
   return q;
 }
 
