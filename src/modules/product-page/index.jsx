@@ -346,17 +346,20 @@ const ProductPage = () => {
         <Divider className='divider' />
         <PincodeChecker />
         <Divider className='divider' />
-        <StoreContainer>
-          <h5>
-            <MouseSquare />
-            Store Details
-          </h5>
-          <p style={{ marginTop: theme.space[2] }}>
-            {Object.values(brandData?.address || {})
-              .filter((item) => item)
-              .join(", ")}
-          </p>
-        </StoreContainer>
+        {brandData?.address && (
+          <StoreContainer>
+            <h5>
+              <MouseSquare />
+              Store Details
+            </h5>
+            <p style={{ marginTop: theme.space[2] }}>
+              {["address", "city", "state", "country", "pincode"]
+                .map((item) => brandData.address[item])
+                .filter((item) => item)
+                .join(", ")}
+            </p>
+          </StoreContainer>
+        )}
         <Divider className='divider' />
         <div className='product-details'>
           <Collapse

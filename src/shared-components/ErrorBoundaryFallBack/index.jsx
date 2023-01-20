@@ -31,6 +31,7 @@ export default function ErrorFallbackComponent({ error, resetErrorBoundary }) {
 
   const handleError = () => {
     resetErrorBoundary();
+    localStorage.setItem("items", JSON.stringify([]));
     navigate("/");
   };
 

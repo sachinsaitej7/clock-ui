@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Button } from "antd";
 
 import { processResults } from "../../utils/searchService";
 
@@ -51,24 +50,6 @@ const Collections = styled(InfiniteScroll)`
 
   @media (min-width: 430px) {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-`;
-
-const StyledButton = styled(Button)`
-  border: 1px solid ${(props) => props.theme.colors.primary};
-  border-radius: ${(props) => props.theme.borderRadius[2]};
-  padding: ${(props) => `${props.theme.space[2]} ${props.theme.space[5]}`};
-  background-color: ${(props) => props.theme.bg[props.type || "default"]};
-  span {
-    color: ${(props) => props.theme.text.primary};
-    font-size: ${(props) => props.theme.fontSizes[1]};
-    line-height: 18px;
-    font-weight: ${(props) => props.theme.fontWeights.semibold};
-  }
-  :hover,
-  :focus {
-    border-color: ${(props) => props.theme.colors.primary};
-    background-color: ${(props) => props.theme.bg[props.type || "default"]};
   }
 `;
 

@@ -5,7 +5,7 @@ const { Meta } = Card;
 
 const StyledCard = styled(Card)`
   background-color: transparent;
-  width: ${(props) => (props.variant === "small" ? "144px" : "164px")};
+  width: ${(props) => (props.variant === "small" ? "134px" : "154px")};
   height: auto;
   border: none;
   cursor: pointer;
@@ -18,8 +18,8 @@ const StyledCard = styled(Card)`
 
   .ant-card-cover img {
     border-radius: ${(props) => props.theme.borderRadius[2]};
-    width: 100%;
-    height: ${(props) => (props.variant === "small" ? "204px" : "244px")};
+    width: ${(props) => (props.variant === "small" ? "134px" : "154px")};
+    height: ${(props) => (props.variant === "small" ? "174px" : "234px")};
   }
 `;
 

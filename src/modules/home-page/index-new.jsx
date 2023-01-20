@@ -222,7 +222,7 @@ const HomePage = () => {
                     variant='medium'
                     onClick={() =>
                       navigate(
-                        `/product-page/${product.slug}?id=${product.productId}`
+                        `/product-page/${product.slug}?id=${product.id}`
                       )
                     }
                   />

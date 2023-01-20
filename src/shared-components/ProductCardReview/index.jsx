@@ -91,7 +91,7 @@ const ProductCardReview = ({
         )}
       </div>
       <div className='right-container'>
-        <h3>{item.name}</h3>
+        <h3>{name}</h3>
         {!nonEditable ? (
           <p
             style={{
@@ -106,7 +106,7 @@ const ProductCardReview = ({
         ) : (
           <p>Sold by : {item.brand.name}</p>
         )}
-        <p className='price'>Rs. {separator(item.price.currentPrice)}</p>
+        <p className='price'>Rs. {separator(price.currentPrice)}</p>
         <div className='variant'>
           <p>
             Colour: <span>{item.color?.name || "NA"}</span>,
