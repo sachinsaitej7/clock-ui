@@ -1,19 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
+import ReactDOM from "react-dom/client";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import "./index.css";
+import AppRoutes from "app/routes";
+import SplashLogo from "app/components/SplashLogo";
 
-import App from "./App.jsx";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
+import "./index.css";
 
 if (process.env.NODE_ENV === "production") {
   Sentry.init({
-    dsn: "https://c7a27bf5657b4ccea1a2f669c5e53f24@o4503977086418944.ingest.sentry.io/4503977100771328",
+    dsn: "https://a2a680d99da943b4ab0d074c4eca72f2@o4503977086418944.ingest.sentry.io/4504628947451904",
     integrations: [new BrowserTracing()],
 
     // Set tracesSampleRate to 1.0 to capture 100%
@@ -23,14 +26,13 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-ReactDOM.render(
+const router = createBrowserRouter(createRoutesFromElements(AppRoutes));
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
-    <Router>
-      <CssBaseline />
-      <App />
-    </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+    <RouterProvider router={router} fallbackElement={<SplashLogo />} />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

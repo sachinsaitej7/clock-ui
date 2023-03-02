@@ -63,6 +63,11 @@ service cloud.firestore {
       allow write: if request.auth.uid == request.resource.data.uid;
     }
 
+    match /userProfile/{userId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == request.resource.id;
+    }
+
     match /{path=**}/subcategory/{subcategoryId} {
       allow read: if true;
       allow write: if false;

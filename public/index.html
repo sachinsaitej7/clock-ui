@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="%PUBLIC_URL%/Favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content="#015850" />
     <meta
       name="description"
       content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby."
     />
-    <meta name="keywords" content="Delivery within 24 hours, Fashion, Quick Commerce, same delivery order">
+    <meta name="keywords" content="Delivery within 4 hours, Fashion, Quick Commerce, same delivery order">
     <meta name="author" content="AARAM NETWORKS PRIVATE LIMITED">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +31,8 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="icon" href="%PUBLIC_URL%/Favicon.png" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -58,4 +59,11 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+        if('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then(function() { console.log("Tada! Your service worker is now registered"); });
+    }
+  </script>
 </html>
