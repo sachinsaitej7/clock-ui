@@ -41,7 +41,6 @@ export function useUserFollower(profileData = {}) {
   const [user] = useAuth();
 
   useEffect(() => {
-    console.log("userFollowers", userFollowers);
     if (Array.isArray(userFollowers)) {
       const userFollower = userFollowers[0];
       setUserFollowerId(userFollower?.id);

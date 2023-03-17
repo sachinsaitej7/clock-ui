@@ -37,7 +37,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "createBy",
+          "fieldPath": "createdBy",
           "order": "ASCENDING"
         },
         {
