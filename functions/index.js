@@ -169,8 +169,3 @@ exports.deleteProductVariantImages = functions.firestore
       console.log(error);
     }
   });
-
-
-// make a razorpay order
-exports.makeRazorpayOrder = functions.https.onCall(async (data, context) => {
-  
