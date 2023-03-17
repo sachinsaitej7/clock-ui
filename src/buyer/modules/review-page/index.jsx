@@ -40,6 +40,7 @@ const StyledButton = styled(Button)`
   background-color: ${(props) => props.theme.bg[props.type || "default"]};
   margin-bottom: ${(props) => props.theme.space[5]};
   margin-top: ${(props) => props.theme.space[5]};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   height: 40px;
   span {
     color: ${(props) =>

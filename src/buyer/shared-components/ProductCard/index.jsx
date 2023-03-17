@@ -110,6 +110,7 @@ const ProductCard = ({
                 variant === "small" ? theme.fontSizes[1] : theme.fontSizes[2],
               fontWeight: theme.fontWeights.bold,
               lineHeight: variant === "small" ? "14px" : "18px",
+              marginTop: theme.space[3],
             }}
           >
             {brand.name}

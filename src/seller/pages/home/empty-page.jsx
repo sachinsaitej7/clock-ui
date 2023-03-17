@@ -9,7 +9,8 @@ const PlaceholderContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: ${(props) => props.theme.space[5]};
-  min-height: 50vh;
+  height: 100%;
+  min-height: 25vh;
 `;
 
 const EmptyPage = () => {
@@ -32,7 +33,7 @@ const EmptyPage = () => {
         </Typography.Title>
       </div>
       <Typography.Text style={{ color: theme.text.light, textAlign: "center" }}>
-        List products from any store to earn money
+       Tap “+” below to get started
       </Typography.Text>
     </PlaceholderContainer>
   );

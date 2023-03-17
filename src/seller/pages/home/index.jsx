@@ -1,25 +1,21 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
-import isEmpty from "lodash/isEmpty";
-import { Typography, Badge, App } from "antd";
+import moment from "moment";
+import { Typography } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { getFirebase } from "app/firebase";
 import { useProductsByProfileId, useUserProfile } from "./hooks";
 import { PageContainer } from "seller/styled-components";
 import Spinner from "seller/shared-components/Spinner";
-import EmptyPage from "./empty-page";
+import { ReactComponent as Calender } from "app/assets/common/calender.svg";
+import { ReactComponent as Add } from "seller/assets/common/plus-circle-filled.svg";
 import AddNew from "./add-new";
 import Products from "./products";
-import { getProfileShareData, handleShare } from "./utils";
-import { ReactComponent as SettingsIcon } from "seller/assets/common/settings.svg";
-import { ReactComponent as ShareIcon } from "seller/assets/common/share.svg";
 import {
-  StyledButton,
-  StyledStickyContainer,
+  StyledStickyFloater,
   ProfileNameContainer,
-  StyledTag as Tag,
 } from "seller/styled-components";
 
 const StyledContainer = styled(PageContainer)`
@@ -31,30 +27,39 @@ const StyledContainer = styled(PageContainer)`
 `;
 
 const StyledNameContainer = styled(ProfileNameContainer)`
+  display: block;
+  padding: ${(props) => props.theme.space[5]};
+  img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-top: -${(props) => props.theme.space[9]};
+    border: 2px solid ${(props) => props.theme.bg.primary};
+  }
+  p {
+    font-size: ${(props) => props.theme.fontSizes[2]};
+    color: ${(props) => props.theme.text.light};
+    margin: ${(props) => props.theme.space[2]} 0px;
+    span {
+      color: ${(props) => props.theme.text.dark};
+      font-weight: ${(props) => props.theme.fontWeights.semibold};
+      display: inline-block;
+      margin: 0px ${(props) => props.theme.space[1]};
+    }
+  }
   .name {
     h5 {
-      margin: ${(props) => props.theme.space[0]};
+      margin: ${(props) => props.theme.space[4]} 0px;
     }
-    margin-left: ${(props) => props.theme.space[3]};
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 `;
 
-const StyledTag = styled(Tag)`
-  display: inline-flex;
-  align-items: center;
-  background-color: ${(props) => props.theme.bg.default};
-  font-weight: ${(props) => props.theme.fontWeights.semibold};
-  font-size: ${(props) => props.theme.fontSizes[1]};
-  margin: ${(props) => props.theme.space[0]};
-`;
-
 const HomePage = () => {
   const navigate = useNavigate();
   const theme = useTheme();
-  const { message } = App.useApp();
   const { auth } = getFirebase();
   const [user] = useAuthState(auth);
   const [profile, profileLoading] = useUserProfile(user.uid);
@@ -79,55 +84,61 @@ const HomePage = () => {
   return (
     <StyledContainer>
       <div>
-        <div
-          style={{ padding: theme.space[5], backgroundColor: theme.bg.dark }}
-        >
-          <StyledNameContainer>
-            <img src={profile.logo} alt='logo' width='100px'></img>
-            <div className='name'>
-              <Typography.Title level={5}>{profile.name}</Typography.Title>
-              <Badge
-                status={profile.status ? "success" : "error"}
-                text={profile.status ? "Active" : "Inactive"}
-                size='small'
-              />
-            </div>
-          </StyledNameContainer>
+        <div>
           <div
             style={{
-              marginTop: theme.space[3],
-              display: "flex",
-              justifyContent: "space-between",
+              height: "84px",
+              backgroundColor: theme.bg.primary,
             }}
-          >
-            <StyledTag icon={<SettingsIcon width='16px' />}>
-              Profile Settings
-            </StyledTag>
-            <StyledTag
-              icon={<ShareIcon width='16px' />}
-              onClick={() => {
-                handleShare(getProfileShareData(profile), (text) => {
-                  message.success(text);
-                });
+          ></div>
+          <StyledNameContainer>
+            <img src={profile.logo} alt='logo'></img>
+            <div className='name'>
+              <Typography.Title level={5}>{profile.name}</Typography.Title>
+            </div>
+            <p>
+              <span>
+                {profile.followers?.count > 0 ? profile.followers?.count : 0}
+              </span>{" "}
+              followers
+              <span
+                style={{
+                  margin: `0px ${theme.space[3]}`,
+                  width: "4px",
+                  height: "4px",
+                  background: "#D9D9D9",
+                  borderRadius: "50%",
+                  verticalAlign: "middle",
+                }}
+              ></span>
+              <span>{products.length || 0}</span> listed products
+            </p>
+            <p>{profile.description || "No Description"}</p>
+            <div
+              style={{
+                color: theme.text.light,
+                fontSize: theme.fontSizes[2],
+                display: "flex",
+                alignContent: "center",
               }}
-            ></StyledTag>
-          </div>
+            >
+              <Calender width='14px' />
+              <span
+                style={{ marginLeft: theme.space[3] }}
+              >{`Seller since ${moment(profile.createdAt.toDate()).format(
+                "MMMM YYYY"
+              )}`}</span>
+            </div>
+          </StyledNameContainer>
         </div>
-
-        {isEmpty(products) ? (
-          <EmptyPage profile={profile} onClick={() => setAddNew(true)} />
-        ) : (
-          <Products />
-        )}
+        <Products />
       </div>
-      <StyledStickyContainer>
-        <StyledButton
-          style={{ width: "100%", marginTop: theme.space[0] }}
+      <StyledStickyFloater>
+        <Add
+          style={{ color: theme.colors.primary }}
           onClick={() => setAddNew(true)}
-        >
-          List a product
-        </StyledButton>
-      </StyledStickyContainer>
+        />
+      </StyledStickyFloater>
     </StyledContainer>
   );
 };

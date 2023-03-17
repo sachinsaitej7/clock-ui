@@ -72,6 +72,33 @@ export const StyledStickyContainer = styled.div`
   }
 `;
 
+
+export const StyledStickyFloater = styled.div`
+  width: 45px;
+  height: 45px;
+  overflow: hidden;
+  position: fixed;
+  box-sizing: border-box;
+  background-color: ${(props) => props.theme.bg.default};
+  padding: ${(props) => `${props.theme.space[0]}`};
+  box-shadow: 0px -2px 12px rgba(0, 0, 0, 0.08);
+  bottom: ${(props) => props.theme.space[9]};
+  right: ${(props) => props.theme.space[4]};
+  z-index: 100;
+  border-radius: 50%;
+
+  @media (min-width: 769px) {
+    left: -10%;
+    margin-left: 20%;
+  }
+
+  @media (min-width: 1025px) {
+    left: -50%;
+    margin-left: 50%;
+  }
+`;
+
+
 export const ProfileNameContainer = styled.div`
   display: flex;
   align-items: center;

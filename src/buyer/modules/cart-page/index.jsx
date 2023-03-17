@@ -37,6 +37,7 @@ const StyledButton = styled(Button)`
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[2]};
   padding: ${(props) => `${props.theme.space[3]} ${props.theme.space[4]}`};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 40px;
   &.ant-btn:hover {

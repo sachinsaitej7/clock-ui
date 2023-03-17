@@ -13,6 +13,7 @@ const StyledButton = styled(Button)`
   margin: ${(props) => props.theme.space[5]};
   margin-left: 0px;
   height: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   span {
     color: ${(props) => props.theme.text.white};
     font-size: ${(props) => props.theme.fontSizes[4]};

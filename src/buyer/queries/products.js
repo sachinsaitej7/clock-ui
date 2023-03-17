@@ -117,6 +117,34 @@ export function fetchProductsByBrandQuery(
   return q;
 }
 
+
+export function fetchProductsByProfileQuery(
+  profileId,
+  lastDoc = null,
+  pageLimit = 25
+) {
+  let q = null;
+  if (lastDoc) {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("createdBy", "==", profileId),
+      orderBy("createdAt", "desc"),
+      startAfter(lastDoc),
+      limit(pageLimit)
+    );
+  } else {
+    q = query(
+      productRef,
+      where("status", "==", true),
+      where("createdBy", "==", profileId),
+      orderBy("createdAt", "desc"),
+      limit(pageLimit)
+    );
+  }
+  return q;
+}
+
 export function fetchProductsByCategoryQuery(
   categoryId,
   lastDoc = null,

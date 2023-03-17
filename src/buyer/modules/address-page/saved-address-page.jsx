@@ -26,6 +26,7 @@ const StyledButton = styled(Button)`
   border-radius: ${(props) => props.theme.borderRadius[2]};
   padding: ${(props) => `${props.theme.space[3]} ${props.theme.space[5]}`};
   background-color: ${(props) => props.theme.bg[props.type || "default"]};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: ${(props) => props.theme.space[5]};
   height: 40px;
   span {

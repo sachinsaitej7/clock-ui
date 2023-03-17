@@ -1,15 +1,15 @@
 import {
-  useDocumentData,
+  useDocumentDataOnce,
   useCollectionData,
 } from "react-firebase-hooks/firestore";
-import { ProductQuery, BrandQuery } from "../../queries";
+import { ProductQuery, BrandQuery, ProfileQuery } from "buyer/queries";
 
 export function useProduct(id) {
-  return useDocumentData(ProductQuery.fetchProductQuery(id));
+  return useDocumentDataOnce(ProductQuery.fetchProductQuery(id));
 }
 
 export function useBrand(id) {
-  return useDocumentData(BrandQuery.fetchBrandQuery(id));
+  return useDocumentDataOnce(BrandQuery.fetchBrandQuery(id));
 }
 
 export function useProductImages(id) {
@@ -18,4 +18,8 @@ export function useProductImages(id) {
 
 export function useProductVariants(id) {
   return useCollectionData(ProductQuery.fetchProductVariantsQuery(id));
+}
+
+export function useUserProfile(id) {
+  return useDocumentDataOnce(ProfileQuery.fetchUserProfileQuery(id));
 }

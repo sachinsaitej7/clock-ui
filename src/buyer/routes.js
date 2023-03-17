@@ -7,10 +7,11 @@ import AuthRoute from "app/hoc/AuthRoute";
 import Root from "buyer";
 const HomePage = lazy(() => import("buyer/modules/home-page"));
 const CollectionPage = lazy(() => import("buyer/modules/collection-page"));
+const ProfilePage = lazy(() => import("buyer/modules/profile-page"));
 const ProductPage = lazy(() => import("buyer/modules/product-page"));
 const BrandPage = lazy(() => import("buyer/modules/brand-page"));
 const TnCPage = lazy(() => import("buyer/modules/other-pages/tnc"));
-const ProfilePage = lazy(() =>
+const UserProfilePage = lazy(() =>
   import("buyer/modules/other-pages/profile-page")
 );
 const CartPage = lazy(() => import("buyer/modules/cart-page"));
@@ -57,6 +58,15 @@ const BuyerRoute = (
       }
     />
     <Route
+      path='profile-page/*'
+      exact
+      element={
+        <Suspense fallback={<Spinner />}>
+          <ProfilePage />
+        </Suspense>
+      }
+    />
+    <Route
       path='cart'
       exact
       element={
@@ -71,7 +81,7 @@ const BuyerRoute = (
         exact
         element={
           <Suspense fallback={<Spinner />}>
-            <ProfilePage />
+            <UserProfilePage />
           </Suspense>
         }
       />

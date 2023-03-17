@@ -34,6 +34,7 @@ const Container = styled.div`
 const StyledButton = styled(Button)`
   width: 100%;
   border: 2px solid ${(props) => props.theme.colors.primary};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: ${(props) => props.theme.borderRadius[2]};
   padding: ${(props) => `${props.theme.space[3]} ${props.theme.space[5]}`};
   background-color: ${(props) => props.theme.bg[props.type || "default"]};

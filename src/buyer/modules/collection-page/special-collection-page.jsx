@@ -65,6 +65,7 @@ const Collections = styled.div`
 const StyledButton = styled(Button)`
   border: 1px solid ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.borderRadius[2]};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: ${(props) => `${props.theme.space[2]} ${props.theme.space[5]}`};
   background-color: ${(props) => props.theme.bg[props.type || "default"]};
   span {

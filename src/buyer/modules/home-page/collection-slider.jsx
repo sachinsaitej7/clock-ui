@@ -78,7 +78,7 @@ const TextContainer = styled.div`
 const StyledButton = styled(Button)`
   margin-top: ${(props) => props.theme.space[4]};
   margin-bottom: ${(props) => props.theme.space[8]};
-
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
   background-color: ${(props) =>

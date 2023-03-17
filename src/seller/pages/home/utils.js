@@ -91,7 +91,7 @@ export const copyToClipboard = (text) => {
   return navigator.clipboard.writeText(text);
 };
 
-export const handleShare = (data, callback = () => {}) => {
+export const handleShare = (data, callback = () => { }) => {
   if (
     navigator.canShare &&
     data.files &&
@@ -113,7 +113,7 @@ export const getProfileShareData = ({ name, id }) => {
   const shareData = {
     title: name,
     text: "Buy from my collection on The Clock",
-    url: `https://www.theclock.xyz/profile-page/${name}?id=${id}`,
+    url: `${window.location.origin}/profile-page/${name}?id=${id}`,
   };
   return shareData;
 };
@@ -121,7 +121,22 @@ export const getProfileShareData = ({ name, id }) => {
 export const getProductShareData = async ({ name, id, thumbnail }) => {
   let file = null;
   try {
-    const blob = await fetch(thumbnail).then((r) => r.blob());
+    const img = new Image();
+    img.src = thumbnail;
+    img.crossOrigin = "Anonymous";
+    img.type = "image/png";
+
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    const dataURL = canvas.toDataURL("image/png");
+    console.log(dataURL,'dataURL');
+    const blob = await fetch(dataURL)
+      .then((r) => r.blob())
+      .catch((e) => console.log(e));
+
     file = new File([blob], "image.png", { type: blob.type });
   } catch (e) {
     console.log(e);
@@ -130,7 +145,7 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
   const shareData = {
     title: name,
     text: "Checkout this on The Clock",
-    url: `https://www.theclock.xyz/product-page/${name}?id=${id}`,
+    url: `${window.location.origin}/product-page/${name}?id=${id}`,
     files: file ? [file] : null,
   };
   return shareData;

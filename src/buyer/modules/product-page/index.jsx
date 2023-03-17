@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import styled, { useTheme } from "styled-components";
 
 import { VariantTag } from "../../shared-components/atoms";
-import { Button, Divider, Collapse, Typography } from "antd";
-
+import { Button, Divider, Collapse } from "antd";
 
 import Store from "../../store";
 
@@ -29,9 +28,9 @@ import {
   useProductImages,
   useProductVariants,
   useBrand,
+  useUserProfile,
 } from "./hooks";
 
-const { Link } = Typography;
 const { CartContext } = Store;
 const { Panel } = Collapse;
 
@@ -116,6 +115,7 @@ const StoreContainer = styled.div`
 
 const StyledButton = styled(Button)`
   margin-top: ${(props) => props.theme.space[5]};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   background-color: ${(props) => props.theme.bg[props.type || "default"]};
   border: 2px solid ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.borderRadius[2]};
@@ -147,7 +147,8 @@ const ProductPage = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
 
-  const [productData, productLoading, ...rest] = useProduct(id);
+  const [productData, productLoading] = useProduct(id);
+  const [userData] = useUserProfile(productData?.createdBy);
   const [brandData] = useBrand(productData?.brand?.id || "");
   const [productImages] = useProductImages(id);
   const [productVariants] = useProductVariants(id);
@@ -176,7 +177,7 @@ const ProductPage = () => {
       });
       setSelectedVariant(variant);
     }
-  }, [color, size]);
+  }, [color, size, productVariants]);
 
   const colorVariant = productVariants?.reduce(
     (acc, variant) => {
@@ -218,7 +219,7 @@ const ProductPage = () => {
           justifyContent: "center",
         }}
       >
-        Product not found
+        Product not found or deleted
       </div>
     );
   return (
@@ -258,12 +259,11 @@ const ProductPage = () => {
         >
           <Brand>{brand.name}</Brand>
           <Link
-            onClick={() => {
-              navigate(`/brand-page/${brand.name}?id=${brand.id}`);
-            }}
+            to={`/brand-page/${brand.name}?id=${brand.id}`}
             style={{
               color: theme.text.primary,
               fontSize: theme.fontSizes[2],
+              fontWeight: theme.fontWeights.semibold,
             }}
           >
             Visit Store
@@ -347,20 +347,52 @@ const ProductPage = () => {
         <PincodeChecker />
         <Divider className='divider' />
         {brandData?.address && (
-          <StoreContainer>
-            <h5>
-              <MouseSquare />
-              Store Details
-            </h5>
-            <p style={{ marginTop: theme.space[2] }}>
-              {["address", "city", "state", "country", "pincode"]
-                .map((item) => brandData.address[item])
-                .filter((item) => item)
-                .join(", ")}
-            </p>
-          </StoreContainer>
+          <>
+            <StoreContainer>
+              <h5>
+                <MouseSquare />
+                Store Details
+              </h5>
+              <p style={{ marginTop: theme.space[2] }}>
+                {["address", "city", "state", "country", "pincode"]
+                  .map((item) => brandData.address[item])
+                  .filter((item) => item)
+                  .join(", ")}
+              </p>
+            </StoreContainer>
+            <Divider className='divider' />
+          </>
         )}
-        <Divider className='divider' />
+        {userData && (
+          <>
+            <StoreContainer>
+              <h5>Listed by</h5>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignContent: "center",
+                }}
+              >
+                <p style={{ marginTop: theme.space[2] }}>{userData.name}</p>
+                <div>
+                  <Link
+                    to={`/profile-page/${userData.name}?id=${userData.id}`}
+                    style={{
+                      color: theme.text.primary,
+                      fontSize: theme.fontSizes[1],
+                      fontWeight: theme.fontWeights.semibold,
+                    }}
+                  >
+                    View Profile
+                  </Link>
+                </div>
+              </div>
+            </StoreContainer>
+            <Divider className='divider' />
+          </>
+        )}
+
         <div className='product-details'>
           <Collapse
             expandIconPosition='end'

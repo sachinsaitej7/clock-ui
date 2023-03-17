@@ -9,6 +9,7 @@ import {
   useUserProfile,
   // useOnDemandProducts,
 } from "./hooks";
+import EmptyPage from "./empty-page";
 import ProductCard from "seller/shared-components/ProductCard";
 import Spinner from "seller/shared-components/Spinner";
 import FilterDrawer from "seller/shared-components/Drawer";
@@ -87,19 +88,7 @@ const Products = () => {
         </Typography.Text>
       );
 
-    if (products.length === 0)
-      return (
-        <Typography.Text
-          style={{
-            color: theme.colors.text,
-            textAlign: "center",
-            display: "block",
-            margin: theme.space[6],
-          }}
-        >
-          No products found
-        </Typography.Text>
-      );
+    if (products.length === 0) return <EmptyPage />;
 
     return (
       <Collections

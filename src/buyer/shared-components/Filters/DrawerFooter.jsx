@@ -15,6 +15,7 @@ const StyledFooter = styled.div`
 const StyledButton = styled(Button)`
   border: 0px;
   border-radius: ${(props) => props.theme.borderRadius[1]};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: ${(props) => `${props.theme.space[3]} ${props.theme.space[9]}`};
   background-color: ${(props) => props.theme.bg[props.type || "default"]};
   height: 36px;

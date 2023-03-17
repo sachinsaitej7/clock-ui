@@ -11,23 +11,23 @@
     />
     <meta name="keywords" content="Delivery within 4 hours, Fashion, Quick Commerce, same delivery order">
     <meta name="author" content="AARAM NETWORKS PRIVATE LIMITED">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+    <meta property="og:title" content="Clock" />
+    <meta property="og:description" content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby." />
+    <meta property="og:image" content="https://ik.imagekit.io/jg7ousac2/v0/b/clock-poc-11334.appspot.com/o/listing-images%2Fandroid-launchericon-512-512-modified.png-1678962827039?alt=media&token=676464bc-db1f-4354-8e2a-54843215c4f3" />
+    <meta property="og:url" content="https://theclock.xyz/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Clock" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Clock" />
+    <meta name="twitter:description" content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby." />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/Favicon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,100&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <!--
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
@@ -60,10 +60,27 @@
     -->
   </body>
   <script>
-        if('serviceWorker' in navigator) {
+
+      // Registering service worker and background sync
+          if('serviceWorker' in navigator && 'SyncManager' in window) {
         navigator.serviceWorker
             .register('/sw.js')
-            .then(function() { console.log("Tada! Your service worker is now registered"); });
+            .then(function() {
+                return navigator.serviceWorker.ready;
+            })
+            .then(function(sw) {
+                var sync = sw.sync.register('sync-new-posts');
+                return sync;
+            })
+            .then(function() {
+                console.log('Sync registered');
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+
+    } else{
+        console.log('Service worker or SyncManager not supported');
     }
   </script>
 </html>

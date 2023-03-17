@@ -1,7 +1,7 @@
 import {
   useCollectionDataOnce,
   useCollectionData,
-  useDocumentDataOnce,
+  useDocumentData,
 } from "react-firebase-hooks/firestore";
 import {
   collection,
@@ -34,7 +34,7 @@ const productVariantRef = collection(db, "productVariant");
 // hook to get userProfile data
 export const useUserProfile = (id = "0") => {
   const userProfileDoc = doc(db, "userProfile", id).withConverter(idConverter);
-  const data = useDocumentDataOnce(userProfileDoc);
+  const data = useDocumentData(userProfileDoc);
   return data;
 };
 

@@ -13,7 +13,7 @@ import {
   useProductVariantsByProductId,
   updateProductVariant,
   deleteProduct,
-  deleteProductVariants,
+  // deleteProductVariants,
 } from "./hooks";
 
 const StyledContent = styled.div`
@@ -79,7 +79,7 @@ function ProductView({ product, handleClose }) {
     try {
       setLoading(true);
       await deleteProduct(product.id);
-      deleteProductVariants(variants.map((variant) => variant.id));
+      // deleteProductVariants(variants.map((variant) => variant.id));
       message.success("Product deleted successfully");
     } catch (error) {
       message.error("Something went wrong, please try again later");

@@ -20,6 +20,7 @@ export const BrandCard = styled.div`
 
   h2 {
     font-weight: ${(props) => props.theme.fontWeights.semibold};
+    margin: ${(props) => props.theme.space[2]} 0px;
   }
 
   img {
