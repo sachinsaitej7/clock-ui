@@ -5,6 +5,7 @@ const {getFileNameFromUrl} = require("./utils");
 admin.initializeApp();
 const db = admin.firestore();
 const storage = admin.storage();
+const ADMIN_USER_ID = "Gx0eO6PTNuWAf08dcxFXFriadJ33";
 
 // on create userProfile add userFollowers document
 exports.addAdminAsUserFollowersForProfile = functions.firestore
@@ -12,10 +13,8 @@ exports.addAdminAsUserFollowersForProfile = functions.firestore
     .onCreate(async (snap, context) => {
       const {id} = context.params;
       const {name, logo} = snap.data();
-      // admin user id
-      const adminId = "c3ssJbzX7zsJvDDToB7umOgK8U0P";
       const data = {
-        userId: adminId,
+        userId: ADMIN_USER_ID,
         profileData: {
           id,
           name,
@@ -48,7 +47,6 @@ exports.aggregateUserFollowerCount = functions.firestore
         const userProfileSnap = await userProfileRef.get();
         const {followers} = userProfileSnap.data();
         const {count} = followers;
-        console.log("count", count);
         if (count > 0) {
           return await userProfileRef.update({
             followers: {

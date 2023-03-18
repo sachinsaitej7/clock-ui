@@ -25,28 +25,35 @@ export function useOrderData(user) {
   const orderUnSubscription = useRef(() => {});
   const addressUnSubscription = useRef(() => {});
 
-  const loadAddress = async () => {
-    try {
-      let localAddress = await localStorage.getItem("address");
-      localAddress = localAddress ? JSON.parse(localAddress) : null;
-      setActiveAddress(localAddress);
-    } catch (e) {
-      localStorage.removeItem("address");
-      console.log(e);
+const loadAddress = async () => {
+  try {
+    let localAddress = localStorage.getItem("address");
+    if (typeof localAddress === "string") {
+      try {
+        localAddress = JSON.parse(localAddress);
+        setActiveAddress(localAddress);
+      } catch (e) {
+        console.log("Error parsing address JSON:", e);
+      }
     }
+  } catch (e) {
+    console.log("Error loading address from localStorage:", e);
+    localStorage.removeItem("address");
+  }
+};
+
+useEffect(() => {
+  loadAddress();
+  return () => {
+    orderUnSubscription.current();
+    addressUnSubscription.current();
   };
+}, []);
 
-  useEffect(() => {
-    loadAddress();
-    return () => {
-      orderUnSubscription.current();
-      addressUnSubscription.current();
-    };
-  }, []);
-
-  useEffect(() => {
+useEffect(() => {
+  if (activeAddress)
     localStorage.setItem("address", JSON.stringify(activeAddress));
-  }, [activeAddress]);
+}, [activeAddress]);
 
   const setUpAddressMeta = useCallback(() => {
     const deliveryQuery = query(

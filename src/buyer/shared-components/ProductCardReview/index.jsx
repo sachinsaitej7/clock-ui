@@ -77,7 +77,7 @@ const ProductCardReview = ({
   ...item
 }) => {
   const theme = useTheme();
-  const { thumbnail, name, price, quantity } = item;
+  const { thumbnail, name, price } = item;
   return (
     <Container>
       <div className='left-container'>

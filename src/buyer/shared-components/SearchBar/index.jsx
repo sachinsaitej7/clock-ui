@@ -87,7 +87,7 @@ const SearchBar = ({
       <StyledSearch
         placeholder={placeholder}
         size='large'
-        loading={loading}
+        loading={loading.toString()}
         suffix={searchMode ? null : <SearchOutlined width='16px' />}
         onChange={onChange}
         onClick={searchMode ? undefined : onClick}

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
-// import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
 
@@ -42,21 +42,21 @@ window.FIREBASE_APPCHECK_DEBUG_TOKEN =
 // eslint-disable-next-line no-restricted-globals
 self.FIREBASE_APPCHECK_DEBUG_TOKEN = window.FIREBASE_APPCHECK_DEBUG_TOKEN;
 
-// const appCheckConfig = {
-//   provider: new ReCaptchaV3Provider("6LcfyswjAAAAAADeNjYPVGqhRE3O0XYIHtOmtHAF"),
-//   isTokenAutoRefreshEnabled: true,
-// };
+const appCheckConfig = {
+  provider: new ReCaptchaV3Provider(process.env.REACT_APP_RECAPTCHA),
+  isTokenAutoRefreshEnabled: true,
+};
 
 // app-check
-// function initializeAppCheckApp(app) {
-//   const appCheck = initializeAppCheck(app, appCheckConfig);
-//   return appCheck;
-// }
+function initializeAppCheckApp(app) {
+  const appCheck = initializeAppCheck(app, appCheckConfig);
+  return appCheck;
+}
 
 // Initialize Firebase
 export function initialize() {
   const app = initializeApp(config.firebase);
-  // const appCheck = initializeAppCheckApp(app);
+  const appCheck = initializeAppCheckApp(app);
   const analytics = getAnalytics(app);
   const db = getFirestore(app);
   const auth = getAuth(app);
@@ -72,7 +72,7 @@ export function initialize() {
     db,
     auth,
     storage,
-    // appCheck,
+    appCheck,
   };
 }
 

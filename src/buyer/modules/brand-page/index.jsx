@@ -68,7 +68,7 @@ const BrandPage = () => {
   const [products, setProducts] = useState([]);
   const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
 
-  const [productsData, productsLoading, error, snapshot] = useProductsByBrand(
+  const [productsData, productsLoading, , snapshot] = useProductsByBrand(
     params.id,
     lastSnapshot
   );
