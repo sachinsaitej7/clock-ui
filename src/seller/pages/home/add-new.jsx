@@ -141,7 +141,6 @@ export default function AddNew({ profile, setAddNew }) {
       return;
     }
     try {
-      console.log(productData)
       const id = await addProduct(productData);
       await addProductVariants(productData, id);
       message.success("Product added successfully");
