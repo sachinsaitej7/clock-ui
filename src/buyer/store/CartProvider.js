@@ -21,9 +21,9 @@ function useCartData() {
   }, []);
 
   useEffect(() => {
-    return () => saveItems(items);
-  }, []);
-
+    saveItems(items);
+  }, [items, saveItems]);
+  
   const updateItem = useCallback((item) => {
     setItems((items) =>
       items.map((i) => {

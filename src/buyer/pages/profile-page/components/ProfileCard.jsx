@@ -72,59 +72,59 @@ const ProfileDetails = ({
   createdAt,
 }) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [mode, setMode] = React.useState(null);
 
   return (
     <div>
-      <ProfilesList open={open} setOpen={setOpen} />
+      <ProfilesList mode={mode} setMode={setMode} />
       <div>
-        <div className="flex justify-between items-center">
+        <div className='flex justify-between items-center'>
           <Typography.Title
             style={{ marginBottom: 0 }}
             level={4}
-            className="mb-0"
+            className='mb-0'
           >
             {name}
           </Typography.Title>
           <FollowButton />
         </div>
         <div
-          className="flex justify-start items-center my-1"
+          className='flex justify-start items-center my-1'
           style={{
             color: theme.text.light,
             fontSize: theme.fontSizes[1],
             lineHeight: "120%",
           }}
         >
-          <p>
-            <strong className="text-black">
+          <p onClick={() => setMode("followers")} className='text-primary'>
+            <strong className='text-black'>
               {followers?.count > 0 ? followers?.count : 0}
             </strong>{" "}
             <span>followers</span>
           </p>
-          <p className="mx-2 w-1 h-1 bg-[#D9D9D9] rounded-full inline-block align-middle"></p>
+          <p className='mx-2 w-1 h-1 bg-[#D9D9D9] rounded-full inline-block align-middle'></p>
           <p>
-            <strong className="text-black">{productsCount || 0}</strong> listed
+            <strong className='text-black'>{productsCount || 0}</strong> listed
             products
           </p>
         </div>
-        <p className="my-1">{description || "No Description"}</p>
+        <p className='my-1'>{description || "No Description"}</p>
         <div
           style={{
             color: theme.text.light,
             fontSize: theme.fontSizes[2],
           }}
-          className="flex items-center"
+          className='flex items-center'
         >
-          <CalendarDaysIcon width="14px" />
-          <span className="ml-1">{`Seller since ${moment(
+          <CalendarDaysIcon width='14px' />
+          <span className='ml-1'>{`Seller since ${moment(
             createdAt.toDate()
           ).format("MMMM YYYY")}`}</span>
         </div>
         <Button
-          size="small"
-          className="text-primary mt-1"
-          onClick={() => setOpen(true)}
+          size='small'
+          className='text-primary mt-1'
+          onClick={() => setMode("following")}
         >
           Other Profiles
         </Button>

@@ -119,7 +119,7 @@ export default function AddNew({ profile, setAddNew }) {
     const productData = {
       name: nameRef.current.input.value,
       price: +priceRef.current.input.value,
-      description: descriptionRef.current.input.value,
+      description: descriptionRef.current.value,
       category: categories?.find((c) => selectedSubcategory?.parentId === c.id),
       subcategory: selectedSubcategory,
       sizes: selectedSizes.map((size) => ({
@@ -141,6 +141,7 @@ export default function AddNew({ profile, setAddNew }) {
       return;
     }
     try {
+      console.log(productData)
       const id = await addProduct(productData);
       await addProductVariants(productData, id);
       message.success("Product added successfully");

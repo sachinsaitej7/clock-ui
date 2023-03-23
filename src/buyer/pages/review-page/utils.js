@@ -1,9 +1,13 @@
-export const getPayload = async (items, user, activeAddress) => {
-  const idToken = await user.getIdToken();
-  const payload = {
-    items: items,
-    id_token: idToken,
-    delivery_address_id: activeAddress.id,
-  };
-  return payload;
+export const loadScript = (src) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
 };

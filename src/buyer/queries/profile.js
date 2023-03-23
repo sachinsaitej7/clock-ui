@@ -57,7 +57,7 @@ export function fetchUserFollowersByUserQuery(userId) {
 export const addUserFollower = async (user, profileData = {}) => {
   if (!user || !profileData.id) return;
   const data = {
-    userId: user.uid,
+    userId: user.id,
     userData: pick(user, ["name", "logo"]),
     profileData: pick(profileData, ["id", "name", "logo"]),
     status: true,

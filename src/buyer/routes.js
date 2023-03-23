@@ -15,10 +15,8 @@ const ProductPage = lazy(() => import("@buyer/pages/product-page"));
 const CartPage = lazy(() => import("@buyer/pages/cart-page"));
 
 const TnCPage = lazy(() => import("@buyer/pages/other-pages/tnc"));
-// const UserProfilePage = lazy(() =>
-//   import("@buyer/pages/other-pages/profile-page")
-// );
-const ReviewPage = lazy(() => import("@buyer/pages/review-page-new"));
+
+const ReviewPage = lazy(() => import("@buyer/pages/review-page"));
 const OrderPage = lazy(() => import("@buyer/pages/order-page"));
 
 const BuyerRoute = (

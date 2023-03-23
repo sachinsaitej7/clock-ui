@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import { Divider, Button } from "antd";
 
 import { Spinner } from "@app/components";
 import { ProductCardReview, SummaryCard, AddressCard } from "@buyer/components";
+import Celebrations from "./components/Celebrations";
 import { useGetOrderData, useGetOrderItems } from "./hooks";
 
 const Container = styled.div`
@@ -59,8 +60,11 @@ const OrderPage = () => {
 
   if (loading || itemsLoading) return <Spinner />;
 
+  if(!orderData) return <div>Order not found</div>
+
   return (
     <Container>
+      <Celebrations />
       <div
         style={{
           textAlign: "center",

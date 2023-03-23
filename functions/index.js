@@ -1,6 +1,13 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const Razorpay = require("razorpay");
+// const algoliasearch = require("algoliasearch");
+
+
+// const algoliaClient = algoliasearch(
+//   functions.config().algolia.appid,
+//   functions.config().algolia.apikey
+// );
 
 const {
   getFileNameFromUrl,
@@ -17,8 +24,8 @@ const ADMIN_DATA = {
   logo: "https://ik.imagekit.io/jg7ousac2/v0/b/clock-poc-11334.appspot.com/o/listing-images%2F184C79EB-569E-4E91-8165-2036AEB6E10B.jpeg-1675653207087?alt=media&token=4ba335d6-5a32-4ba4-855b-23c643ebb1e6",
 };
 
-const RAZORPAY_KEY_ID = "rzp_live_wKoj3DjB4pqEY2";
-const RAZORPAY_KEY_SECRET = "sq5MooS6VgMFhZB5nVkFbCwM";
+const RAZORPAY_KEY_ID = functions.config().razorpay.keyid;
+const RAZORPAY_KEY_SECRET = functions.config().razorpay.secret;
 
 const razorpay = new Razorpay({
   key_id: RAZORPAY_KEY_ID,
@@ -192,6 +199,53 @@ exports.deleteProductVariantImages = functions.firestore
       await file.delete();
     } catch (error) {
       console.log(error);
+    }
+  });
+
+  // add size variants to product
+exports.addSizeVariants = functions.firestore
+  .document("productVariant/{productVariantId}")
+  .onCreate(async (snap, context) => {
+    const { productId, size } = snap.data();
+    const productRef = db.collection("product").doc(productId);
+    const productSnap = await productRef.get();
+    const { sizes } = productSnap.data();
+    if (!sizes?.includes(size.values)) {
+      return await productRef.update({
+        sizes: sizes ? admin.firestore.FieldValue.arrayUnion(size.values) : [size.values],
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+  });
+
+  // send email to user when order is placed
+exports.sendOrderEmail = functions.firestore
+  .document("order/{orderId}")
+  .onWrite(async (change, context) => {
+    const { orderId } = context.params;
+    const { status } = change.after.data();
+    const { status: prevStatus } = change.before.data();
+    if (status !== prevStatus && ['order_placed', 'payment_received'].includes(status)) {
+      const orderRef = db.collection("orders").doc(orderId);
+      const orderSnap = await orderRef.get();
+      const { userId, address, paymentType, totalAmount } = orderSnap.data();
+      const userRef = db.collection("userProfile").doc(userId);
+      const userSnap = await userRef.get();
+      const {  name, } = userSnap.data();
+
+      const newMessageRef = db.collection('emails').doc();
+      const messageData = {
+        subject: `New Order placed by ${name || "New User"} || ${orderId}`,
+        text: `New Order placed by ${name || "New User"}.\nAddress: ${address.address
+          }, pincode: ${address.pincode}.\nMobile: ${address.mobileNo
+          }\\nPayment Type: ${paymentType}.\nTotal Amount: ${totalAmount}.\n link: https://theclock.xyz/order/${orderId}`,
+      };
+
+      await setDoc(newMessageRef, {
+        message: messageData,
+        to: "barathms13@gmail.com",
+        cc: "sachin.saitej.7@gmail.com",
+      });
     }
   });
 
