@@ -8,11 +8,11 @@ import { ConfigProvider, App as AntdApp } from "antd";
 
 import Store from "./store";
 
-import { useCartData } from "buyer/hooks/useCartData";
-import { useAuthData } from "buyer/hooks/useAuthData";
-import { useOrderData } from "buyer/hooks/useOrderData";
+import { useCartData } from "@buyer/hooks/useCartData";
+import { useAuthData } from "@buyer/hooks/useAuthData";
+import { useOrderData } from "@buyer/hooks/useOrderData";
 
-import WithTopAndBottom from "buyer/wrappers/WithTopAndBottom";
+import WithTopAndBottom from "@buyer/wrappers/WithTopAndBottom";
 
 
 const queryClient = new QueryClient();

@@ -6,13 +6,13 @@ import { Typography } from "antd";
 import { useProfileContext } from "./context";
 
 //images
-import { ReactComponent as InfoIcon } from "seller/assets/common/info-circle.svg";
+import { ReactComponent as InfoIcon } from "@seller/assets/common/info-circle.svg";
 
 import {
   StyledStickyContainer,
   StyledButton,
   ProfileNameContainer,
-} from "seller/styled-components";
+} from "@seller/styled-components";
 import { StyledCard, Container } from "./styled";
 
 const Step4 = () => {

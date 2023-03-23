@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { useAppMode } from "app/store";
+import { useAppMode } from "@app/store";
 
 //antd use icon
 import { UserOutlined, ShopOutlined } from "@ant-design/icons";

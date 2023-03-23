@@ -6,7 +6,7 @@ import {
   signInWithCredential,
 } from "firebase/auth";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 
 export const useSendOtp = () => {
   const [verificationId, setVerificationId] = useState(null);

@@ -1,4 +1,4 @@
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import {
   collection,
   collectionGroup,
@@ -116,7 +116,6 @@ export function fetchProductsByBrandQuery(
   }
   return q;
 }
-
 
 export function fetchProductsByProfileQuery(
   profileId,

@@ -1,4 +1,4 @@
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import {
   doc,
   collection,
@@ -48,8 +48,5 @@ export const addUserFollower = async (userId, profileData = {}) => {
 export async function updateUserFollower(id, data = {}) {
   if (!id) return;
   const updatedData = { ...data, updatedAt: serverTimestamp() };
-  return await updateDoc(
-    doc(db, "userFollowers", id),
-    updatedData
-  );
+  return await updateDoc(doc(db, "userFollowers", id), updatedData);
 }

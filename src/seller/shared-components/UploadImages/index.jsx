@@ -5,7 +5,7 @@ import { Modal, Upload, App } from "antd";
 import { useUploadImage, useDeleteImage } from "./hooks";
 
 // images
-import { ReactComponent as UploadImagePlaceholder } from "seller/assets/home/image-placeholder.svg";
+import { ReactComponent as UploadImagePlaceholder } from "@seller/assets/home/image-placeholder.svg";
 
 const StyledUpload = styled(Upload)`
   .ant-upload-select {

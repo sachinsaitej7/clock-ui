@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "styled-components";
 import { Form, Typography, Input, Row, Col, App } from "antd";
 
-import { StyledButton } from "seller/styled-components";
+import { StyledButton } from "@seller/styled-components";
 
 const SendOtpForm = ({
   sendOtp,

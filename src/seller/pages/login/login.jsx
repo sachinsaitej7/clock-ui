@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Button } from "antd";
 import styled, { useTheme } from "styled-components";
 
-import { StyledButton } from "seller/styled-components";
+import { StyledButton } from "@seller/styled-components";
 
 const Container = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import {
   useDocumentDataOnce,
   useCollectionData,
 } from "react-firebase-hooks/firestore";
-import { ProductQuery, BrandQuery, ProfileQuery } from "buyer/queries";
+import { ProductQuery, BrandQuery, ProfileQuery } from "@buyer/queries";
 
 export function useProduct(id) {
   return useDocumentDataOnce(ProductQuery.fetchProductQuery(id));

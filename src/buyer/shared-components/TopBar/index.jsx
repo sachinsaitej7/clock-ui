@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
+import { Drawer } from "antd";
 
 //images
-import { ReactComponent as Logo } from "../../assets/common/logo-mobile.svg";
-import { ReactComponent as CartIcon } from "../../assets/common/shopping-cart.svg";
-import { ReactComponent as MenuIcon } from "../../assets/common/menu.svg";
-import { ReactComponent as CCloseIcon } from "../../assets/common/close-circle.svg";
+import { ReactComponent as Logo } from "@app/assets/common/logo-mobile.svg";
+import { ReactComponent as CartIcon } from "@app/assets/common/shopping-cart.svg";
+import { ReactComponent as MenuIcon } from "@app/assets/common/menu.svg";
 
-import { Drawer } from "antd";
-import TopMenu from "../TopMenu";
-import { CircleTag } from "../atoms";
-import LoginModal from "../LoginModal";
+import { CircleTag, LoginModal } from "@buyer/shared-components/atoms";
 
 const TopBarContainer = styled.div`
   width: 100%;
@@ -49,7 +46,7 @@ const StyledDrawer = styled(Drawer)`
   top: 50px;
   height: 100%;
   max-width: 768px;
-  margin: 0px auto;
+  margin: 50px auto;
 `;
 
 const TopBar = ({
@@ -61,50 +58,43 @@ const TopBar = ({
 }) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const theme = useTheme();
-  const handleMenu = () => {
-    setDrawerVisible(!drawerVisible);
+
+  const toggleDrawer = () => {
+    setDrawerVisible((prev) => !prev);
   };
 
   return (
     <TopBarContainer>
       <StyledLogoContainer>
-        <Link to="/">
+        <Link to='/'>
           <Logo />
         </Link>
       </StyledLogoContainer>
-      {drawerVisible ? (
-        <RightMenuContainer close>
-          <div style={{ width: "20px" }}></div>
-          <CCloseIcon onClick={handleMenu} />
-        </RightMenuContainer>
-      ) : (
-        <RightMenuContainer>
-          <div
-            style={{ position: "relative" }}
-            onClick={() => clickHandler("cart")}
-          >
-            <CartIcon />
-            {!!itemsCount && (
-              <CircleTag
-                active
-                style={{
-                  position: "absolute",
-                  top: "-10px",
-                  right: "-10px",
-                  padding: theme.space[2],
-                  lineHeight: "12px",
-                }}
-                title={itemsCount}
-              />
-            )}
-          </div>
-          <MenuIcon onClick={handleMenu} />
-        </RightMenuContainer>
-      )}
-
+      <RightMenuContainer>
+        <div
+          style={{ position: "relative" }}
+          onClick={() => clickHandler("cart")}
+        >
+          <CartIcon />
+          {!!itemsCount && (
+            <CircleTag
+              active
+              style={{
+                position: "absolute",
+                top: "-10px",
+                right: "-10px",
+                padding: theme.space[2],
+                lineHeight: "12px",
+              }}
+              title={itemsCount}
+            />
+          )}
+        </div>
+        <MenuIcon onClick={handleMenu} />
+      </RightMenuContainer>
       {drawerVisible && (
         <StyledDrawer
-          placement="top"
+          placement='top'
           onClose={handleMenu}
           visible={drawerVisible}
           closable={false}

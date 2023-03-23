@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ReactComponent as Logo } from "app/assets/common/logo-full.svg";
+import { ReactComponent as Logo } from "@assets/common/logo-full.svg";
 
 export const PageContainer = styled.div`
   width: 100%;

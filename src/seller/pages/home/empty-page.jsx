@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
 import { Typography } from "antd";
-import Eyes from "seller/assets/home/eyes.jpg";
+import Eyes from "@seller/assets/home/eyes.jpg";
 
 const PlaceholderContainer = styled.div`
   display: flex;

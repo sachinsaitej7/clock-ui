@@ -13,10 +13,10 @@ import {
 } from "./context";
 
 //images
-import { ReactComponent as LeftArrow } from "seller/assets/common/arrow-left.svg";
+import { ReactComponent as LeftArrow } from "@seller/assets/common/arrow-left.svg";
 
-import { PageContainer } from "seller/styled-components";
-import Spinner from "seller/shared-components/Spinner";
+import { PageContainer } from "@seller/styled-components";
+import Spinner from "@seller/shared-components/Spinner";
 
 import Step0 from "./step-0";
 import Step1 from "./step-1";

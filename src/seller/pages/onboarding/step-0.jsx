@@ -3,7 +3,7 @@ import { useTheme } from "styled-components";
 import { Typography } from "antd";
 
 import { useOnboardingContext } from "./context";
-import { StyledButton, StyledStickyContainer } from "seller/styled-components";
+import { StyledButton, StyledStickyContainer } from "@seller/styled-components";
 
 const Step0 = () => {
   const theme = useTheme();

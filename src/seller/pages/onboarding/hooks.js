@@ -1,4 +1,4 @@
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 
 import { doc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";

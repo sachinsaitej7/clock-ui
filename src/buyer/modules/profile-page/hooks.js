@@ -4,10 +4,10 @@ import {
   useCollectionDataOnce,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import { ProductQuery, ProfileQuery } from "buyer/queries";
-import { getLastDoc } from "buyer/queries/utils";
+import { ProductQuery, ProfileQuery } from "@buyer/queries";
+import { getLastDoc } from "@buyer/queries/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 
 const { auth } = getFirebase();
 

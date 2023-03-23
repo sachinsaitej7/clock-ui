@@ -6,7 +6,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 
 const { storage } = getFirebase();
 

@@ -5,7 +5,7 @@ import { Button, Form, Typography, App } from "antd";
 // images
 import { CheckCircleOutlined } from "@ant-design/icons";
 
-import { StyledInput } from "seller/styled-components";
+import { StyledInput } from "@seller/styled-components";
 
 const StyledButton = styled(Button)`
   width: 100%;

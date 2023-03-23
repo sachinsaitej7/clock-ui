@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { debounce } from "lodash";
-import { logAnalyticsEvent } from "app/firebase/utils";
+import { logAnalyticsEvent } from "@firebase/utils";
 import {
   useHits,
   useInstantSearch,
@@ -44,7 +44,7 @@ const Header = styled.div`
   background-size: cover;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${BackgroundHome});
-  height: 300px;
+  height: 240px;
   width: 100%;
   padding: 0px ${(props) => props.theme.space[5]};
   padding-top: 40%;
@@ -146,12 +146,10 @@ const HomePage = () => {
   return (
     <>
       {!searchMode && (
-        <div>
-          <Header>
-            <h2>Explore fashion from the boutiques of Chennai.</h2>
-            <p className='subtitle'>Ready to buy? Just search!</p>
-          </Header>
-        </div>
+        <Header>
+          <h2>Explore latest fashion in your city</h2>
+          <p className='subtitle'>Ready to buy? Just search!</p>
+        </Header>
       )}
       <HomePageContainer>
         <div style={{ marginTop: !searchMode ? "-40px" : "0px" }}>

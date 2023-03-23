@@ -5,18 +5,18 @@ import moment from "moment";
 import { Divider, Typography, App } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { processResults } from "buyer/utils/searchService";
+import { processResults } from "@buyer/utils/searchService";
 
-import { generateFilters } from "buyer/utils";
+import { generateFilters } from "@buyer/utils";
 
 import { useProductsByProfile, useUserProfile, useUserFollower } from "./hooks";
 import { StyledNameContainer, StyledButton } from "./styled";
 
-import Filters from "buyer/shared-components/Filters";
-import ProductCard from "buyer/shared-components/ProductCard";
-import Spinner from "buyer/shared-components/Spinner";
-import { ReactComponent as ArrowLongLeft } from "buyer/assets/common/arrow-long-left.svg";
-import { ReactComponent as Calender } from "app/assets/common/calender.svg";
+import Filters from "@buyer/shared-components/Filters";
+import ProductCard from "@buyer/shared-components/ProductCard";
+import Spinner from "@buyer/shared-components/Spinner";
+import { ReactComponent as ArrowLongLeft } from "@buyer/assets/common/arrow-long-left.svg";
+import { ReactComponent as Calender } from "@app/assets/common/calender.svg";
 
 import { getParams } from "./utils";
 

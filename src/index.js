@@ -8,8 +8,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import AppRoutes from "app/routes";
-import SplashLogo from "app/components/SplashLogo";
+import AppRoutes from "@app/routes";
+import SplashLogo from "@components/SplashLogo";
 
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";

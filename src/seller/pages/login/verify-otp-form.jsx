@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "styled-components";
 import { Form, Typography, Row, App } from "antd";
 
-import { StyledButton, StyledInput } from "seller/styled-components";
+import { StyledButton, StyledInput } from "@seller/styled-components";
 
 const { useForm } = Form;
 

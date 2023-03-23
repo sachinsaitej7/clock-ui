@@ -1,4 +1,4 @@
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import { doc } from "firebase/firestore";
 import { getIdConverter } from "./utils";
 

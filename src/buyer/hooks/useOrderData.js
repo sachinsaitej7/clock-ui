@@ -13,7 +13,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 
 export function useOrderData(user) {
   const { db } = getFirebase();

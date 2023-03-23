@@ -4,9 +4,9 @@ import { Typography, App } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import { useSendOtp, useVerifyOtp } from "./hooks";
-import { PageContainer } from "seller/styled-components";
+import { PageContainer } from "@seller/styled-components";
 import Login from "./login";
 import VerifyOtpForm from "./verify-otp-form";
 import SendOtpForm from "./send-otp-form";

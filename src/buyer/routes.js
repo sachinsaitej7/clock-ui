@@ -2,22 +2,22 @@ import React, { lazy, Suspense } from "react";
 
 import { Route } from "react-router-dom";
 
-import Spinner from "app/components/Spinner";
-import AuthRoute from "app/hoc/AuthRoute";
+import Spinner from "@app/components/Spinner";
+import AuthRoute from "@app/hoc/AuthRoute";
 import Root from "buyer";
-const HomePage = lazy(() => import("buyer/modules/home-page"));
-const CollectionPage = lazy(() => import("buyer/modules/collection-page"));
-const ProfilePage = lazy(() => import("buyer/modules/profile-page"));
-const ProductPage = lazy(() => import("buyer/modules/product-page"));
-const BrandPage = lazy(() => import("buyer/modules/brand-page"));
-const TnCPage = lazy(() => import("buyer/modules/other-pages/tnc"));
+const HomePage = lazy(() => import("@buyer/modules/home-page"));
+const CollectionPage = lazy(() => import("@buyer/modules/collection-page"));
+const ProfilePage = lazy(() => import("@buyer/modules/profile-page"));
+const ProductPage = lazy(() => import("@buyer/modules/product-page"));
+const BrandPage = lazy(() => import("@buyer/modules/brand-page"));
+const TnCPage = lazy(() => import("@buyer/modules/other-pages/tnc"));
 const UserProfilePage = lazy(() =>
-  import("buyer/modules/other-pages/profile-page")
+  import("@buyer/modules/other-pages/profile-page")
 );
-const CartPage = lazy(() => import("buyer/modules/cart-page"));
-const AddressPage = lazy(() => import("buyer/modules/address-page"));
-const ReviewPage = lazy(() => import("buyer/modules/review-page"));
-const OrderPage = lazy(() => import("buyer/modules/order-page"));
+const CartPage = lazy(() => import("@buyer/modules/cart-page"));
+const AddressPage = lazy(() => import("@buyer/modules/address-page"));
+const ReviewPage = lazy(() => import("@buyer/modules/review-page"));
+const OrderPage = lazy(() => import("@buyer/modules/order-page"));
 
 const BuyerRoute = (
   <Route path='/' element={<Root />}>

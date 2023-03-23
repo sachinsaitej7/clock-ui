@@ -3,16 +3,16 @@ import styled, { useTheme } from "styled-components";
 import { Typography, Tabs } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import {
   useInstantProducts,
   useUserProfile,
   // useOnDemandProducts,
 } from "./hooks";
 import EmptyPage from "./empty-page";
-import ProductCard from "seller/shared-components/ProductCard";
-import Spinner from "seller/shared-components/Spinner";
-import FilterDrawer from "seller/shared-components/Drawer";
+import ProductCard from "@seller/shared-components/ProductCard";
+import Spinner from "@seller/shared-components/Spinner";
+import FilterDrawer from "@seller/shared-components/Drawer";
 import ProductView from "./product-view";
 
 const StyledContainer = styled.div``;

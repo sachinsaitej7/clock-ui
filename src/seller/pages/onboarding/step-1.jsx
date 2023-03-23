@@ -8,9 +8,9 @@ import {
   StyledInput,
   StyledStickyContainer,
   StyledButton,
-} from "seller/styled-components";
+} from "@seller/styled-components";
 import { Container } from "./styled";
-import UploadImages from "seller/shared-components/UploadImages";
+import UploadImages from "@seller/shared-components/UploadImages";
 
 const Step1 = () => {
   const theme = useTheme();

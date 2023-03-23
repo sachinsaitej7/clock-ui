@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Drawer } from "antd";
 
-import { ReactComponent as CCloseIcon } from "seller/assets/common/close-circle.svg";
+import { ReactComponent as CCloseIcon } from "@seller/assets/common/close-circle.svg";
 
 const StyledDrawer = styled(Drawer)`
   max-width: 768px;

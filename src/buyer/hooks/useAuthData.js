@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 // import { verifyToken } from "../apis/auth";

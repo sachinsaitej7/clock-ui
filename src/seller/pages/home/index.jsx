@@ -5,18 +5,18 @@ import moment from "moment";
 import { Typography } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 import { useProductsByProfileId, useUserProfile } from "./hooks";
-import { PageContainer } from "seller/styled-components";
-import Spinner from "seller/shared-components/Spinner";
-import { ReactComponent as Calender } from "app/assets/common/calender.svg";
-import { ReactComponent as Add } from "seller/assets/common/plus-circle-filled.svg";
+import { PageContainer } from "@seller/styled-components";
+import Spinner from "@seller/shared-components/Spinner";
+import { ReactComponent as Calender } from "@app/assets/common/calender.svg";
+import { ReactComponent as Add } from "@seller/assets/common/plus-circle-filled.svg";
 import AddNew from "./add-new";
 import Products from "./products";
 import {
   StyledStickyFloater,
   ProfileNameContainer,
-} from "seller/styled-components";
+} from "@seller/styled-components";
 
 const StyledContainer = styled(PageContainer)`
   padding: ${(props) => props.theme.space[0]};
@@ -67,7 +67,7 @@ const HomePage = () => {
   const [addNew, setAddNew] = React.useState(false);
 
   useEffect(() => {
-    if (!profileLoading && !profile?.status) navigate("/seller/onboarding");
+    if (!profileLoading && !profile?.status) navigate("/@seller/onboarding");
   }, [navigate, profile, profileLoading, user]);
 
   if (profileLoading || productLoading)

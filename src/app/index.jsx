@@ -4,11 +4,11 @@ import { ConfigProvider, App as AntdApp } from "antd";
 import { ErrorBoundary } from "react-error-boundary";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "app/firebase";
-import { ThemeProvider, AppModeProvider, Theme } from "app/store";
-import BottomNavBar from "app/components/BottomNavBar";
-import SplashLogo from "app/components/SplashLogo";
-import ErrorFallbackComponent from "app/components/ErrorBoundaryFallBack";
+import { getFirebase } from "@firebase";
+import { ThemeProvider, AppModeProvider, Theme } from "@app/store";
+import BottomNavBar from "@app/components/BottomNavBar";
+import SplashLogo from "@app/components/SplashLogo";
+import ErrorFallbackComponent from "@app/components/ErrorBoundaryFallBack";
 
 const Root = () => {
   // eslint-disable-next-line no-unused-vars

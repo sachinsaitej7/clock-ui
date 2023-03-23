@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 //images
 import { LogoutOutlined } from "@ant-design/icons";
-import { ReactComponent as Logo } from "seller/assets/common/seller-logo.svg";
+import { ReactComponent as Logo } from "@seller/assets/common/seller-logo.svg";
 
 const TopBarContainer = styled.div`
   width: 100%;

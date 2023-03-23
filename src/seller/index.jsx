@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-import WithTopAndBottom from "seller/hoc/WithTopAndBottom";
+import WithTopAndBottom from "@seller/hoc/WithTopAndBottom";
 
 const Container = styled.div`
   width: 100%;

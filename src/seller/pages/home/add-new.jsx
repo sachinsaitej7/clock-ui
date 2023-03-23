@@ -5,8 +5,8 @@ import { Typography, Radio, App, Divider, Select } from "antd";
 //images
 import { CloseOutlined } from "@ant-design/icons";
 import { DeleteOutlined } from "@ant-design/icons";
-import { ReactComponent as RightArrow } from "seller/assets/common/chevron-right.svg";
-import { ReactComponent as LeftArrow } from "seller/assets/common/arrow-left.svg";
+import { ReactComponent as RightArrow } from "@seller/assets/common/chevron-right.svg";
+import { ReactComponent as LeftArrow } from "@seller/assets/common/arrow-left.svg";
 
 import {
   useBrands,
@@ -22,11 +22,11 @@ import {
   StyledInput,
   StyledButton,
   StyledStickyContainer,
-} from "seller/styled-components";
+} from "@seller/styled-components";
 
-import HashTags from "seller/shared-components/HashTags";
-import UploadImages from "seller/shared-components/UploadImages";
-import FilterDrawer from "seller/shared-components/Drawer";
+import HashTags from "@seller/shared-components/HashTags";
+import UploadImages from "@seller/shared-components/UploadImages";
+import FilterDrawer from "@seller/shared-components/Drawer";
 
 import { validateProductData } from "./utils";
 

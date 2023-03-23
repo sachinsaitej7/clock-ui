@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Button } from "antd";
 
-import { removeEmptyKeys } from "seller/utils";
+import { removeEmptyKeys } from "@seller/utils";
 import { FilterContext } from "./FilterContext";
 
 const StyledFooter = styled.div`

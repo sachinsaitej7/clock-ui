@@ -4,9 +4,9 @@ import styled, { useTheme } from "styled-components";
 import { Typography, Button, Switch, App } from "antd";
 
 import { DeleteOutlined } from "@ant-design/icons";
-import { ReactComponent as ShareIcon } from "seller/assets/common/share.svg";
-import { StyledCard as Card } from "seller/styled-components";
-import ProductCard from "seller/shared-components/ProductCard";
+import { ReactComponent as ShareIcon } from "@seller/assets/common/share.svg";
+import { StyledCard as Card } from "@seller/styled-components";
+import ProductCard from "@seller/shared-components/ProductCard";
 import { getProductShareData, handleShare } from "./utils";
 
 import {

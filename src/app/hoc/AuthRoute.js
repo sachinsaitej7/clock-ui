@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getFirebase } from "app/firebase";
+import { getFirebase } from "@firebase";
 
-import Spinner from "app/components/Spinner";
+import Spinner from "@app/components/Spinner";
 
 export default function AuthComponent() {
   const location = useLocation();
