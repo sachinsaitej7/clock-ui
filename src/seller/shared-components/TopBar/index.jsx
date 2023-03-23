@@ -35,8 +35,8 @@ const TopBar = ({ handleClick }) => {
   return (
     <TopBarContainer>
       <StyledLogoContainer>
-        <Link to='/seller'>
-          <Logo width='75px' height='34px' />
+        <Link to="/seller">
+          <Logo width="75px" height="34px" />
         </Link>
       </StyledLogoContainer>
       {handleClick && <LogoutOutlined onClick={handleClick} />}

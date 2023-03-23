@@ -1,7 +1,8 @@
 import React from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { ConfigProvider } from "antd";
 
-export const Theme = {
+const Theme = {
   colors: {
     primary: "#31A683",
     secondary: "#E6F3EF",
@@ -77,5 +78,20 @@ export const Theme = {
 };
 
 export const ThemeProvider = ({ children }) => {
-  return <StyledThemeProvider theme={Theme}>{children}</StyledThemeProvider>;
+  return (
+    <StyledThemeProvider theme={Theme}>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: Theme.colors.primary,
+            colorSecondary: Theme.colors.secondary,
+            background: Theme.bg.default,
+            fontFamily: Theme.fonts.primary,
+          },
+        }}
+      >
+        {children}
+      </ConfigProvider>
+    </StyledThemeProvider>
+  );
 };

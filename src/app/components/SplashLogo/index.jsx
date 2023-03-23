@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ReactComponent as Logo } from "@assets/common/logo-full.svg";
+import { Logo } from "@assets/logo";
 
-export const PageContainer = styled.div`
+const PageContainer = styled.div`
   width: 100%;
   min-height: calc(100vh - 100px);
   font-family: ${(props) => props.theme.fonts.primary};
@@ -108,12 +108,12 @@ const StyledContainer = styled(PageContainer)`
 const SplashLogo = () => {
   return (
     <StyledContainer>
-      <div className='circle top-left'></div>
-      <div className='circle bottom-right'></div>
-      <div className='circle bottom-left'></div>
-      <div className='circle top-right'></div>
-      <div className='mini-circle'></div>
-      <Logo className='logo' />
+      <div className="circle top-left"></div>
+      <div className="circle bottom-right"></div>
+      <div className="circle bottom-left"></div>
+      <div className="circle top-right"></div>
+      <div className="mini-circle"></div>
+      <Logo className="logo" />
     </StyledContainer>
   );
 };

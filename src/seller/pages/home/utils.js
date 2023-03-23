@@ -1,5 +1,6 @@
 import slugify from "slugify";
 import omit from "lodash/omit";
+import pick from "lodash/pick";
 import isEmpty from "lodash/isEmpty";
 
 export const createProductData = (data) => {
@@ -26,6 +27,7 @@ export const createProductData = (data) => {
     delivery: data.delivery,
     tags: data.tags,
     createdBy: data.createdBy,
+    profileData: pick(data.profileData, ["name", "logo"]),
     listingType: data.listingType,
   };
 };
@@ -73,7 +75,6 @@ export const validateProductData = (data) => {
   return message;
 };
 
-
 export const fallbackCopyClipboard = (text) => {
   const el = document.createElement("textarea");
   el.value = text;
@@ -91,7 +92,7 @@ export const copyToClipboard = (text) => {
   return navigator.clipboard.writeText(text);
 };
 
-export const handleShare = (data, callback = () => { }) => {
+export const handleShare = (data, callback = () => {}) => {
   if (
     navigator.canShare &&
     data.files &&
@@ -132,7 +133,6 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
     const dataURL = canvas.toDataURL("image/png");
-    console.log(dataURL,'dataURL');
     const blob = await fetch(dataURL)
       .then((r) => r.blob())
       .catch((e) => console.log(e));
@@ -150,6 +150,3 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
   };
   return shareData;
 };
-
-
-

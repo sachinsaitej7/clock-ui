@@ -13,7 +13,6 @@
 // 12. cache the google analytics script.
 // 13. updates the caches when the app is updated.
 
-
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
@@ -30,7 +29,7 @@ const precacheFiles = [
   "logo.png",
   "logo-192.png",
   "logo-512.png",
-]
+];
 
 self.addEventListener("install", (event) => {
   console.log("[PWA Builder] Install Event processing");
@@ -62,12 +61,13 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    fetch(event.request)
-      .catch((error) => {
-        // Return the offline page
-        console.log("[PWA Builder] Network request Failed. Serving offline page " + error);
-        return caches.open(CACHE).then((cache) => cache.match(OFFLINE_URL));
-      })
+    fetch(event.request).catch((error) => {
+      // Return the offline page
+      console.log(
+        "[PWA Builder] Network request Failed. Serving offline page " + error
+      );
+      return caches.open(CACHE).then((cache) => cache.match(OFFLINE_URL));
+    })
   );
 });
 
@@ -77,7 +77,10 @@ self.addEventListener("refreshOffline", () => {
 
   return fetch(offlineRequest).then((response) => {
     return caches.open(CACHE).then((cache) => {
-      console.log("[PWA Builder] Offline page updated from refreshOffline event: " + response.url);
+      console.log(
+        "[PWA Builder] Offline page updated from refreshOffline event: " +
+          response.url
+      );
       return cache.put(offlineRequest, response);
     });
   });
@@ -94,7 +97,8 @@ self.addEventListener("push", (event) => {
   }
 
   const title = data.title || "Something Has Happened";
-  const message = data.message || "Here's something you might want to check out.";
+  const message =
+    data.message || "Here's something you might want to check out.";
   const icon = "logo.png";
 
   const notification = self.registration.showNotification(title, {
@@ -115,16 +119,12 @@ self.addEventListener("notificationclick", (event) => {
 
   event.notification.close();
 
-  event.waitUntil(
-    clients.openWindow("https://theclock.xyz/")
-  );
+  event.waitUntil(clients.openWindow("https://theclock.xyz/"));
 });
 
 self.addEventListener("sync", (event) => {
   if (event.tag === "myFirstSync") {
-    event.waitUntil(
-      doSomeStuff()
-    );
+    event.waitUntil(doSomeStuff());
   }
 });
 
@@ -138,12 +138,14 @@ self.addEventListener("message", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== CACHE) {
-          console.log("[ServiceWorker] Removing old cache", key);
-          return caches.delete(key);
-        }
-      }));
+      return Promise.all(
+        keyList.map((key) => {
+          if (key !== CACHE) {
+            console.log("[ServiceWorker] Removing old cache", key);
+            return caches.delete(key);
+          }
+        })
+      );
     })
   );
 });
@@ -195,13 +197,16 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.open(CACHE).then(async (cache) => {
       return cache.match(event.request).then((response) => {
-        return response || fetch(event.request).then((response) => {
-          //Uncaught (in promise) TypeError: Failed to execute 'put' on 'Cache': Request method 'POST' is unsupported
-          if (event.request.method === "GET") {
-            cache.put(event.request, response.clone());
-          }
-          return response;
-        });
+        return (
+          response ||
+          fetch(event.request).then((response) => {
+            //Uncaught (in promise) TypeError: Failed to execute 'put' on 'Cache': Request method 'POST' is unsupported
+            if (event.request.method === "GET") {
+              cache.put(event.request, response.clone());
+            }
+            return response;
+          })
+        );
       });
     })
   );

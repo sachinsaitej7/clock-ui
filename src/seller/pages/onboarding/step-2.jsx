@@ -41,7 +41,7 @@ const Step4 = () => {
             profile && (
               <div>
                 <ProfileNameContainer>
-                  <img src={profile.logo} alt='logo' width='100px'></img>
+                  <img src={profile.logo} alt="logo" width="100px"></img>
                   <Typography.Title
                     level={5}
                     style={{
@@ -70,7 +70,7 @@ const Step4 = () => {
             color: theme.text.light,
           }}
         >
-          <InfoIcon width='16px' style={{ marginRight: theme.space[2] }} />
+          <InfoIcon width="16px" style={{ marginRight: theme.space[2] }} />
           You can always edit these details in settings
         </Typography.Text>
       </Container>

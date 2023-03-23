@@ -38,20 +38,20 @@ const Login = ({ handleClick }) => {
       >
         Welcome to Clock
       </Typography.Title>
-      <Typography.Text type='secondary'>
-        A place where you can earn money by listing the products
+      <Typography.Text type="secondary">
+        Recommend fashion you like & earn money.
       </Typography.Text>
       <StyledButton
-        type='primary'
+        type="primary"
         onClick={handleClick}
         style={{ marginTop: theme.space[9] }}
       >
         Sign Up
       </StyledButton>
-      <Button ghost type='primary' onClick={handleClick}>
+      <Button ghost type="primary" onClick={handleClick}>
         Log In
       </Button>
-      <Typography.Text type='secondary'>
+      <Typography.Text type="secondary">
         By logging in or signing up, you are agreeing to our Terms of Service
         and Privacy Policy
       </Typography.Text>

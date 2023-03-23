@@ -1,6 +1,6 @@
 import React, { useState, createContext, useMemo, useCallback } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import { useUserProfile, addProfile, updateProfile } from "./hooks";
 
 const OnboardingContext = createContext();

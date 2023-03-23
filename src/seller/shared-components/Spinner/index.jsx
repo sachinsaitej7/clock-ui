@@ -15,7 +15,7 @@ const Container = styled.div`
 const Spinner = () => {
   return (
     <Container>
-      <Spin size='large' indicator={antIcon} />
+      <Spin size="large" indicator={antIcon} />
     </Container>
   );
 };

@@ -5,11 +5,11 @@ import moment from "moment";
 import { Typography } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import { useProductsByProfileId, useUserProfile } from "./hooks";
 import { PageContainer } from "@seller/styled-components";
 import Spinner from "@seller/shared-components/Spinner";
-import { ReactComponent as Calender } from "@app/assets/common/calender.svg";
+import { CalendarDaysIcon } from "@assets/icons";
 import { ReactComponent as Add } from "@seller/assets/common/plus-circle-filled.svg";
 import AddNew from "./add-new";
 import Products from "./products";
@@ -33,7 +33,7 @@ const StyledNameContainer = styled(ProfileNameContainer)`
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    margin-top: -${(props) => props.theme.space[9]};
+    margin-top: -48px;
     border: 2px solid ${(props) => props.theme.bg.primary};
   }
   p {
@@ -67,7 +67,7 @@ const HomePage = () => {
   const [addNew, setAddNew] = React.useState(false);
 
   useEffect(() => {
-    if (!profileLoading && !profile?.status) navigate("/@seller/onboarding");
+    if (!profileLoading && !profile?.status) navigate("/seller/onboarding");
   }, [navigate, profile, profileLoading, user]);
 
   if (profileLoading || productLoading)
@@ -92,8 +92,8 @@ const HomePage = () => {
             }}
           ></div>
           <StyledNameContainer>
-            <img src={profile.logo} alt='logo'></img>
-            <div className='name'>
+            <img src={profile.logo} alt="logo"></img>
+            <div className="name">
               <Typography.Title level={5}>{profile.name}</Typography.Title>
             </div>
             <p>
@@ -122,7 +122,7 @@ const HomePage = () => {
                 alignContent: "center",
               }}
             >
-              <Calender width='14px' />
+              <CalendarDaysIcon width="14px" />
               <span
                 style={{ marginLeft: theme.space[3] }}
               >{`Seller since ${moment(profile.createdAt.toDate()).format(

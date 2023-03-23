@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 768px;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
 p {
@@ -14,7 +16,7 @@ p {
   padding: 0;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 

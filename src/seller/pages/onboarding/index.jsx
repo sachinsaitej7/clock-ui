@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 
-
 //context
 import {
   OnboardingProvider,
@@ -105,16 +104,16 @@ const OnboardingPage = () => {
                 return <StyledStep key={i} active={step > i}></StyledStep>;
               })}
           </StyledStepContainer>
-          {step > 2 && <LeftArrow className='back' onClick={prevStep} />}
+          {step > 2 && <LeftArrow className="back" onClick={prevStep} />}
           <div style={{ width: "100%" }}>
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={step}
                 custom={direction}
                 variants={variants}
-                initial='enter'
-                animate='center'
-                exit='exit'
+                initial="enter"
+                animate="center"
+                exit="exit"
                 // transition={{
                 //   x: { type: "spring", stiffness: 30, damping: 10 },
                 // }}

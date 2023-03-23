@@ -1,14 +1,12 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { getFirebase } from "@firebase";
 
-import Spinner from "@app/components/Spinner";
+import { useAuth } from "@app/store";
+import Spinner from "@components/Spinner";
 
 export default function AuthComponent() {
   const location = useLocation();
-  const { auth } = getFirebase();
-  const [user, loading] = useAuthState(auth);
+  const [user, loading] = useAuth();
   const isSeller = location.pathname.includes("/seller");
   const prefix = isSeller ? "seller" : "";
 

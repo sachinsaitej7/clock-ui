@@ -3,35 +3,53 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/Favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <meta name="theme-color" content="#015850" />
     <meta
       name="description"
       content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby."
     />
-    <meta name="keywords" content="Delivery within 4 hours, Fashion, Quick Commerce, same delivery order">
-    <meta name="author" content="AARAM NETWORKS PRIVATE LIMITED">
+    <meta
+      name="keywords"
+      content="Delivery within 4 hours, Fashion, Quick Commerce, same delivery order"
+    />
+    <meta name="author" content="AARAM NETWORKS PRIVATE LIMITED" />
     <meta property="og:title" content="Clock" />
-    <meta property="og:description" content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby." />
-    <meta property="og:image" content="https://ik.imagekit.io/jg7ousac2/v0/b/clock-poc-11334.appspot.com/o/listing-images%2Fandroid-launchericon-512-512-modified.png-1678962827039?alt=media&token=676464bc-db1f-4354-8e2a-54843215c4f3" />
+    <meta
+      property="og:description"
+      content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby."
+    />
+    <meta
+      property="og:image"
+      content="https://ik.imagekit.io/jg7ousac2/v0/b/clock-poc-11334.appspot.com/o/listing-images%2Fandroid-launchericon-512-512-modified.png-1678962827039?alt=media&token=676464bc-db1f-4354-8e2a-54843215c4f3"
+    />
     <meta property="og:url" content="https://theclock.xyz/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Clock" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Clock" />
-    <meta name="twitter:description" content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby." />
+    <meta
+      name="twitter:description"
+      content="Clock sets the stage for retail fashion stores to showcase their inventory to people searching for it nearby."
+    />
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/Favicon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -43,7 +61,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Clock</title>
-
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -60,27 +77,25 @@
     -->
   </body>
   <script>
-
-      // Registering service worker and background sync
-          if('serviceWorker' in navigator && 'SyncManager' in window) {
-        navigator.serviceWorker
-            .register('/sw.js')
-            .then(function() {
-                return navigator.serviceWorker.ready;
-            })
-            .then(function(sw) {
-                var sync = sw.sync.register('sync-new-posts');
-                return sync;
-            })
-            .then(function() {
-                console.log('Sync registered');
-            })
-            .catch(function(err) {
-                console.log(err);
-            });
-
-    } else{
-        console.log('Service worker or SyncManager not supported');
+    // Registering service worker and background sync
+    if ("serviceWorker" in navigator && "SyncManager" in window) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then(function () {
+          return navigator.serviceWorker.ready;
+        })
+        .then(function (sw) {
+          var sync = sw.sync.register("sync-new-posts");
+          return sync;
+        })
+        .then(function () {
+          console.log("Sync registered");
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    } else {
+      console.log("Service worker or SyncManager not supported");
     }
   </script>
 </html>

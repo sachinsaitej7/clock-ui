@@ -1,8 +1,10 @@
 // make a antd 404 not found page component
 
 import React from "react";
-import { Result, Button } from "antd";
+import { Result } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
+
+import { StyledButton } from "@app/styled-components";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -12,13 +14,13 @@ const NotFoundPage = () => {
 
   return (
     <Result
-      status='404'
-      title='404'
-      subTitle='Sorry, the page you visited does not exist.'
+      status="404"
+      title="404"
+      subTitle="Sorry, the page you visited does not exist."
       extra={
-        <Button type='primary' onClick={() => navigate(`/${prefix}`)}>
+        <StyledButton type="primary" onClick={() => navigate(`/${prefix}`)}>
           Back Home
-        </Button>
+        </StyledButton>
       }
     />
   );

@@ -102,11 +102,11 @@ const UploadImages = ({ limit = 8, onSuccess }) => {
   return (
     <>
       <StyledUpload
-        listType='picture-card'
+        listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
-        accept='image/*'
+        accept="image/*"
         beforeUpload={beforeUpload}
         customRequest={handleUpload}
         onRemove={handleRemove}
@@ -132,7 +132,7 @@ const UploadImages = ({ limit = 8, onSuccess }) => {
         onCancel={handleCancel}
       >
         <img
-          alt='example'
+          alt="example"
           style={{
             width: "100%",
           }}

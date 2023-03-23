@@ -19,6 +19,7 @@ const Step1 = () => {
   const { addUserProfile } = useProfileContext();
   const [name, setName] = useState("");
   const [logo, setLogo] = useState("");
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
   const createNewProfile = async () => {
@@ -28,7 +29,7 @@ const Step1 = () => {
     }
     setLoading(true);
     try {
-      await addUserProfile({ name, logo });
+      await addUserProfile({ name, logo, description });
       nextStep();
     } catch (error) {
       console.log(error);
@@ -50,17 +51,26 @@ const Step1 = () => {
           Add your Profile name and logo
         </Typography.Title>
         <Typography.Title level={5} style={{ opacity: 0.8 }}>
-          Your Profile Name
+          Your Profile Name*
         </Typography.Title>
         <StyledInput
-          type='text'
-          placeholder='Please enter your name'
+          type="text"
+          placeholder="Please enter your name"
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
+        <Typography.Title level={5} style={{ opacity: 0.8 }} className="my-4">
+          Description
+        </Typography.Title>
+        <StyledInput
+          type="text"
+          placeholder="Please enter your status"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+        />
         <div style={{ marginTop: theme.space[8] }}>
           <Typography.Title level={5} style={{ opacity: 0.8 }}>
-            Your Logo
+            Your Logo*
           </Typography.Title>
           <UploadImages limit={1} onSuccess={handleUploadImages} />
         </div>

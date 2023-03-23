@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 import { Typography, Tabs } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import {
   useInstantProducts,
   useUserProfile,
@@ -122,7 +122,7 @@ const Products = () => {
         <StyledTabs
           activeKey={active}
           onChange={(key) => handleActive(key)}
-          size='small'
+          size="small"
           centered
           items={[
             {

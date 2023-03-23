@@ -30,10 +30,10 @@ const ImageCover = ({ imgUrl, variant }) => (
   <ImageContainer src={`${imgUrl}`} variant={variant} />
 );
 
-const ProductCard = ({ thumbnail, onClick = () => { } }) => {
+const ProductCard = ({ thumbnail, onClick = () => {} }) => {
   let variant = "small";
   window.innerWidth > 768 && (variant = "medium");
-  
+
   return (
     <StyledCard
       cover={<ImageCover imgUrl={thumbnail} variant={variant} />}

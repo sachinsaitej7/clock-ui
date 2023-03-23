@@ -2,22 +2,24 @@ import React, { lazy, Suspense } from "react";
 
 import { Route } from "react-router-dom";
 
-import Spinner from "@app/components/Spinner";
+import { Spinner } from "@components";
 import AuthRoute from "@app/hoc/AuthRoute";
-import Root from "buyer";
-const HomePage = lazy(() => import("@buyer/modules/home-page"));
-const CollectionPage = lazy(() => import("@buyer/modules/collection-page"));
-const ProfilePage = lazy(() => import("@buyer/modules/profile-page"));
-const ProductPage = lazy(() => import("@buyer/modules/product-page"));
-const BrandPage = lazy(() => import("@buyer/modules/brand-page"));
-const TnCPage = lazy(() => import("@buyer/modules/other-pages/tnc"));
-const UserProfilePage = lazy(() =>
-  import("@buyer/modules/other-pages/profile-page")
-);
-const CartPage = lazy(() => import("@buyer/modules/cart-page"));
-const AddressPage = lazy(() => import("@buyer/modules/address-page"));
-const ReviewPage = lazy(() => import("@buyer/modules/review-page"));
-const OrderPage = lazy(() => import("@buyer/modules/order-page"));
+
+import Root from "@buyer";
+
+const HomePage = lazy(() => import("@buyer/pages/home-page"));
+const CollectionPage = lazy(() => import("@buyer/pages/collection-page"));
+const ProfilePage = lazy(() => import("@buyer/pages/profile-page"));
+const BrandPage = lazy(() => import("@buyer/pages/brand-page"));
+const ProductPage = lazy(() => import("@buyer/pages/product-page"));
+const CartPage = lazy(() => import("@buyer/pages/cart-page"));
+
+const TnCPage = lazy(() => import("@buyer/pages/other-pages/tnc"));
+// const UserProfilePage = lazy(() =>
+//   import("@buyer/pages/other-pages/profile-page")
+// );
+const ReviewPage = lazy(() => import("@buyer/pages/review-page-new"));
+const OrderPage = lazy(() => import("@buyer/pages/order-page"));
 
 const BuyerRoute = (
   <Route path='/' element={<Root />}>
@@ -40,11 +42,11 @@ const BuyerRoute = (
       }
     />
     <Route
-      path='product-page/*'
+      path='profile-page/*'
       exact
       element={
         <Suspense fallback={<Spinner />}>
-          <ProductPage />
+          <ProfilePage />
         </Suspense>
       }
     />
@@ -58,11 +60,11 @@ const BuyerRoute = (
       }
     />
     <Route
-      path='profile-page/*'
+      path='product-page/*'
       exact
       element={
         <Suspense fallback={<Spinner />}>
-          <ProfilePage />
+          <ProductPage />
         </Suspense>
       }
     />
@@ -76,24 +78,6 @@ const BuyerRoute = (
       }
     />
     <Route element={<AuthRoute />}>
-      <Route
-        path='profile'
-        exact
-        element={
-          <Suspense fallback={<Spinner />}>
-            <UserProfilePage />
-          </Suspense>
-        }
-      />
-      <Route
-        path='address'
-        exact
-        element={
-          <Suspense fallback={<Spinner />}>
-            <AddressPage />
-          </Suspense>
-        }
-      />
       <Route
         path='review-order'
         exact

@@ -62,11 +62,11 @@ export default function DrawerFooter() {
 
   return (
     <StyledFooter>
-      <StyledButton type='default' onClick={handleClear}>
+      <StyledButton type="default" onClick={handleClear}>
         Clear All
       </StyledButton>{" "}
       <StyledButton
-        type='primary'
+        type="primary"
         onClick={() => handleApply(removeEmptyKeys(filterValues))}
       >
         Apply

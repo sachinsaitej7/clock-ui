@@ -24,7 +24,7 @@ const EmptyPage = () => {
           justifyContent: "center",
         }}
       >
-        <img src={Eyes} alt='eyes' width='24px' height='24px' />
+        <img src={Eyes} alt="eyes" width="24px" height="24px" />
         <Typography.Title
           level={5}
           style={{ margin: theme.space[0], marginLeft: theme.space[2] }}
@@ -33,7 +33,7 @@ const EmptyPage = () => {
         </Typography.Title>
       </div>
       <Typography.Text style={{ color: theme.text.light, textAlign: "center" }}>
-       Tap “+” below to get started
+        Tap “+” below to get started
       </Typography.Text>
     </PlaceholderContainer>
   );

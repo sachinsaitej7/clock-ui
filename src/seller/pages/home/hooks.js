@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import omit from "lodash/omit";
 
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import { createProductData } from "./utils";
 
 const { db } = getFirebase();

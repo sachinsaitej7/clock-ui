@@ -3,6 +3,7 @@ import { initializeApp, getApps } from "firebase/app";
 import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 import {
   getFirestore,
@@ -19,7 +20,7 @@ import {
 
 import config from "./config";
 
-function connectToEmulators({ app, auth, db, storage, appCheck }) {
+function connectToEmulators({ app, auth, db, storage, appCheck, functions }) {
   if (process.env.NODE_ENV === "development") {
     console.log("Connecting to emulators");
     connectAuthEmulator(auth, "http://localhost:9099", {
@@ -27,13 +28,14 @@ function connectToEmulators({ app, auth, db, storage, appCheck }) {
     });
     connectFirestoreEmulator(db, "localhost", 8080);
     connectStorageEmulator(storage, "localhost", 9199);
+    connectFunctionsEmulator(functions, "localhost", 5001);
   }
-  return { app, auth, db, storage, appCheck };
+  return { app, auth, db, storage, appCheck, functions };
 }
 
-function enableOffline({ db, app, auth, storage, appCheck }) {
+function enableOffline({ db, app, auth, storage, appCheck, functions }) {
   enableMultiTabIndexedDbPersistence(db);
-  return { db, app, auth, storage, appCheck };
+  return { db, app, auth, storage, appCheck, functions };
 }
 
 window.FIREBASE_APPCHECK_DEBUG_TOKEN =
@@ -61,6 +63,12 @@ export function initialize() {
   const db = getFirestore(app);
   const auth = getAuth(app);
   const storage = getStorage(app, "gs://clock-poc-11334.appspot.com");
+  let functions = null;
+  if (process.env.NODE_ENV === "development") {
+    functions = getFunctions(app);
+  } else {
+    functions = getFunctions(app, "asia-south1");
+  }
 
   (async () => {
     await setPersistence(auth, browserLocalPersistence);
@@ -73,6 +81,7 @@ export function initialize() {
     auth,
     storage,
     appCheck,
+    functions,
   };
 }
 

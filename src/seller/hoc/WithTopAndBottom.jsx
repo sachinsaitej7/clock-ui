@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import TopBar from "@seller/shared-components/TopBar";
 import Footer from "@seller/shared-components/Footer";
 

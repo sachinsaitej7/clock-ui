@@ -1,9 +1,10 @@
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import {
   doc,
   collection,
   query,
   where,
+  orderBy,
   addDoc,
   updateDoc,
   serverTimestamp,
@@ -33,10 +34,31 @@ export function fetchUserFollowersQuery(id, profileId) {
   return q;
 }
 
-export const addUserFollower = async (userId, profileData = {}) => {
-  if (!userId || !profileData.id) return;
+export function fetchUserFollowersByProfileQuery(profileId) {
+  if (!profileId) return;
+  const q = query(
+    userFollowersColRef,
+    where("profileData.id", "==", profileId),
+    where("status", "==", true)
+  ).withConverter(idConverter);
+  return q;
+}
+
+export function fetchUserFollowersByUserQuery(userId) {
+  if (!userId) return;
+  const q = query(
+    userFollowersColRef,
+    where("userId", "==", userId),
+    where("status", "==", true)
+  ).withConverter(idConverter);
+  return q;
+}
+
+export const addUserFollower = async (user, profileData = {}) => {
+  if (!user || !profileData.id) return;
   const data = {
-    userId,
+    userId: user.uid,
+    userData: pick(user, ["name", "logo"]),
     profileData: pick(profileData, ["id", "name", "logo"]),
     status: true,
     createdAt: serverTimestamp(),
@@ -50,3 +72,25 @@ export async function updateUserFollower(id, data = {}) {
   const updatedData = { ...data, updatedAt: serverTimestamp() };
   return await updateDoc(doc(db, "userFollowers", id), updatedData);
 }
+
+export const addNewAddress = async (id, data) => {
+  if (!id || !data) return;
+  const updatedData = {
+    ...data,
+    uuid: id,
+    updatedAt: serverTimestamp(),
+    createdAt: serverTimestamp(),
+    status: true,
+  };
+  return await addDoc(collection(db, "delivery-address"), updatedData);
+};
+
+export const fetchUserAddressQuery = (id) => {
+  if (!id) return;
+  return query(
+    collection(db, "delivery-address"),
+    where("uuid", "==", id),
+    where("status", "==", true),
+    orderBy("updatedAt", "desc")
+  ).withConverter(idConverter);
+};

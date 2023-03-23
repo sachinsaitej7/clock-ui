@@ -91,7 +91,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "profileId",
+          "fieldPath": "profileData.id",
           "order": "ASCENDING"
         },
         {

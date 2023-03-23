@@ -1,10 +1,10 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { Typography, App } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 import { useSendOtp, useVerifyOtp } from "./hooks";
 import { PageContainer } from "@seller/styled-components";
 import Login from "./login";
@@ -16,7 +16,6 @@ const StyledContainer = styled(PageContainer)`
 `;
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const { auth } = getFirebase();
   const { message } = App.useApp();
@@ -35,7 +34,7 @@ const LoginPage = () => {
     }
   };
 
-  if (user !== null) navigate("/seller");
+  if (user !== null) return <Navigate to="/seller" />;
 
   if (!loginMode)
     return (

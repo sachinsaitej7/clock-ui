@@ -92,12 +92,12 @@ const LoginForm = ({ sendOtp = () => {}, verifyOtp = () => {} }) => {
   };
 
   return (
-    <StyledForm onFinish={onSubmit} scrollToFirstError layout='vertical'>
-      <Form.List name='list'>
+    <StyledForm onFinish={onSubmit} scrollToFirstError layout="vertical">
+      <Form.List name="list">
         {(fields, { add, remove }) => (
           <>
             <Form.Item
-              name='phone'
+              name="phone"
               validateFirst={true}
               rules={[
                 {
@@ -108,8 +108,8 @@ const LoginForm = ({ sendOtp = () => {}, verifyOtp = () => {} }) => {
               ]}
             >
               <StyledInput
-                placeholder='Phone Number'
-                type='number'
+                placeholder="Phone Number"
+                type="number"
                 ref={inputRef}
                 prefix={"+91"}
                 suffix={step === 2 && <CheckCircleOutlined />}
@@ -120,7 +120,7 @@ const LoginForm = ({ sendOtp = () => {}, verifyOtp = () => {} }) => {
             <Text>Promise, we don't spam</Text>
             {step === 2 && (
               <Form.Item
-                name='otp'
+                name="otp"
                 dependencies={["phone"]}
                 rules={[
                   {
@@ -131,17 +131,17 @@ const LoginForm = ({ sendOtp = () => {}, verifyOtp = () => {} }) => {
                 ]}
               >
                 <StyledInput
-                  placeholder='Enter 6 digit Code'
-                  type='number'
+                  placeholder="Enter 6 digit Code"
+                  type="number"
                   autoFocus={step === 2}
                 />
               </Form.Item>
             )}
             {step === 1 && (
-              <Form.Item name='send-otp'>
+              <Form.Item name="send-otp">
                 <StyledButton
                   onClick={onSendOtp}
-                  id='sign-in-button'
+                  id="sign-in-button"
                   loading={loading}
                 >
                   Send Otp
@@ -154,7 +154,7 @@ const LoginForm = ({ sendOtp = () => {}, verifyOtp = () => {} }) => {
 
       {step === 2 && (
         <Form.Item>
-          <StyledButton htmlType='submit' loading={loading}>
+          <StyledButton htmlType="submit" loading={loading}>
             Login
           </StyledButton>
         </Form.Item>

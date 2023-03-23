@@ -96,7 +96,7 @@ const VerifyOtpForm = ({
 
   return (
     <Form
-      layout='vertical'
+      layout="vertical"
       form={form}
       onFinish={() => verifyOtp(verificationId, inputRef.current?.input.value)}
       style={{ marginTop: theme.space[7] }}
@@ -107,7 +107,7 @@ const VerifyOtpForm = ({
             OTP *
           </Typography.Title>
         }
-        name='otp'
+        name="otp"
       >
         <Row>
           {/* {otp.map((value, index) => (
@@ -126,11 +126,11 @@ const VerifyOtpForm = ({
           <StyledInput
             autoFocus
             ref={inputRef}
-            type='number'
-            placeholder='Enter OTP'
+            type="number"
+            placeholder="Enter OTP"
           />
         </Row>
-        <Row justify='space-between' style={{ margin: theme.space[3] }}>
+        <Row justify="space-between" style={{ margin: theme.space[3] }}>
           <Typography.Link
             strong
             style={{ display: "block" }}
@@ -140,7 +140,7 @@ const VerifyOtpForm = ({
             }}
             underline
             disabled={timer > 0}
-            id='recaptcha-container-resend'
+            id="recaptcha-container-resend"
           >
             Resend OTP
           </Typography.Link>
@@ -152,8 +152,8 @@ const VerifyOtpForm = ({
       </Form.Item>
       <Form.Item>
         <StyledButton
-          type='primary'
-          htmlType='submit'
+          type="primary"
+          htmlType="submit"
           style={{
             opacity: inputRef.current?.input.value ? 1 : 0.5,
           }}

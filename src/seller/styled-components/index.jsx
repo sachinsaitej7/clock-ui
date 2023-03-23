@@ -72,7 +72,6 @@ export const StyledStickyContainer = styled.div`
   }
 `;
 
-
 export const StyledStickyFloater = styled.div`
   width: 45px;
   height: 45px;
@@ -97,7 +96,6 @@ export const StyledStickyFloater = styled.div`
     margin-left: 50%;
   }
 `;
-
 
 export const ProfileNameContainer = styled.div`
   display: flex;

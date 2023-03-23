@@ -13,7 +13,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-import { getFirebase } from "@firebase";
+import { getFirebase } from "@firebase-app";
 
 export function useOrderData(user) {
   const { db } = getFirebase();
@@ -25,35 +25,35 @@ export function useOrderData(user) {
   const orderUnSubscription = useRef(() => {});
   const addressUnSubscription = useRef(() => {});
 
-const loadAddress = async () => {
-  try {
-    let localAddress = localStorage.getItem("address");
-    if (typeof localAddress === "string") {
-      try {
-        localAddress = JSON.parse(localAddress);
-        setActiveAddress(localAddress);
-      } catch (e) {
-        console.log("Error parsing address JSON:", e);
+  const loadAddress = async () => {
+    try {
+      let localAddress = localStorage.getItem("address");
+      if (typeof localAddress === "string") {
+        try {
+          localAddress = JSON.parse(localAddress);
+          setActiveAddress(localAddress);
+        } catch (e) {
+          console.log("Error parsing address JSON:", e);
+        }
       }
+    } catch (e) {
+      console.log("Error loading address from localStorage:", e);
+      localStorage.removeItem("address");
     }
-  } catch (e) {
-    console.log("Error loading address from localStorage:", e);
-    localStorage.removeItem("address");
-  }
-};
-
-useEffect(() => {
-  loadAddress();
-  return () => {
-    orderUnSubscription.current();
-    addressUnSubscription.current();
   };
-}, []);
 
-useEffect(() => {
-  if (activeAddress)
-    localStorage.setItem("address", JSON.stringify(activeAddress));
-}, [activeAddress]);
+  useEffect(() => {
+    loadAddress();
+    return () => {
+      orderUnSubscription.current();
+      addressUnSubscription.current();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (activeAddress)
+      localStorage.setItem("address", JSON.stringify(activeAddress));
+  }, [activeAddress]);
 
   const setUpAddressMeta = useCallback(() => {
     const deliveryQuery = query(

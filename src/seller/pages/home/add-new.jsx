@@ -84,7 +84,6 @@ const StyledCard = styled.div`
   }
 `;
 
-
 export default function AddNew({ profile, setAddNew }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -102,6 +101,7 @@ export default function AddNew({ profile, setAddNew }) {
   const [deliveryTime, setDeliveryTime] = useState("instant");
   const nameRef = useRef(null);
   const priceRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   const [brands] = useBrands();
   const [categories] = useCategories();
@@ -119,6 +119,7 @@ export default function AddNew({ profile, setAddNew }) {
     const productData = {
       name: nameRef.current.input.value,
       price: +priceRef.current.input.value,
+      description: descriptionRef.current.input.value,
       category: categories?.find((c) => selectedSubcategory?.parentId === c.id),
       subcategory: selectedSubcategory,
       sizes: selectedSizes.map((size) => ({
@@ -129,6 +130,7 @@ export default function AddNew({ profile, setAddNew }) {
       delivery: deliveryTime,
       brand,
       createdBy: profile.id,
+      profileData: profile,
       listingType: "lister",
       tags: selectedHashTags,
     };
@@ -241,14 +243,14 @@ export default function AddNew({ profile, setAddNew }) {
       </StyledCard>
       <StyledCard>
         <Typography.Title level={4}>Product details *</Typography.Title>
-        <StyledInput type='text' placeholder='Product name' ref={nameRef} />
+        <StyledInput type="text" placeholder="Product name" ref={nameRef} />
       </StyledCard>
       <StyledCard>
         <Typography.Title level={4}>Product Price *</Typography.Title>
         <StyledInput
-          type='number'
-          prefix='₹'
-          placeholder='MRP'
+          type="number"
+          prefix="₹"
+          placeholder="MRP"
           ref={priceRef}
         />
       </StyledCard>
@@ -267,6 +269,15 @@ export default function AddNew({ profile, setAddNew }) {
           results
         </Typography.Text>
       </StyledCard>
+      <StyledCard>
+        <Typography.Title level={4}>Product description</Typography.Title>
+        <StyledInput.TextArea
+          type="text"
+          placeholder="Product Description"
+          ref={descriptionRef}
+          autoSize={{ minRows: 2, maxRows: 30 }}
+        />
+      </StyledCard>
       <StyledCard
         style={{
           display: "flex",
@@ -275,7 +286,7 @@ export default function AddNew({ profile, setAddNew }) {
         }}
         onClick={() => handleCardClick("category")}
       >
-        <Typography.Title level={4} className='no-margin'>
+        <Typography.Title level={4} className="no-margin">
           Category *
         </Typography.Title>
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -283,7 +294,7 @@ export default function AddNew({ profile, setAddNew }) {
             {parentCategory && `${parentCategory?.name} /`}{" "}
             {selectedSubcategory?.name || "Select"}
           </Typography.Text>
-          <RightArrow style={{ marginLeft: theme.space[3] }} width='20px' />
+          <RightArrow style={{ marginLeft: theme.space[3] }} width="20px" />
         </div>
       </StyledCard>
       <StyledCard>
@@ -316,7 +327,7 @@ export default function AddNew({ profile, setAddNew }) {
                 <Typography.Text strong>{size.label}</Typography.Text>
                 <RightArrow
                   style={{ marginLeft: theme.space[3] }}
-                  width='16px'
+                  width="16px"
                 />
               </div>
             </div>
@@ -341,9 +352,9 @@ export default function AddNew({ profile, setAddNew }) {
         <Typography.Title level={4}>Brand *</Typography.Title>
         <Select
           style={{ width: "100%", marginBottom: theme.space[3] }}
-          placeholder='Select a brand'
+          placeholder="Select a brand"
           onChange={(_, option) => setBrand(option)}
-          size='large'
+          size="large"
           options={brands}
           fieldNames={{ label: "name", value: "id" }}
         />
@@ -357,7 +368,7 @@ export default function AddNew({ profile, setAddNew }) {
           onChange={(e) => setDeliveryTime(e.target.value)}
           value={deliveryTime}
         >
-          <Radio value='instant'>1 hr Delivery</Radio>
+          <Radio value="instant">1 hr Delivery</Radio>
           {/* <Radio value='on-demand'>Made to delivery</Radio> */}
         </Radio.Group>
       </StyledCard>
@@ -422,7 +433,7 @@ export default function AddNew({ profile, setAddNew }) {
                   {value.label || value.name}
                 </Typography.Text>
                 {value.children && (
-                  <RightArrow width='16px' disabled={disabled} />
+                  <RightArrow width="16px" disabled={disabled} />
                 )}
               </div>
             );

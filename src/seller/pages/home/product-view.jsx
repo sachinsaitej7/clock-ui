@@ -90,7 +90,7 @@ function ProductView({ product, handleClose }) {
 
   return (
     <StyledContent>
-      <div className='info'>
+      <div className="info">
         <ProductCard {...product} />
         <div
           style={{
@@ -128,7 +128,7 @@ function ProductView({ product, handleClose }) {
           </Typography.Text>
         </StyledCard>
       </div>
-      <div className='variants'>
+      <div className="variants">
         <Typography.Title level={5}>Listed Sizes</Typography.Title>
         {!isEmpty(variants) ? (
           variants?.map((variant) => (
@@ -148,7 +148,7 @@ function ProductView({ product, handleClose }) {
                 <Switch
                   defaultChecked={variant.status}
                   checked={variant.status}
-                  size='small'
+                  size="small"
                   style={{ marginRight: theme.space[5] }}
                   onChange={(checked) => toggleStatus(checked, variant.id)}
                 />
@@ -165,7 +165,7 @@ function ProductView({ product, handleClose }) {
       </div>
       <Button
         danger
-        type='text'
+        type="text"
         onClick={handleDelete}
         icon={<DeleteOutlined />}
         loading={loading || productLoading}

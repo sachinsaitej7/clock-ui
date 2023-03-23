@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@app/*": ["src/app/*"],
       "@buyer/*": ["src/buyer/*"],
       "@seller/*": ["src/seller/*"],
       "@components/*": ["src/app/components/*"],
-      "@firebase/*": ["src/app/firebase/*"],
+      "@firebase-app/*": ["src/app/firebase/*"],
       "@utils/*": ["src/app/utils/*"],
       "@assets/*": ["src/app/assets/*"]
     }
