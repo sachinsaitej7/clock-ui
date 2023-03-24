@@ -16,6 +16,8 @@ const SavedAddressPage = () => {
         <Skeleton active className="mt-4 p-2" />
       </>
     );
+  
+  if (!addresses?.length) return <div className="text-center my-4">No address found</div>;
 
   return (
     <div className="w-full">

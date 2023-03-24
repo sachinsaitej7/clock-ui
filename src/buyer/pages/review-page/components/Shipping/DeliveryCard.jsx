@@ -85,7 +85,7 @@ const DeliveryCard = () => {
         deliveryTime: estimatedDate.format("hh:mm a"),
       }));
     }
-  }, [estimatedDate]);
+  }, [estimatedDate?.format("YYYY-MM-DD")]);
 
   return (
     <>
