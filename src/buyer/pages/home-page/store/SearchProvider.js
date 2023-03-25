@@ -13,6 +13,16 @@ const INDEX_NAME = process.env.REACT_APP_ALGOLIA_INDEX_NAME;
 
 const sessionStorageCache = createInfiniteHitsSessionStorageCache();
 
+const transformItems = (items) => {
+  return items.map((item) => {
+    const { objectID, ...rest } = item;
+    return {
+      ...rest,
+      id: objectID,
+    };
+  });
+};
+
 function googleAnalyticsMiddleware() {
   const sendEventDebounced = debounce((uiState) => {
     const { query, ...rest } = uiState[INDEX_NAME] || {};
@@ -72,5 +82,6 @@ export function SearchProvider({ children }) {
 export function useHitsData() {
   return useInfiniteHits({
     cache: sessionStorageCache,
+    transformItems,
   });
 }

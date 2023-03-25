@@ -5,6 +5,8 @@ import styled, { useTheme } from "styled-components";
 import { Typography, Skeleton, Avatar, App, Button } from "antd";
 
 import { CalendarDaysIcon } from "@assets/icons";
+import { useAuth } from "@app/store";
+import { useLoginContext } from "@buyer/store";
 import ProfilesList from "./ProfilesList";
 import { StyledButton } from "../styled";
 import {
@@ -14,13 +16,13 @@ import {
 } from "../hooks";
 
 const ProfileImage = ({ loading, logo }) => {
-  if (loading) return <Skeleton.Avatar shape="circle" />;
+  if (loading) return <Skeleton.Avatar shape='circle' />;
   return (
     <Avatar
       src={logo}
-      alt="logo"
+      alt='logo'
       size={64}
-      className="-mt-14 border-primary border-2	"
+      className='-mt-14 border-primary border-2	'
     />
   );
 };
@@ -33,6 +35,23 @@ const FollowButton = () => {
   const { isFollowing, addFollow, removeFollow, loading, error } =
     useUserFollower(searchParams.get("id"));
 
+  const [user] = useAuth();
+  const { handleLoginModal } = useLoginContext();
+
+  const handleFollow = () => {
+    if (user) {
+      if (isFollowing) {
+        removeFollow();
+      } else {
+        addFollow();
+      }
+    } else {
+      handleLoginModal(
+        () => addFollow()
+      );
+    }
+  };
+
   useEffect(() => {
     if (error) message.error(error.message);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,10 +60,10 @@ const FollowButton = () => {
   if (isFollowing) {
     return (
       <StyledButton
-        size="small"
-        onClick={() => removeFollow()}
+        size='small'
+        onClick={handleFollow}
         loading={loading}
-        className="font-semibold text-primary"
+        className='font-semibold text-primary'
       >
         Following
       </StyledButton>
@@ -52,11 +71,11 @@ const FollowButton = () => {
   } else {
     return (
       <StyledButton
-        type="primary"
-        size="small"
-        onClick={() => addFollow()}
+        type='primary'
+        size='small'
+        onClick={handleFollow}
         loading={loading}
-        className="bg-primary font-semibold"
+        className='bg-primary font-semibold'
       >
         Follow
       </StyledButton>

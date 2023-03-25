@@ -5,6 +5,7 @@ import React, {
   useState,
   useMemo,
   useCallback,
+  useEffect,
 } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -34,6 +35,11 @@ export function AppModeProvider({ children }) {
     },
     [setMode, navigate, mode]
   );
+
+  useEffect(() => {
+    if (sellerMode) setMode("seller");
+    else setMode("buyer");
+  }, [sellerMode]);
 
   const value = useMemo(
     () => ({ mode, setMode: handleChange }),

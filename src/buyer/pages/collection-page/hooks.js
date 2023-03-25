@@ -34,7 +34,7 @@ export function useGetPaginatedProducts({ filterValues = {} } = {}) {
     lastSnapshot
   );
 
-  const isLastPage = snapshot?.docs.length < 25;
+  const isLastPage = snapshot?.docs?.length < 25;
   const isEmptyPage = productsData?.length === 0 && products.length === 0;
   const stringifyParams = JSON.stringify(params);
 
