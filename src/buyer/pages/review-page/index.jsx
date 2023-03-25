@@ -1,9 +1,7 @@
 import React from "react";
-import isEmpty from "lodash/isEmpty";
 import styled from "styled-components";
-import { Tabs, App } from "antd";
+import { Tabs } from "antd";
 
-import { usePincodeCheck } from "./hooks";
 import { OrderSummary, Shipping, Payment } from "./components";
 import { SummaryProvider, useSummaryContext } from "./store/SummaryProvider";
 
@@ -44,13 +42,11 @@ const items = [
 ];
 
 const ReviewContainer = () => {
-  const { message } = App.useApp();
-  const { activeTab, setActiveTab, address } = useSummaryContext();
-  const [pincodeData] = usePincodeCheck(address?.pincode);
+  const { activeTab, setActiveTab,  } = useSummaryContext();
 
   const handleTabClick = (key) => {
-    if (key === "3" && (!address || isEmpty(pincodeData)))
-      return message.warning("Please select an address");
+    if (key === "3")
+      return;
     setActiveTab(key);
   };
 

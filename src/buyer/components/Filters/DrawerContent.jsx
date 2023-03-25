@@ -46,7 +46,6 @@ const RadioOptionItem = ({ option, checked, onClick }) => {
 
 const DrawerContent = () => {
   const { selectedFilter, filterValues, setFilterValues } = useFilterContext();
-  console.log(selectedFilter);
   const { key, type, options, optionType } = selectedFilter;
   const selectedValues = filterValues[key] || [];
 

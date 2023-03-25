@@ -16,8 +16,13 @@ import "./index.css";
 
 if (process.env.NODE_ENV === "production") {
   Sentry.init({
-    dsn: "https://a2a680d99da943b4ab0d074c4eca72f2@o4503977086418944.ingest.sentry.io/4504628947451904",
-    integrations: [new BrowserTracing()],
+    dsn: "https://c7a27bf5657b4ccea1a2f669c5e53f24@o4503977086418944.ingest.sentry.io/4503977100771328",
+    replaysSessionSampleRate: 0.1,
+    // If the entire session is not sampled, use the below sample rate to sample
+    // sessions when an error occurs.
+    replaysOnErrorSampleRate: 1.0,
+
+    integrations: [new Sentry.Replay(), new BrowserTracing()],
 
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.

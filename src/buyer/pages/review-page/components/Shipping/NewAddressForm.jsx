@@ -36,22 +36,39 @@ const NewAddressPage = () => {
   const { setAddress } = useSummaryContext();
 
   const onValuesChange = debounce((_, allValues) => {
-    setAddress(allValues);
-  }, 3000);
+    const address = {
+      mobileNo: allValues.mobileNo,
+      email: allValues.email || "",
+      name: `${allValues.fname || ""} ${allValues.lname || ""}`,
+      address: (allValues.address1 || "") + " " + (allValues.address2 || ""),
+      landMark: allValues.landMark || "",
+      deliveryTime: "Update Later",
+      deliveryDate: "Update Later",
+      pincode: allValues.pincode,
+      city: allValues.city,
+      state: allValues.state,
+      saveAddress: allValues.saveAddress,
+      status: true,
+    };
+
+    setAddress(address);
+  }, 2000);
 
   return (
     <StyledForm
       onValuesChange={onValuesChange}
-      name="newAddress"
+      name='newAddress'
       scrollToFirstError
-      layout="vertical"
-      validateTrigger="onBlur"
+      layout='vertical'
+      validateTrigger='onBlur'
       initialValues={{
         saveAddress: true,
+        state: "Tamilnadu",
+        city: "Chennai",
       }}
     >
       <Form.Item
-        name="mobileNo"
+        name='mobileNo'
         rules={[
           {
             required: true,
@@ -59,16 +76,16 @@ const NewAddressPage = () => {
           },
         ]}
       >
-        <StyledInput placeholder="Mobile Number" />
+        <StyledInput placeholder='Mobile Number' />
       </Form.Item>
-      <Form.Item name="email">
-        <StyledInput placeholder="Email ID" />
+      <Form.Item name='email'>
+        <StyledInput placeholder='Email ID' />
       </Form.Item>
-      <div className="text-sm font-semibold my-2">
+      <div className='text-sm font-semibold my-2'>
         <h2>Address</h2>
       </div>
       <Form.Item
-        name="fname"
+        name='fname'
         rules={[
           {
             required: true,
@@ -76,10 +93,10 @@ const NewAddressPage = () => {
           },
         ]}
       >
-        <StyledInput placeholder="First Name *" />
+        <StyledInput placeholder='First Name *' />
       </Form.Item>
       <Form.Item
-        name="lname"
+        name='lname'
         rules={[
           {
             required: true,
@@ -87,10 +104,10 @@ const NewAddressPage = () => {
           },
         ]}
       >
-        <StyledInput placeholder="Last Name *" />
+        <StyledInput placeholder='Last Name *' />
       </Form.Item>
       <Form.Item
-        name="address1"
+        name='address1'
         rules={[
           {
             required: true,
@@ -100,12 +117,12 @@ const NewAddressPage = () => {
       >
         <StyledInput
           style={{ marginBottom: theme.space[0] }}
-          placeholder="Street Address *"
+          placeholder='Street Address *'
         />
       </Form.Item>
       <Text>Ex: No.12, Mount Road</Text>
       <Form.Item
-        name="address2"
+        name='address2'
         rules={[
           {
             required: false,
@@ -115,16 +132,16 @@ const NewAddressPage = () => {
       >
         <StyledInput
           style={{ marginBottom: theme.space[0] }}
-          placeholder="Apartment, suite, etc. (optional)"
+          placeholder='Apartment, suite, etc. (optional)'
         />
       </Form.Item>
       <Text>Ex: B612, Presidium</Text>
-      <Form.Item name="landMark">
-        <StyledInput placeholder="Landmark" />
+      <Form.Item name='landMark'>
+        <StyledInput placeholder='Landmark' />
       </Form.Item>
       <Form.Item
-        name="pincode"
-        type="number"
+        name='pincode'
+        type='number'
         rules={[
           {
             required: true,
@@ -132,10 +149,10 @@ const NewAddressPage = () => {
           },
         ]}
       >
-        <StyledInput placeholder="Pincode *" type="number" />
+        <StyledInput placeholder='Pincode *' type='number' />
       </Form.Item>
       <Form.Item
-        name="city"
+        name='city'
         rules={[
           {
             required: true,
@@ -143,10 +160,10 @@ const NewAddressPage = () => {
           },
         ]}
       >
-        <StyledInput placeholder="City *" />
+        <StyledInput placeholder='City *' />
       </Form.Item>
       <Form.Item
-        name="state"
+        name='state'
         rules={[
           {
             required: true,
@@ -154,12 +171,12 @@ const NewAddressPage = () => {
           },
         ]}
       >
-        <StyledInput placeholder="State *" />
+        <StyledInput placeholder='State *' />
       </Form.Item>
-      <Form.Item name="saveAddress" valuePropName="checked">
+      <Form.Item name='saveAddress' valuePropName='checked'>
         <Checkbox>Save this address for future use</Checkbox>
       </Form.Item>
-      <Divider className="divider" />
+      <Divider className='divider' />
     </StyledForm>
   );
 };

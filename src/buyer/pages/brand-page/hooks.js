@@ -31,28 +31,25 @@ export function useSizes() {
   return useCollectionDataOnce(ProductQuery.fetchSizesQuery());
 }
 
-export function useGetPaginatedProducts() {
+export function useGetPaginatedProducts({ filterValues = {} } = {}) {
   const [lastSnapshot, setLastSnapshot] = useState(null);
-  let [searchParams] = useSearchParams();
-  const params = {};
-
-  if (!searchParams.get("sort") || searchParams.get("sort") === "relevance")
-    delete params["sort"];
-  else params["sort"] = searchParams.get("sort");
-
-  params["brand"] = searchParams.get("id");
+  const [searchParams] = useSearchParams();
+  const params = { brand: searchParams.get("id"), ...filterValues };
 
   const [products, setProducts] = useState([]);
-  const [productsData, productsLoading, , snapshot] = useProductsByParams(
+  const [productsData, productsLoading, snapshot] = useProductsByParams(
     params,
     lastSnapshot
   );
 
   const isLastPage = snapshot?.docs.length < 25;
+  const isEmptyPage = productsData?.length === 0 && products.length === 0;
+
+  const stringifyParams = JSON.stringify(params);
 
   useEffect(() => {
     setProducts([]);
-  }, [searchParams]);
+  }, [stringifyParams]);
 
   useEffect(() => {
     if (productsData) setProducts((p) => [...p, ...productsData]);
@@ -66,22 +63,17 @@ export function useGetPaginatedProducts() {
     setLastSnapshot,
     lastSnapshot,
     isLastPage,
+    isEmptyPage,
   };
 }
 
-export function useCollectionName() {
-  let [searchParams] = useSearchParams();
-  const { products } = useGetPaginatedProducts();
-  const [collectionName, setCollectionName] = useState(null);
-
-  const params = getParams(searchParams);
-
+export function useCollectionName(products) {
+  const [searchParams] = useSearchParams();
+  const collectionName = getCollectionName(searchParams, products);
+  const [name, setName] = useState(collectionName);
   useEffect(() => {
-    if (params) {
-      const name = getCollectionName(searchParams, products);
-      name && setCollectionName(name);
-    }
-  }, [params, products, searchParams]);
-
-  return collectionName;
+    products.length > 0 && setName(collectionName);
+  }, [collectionName]);
+  return name;
 }
+

@@ -119,7 +119,7 @@ export default function AddNew({ profile, setAddNew }) {
     const productData = {
       name: nameRef.current.input.value,
       price: +priceRef.current.input.value,
-      description: descriptionRef.current.value,
+      description: descriptionRef.current.resizableTextArea.textArea.value || "",
       category: categories?.find((c) => selectedSubcategory?.parentId === c.id),
       subcategory: selectedSubcategory,
       sizes: selectedSizes.map((size) => ({

@@ -68,7 +68,6 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
     const dataURL = canvas.toDataURL("image/png");
-    console.log(dataURL, "dataURL");
     const blob = await fetch(dataURL)
       .then((r) => r.blob())
       .catch((e) => console.log(e));
@@ -84,5 +83,6 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
     url: `${window.location.origin}/product-page/${name}?id=${id}`,
     files: file ? [file] : null,
   };
+  console.log(shareData);
   return shareData;
 };

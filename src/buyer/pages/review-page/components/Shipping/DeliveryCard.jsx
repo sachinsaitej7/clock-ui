@@ -80,7 +80,7 @@ const DeliveryCard = () => {
   useEffect(() => {
     if (estimatedDate) {
       setAddress((prev) => ({
-        ...prev,
+        ...(prev || {}),
         deliveryDate: estimatedDate.format("YYYY-MM-DD"),
         deliveryTime: estimatedDate.format("hh:mm a"),
       }));
@@ -102,7 +102,7 @@ const DeliveryCard = () => {
               </p>
               <p className='font-semibold'>
                 {estimatedDate
-                  ? estimatedDate.format("ddd, Do MMM hh:mm a")
+                  ? estimatedDate.format("ddd, Do MMM, hh:mm a")
                   : "NA"}
               </p>
             </div>

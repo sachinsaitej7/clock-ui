@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ArrowLongLeftIcon } from "@assets/icons";
+import { DEFAULT_VALUE } from "@buyer/constants";
 
 import FiltersBar from "./components/FiltersBar";
 import Collections from "./components/Collections";
 
-import { useCollectionName } from "./hooks";
+import { useCollectionName, useGetPaginatedProducts } from "./hooks";
 
 const CollectionPageContainer = styled.div`
   width: 100%;
@@ -24,24 +25,32 @@ const Header = styled.div`
 
 const CollectionPage = () => {
   const navigate = useNavigate();
-  const collectionName = useCollectionName();
+  const [filterValues, setFilterValues] = useState(DEFAULT_VALUE);
+  const { products } = useGetPaginatedProducts({
+    filterValues,
+  });
+  const collectionName = useCollectionName(products);
+
 
   return (
     <CollectionPageContainer>
       <Header>
-        <div className="flex items-center mb-4">
+        <div className='flex items-center mb-4'>
           <ArrowLongLeftIcon
-            width="24px"
+            width='24px'
             onClick={() => navigate(-1)}
-            className="cursor-pointer"
+            className='cursor-pointer'
           />
         </div>
-        <p className="my-2">
+        <p className='my-2'>
           {collectionName ? `${collectionName}’s Collection` : `All Products`}
         </p>
       </Header>
-      <FiltersBar />
-      <Collections />
+      <FiltersBar
+        filterValues={filterValues}
+        setFilterValues={setFilterValues}
+      />
+      <Collections filterValues={filterValues} />
     </CollectionPageContainer>
   );
 };

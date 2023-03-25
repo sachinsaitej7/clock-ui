@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
 import { useSortBy, useSearchBox } from "react-instantsearch-hooks-web";
 
+import { SORT_BY_OPTIONS, FILTER_MAP } from "@buyer/constants";
 import { Filters } from "@buyer/components";
 import { useSizes } from "../hooks";
-import { SORT_BY_OPTIONS, FILTER_MAP } from "../constants";
 
 const getSizeFilter = (sizes) => {
   if (!sizes) return {};

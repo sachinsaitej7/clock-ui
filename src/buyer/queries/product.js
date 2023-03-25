@@ -9,7 +9,10 @@ import {
   startAfter,
   doc,
 } from "firebase/firestore";
+import { SORT_QUERY_MAP } from "@buyer/constants";
+
 import { getIdConverter } from "./utils";
+import { isEmpty } from "lodash";
 
 const { db } = getFirebase();
 const idConverter = getIdConverter();
@@ -24,6 +27,15 @@ export function fetchSizesQuery() {
 export function fetchCategoriesQuery() {
   const categoryRef = collection(db, "category").withConverter(idConverter);
   const q = query(categoryRef, where("status", "==", true));
+  return q;
+}
+
+export function fetchSubCategoryByIdQuery(id) {
+  if (!id) return;
+  const subcategoryRef = collectionGroup(db, "subcategory").withConverter(
+    idConverter
+  );
+  const q = query(subcategoryRef, where("status", "==", true), where("__name__", "==", id));
   return q;
 }
 
@@ -222,17 +234,25 @@ export function fetchProductsByParamsQuery(
   lastDoc = null,
   pageLimit = 25
 ) {
-  const sortValue = params.sort;
-  delete params.sort;
-  const customQueryConstraints = Object.keys(params).reduce((acc, key) => {
-    return [...acc, where(`${key}.id`, "==", params[key])];
-  }, []);
+ const { sort, size, ...rest } = params;
+ const customQueryConstraints = Object.keys(rest).reduce((acc, key) => {
+   return [...acc, where(`${key}.id`, "==", params[key])];
+ }, []);
   customQueryConstraints.push(where("status", "==", true));
 
-  if (sortValue) {
-    const isDesc = sortValue.includes("desc");
+  if (!isEmpty(sort)) {
+    const sortValue = SORT_QUERY_MAP[sort[0]];
+    if (sortValue === "")
+      customQueryConstraints.push(orderBy("createdAt", "desc"));
+    else if (sortValue === "asc")
+      customQueryConstraints.push(orderBy("price.currentPrice", "asc"));
+    else if (sortValue === "desc")
+      customQueryConstraints.push(orderBy("price.currentPrice", "desc"));
+  }
+
+  if (!isEmpty(size)) {
     customQueryConstraints.push(
-      orderBy("price.currentPrice", isDesc ? "desc" : undefined)
+      where("sizes", "array-contains-any", size)
     );
   }
 

@@ -78,22 +78,16 @@ const ShippingData = () => {
   }, [error]);
 
   const handleNext = async () => {
-    const { saveAddress, fname, lname, address1, address2, ...rest } = address;
-    const payload = {
-      name: fname + " " + lname,
-      address: address1 + " " + address2,
-      ...rest,
-    };
+    const { saveAddress, ...rest } = address;
     if (
-      !payload.name ||
-      !payload.address ||
-      !payload.pincode ||
-      !payload.city ||
-      !payload.mobileNo
+      !rest.name ||
+      !rest.address ||
+      !rest.pincode ||
+      !rest.city ||
+      !rest.mobileNo
     )
       return message.error("Please enter your address details");
-    if (saveAddress) await addNewAddress(removeEmptyKeys(payload));
-
+    if (saveAddress) await addNewAddress(removeEmptyKeys(rest));
     setActiveTab("3");
   };
 

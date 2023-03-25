@@ -17,7 +17,7 @@ const SavedAddressPage = () => {
       </>
     );
   
-  if (!addresses?.length) return <div className="text-center my-4">No address found</div>;
+  if (!addresses?.length) return <div className="text-center my-20">No address found</div>;
 
   return (
     <div className="w-full">

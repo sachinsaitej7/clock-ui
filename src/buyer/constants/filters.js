@@ -1,10 +1,16 @@
 export const SORT_BY_OPTIONS = [
-  { label: "Relevance", value: "relevance" },
+  { label: "Relevance", value: "products" },
   { label: "Price: Low to High", value: "products_current_price_asc" },
   { label: "Price: High to Low", value: "products_current_price_desc" },
 ];
 
-export const DEFAULT_VALUE = { sort: ["relevance"] };
+export const DEFAULT_VALUE = { sort: ["products"] };
+
+export const SORT_QUERY_MAP = {
+  products: "",
+  products_current_price_asc: "asc",
+  products_current_price_desc: "desc",
+}
 
 export const FILTER_MAP = {
   sort: {

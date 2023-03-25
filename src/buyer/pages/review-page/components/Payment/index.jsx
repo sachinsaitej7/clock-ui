@@ -30,9 +30,7 @@ const StyledCollapse = styled(Collapse)`
 const StyledPanel = styled(Panel)`
   .ant-collapse-header {
     padding: 0 !important;
-  }import { useOrderData } from '../../../../hooks/useOrderData';
-import { useNavigate } from 'react-router-dom';
-
+  };
 `;
 
 const CollapseHeader = ({ items }) => (
@@ -59,6 +57,8 @@ const Payment = () => {
       removeAllItems();
     }
   }, [orderData]);
+
+  if (!address) return null;
 
   return (
     <div>

@@ -119,8 +119,8 @@ const PincodeTextContainer = ({ data }) => {
 const PincodeChecker = () => {
   const theme = useTheme();
   const inputRef = useRef(null);
-  const [pincode, setPincode] = useState(+localStorage.getItem("pincode"));
-  const [data, loading] = usePincodeCheck(pincode);
+  const [pincode, setPincode] = useState(localStorage.getItem("pincode"));
+  const [data, loading] = usePincodeCheck(+pincode);
 
   const handleClick = () => {
     const pincode = +inputRef.current?.input.value;

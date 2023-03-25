@@ -1,11 +1,9 @@
-import React, { useCallback, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useCallback } from "react";
 
 import { Filters } from "@buyer/components";
-import { FILTER_MAP, DEFAULT_VALUE } from "@buyer/constants";
+import { FILTER_MAP } from "@buyer/constants";
 
 import { useSizes } from "../hooks";
-import { getParams } from "../utils";
 
 const getSizeFilter = (sizes) => {
   if (!sizes) return {};
@@ -18,32 +16,20 @@ const getSizeFilter = (sizes) => {
   };
 };
 
-const FiltersBar = () => {
+const FiltersBar = ({ filterValues, setFilterValues }) => {
   const [sizes] = useSizes();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const values = useMemo(
-    () => ({
-      sort: searchParams.get("sort")
-        ? searchParams.getAll("sort")
-        : DEFAULT_VALUE.sort,
-      size: searchParams.get("size") ? searchParams.getAll("size") : undefined,
-    }),
-    [searchParams]
-  );
 
   const onApply = useCallback(
     (values) => {
-      const params = getParams(searchParams);
-      setSearchParams({ ...params, ...values });
+      setFilterValues(values);
     },
-    [searchParams, setSearchParams]
+    [setFilterValues]
   );
 
   return (
     <Filters
       filters={[FILTER_MAP.sort, getSizeFilter(sizes)]}
-      values={values}
+      values={filterValues}
       onApply={onApply}
     />
   );

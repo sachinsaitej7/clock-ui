@@ -17,7 +17,7 @@ const Header = styled.div`
   min-height: 240px;
 
   padding: ${(props) => props.theme.space[5]};
-  font-family: Crimson Pro;
+  font-family: "Crimson Pro";
   color: ${(props) => props.theme.text.white};
   transition: all 0.3s ease-out;
 

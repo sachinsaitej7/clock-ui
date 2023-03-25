@@ -12,22 +12,24 @@ import { ProductCard } from "@buyer/components";
 
 import { useGetPaginatedProducts } from "../hooks";
 
-const Collections = () => {
+const Collections = ({filterValues}) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
   const {
     products,
+    productsData,
     isLastPage,
+    isEmptyPage,
     productsLoading,
     snapshot,
     lastSnapshot,
     setLastSnapshot,
-  } = useGetPaginatedProducts();
+  } = useGetPaginatedProducts({ filterValues });
 
   if (productsLoading && !lastSnapshot) return <CollectionGridSkeleton />;
 
-  if (!products?.length)
+  if (isEmptyPage)
     return <div className="text-center h-60 my-4">No products found</div>;
 
   return (
@@ -37,12 +39,12 @@ const Collections = () => {
           color: theme.text.light,
           fontSize: theme.fontSizes[1],
         }}
-        className="my-2"
+        className='my-2'
       >
-        Showing {products.length} products
+        Showing {products.length || productsData?.length || 0} products
       </p>
       <CollectionGrid
-        className="pb-4"
+        className='pb-4'
         dataLength={products.length}
         next={() => setLastSnapshot(snapshot)}
         hasMore={!isLastPage}

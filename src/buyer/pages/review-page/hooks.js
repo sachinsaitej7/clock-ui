@@ -115,7 +115,7 @@ export function usePaymentMethod(id) {
   const [orderData] = useGetOrderData(id);
   const [updateOrder, loading, error] = useUpdateOrderData();
 
-  const handleRazorpayResponse = (response) => {
+  const handleRazorpayResponse = async (response) => {
     const razorpayPaymentId = response.razorpay_payment_id;
     const razorpaySignature = response.razorpay_signature;
     const payload = {
@@ -125,7 +125,7 @@ export function usePaymentMethod(id) {
       status: "payment_received",
       amountDue: 0,
     };
-    updateOrder(id, payload);
+    await updateOrder(id, payload);
   };
 
   useEffect(() => {

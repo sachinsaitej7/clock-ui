@@ -11,7 +11,7 @@ export const createProductData = (data) => {
       discount: 0,
       mrp: null,
     },
-    description: data.description || null,
+    description: data.description || "",
     descriptionHtml: null,
     slug: slugify(data.name || "", {
       lower: true,
