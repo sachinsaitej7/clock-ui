@@ -83,6 +83,5 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
     url: `${window.location.origin}/product-page/${name}?id=${id}`,
     files: file ? [file] : null,
   };
-  console.log(shareData);
   return shareData;
 };

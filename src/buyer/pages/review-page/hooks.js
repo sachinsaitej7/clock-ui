@@ -121,7 +121,7 @@ export function usePaymentMethod(id) {
     const payload = {
       razorpayPaymentId,
       razorpaySignature,
-      amountPaid: orderData.amount,
+      amountPaid: orderData.totalAmount,
       status: "payment_received",
       amountDue: 0,
     };

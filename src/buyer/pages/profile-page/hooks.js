@@ -58,7 +58,7 @@ export function useUserFollower(id) {
   const [profileData] = useUserProfile(id);
   const [userFollowers] = useGetUserFollowers(id);
   const [user] = useAuth();
-  const [userData, userDataLoading] = useUserProfile(user?.uid);
+  const [userData] = useUserProfile(user?.uid);
 
   const isFollowing = userFollowers?.length > 0;
 

@@ -13,10 +13,11 @@ const ShareIcon = () => {
   const [product] = useProduct(id);
 
   const handleClick = async () => {
-    const shareData = await getProductShareData(product);
-    handleShare(shareData, (text) => {
-      message.success(text);
-    });
+     getProductShareData(product).then((data) =>
+       handleShare(data, (text) => {
+         message.success(text);
+       })
+     );
   };
 
   if (!product) return null;

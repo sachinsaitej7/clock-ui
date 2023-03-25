@@ -108,7 +108,7 @@ const OrderPage = () => {
         <div key={item.id} style={{ margin: theme.space[5] + " 0px" }}>
           <ProductCardReview.NonEditable
             {...item}
-            onClick={() => navigate(`/product-page/${item.slug}?id=${item.id}`)}
+            onClick={() => navigate(`/product-page/${item.slug}?id=${item.productId}`)}
           />
         </div>
       ))}
