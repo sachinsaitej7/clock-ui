@@ -129,7 +129,7 @@ export function usePaymentMethod(id) {
   };
 
   useEffect(() => {
-    if (orderData) {
+    if (orderData && orderData.status === "created") {
       const options = {
         key: process.env.REACT_APP_RAZORPAY_KEY,
         currency: orderData.currency,

@@ -66,9 +66,7 @@ const OrderPage = () => {
     <Container>
       <Celebrations />
       <div
-        style={{
-          textAlign: "center",
-        }}
+        className="text-center"
       >
         <h6
           style={{

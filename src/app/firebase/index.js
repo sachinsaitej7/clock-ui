@@ -63,11 +63,11 @@ export function initialize() {
   const auth = getAuth(app);
   const storage = getStorage(app, "gs://clock-poc-11334.appspot.com");
   let functions = null;
-  // if (process.env.NODE_ENV === "development") {
-  functions = getFunctions(app);
-  // } else {
-  //   functions = getFunctions(app, "asia-south1");
-  // }
+  if (process.env.NODE_ENV === "development") {
+    functions = getFunctions(app);
+  } else {
+    functions = getFunctions(app, "asia-south1");
+  }
 
   (async () => {
     await setPersistence(auth, browserLocalPersistence);

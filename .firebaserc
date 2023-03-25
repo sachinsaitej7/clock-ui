@@ -4,5 +4,12 @@
     "prod": "clock-poc-11334"
   },
   "targets": {},
-  "etags": {}
+  "etags": {
+    "clock-poc-11334": {
+      "extensionInstances": {
+        "firestore-send-email": "efde39fe905ff69cb059f77995372c0cd5850902d7952385e2fe53f258d06092",
+        "firestore-algolia-search": "e7db8a7124815d7e39337e9c96bc5a954dbc9272fff5ce13a47af39bbfdb8597"
+      }
+    }
+  }
 }
