@@ -6,7 +6,7 @@ import Spinner from "@app/components/Spinner/index";
 import Root from "@seller";
 const HomePage = lazy(() => import("@seller/pages/home"));
 const LoginPage = lazy(() => import("@seller/pages/login"));
-const OnboardingPage = lazy(() => import("@seller/pages/onboarding"));
+const OnboardingPage = lazy(() => import("@seller/pages/profile-setup"));
 
 const SellerRoute = (
   <Route path="/seller" element={<Root />}>

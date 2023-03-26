@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { getFirebase } from "@firebase-app";
 import { useProductsByProfileId, useUserProfile } from "./hooks";
 import { PageContainer } from "@seller/styled-components";
-import Spinner from "@seller/shared-components/Spinner";
+import { Spinner } from "@components";
 import { CalendarDaysIcon } from "@assets/icons";
 import { ReactComponent as Add } from "@seller/assets/common/plus-circle-filled.svg";
 import AddNew from "./add-new";

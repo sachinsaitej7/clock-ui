@@ -3,33 +3,21 @@ import { Button, Input, Tag, Card } from "antd";
 
 export const PageContainer = styled.div`
   width: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 120px);
   font-family: ${(props) => props.theme.fonts.primary};
   background-color: ${(props) => props.theme.bg.white};
   padding: ${(props) => props.theme.space[0] + " " + props.theme.space[5]};
 `;
 
 export const StyledButton = styled(Button)`
-  margin-top: ${(props) => props.theme.space[5]};
-  background-color: ${(props) => props.theme.colors.primary};
-  border: none;
   border-radius: ${(props) => props.theme.borderRadius[2]};
   padding: ${(props) => `${props.theme.space[3]} ${props.theme.space[4]}`};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 40px;
-  &.ant-btn:hover {
-    border-color: ${(props) => props.theme.colors.primary};
-    background: ${(props) => props.theme.bg.primary};
-  }
-  :hover {
-    border-color: ${(props) => props.theme.colors.primary} !important;
-    background: ${(props) => props.theme.bg.primary};
-  }
+  height: 42px;
   span {
-    color: ${(props) => props.theme.text.white};
     font-size: ${(props) => props.theme.fontSizes[3]};
-    line-height: 24px;
+    line-height: 120%;
     font-weight: ${(props) => props.theme.fontWeights.semibold};
   }
 `;
@@ -56,7 +44,7 @@ export const StyledStickyContainer = styled.div`
   background-color: ${(props) => props.theme.bg.default};
   padding: ${(props) => `${props.theme.space[5]}`};
   box-shadow: 0px -2px 12px rgba(0, 0, 0, 0.08);
-  bottom: 56px;
+  bottom: 50px;
   left: 50%;
   margin-left: -50%;
   z-index: 100;

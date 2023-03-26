@@ -24,9 +24,9 @@ import {
   StyledStickyContainer,
 } from "@seller/styled-components";
 
-import HashTags from "@seller/shared-components/HashTags";
-import UploadImages from "@seller/shared-components/UploadImages";
-import FilterDrawer from "@seller/shared-components/Drawer";
+import HashTags from "@seller/components/HashTags";
+import UploadImages from "@seller/components/UploadImages";
+import FilterDrawer from "@seller/components/Drawer";
 
 import { validateProductData } from "./utils";
 
@@ -386,9 +386,10 @@ export default function AddNew({ profile, setAddNew }) {
         }}
       >
         <StyledButton
-          style={{ width: "100%", marginTop: theme.space[0] }}
           loading={loading}
           onClick={handleAddProduct}
+          type="primary"
+          className="w-full mt-0 bg-primary"
         >
           List product
         </StyledButton>

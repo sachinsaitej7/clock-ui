@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 
+//images
+import { ArrowLongLeftIcon } from "@assets/icons";
+import { Spinner } from "@components";
+
+import { PageContainer } from "@seller/styled-components";
+
 //context
 import {
   OnboardingProvider,
@@ -10,12 +16,6 @@ import {
   useProfileContext,
   ProfileProvider,
 } from "./context";
-
-//images
-import { ReactComponent as LeftArrow } from "@seller/assets/common/arrow-left.svg";
-
-import { PageContainer } from "@seller/styled-components";
-import Spinner from "@seller/shared-components/Spinner";
 
 import Step0 from "./step-0";
 import Step1 from "./step-1";
@@ -46,11 +46,6 @@ const variants = {
 };
 
 const StyledContainer = styled(PageContainer)`
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-
   .back {
     cursor: pointer;
     margin-top: ${(props) => props.theme.space[8]};
@@ -84,7 +79,7 @@ const OnboardingPage = () => {
   if (profileLoading)
     return (
       <StyledContainer
-        style={{ justifyContent: "center", alignItems: "center" }}
+       className="text-center middle"
       >
         <Spinner />
       </StyledContainer>
@@ -104,16 +99,18 @@ const OnboardingPage = () => {
                 return <StyledStep key={i} active={step > i}></StyledStep>;
               })}
           </StyledStepContainer>
-          {step > 2 && <LeftArrow className="back" onClick={prevStep} />}
+          {step > 2 && (
+            <ArrowLongLeftIcon className='back' onClick={prevStep} />
+          )}
           <div style={{ width: "100%" }}>
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={step}
                 custom={direction}
                 variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
+                initial='enter'
+                animate='center'
+                exit='exit'
                 // transition={{
                 //   x: { type: "spring", stiffness: 30, damping: 10 },
                 // }}

@@ -25,6 +25,7 @@ import { ReactComponent as MinusIcon } from "./minus.svg";
 import { ReactComponent as PlusIcon } from "./plus.svg";
 
 import { ReactComponent as CheckCircleIcon } from "./check-circle.svg";
+import { ReactComponent as SparklesIcon } from "./sparkles.svg";
 
 export {
   //buy and sell
@@ -33,6 +34,7 @@ export {
   MagnifyingGlassIcon,
   Bars3Icon,
   XCircleIcon,
+  SparklesIcon,
 
   // arrows
   ChevronDownIcon,

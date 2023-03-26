@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useTheme } from "styled-components";
 import { Form, Typography, Input, Row, Col, App } from "antd";
 
@@ -12,6 +12,13 @@ const SendOtpForm = ({
   const theme = useTheme();
   const [phoneNumber, setPhoneNumber] = useState("");
   const { message } = App.useApp();
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   useEffect(() => {
     if (sendOtpError) {
@@ -27,7 +34,7 @@ const SendOtpForm = ({
 
   return (
     <Form
-      layout="vertical"
+      layout='vertical'
       onFinish={() => sendOtp(phoneNumber)}
       style={{ marginTop: theme.space[8] }}
     >
@@ -35,23 +42,23 @@ const SendOtpForm = ({
         label={
           <Typography.Title level={5} style={{ margin: "0px" }}>
             Phone Number *
-            <Typography.Text type="secondary" style={{ marginLeft: "5px" }}>
+            <Typography.Text type='secondary' style={{ marginLeft: "5px" }}>
               (We will send you an OTP)
             </Typography.Text>
           </Typography.Title>
         }
-        name="phone-number"
+        name='phone-number'
       >
-        <Input.Group size="large">
+        <Input.Group size='large'>
           <Row gutter={8}>
             <Col span={4}>
-              <Input value="+91" readOnly style={{ padding: theme.space[3] }} />
+              <Input value='+91' readOnly style={{ padding: theme.space[3] }} />
             </Col>
             <Col span={20}>
               <Input
-                placeholder="Phone Number"
-                id="phone-number"
-                type="number"
+                placeholder='Phone Number'
+                id='phone-number'
+                type='number'
                 maxLength={10}
                 onChange={handlePhoneNumberChange}
                 value={phoneNumber}
@@ -63,10 +70,11 @@ const SendOtpForm = ({
       </Form.Item>
       <Form.Item>
         <StyledButton
-          id="sign-in-button"
-          type="primary"
-          htmlType="submit"
+          id='sign-in-button'
+          type='primary'
+          htmlType='submit'
           loading={sendOtpLoading}
+          className='w-full bg-primary'
         >
           Continue
         </StyledButton>

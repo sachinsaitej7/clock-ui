@@ -68,6 +68,11 @@ service cloud.firestore {
       allow write: if request.auth.uid == request.resource.data.uid;
     }
 
+    match /userName/{userName} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == request.resource.data.userId;
+    }
+
     match /userProfile/{userId} {
       allow read: if true;
       allow write: if request.auth.uid == request.resource.id;

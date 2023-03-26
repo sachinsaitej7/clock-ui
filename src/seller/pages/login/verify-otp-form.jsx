@@ -141,6 +141,7 @@ const VerifyOtpForm = ({
             underline
             disabled={timer > 0}
             id="recaptcha-container-resend"
+            className="text-primary"
           >
             Resend OTP
           </Typography.Link>
@@ -158,6 +159,8 @@ const VerifyOtpForm = ({
             opacity: inputRef.current?.input.value ? 1 : 0.5,
           }}
           loading={verifyOtpLoading}
+          disabled={!inputRef.current?.input.value}
+          className='bg-primary'
         >
           Continue
         </StyledButton>

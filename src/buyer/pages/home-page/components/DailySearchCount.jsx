@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTheme } from "styled-components";
 
-import { SparklesIcon } from "@buyer/assets/icons";
+import { SparklesIcon } from "@assets/icons";
 import { useSearch } from "../store/SearchProvider";
 
 const DailySearchCount = () => {

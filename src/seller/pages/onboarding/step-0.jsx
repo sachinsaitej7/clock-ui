@@ -1,34 +1,19 @@
 import React from "react";
-import { useTheme } from "styled-components";
 import { Typography } from "antd";
 
 import { useOnboardingContext } from "./context";
 import { StyledButton, StyledStickyContainer } from "@seller/styled-components";
 
 const Step0 = () => {
-  const theme = useTheme();
   const { nextStep } = useOnboardingContext();
 
   return (
     <>
-      <Typography.Title
-        level={3}
-        style={{
-          textAlign: "center",
-          marginTop: theme.space[11],
-          width: "100%",
-          fontSize: theme.fontSizes[6],
-        }}
-      >
+      <Typography.Title level={3} className='text-center'>
         Let’s start by setting up your profile
       </Typography.Title>
       <StyledStickyContainer>
-        <StyledButton
-          onClick={nextStep}
-          style={{
-            margin: "0px",
-          }}
-        >
+        <StyledButton onClick={nextStep} className='m-0'>
           Setup Profile
         </StyledButton>
       </StyledStickyContainer>

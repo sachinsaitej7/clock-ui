@@ -38,7 +38,7 @@ const LoginPage = () => {
 
   if (!loginMode)
     return (
-      <StyledContainer>
+      <StyledContainer className='bg-[#252629]'>
         <Login handleClick={() => setLoginMode(true)} />
       </StyledContainer>
     );
@@ -51,8 +51,8 @@ const LoginPage = () => {
             Enter OTP to verify
           </Typography.Title>
           <Typography.Paragraph style={{ color: "#8C8C8C" }}>
-            {`Please enter the OTP code that we’ve sent to your registered phone
-            number ${phoneNumber}`}
+            Please enter the OTP code that we’ve sent to your registered phone
+            number <strong className="text-primary">+91 {phoneNumber}</strong>
           </Typography.Paragraph>
           <VerifyOtpForm
             verifyOtp={verifyOtp}
@@ -71,6 +71,10 @@ const LoginPage = () => {
           Clock
         </Typography.Paragraph>
         <SendOtpForm sendOtp={sendOtp} {...sendOtpData} />
+        <Typography.Text type='secondary'>
+          By logging in or signing up, you are agreeing to our Terms of Service
+          and Privacy Policy
+        </Typography.Text>
       </div>
     </StyledContainer>
   );

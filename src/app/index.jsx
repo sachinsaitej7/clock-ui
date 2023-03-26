@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, matchPath } from "react-router-dom";
 import { App as AntdApp } from "antd";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -36,7 +36,25 @@ const Root = () => {
             <BottomNavBar />
           </>
         )}
-        <ScrollRestoration />
+        <ScrollRestoration
+          getKey={(location, matches) => {
+            const paths = [
+              "/products/*",
+              "/brand-page/*",
+              "/profile-page/*",
+              "/seller",
+            ];
+            let flag = false;
+            for (const path of paths) {
+              if (matchPath({ path, exact: true }, location.pathname)) {
+                flag = true;
+                break;
+              }
+            }
+            if (flag) return location.pathname;
+            return location.key;
+          }}
+        />
       </AntdApp>
     </AllProviders>
   );

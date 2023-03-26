@@ -10,9 +10,9 @@ import {
   // useOnDemandProducts,
 } from "./hooks";
 import EmptyPage from "./empty-page";
-import ProductCard from "@seller/shared-components/ProductCard";
-import Spinner from "@seller/shared-components/Spinner";
-import FilterDrawer from "@seller/shared-components/Drawer";
+import ProductCard from "@seller/components/ProductCard";
+import Spinner from "@components/Spinner";
+import FilterDrawer from "@seller/components/Drawer";
 import ProductView from "./product-view";
 
 const StyledContainer = styled.div``;

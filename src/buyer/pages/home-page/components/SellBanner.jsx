@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { Card } from "antd";
 
 import { useAppMode } from "@app/store";
-import { ArrowRightCircleIcon } from "@assets/icons";
-import { SparklesIcon } from "@buyer/assets/icons";
+import { ArrowRightCircleIcon, SparklesIcon } from "@assets/icons";
 
 import { useSearch } from "../store/SearchProvider";
 

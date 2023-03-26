@@ -7,6 +7,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
+import isEmpty from "lodash/isEmpty";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const AppModeContext = createContext();
@@ -23,22 +24,33 @@ export function AppModeProvider({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
   const sellerMode = location.pathname.includes("/seller");
-
+  const [previousPath, setPreviousPath] = useState({});
+  
   const [mode, setMode] = useState(sellerMode ? "seller" : "buyer");
 
   const handleChange = useCallback(
     (value) => {
       if (value === mode) return;
-      if (value === "buyer") navigate("/");
-      else if (value === "seller") navigate("/seller");
+      const prevValue = previousPath[value];
+      if (value === "buyer") {
+        setPreviousPath({ seller: location });
+        !isEmpty(prevValue)
+          ? navigate(`${prevValue.pathname}${prevValue.search}`)
+          : navigate("/");
+      } else if (value === "seller") {
+        setPreviousPath({ buyer: location });
+        !isEmpty(prevValue)
+          ? navigate(`${prevValue.pathname}${prevValue.search}`)
+          : navigate("/seller");
+      }
       setMode(value);
     },
     [setMode, navigate, mode]
   );
 
   useEffect(() => {
-    if (sellerMode) setMode("seller");
-    else setMode("buyer");
+    if (sellerMode && mode !== "seller") setMode("seller");
+    else if (!sellerMode && mode !== "buyer") setMode("buyer");
   }, [sellerMode]);
 
   const value = useMemo(

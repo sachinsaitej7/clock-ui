@@ -10,3 +10,10 @@ export function logAnalyticsEvent(name, params) {
   
   logEvent(analytics, name, params);
 }
+
+export const idConverter = {
+  fromFirestore: function (snapshot, options) {
+    const data = snapshot.data(options);
+    return { ...data, id: snapshot.id };
+  },
+};
