@@ -244,10 +244,7 @@ export function fetchProductsByParamsQuery(
     const sortValue = SORT_QUERY_MAP[sort[0]];
     if (sortValue === "")
       customQueryConstraints.push(orderBy("createdAt", "desc"));
-    else if (sortValue === "asc")
-      customQueryConstraints.push(orderBy("price.currentPrice", "asc"));
-    else if (sortValue === "desc")
-      customQueryConstraints.push(orderBy("price.currentPrice", "desc"));
+    else customQueryConstraints.push(orderBy("price.currentPrice", sortValue));
   }
 
   if (!isEmpty(size)) {

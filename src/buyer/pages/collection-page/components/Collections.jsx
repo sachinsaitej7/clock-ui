@@ -24,13 +24,12 @@ const Collections = ({filterValues}) => {
     lastSnapshot,
     setLastSnapshot,
     productsData,
-  } = useGetPaginatedProducts({filterValues});
+  } = useGetPaginatedProducts({ filterValues });
 
   if (productsLoading && !lastSnapshot) return <CollectionGridSkeleton />;
 
   if (isEmptyPage)
     return <div className='text-center h-60 my-4'>No products found</div>;
-
   return (
     <>
       <p

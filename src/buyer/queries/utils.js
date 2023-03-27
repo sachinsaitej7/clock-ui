@@ -1,5 +1,5 @@
 export function getLastDoc(snapshot) {
-  if (!snapshot) return null;
+  if (!snapshot?.docs) return null;
   const lastDoc = snapshot.docs[snapshot.docs.length - 1];
   return lastDoc;
 }
