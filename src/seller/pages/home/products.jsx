@@ -122,18 +122,20 @@ const Products = () => {
         <StyledTabs
           activeKey={active}
           onChange={(key) => handleActive(key)}
-          size="small"
+          size='small'
           centered
+          tabBarGutter={36}
+          className='w-full'
           items={[
             {
               key: "instant",
-              label: "Products",
+              label: <h3>Products ({products?.length || 0})</h3>,
               children: getChildren(),
               forceRender: true,
             },
             {
               key: "orders",
-              label: "Orders",
+              label: <h3>Orders </h3>,
               children: getChildren(),
               forceRender: true,
             },

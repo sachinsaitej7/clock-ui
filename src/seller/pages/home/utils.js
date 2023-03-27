@@ -122,21 +122,8 @@ export const getProfileShareData = ({ name, id }) => {
 export const getProductShareData = async ({ name, id, thumbnail }) => {
   let file = null;
   try {
-    const img = new Image();
-    img.src = thumbnail;
-    img.crossOrigin = "Anonymous";
-    img.type = "image/png";
-
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    const dataURL = canvas.toDataURL("image/png");
-    const blob = await fetch(dataURL)
-      .then((r) => r.blob())
-      .catch((e) => console.log(e));
-
+    const response = await fetch(thumbnail);
+    const blob = await response.blob();
     file = new File([blob], "image.png", { type: blob.type });
   } catch (e) {
     console.log(e);

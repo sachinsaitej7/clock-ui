@@ -22,6 +22,18 @@ const StyledCard = styled(Card)`
     width: ${(props) => (props.variant === "small" ? "110px" : "164px")};
     height: ${(props) => (props.variant === "small" ? "156px" : "220px")};
   }
+
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+  animation-delay: 0.5s;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const ImageContainer = styled.img``;

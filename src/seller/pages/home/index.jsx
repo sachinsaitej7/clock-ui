@@ -13,6 +13,8 @@ import { CalendarDaysIcon } from "@assets/icons";
 import { ReactComponent as Add } from "@seller/assets/common/plus-circle-filled.svg";
 import AddNew from "./add-new";
 import Products from "./products";
+
+import { AddDescription, ProfilesList } from "./components";
 import {
   StyledStickyFloater,
   ProfileNameContainer,
@@ -38,19 +40,10 @@ const StyledNameContainer = styled(ProfileNameContainer)`
   }
   p {
     font-size: ${(props) => props.theme.fontSizes[2]};
-    color: ${(props) => props.theme.text.light};
     margin: ${(props) => props.theme.space[2]} 0px;
-    span {
-      color: ${(props) => props.theme.text.dark};
-      font-weight: ${(props) => props.theme.fontWeights.semibold};
-      display: inline-block;
-      margin: 0px ${(props) => props.theme.space[1]};
-    }
   }
   .name {
-    h5 {
-      margin: ${(props) => props.theme.space[4]} 0px;
-    }
+    margin: ${(props) => props.theme.space[3]} 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,7 +56,7 @@ const HomePage = () => {
   const { auth } = getFirebase();
   const [user] = useAuthState(auth);
   const [profile, profileLoading] = useUserProfile(user.uid);
-  const [products, productLoading] = useProductsByProfileId(user.uid);
+  const [, productLoading] = useProductsByProfileId(user.uid);
   const [addNew, setAddNew] = React.useState(false);
 
   useEffect(() => {
@@ -92,28 +85,15 @@ const HomePage = () => {
             }}
           ></div>
           <StyledNameContainer>
-            <img src={profile.logo} alt="logo"></img>
-            <div className="name">
+            <img src={profile.logo} alt='logo'></img>
+            <div className='name'>
               <Typography.Title level={5}>{profile.name}</Typography.Title>
+              <Typography.Text type='secondary'>
+                {profile.userName ? `@${profile.userName}` : ""}
+              </Typography.Text>
             </div>
-            <p>
-              <span>
-                {profile.followers?.count > 0 ? profile.followers?.count : 0}
-              </span>{" "}
-              followers
-              <span
-                style={{
-                  margin: `0px ${theme.space[3]}`,
-                  width: "4px",
-                  height: "4px",
-                  background: "#D9D9D9",
-                  borderRadius: "50%",
-                  verticalAlign: "middle",
-                }}
-              ></span>
-              <span>{products.length || 0}</span> listed products
-            </p>
-            <p>{profile.description || "No Description"}</p>
+            <ProfilesList profile={profile} />
+            <AddDescription profile={profile} />
             <div
               style={{
                 color: theme.text.light,
@@ -122,7 +102,7 @@ const HomePage = () => {
                 alignContent: "center",
               }}
             >
-              <CalendarDaysIcon width="14px" />
+              <CalendarDaysIcon width='14px' />
               <span
                 style={{ marginLeft: theme.space[3] }}
               >{`Seller since ${moment(profile.createdAt.toDate()).format(

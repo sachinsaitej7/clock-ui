@@ -115,7 +115,7 @@ const ProfileDetails = ({
             lineHeight: "120%",
           }}
         >
-          <p onClick={() => setMode("followers")} className='text-primary'>
+          <p onClick={() => setMode("follower")} className='text-primary'>
             <strong className='text-black'>
               {followers?.count > 0 ? followers?.count : 0}
             </strong>{" "}

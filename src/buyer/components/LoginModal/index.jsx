@@ -95,14 +95,14 @@ const LoginModal = ({
         paddingTop: theme.space[4],
       }}
       onCancel={handleClose}
-      title={<h3 className="text-lg">Login</h3>}
+      title={<h3 className='text-lg'>Login</h3>}
     >
-      <StyledForm onFinish={onSubmit} scrollToFirstError layout="vertical">
-        <Form.List name="list" className="mb-1">
+      <StyledForm onFinish={onSubmit} scrollToFirstError layout='vertical'>
+        <Form.List name='list' className='mb-1'>
           {(fields, { add, remove }) => (
             <>
               <Form.Item
-                name="phone"
+                name='phone'
                 validateFirst={true}
                 validateStatus={step === 2 ? "success" : ""}
                 hasFeedback
@@ -115,9 +115,9 @@ const LoginModal = ({
                 ]}
               >
                 <StyledInput
-                  placeholder="Phone Number"
-                  type="number"
-                  id="success"
+                  placeholder='Phone Number'
+                  type='number'
+                  id='success'
                   prefix={"+91"}
                   contentEditable={step === 1}
                 />
@@ -125,7 +125,7 @@ const LoginModal = ({
               <Text>Promise, we don't spam</Text>
               {step === 2 && (
                 <Form.Item
-                  name="otp"
+                  name='otp'
                   dependencies={["phone"]}
                   rules={[
                     {
@@ -135,18 +135,24 @@ const LoginModal = ({
                     },
                   ]}
                 >
-                  <StyledInput placeholder="Enter 6 digit Code" type="number" />
+                  <StyledInput
+                    placeholder='Enter 6 digit Code'
+                    type='number'
+                    ref={(ref) => {
+                      if (ref) ref.focus();
+                    }}
+                  />
                 </Form.Item>
               )}
               {step === 1 && (
-                <Form.Item name="send-otp">
+                <Form.Item name='send-otp'>
                   <StyledButton
                     // onClick={onSendOtp}
-                    id="sign-in-button"
+                    id='sign-in-button'
                     loading={loading}
-                    type="primary"
-                    htmlType="submit"
-                    className="bg-primary"
+                    type='primary'
+                    htmlType='submit'
+                    className='bg-primary'
                   >
                     Send Otp
                   </StyledButton>
@@ -159,10 +165,10 @@ const LoginModal = ({
         {step === 2 && (
           <Form.Item>
             <StyledButton
-              htmlType="submit"
+              htmlType='submit'
               loading={loading}
-              type="primary"
-              className="bg-primary"
+              type='primary'
+              className='bg-primary'
             >
               Login
             </StyledButton>

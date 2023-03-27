@@ -1,10 +1,11 @@
-import React from "react";
-import { useTheme } from "styled-components";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { Avatar, List, Drawer } from "antd";
+import React, { useState } from "react";
 import moment from "moment";
+import { useTheme } from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { Avatar, List } from "antd";
 
 import { CalendarDaysIcon } from "@assets/icons";
+import { Drawer } from "@seller/components";
 import {
   useGetUserFollowersByProfile,
   useGetUserFollowersByUser,
@@ -27,7 +28,6 @@ const UserList = ({ dataSource, loading }) => {
           }
         >
           <List.Item.Meta
-            className='w-full px-2'
             avatar={<Avatar src={item.profileData.logo} size={54} />}
             title={<p className='font-bold'>{item.profileData.name}</p>}
             description={
@@ -53,42 +53,53 @@ const UserList = ({ dataSource, loading }) => {
 };
 
 const FollowingListContent = () => {
-  const [searchParams] = useSearchParams();
-  const [userFollowing, loading] = useGetUserFollowersByUser(
-    searchParams.get("id")
-  );
+  const [userFollowing, loading] = useGetUserFollowersByUser();
   return <UserList dataSource={userFollowing} loading={loading} />;
 };
 
 const FollowersListContent = () => {
-  const [searchParams] = useSearchParams();
-  const [userFollowers, loading] = useGetUserFollowersByProfile(
-    searchParams.get("id")
-  );
-
+  const [userFollowers, loading] = useGetUserFollowersByProfile();
   return <UserList dataSource={userFollowers} loading={loading} />;
 };
 
-const ProfilesList = ({ mode, setMode }) => {
-  const theme = useTheme();
+const ProfilesList = ({ profile }) => {
+  const [mode, setMode] = useState(null);
 
   return (
-    <Drawer
-      open={mode !== null}
-      placement='bottom'
-      onClose={() => setMode(null)}
-      title={mode === "follower" ? "Followers List" : "Following List"}
-      closable={false}
-      bodyStyle={{
-        padding: theme.space[5],
-      }}
-    >
-      {mode === "following" ? (
-        <FollowingListContent />
-      ) : (
-        <FollowersListContent />
-      )}
-    </Drawer>
+    <div>
+      <p>
+        <span
+          className='text-primary cursor-pointer'
+          onClick={() => setMode("follower")}
+        >
+          <strong className='mr-1 text-black'>
+            {profile.followers?.count > 0 ? profile.followers?.count : 0}
+          </strong>
+          followers
+        </span>
+        <span className='mx-2 inline-block align-middle w-1 h-1 bg-[#D9D9D9] rounded-full'></span>
+        <span
+          className='text-primary cursor-pointer'
+          onClick={() => setMode("following")}
+        >
+          following
+        </span>
+      </p>
+      <Drawer
+        open={mode !== null}
+        placement='bottom'
+        onClose={() => setMode(null)}
+        title={mode === "follower" ? "Followers List" : "Following List"}
+        closable={false}
+        height='auto'
+      >
+        {mode === "following" ? (
+          <FollowingListContent />
+        ) : (
+          <FollowersListContent />
+        )}
+      </Drawer>
+    </div>
   );
 };
 

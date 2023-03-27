@@ -26,7 +26,7 @@ const UserData = () => {
       <div>
         <h5 style={{ color: theme.text.light }}>Listed by</h5>
         <div className="flex items-center justify-between my-2">
-          <p className="font-bold">@{userData.name}</p>
+          <p className="font-bold">@{userData.userName || userData.name}</p>
           <Link
             to={`/profile-page/${userData.name}?id=${userData.id}`}
             style={{

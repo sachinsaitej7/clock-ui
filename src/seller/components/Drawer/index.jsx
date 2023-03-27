@@ -42,23 +42,22 @@ const FilterDrawer = ({
   children,
   closable = false,
   title = "Select category",
+  height = "580px",
 }) => {
   return (
-    <div>
-      <StyledDrawer
-        title={<Title>{title}</Title>}
-        placement={"bottom"}
-        width={"100%"}
-        onClose={onClose}
-        open={open}
-        closable={closable}
-        maskClosable={true}
-        closeIcon={<StyledCloseIcon />}
-        height={"580px"}
-      >
-        {children}
-      </StyledDrawer>
-    </div>
+    <StyledDrawer
+      title={<Title>{title}</Title>}
+      placement={"bottom"}
+      width={"100%"}
+      onClose={onClose}
+      open={open}
+      closable={closable}
+      maskClosable={true}
+      closeIcon={<StyledCloseIcon />}
+      height={height}
+    >
+      {children}
+    </StyledDrawer>
   );
 };
 

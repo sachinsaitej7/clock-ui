@@ -1,3 +1,5 @@
+import { useState, useCallback } from "react";
+import omit from "lodash/omit";
 import {
   useCollectionDataOnce,
   useCollectionData,
@@ -14,9 +16,9 @@ import {
   serverTimestamp,
   collectionGroup,
 } from "firebase/firestore";
-import omit from "lodash/omit";
 
 import { getFirebase } from "@firebase-app";
+import { useAuth } from "@app/store";
 import { createProductData } from "./utils";
 
 const { db } = getFirebase();
@@ -30,45 +32,54 @@ const idConverter = {
 const productRef = collection(db, "product");
 const brandRef = collection(db, "brand");
 const productVariantRef = collection(db, "productVariant");
+const userFollowersColRef = collection(db, "userFollowers");
 
 // hook to get userProfile data
-export const useUserProfile = (id = "0") => {
-  const userProfileDoc = doc(db, "userProfile", id).withConverter(idConverter);
+export const useUserProfile = (id) => {
+  const userProfileDoc = id
+    ? doc(db, "userProfile", id).withConverter(idConverter)
+    : undefined;
   const data = useDocumentData(userProfileDoc);
   return data;
 };
 
 // hook to get product data by brand id
-export const useProductsByProfileId = (uid = "") => {
-  const productQuery = query(
-    productRef,
-    where("createdBy", "==", uid),
-    where("status", "==", true)
-  ).withConverter(idConverter);
+export const useProductsByProfileId = (uid) => {
+  const productQuery = uid
+    ? query(
+        productRef,
+        where("createdBy", "==", uid),
+        where("status", "==", true)
+      ).withConverter(idConverter)
+    : undefined;
   const data = useCollectionData(productQuery);
   return data;
 };
 
 // hook to get products with delivery='instant' and status=true
-export const useInstantProducts = (uid = "") => {
-  const productQuery = query(
-    productRef,
-    where("delivery", "==", "instant"),
-    where("status", "==", true),
-    where("createdBy", "==", uid)
-  ).withConverter(idConverter);
+export const useInstantProducts = (uid) => {
+  const productQuery = uid
+    ? query(
+        productRef,
+        where("delivery", "==", "instant"),
+        where("status", "==", true),
+        where("createdBy", "==", uid)
+      ).withConverter(idConverter)
+    : undefined;
   const data = useCollectionData(productQuery);
   return data;
 };
 
 // hook to get products with delivery='on-demand' and status=true
 export const useOnDemandProducts = (uid) => {
-  const productQuery = query(
-    productRef,
-    where("delivery", "==", "on-demand"),
-    where("status", "==", true),
-    where("createdBy", "==", uid)
-  ).withConverter(idConverter);
+  const productQuery = uid
+    ? query(
+        productRef,
+        where("delivery", "==", "on-demand"),
+        where("status", "==", true),
+        where("createdBy", "==", uid)
+      ).withConverter(idConverter)
+    : undefined;
   const data = useCollectionData(productQuery);
   return data;
 };
@@ -213,4 +224,58 @@ export const updateProductVariant = async (productId, data) => {
   const productVariantDoc = doc(db, "productVariant", productId);
   await updateDoc(productVariantDoc, { ...data, updatedAt: serverTimestamp() });
   return;
+};
+
+export function useGetUserFollowersByProfile() {
+  const [user] = useAuth();
+  const profileId = user?.uid;
+  const q = profileId
+    ? query(
+        userFollowersColRef,
+        where("profileData.id", "==", profileId),
+        where("status", "==", true)
+      ).withConverter(idConverter)
+    : undefined;
+  return useCollectionData(q);
+}
+
+export function useGetUserFollowersByUser() {
+  const [user] = useAuth();
+  const userId = user?.uid;
+  const q = userId
+    ? query(
+        userFollowersColRef,
+        where("userId", "==", userId),
+        where("status", "==", true)
+      ).withConverter(idConverter)
+    : undefined;
+  return useCollectionData(q);
+}
+
+export const useUpdateUserProfile = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [user] = useAuth();
+  const userId = user?.uid;
+
+  const updateProfile = useCallback(
+    async (payload) => {
+      if (!userId) return;
+      const updatedProfileData = {
+        ...payload,
+        updatedAt: serverTimestamp(),
+      };
+      const userProfileDoc = doc(db, "userProfile", userId);
+      try {
+        setLoading(true);
+        await updateDoc(userProfileDoc, updatedProfileData);
+      } catch (error) {
+        setError(error);
+      }
+      setLoading(false);
+    },
+    [userId]
+  );
+
+  return [updateProfile, loading, error];
 };

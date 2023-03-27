@@ -1,4 +1,3 @@
-import generateFilters from "./generateFilters";
 import removeEmptyKeys from "./removeEmptyKeys";
 
 const formatCurrency = (value) => {
@@ -34,7 +33,6 @@ const getParams = (searchParams = {}) => {
 
 export {
   formatCurrency,
-  generateFilters,
   getSummaryData,
   getParams,
   removeEmptyKeys,

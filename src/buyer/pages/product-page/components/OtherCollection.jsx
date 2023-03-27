@@ -17,25 +17,27 @@ const OtherCollection = () => {
       <>
         <Skeleton
           active
-          className="my-4"
+          className='my-4'
           paragraph={{ rows: 1 }}
           title={null}
         />
-        <Skeleton.Image
-          active
-          style={{ width: 104, height: 136 }}
-          className="mr-1"
-        />
-        <Skeleton.Image
-          active
-          style={{ width: 104, height: 136 }}
-          className="mr-1"
-        />
-        <Skeleton.Image
-          active
-          style={{ width: 104, height: 136 }}
-          className="mr-1"
-        />
+        <div className='grid grid-cols-3 gap-2 overflow-x-auto'>
+          <Skeleton.Image
+            active
+            // style={{ width: 104, height: 136 }}
+            className='rounded h-36 w-full object-cover'
+          />
+          <Skeleton.Image
+            active
+            // style={{ width: 104, height: 136 }}
+            className='rounded h-36 w-full object-cover'
+          />
+          <Skeleton.Image
+            active
+            // style={{ width: 104, height: 136 }}
+            className='rounded h-36 w-full object-cover'
+          />
+        </div>
       </>
     );
 
