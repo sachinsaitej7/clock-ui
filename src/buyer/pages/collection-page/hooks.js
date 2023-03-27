@@ -29,7 +29,7 @@ export function useGetPaginatedProducts({ filterValues = {} } = {}) {
   const params = { ...getParams(searchParams), ...filterValues };
 
   const [products, setProducts] = useState([]);
-  const [productsData, productsLoading,error , snapshot] = useProductsByParams(
+  const [productsData, productsLoading, , snapshot] = useProductsByParams(
     params,
     lastSnapshot
   );
@@ -62,8 +62,10 @@ export function useCollectionName(products) {
   const [searchParams] = useSearchParams();
   const collectionName = getCollectionName(searchParams, products);
   const [name, setName] = useState(collectionName);
+
   useEffect(() => {
     products.length > 0 && setName(collectionName);
   }, [collectionName]);
+  
   return name;
 }
