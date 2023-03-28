@@ -23,13 +23,13 @@ const UserList = ({ dataSource, loading }) => {
           key={item.id}
           onClick={() =>
             navigate(
-              `/profile-page/${item.profileData.name}?id=${item.profileData.id}`
+              `/profile-page/${item.name}?id=${item.id}`
             )
           }
         >
           <List.Item.Meta
-            avatar={<Avatar src={item.profileData.logo} size={54} />}
-            title={<p className='font-bold'>{item.profileData.name}</p>}
+            avatar={<Avatar src={item.logo} size={54} />}
+            title={<p className='font-bold'>{item.name}</p>}
             description={
               <div
                 style={{
@@ -39,7 +39,7 @@ const UserList = ({ dataSource, loading }) => {
                 className='flex items-center'
               >
                 <CalendarDaysIcon width='14px' />
-                <span className='ml-1'>{`Following from ${moment(
+                <span className='ml-1'>{`From ${moment(
                   item.createdAt.toDate()
                 ).format("MMMM YYYY")}`}</span>
               </div>

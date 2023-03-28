@@ -21,21 +21,21 @@ const OtherCollection = () => {
           paragraph={{ rows: 1 }}
           title={null}
         />
-        <div className='grid grid-cols-3 gap-2 overflow-x-auto'>
+        <div className='grid grid-cols-3 gap-1 overflow-x-auto'>
           <Skeleton.Image
             active
             // style={{ width: 104, height: 136 }}
-            className='rounded h-36 w-full object-cover'
+            className='rounded h-40 w-full object-cover'
           />
           <Skeleton.Image
             active
             // style={{ width: 104, height: 136 }}
-            className='rounded h-36 w-full object-cover'
+            className='rounded h-40 w-full object-cover'
           />
           <Skeleton.Image
             active
             // style={{ width: 104, height: 136 }}
-            className='rounded h-36 w-full object-cover'
+            className='rounded h-40 w-full object-cover'
           />
         </div>
       </>

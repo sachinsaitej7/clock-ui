@@ -37,14 +37,13 @@ export function useGetPaginatedProducts({ filterValues = {} } = {}) {
   const params = { brand: searchParams.get("id"), ...filterValues };
 
   const [products, setProducts] = useState([]);
-  const [productsData, productsLoading, snapshot] = useProductsByParams(
+  const [productsData, productsLoading, , snapshot] = useProductsByParams(
     params,
     lastSnapshot
   );
 
-  const isLastPage = snapshot?.docs.length < 25;
+  const isLastPage = snapshot?.docs?.length < 25;
   const isEmptyPage = productsData?.length === 0 && products.length === 0;
-
   const stringifyParams = JSON.stringify(params);
 
   useEffect(() => {

@@ -15,21 +15,20 @@ const UserList = ({ dataSource, loading }) => {
   const navigate = useNavigate();
   return (
     <List
-      style={{ padding: theme.space[4] }}
       dataSource={dataSource}
       renderItem={(item) => (
         <List.Item
           key={item.id}
           onClick={() =>
             navigate(
-              `/profile-page/${item.profileData.name}?id=${item.profileData.id}`
+              `/profile-page/${item.name}?id=${item.id}`
             )
           }
         >
           <List.Item.Meta
             className='w-full px-2'
-            avatar={<Avatar src={item.profileData.logo} size={54} />}
-            title={<p className='font-bold'>{item.profileData.name}</p>}
+            avatar={<Avatar src={item.logo} size={54} />}
+            title={<p className='font-bold'>{item.name}</p>}
             description={
               <div
                 style={{
@@ -39,7 +38,7 @@ const UserList = ({ dataSource, loading }) => {
                 className='flex items-center'
               >
                 <CalendarDaysIcon width='14px' />
-                <span className='ml-1'>{`Following from ${moment(
+                <span className='ml-1'>{`From ${moment(
                   item.createdAt.toDate()
                 ).format("MMMM YYYY")}`}</span>
               </div>
@@ -80,7 +79,7 @@ const ProfilesList = ({ mode, setMode }) => {
       title={mode === "follower" ? "Followers List" : "Following List"}
       closable={false}
       bodyStyle={{
-        padding: theme.space[5],
+        padding: theme.space[3],
       }}
     >
       {mode === "following" ? (

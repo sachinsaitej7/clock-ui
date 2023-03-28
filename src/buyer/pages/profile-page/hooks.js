@@ -81,6 +81,8 @@ export function useUserFollower(id) {
   };
 
   const removeFollow = async () => {
+    if (!userFollowerId) return;
+    if (!user?.uid) return console.log("user not found");
     setLoading(true);
     try {
       await ProfileQuery.updateUserFollower(userFollowerId, {

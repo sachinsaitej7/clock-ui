@@ -29,6 +29,32 @@ const idConverter = {
     return { ...data, id: snapshot.id };
   },
 };
+
+
+const userConvertor = {
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options);
+    return {
+      id: data.userId,
+      name: data.userData?.name || "",
+      logo: data.userData?.logo || "",
+      createdAt: data.createdAt,
+    };
+  },
+};
+
+const profileConvertor = {
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options);
+    return {
+      id: data.profileData.id,
+      name: data.profileData?.name || "",
+      logo: data.profileData?.logo || "",
+      createdAt: data.createdAt,
+    };
+  },
+};
+
 const productRef = collection(db, "product");
 const brandRef = collection(db, "brand");
 const productVariantRef = collection(db, "productVariant");
@@ -234,7 +260,7 @@ export function useGetUserFollowersByProfile() {
         userFollowersColRef,
         where("profileData.id", "==", profileId),
         where("status", "==", true)
-      ).withConverter(idConverter)
+      ).withConverter(userConvertor)
     : undefined;
   return useCollectionData(q);
 }
@@ -247,7 +273,7 @@ export function useGetUserFollowersByUser() {
         userFollowersColRef,
         where("userId", "==", userId),
         where("status", "==", true)
-      ).withConverter(idConverter)
+      ).withConverter(profileConvertor)
     : undefined;
   return useCollectionData(q);
 }

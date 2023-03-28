@@ -17,6 +17,30 @@ const idConverter = getIdConverter();
 
 const userFollowersColRef = collection(db, "userFollowers");
 
+const userConvertor = {
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options);
+    return {
+      id: data.userId,
+      name: data.userData?.name || "",
+      logo: data.userData?.logo || "",
+      createdAt: data.createdAt,
+    };
+  },
+};
+
+const profileConvertor = {
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options);
+    return {
+      id: data.profileData.id,
+      name: data.profileData?.name || "",
+      logo: data.profileData?.logo || "",
+      createdAt: data.createdAt,
+    };
+  },
+};
+
 export function fetchUserProfileQuery(id) {
   if (!id) return;
   const userProfileRef = doc(db, "userProfile", id).withConverter(idConverter);
@@ -40,7 +64,7 @@ export function fetchUserFollowersByProfileQuery(profileId) {
     userFollowersColRef,
     where("profileData.id", "==", profileId),
     where("status", "==", true)
-  ).withConverter(idConverter);
+  ).withConverter(userConvertor);
   return q;
 }
 
@@ -50,7 +74,7 @@ export function fetchUserFollowersByUserQuery(userId) {
     userFollowersColRef,
     where("userId", "==", userId),
     where("status", "==", true)
-  ).withConverter(idConverter);
+  ).withConverter(profileConvertor);
   return q;
 }
 
