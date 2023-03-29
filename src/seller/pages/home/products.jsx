@@ -49,6 +49,13 @@ const StyledTabs = styled(Tabs)`
   }
 `;
 
+const ProductsImage = styled.img`
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: ${(props) => props.theme.borderRadius[1]}};
+`;
+
 const Products = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -100,9 +107,10 @@ const Products = () => {
       >
         {products.map((product, index) => {
           return (
-            <ProductCard
-              key={product.id + "-" + index}
-              {...product}
+            <ProductsImage
+              src={product.thumbnail}
+              alt={product.name}
+              key={product.id}
               onClick={() => {
                 setActiveProduct(product);
                 setOpen(true);

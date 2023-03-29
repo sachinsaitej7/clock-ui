@@ -28,6 +28,7 @@ import { ReactComponent as CheckCircleIcon } from "./check-circle.svg";
 import { ReactComponent as SparklesIcon } from "./sparkles.svg";
 
 import { ReactComponent as PencilSquareIcon } from "./pencil-square.svg";
+import { ReactComponent as CurrencyRupeeIcon } from "./currency-rupee.svg";
 
 export {
   //buy and sell
@@ -62,4 +63,5 @@ export {
   PlusIcon,
   MinusIcon,
   PencilSquareIcon,
+  CurrencyRupeeIcon,
 };

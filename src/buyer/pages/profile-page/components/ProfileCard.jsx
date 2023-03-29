@@ -65,7 +65,7 @@ const FollowButton = () => {
         loading={loading}
         className='font-semibold text-primary'
       >
-        Following
+       Unfollow
       </StyledButton>
     );
   } else {
@@ -86,7 +86,6 @@ const FollowButton = () => {
 const ProfileDetails = ({
   name,
   followers,
-  productsCount,
   description,
   createdAt,
 }) => {
@@ -122,9 +121,8 @@ const ProfileDetails = ({
             <span>followers</span>
           </p>
           <p className='mx-2 w-1 h-1 bg-[#D9D9D9] rounded-full inline-block align-middle'></p>
-          <p>
-            <strong className='text-black'>{productsCount || 0}</strong> listed
-            products
+          <p onClick={() => setMode("following")} className='text-primary'>
+            <span>following</span>
           </p>
         </div>
         <p className='my-1'>{description || "No Description"}</p>
@@ -140,13 +138,10 @@ const ProfileDetails = ({
             createdAt.toDate()
           ).format("MMMM YYYY")}`}</span>
         </div>
-        <Button
-          size='small'
-          className='text-primary mt-1'
-          onClick={() => setMode("following")}
-        >
-          Other Profiles
-        </Button>
+        {/* <p>
+          <strong className='text-black'>{productsCount || 0}</strong> listed
+          products
+        </p> */}
       </div>
     </div>
   );
@@ -156,8 +151,6 @@ const ProfileCard = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const [profileData, profileLoading] = useUserProfile(id);
-  const [products = []] = useProductsByProfile(id);
-  const productsCount = products.length;
 
   if (profileLoading)
     return (
@@ -170,7 +163,7 @@ const ProfileCard = () => {
   return (
     <ProfileContainer>
       <ProfileImage loading={profileLoading} logo={profileData.logo} />
-      <ProfileDetails {...profileData} productsCount={productsCount} />
+      <ProfileDetails {...profileData} />
     </ProfileContainer>
   );
 };
