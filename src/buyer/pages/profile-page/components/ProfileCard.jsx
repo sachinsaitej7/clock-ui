@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import moment from "moment";
 import { useSearchParams } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
-import { Typography, Skeleton, Avatar, App, Button } from "antd";
+import { Typography, Skeleton, Avatar, App } from "antd";
 
 import { CalendarDaysIcon } from "@assets/icons";
 import { useAuth } from "@app/store";
@@ -12,7 +12,6 @@ import { StyledButton } from "../styled";
 import {
   useUserProfile,
   useUserFollower,
-  useProductsByProfile,
 } from "../hooks";
 
 const ProfileImage = ({ loading, logo }) => {
