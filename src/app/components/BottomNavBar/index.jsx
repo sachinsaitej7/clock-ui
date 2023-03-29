@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 import { useAppMode } from "@app/store";
 
 //icons
-import { HomeIcon, BuildingStorefrontIcon } from "@assets/icons";
+import { HomeIcon, CurrencyRupeeIcon } from "@assets/icons";
 
 const BottomBarContainer = styled.div`
   width: 100%;
@@ -61,8 +61,8 @@ const BottomBar = () => {
           onClick={() => setMode("seller")}
           active={active === 1}
         >
-          <BuildingStorefrontIcon />
-          <p>Sell</p>
+          <CurrencyRupeeIcon />
+          <p>Earn</p>
         </Item>
       </BottomBarContainer>
     </>
