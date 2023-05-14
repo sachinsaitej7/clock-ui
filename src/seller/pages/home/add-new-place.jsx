@@ -38,9 +38,9 @@ const TopBarContainer = styled.div`
 
 const StyledContainer = styled(PageContainer)`
   padding: ${(props) => props.theme.space[0]};
+  margin-bottom: ${(props) => props.theme.space[8]};
   position: sticky;
-  padding-bottom: ${(props) => props.theme.space[9]};
-  min-height: 80vh;
+  min-height: 100vh;
   max-width: 768px;
   background-color: ${(props) => props.theme.bg.dark};
   animation: slide-up 0.5s ease-in-out;
@@ -134,7 +134,7 @@ export default function AddNewPlace({ profile, setAddPlace }) {
         </Typography.Title>
         <UploadImages limit={4} onSuccess={handleProductImages} />
         <Typography.Text style={{ color: "#8C8C8C" }}>
-          Add some cool pictures of ths place!
+          Add some cool pictures of this post!
         </Typography.Text>
       </StyledCard>
       <StyledCard>

@@ -322,7 +322,7 @@ export const getBrowserLocation = () => {
 // get address from lat and long
 export const getAddressFromLatLong = async ({ latitude, longitude }) => {
   try {
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&type=clothing_store&radius=100&type=store&keyword=clothing&type=shopping_mall`;
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2c${longitude}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&type=clothing_store&radius=100&type=store&keyword=clothing&type=shopping_mall`;
     const response = await fetch(url);
     const data = await response.json();
     if (

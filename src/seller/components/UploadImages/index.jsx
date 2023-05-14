@@ -107,6 +107,7 @@ const UploadImages = ({ limit = 8, onSuccess }) => {
         onPreview={handlePreview}
         onChange={handleChange}
         accept="image/*"
+        capture="environment"
         beforeUpload={beforeUpload}
         customRequest={handleUpload}
         onRemove={handleRemove}

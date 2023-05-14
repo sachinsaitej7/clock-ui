@@ -65,6 +65,7 @@ const HomePage = () => {
   const [addNewPlace, setAddPlace] = React.useState(false);
   const [, , locationError] = useGetUserLocation();
 
+
   const handleAddNew = (type) => {
     if (locationError)
       return message.error("Please allow location access and refresh the page");
