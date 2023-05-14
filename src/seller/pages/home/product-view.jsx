@@ -113,16 +113,16 @@ function ProductView({ product, handleClose }) {
           />
         </div>
         <StyledCard>
-          <Typography.Text level={5} style={{ fontSize: theme.fontSizes[3] }}>
+          {product.name && <Typography.Text level={5} style={{ fontSize: theme.fontSizes[3] }}>
             {product.name}
-          </Typography.Text>
+          </Typography.Text>}
           <Typography.Paragraph>{product.description}</Typography.Paragraph>
-          <Typography.Paragraph style={{ opacity: "0.5" }}>
+          {product.brand && <Typography.Paragraph style={{ opacity: "0.5" }}>
             {product.brand.name}
-          </Typography.Paragraph>
-          <Typography.Paragraph strong>
+          </Typography.Paragraph>}
+          {product.price && <Typography.Paragraph strong>
             ₹ {product.price.currentPrice}
-          </Typography.Paragraph>
+          </Typography.Paragraph>}
           <Typography.Text style={{ opacity: "0.5" }}>
             #{product.tags?.join(", #")}
           </Typography.Text>

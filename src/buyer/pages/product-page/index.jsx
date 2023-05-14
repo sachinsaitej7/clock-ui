@@ -31,30 +31,34 @@ const ProductPage = () => {
 
   return (
     <ProductProvider>
-      <Container className="mb-6">
-        <div className="flex items-center justify-between my-2">
+      <Container className='mb-6'>
+        <div className='flex items-center justify-between my-2'>
           <ArrowLongLeftIcon
-            width="24px"
+            width='24px'
             onClick={() => navigate(-1)}
-            className="cursor-pointer"
+            className='cursor-pointer'
           />
           <ShareIcon />
         </div>
         {!loading && !product ? (
-          <h1 className="text-center text-xl h-60">Product not found</h1>
+          <h1 className='text-center text-xl h-60'>Product not found</h1>
         ) : (
           <>
             <ProductCarousal />
             <ProductDetails />
-            <Divider className="my-4 border-t-8 w-[120%] -ml-[10%]" />
+            <Divider className='my-4 border-t-8 w-[120%] -ml-[10%]' />
             <Variants />
-            <DeliveryDetails />
-            <Divider className="my-4 border-t-8 w-[120%] -ml-[10%]" />
-            <BuyButtons />
-            <Divider className="my-4 border-t-8 w-[120%] -ml-[10%]" />
+            {product?.price && (
+              <>
+                <DeliveryDetails />
+                <Divider className='my-4 border-t-8 w-[120%] -ml-[10%]' />
+              </>
+            )}
+            <BuyButtons type={product?.type} />
+            <Divider className='my-4 border-t-8 w-[120%] -ml-[10%]' />
             <UserData />
-            <Features />
-            <Divider className="my-4 border-t-8 w-[120%] -ml-[10%]" />
+            <Features type={product?.type} />
+            <Divider className='my-4 border-t-8 w-[120%] -ml-[10%]' />
             <OtherCollection />
           </>
         )}

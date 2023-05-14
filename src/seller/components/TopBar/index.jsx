@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 //images
 import { LogoutOutlined } from "@ant-design/icons";
-import { SellerLogo } from "@assets/logo";
+import { Logo } from "@assets/logo";
 
 const TopBarContainer = styled.div`
   width: 100%;
@@ -31,7 +31,7 @@ const RightMenu = ({ handleClick }) => (
 
 const LeftMenu = (
   <Link to='/seller'>
-    <SellerLogo width='75px' height='32px' />
+    <Logo width='75px' height='32px' />
   </Link>
 );
 

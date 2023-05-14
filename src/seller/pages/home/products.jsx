@@ -136,7 +136,7 @@ const Products = () => {
           items={[
             {
               key: "instant",
-              label: <h3>Products ({products?.length || 0})</h3>,
+              label: <h3>Posts ({products?.length || 0})</h3>,
               children: getChildren(),
               forceRender: true,
             },

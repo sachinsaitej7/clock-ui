@@ -12,10 +12,10 @@ const Root = () => {
   const [showSplash, setShowSplash] = React.useState(true);
 
   useEffect(() => {
-    const splashCount = localStorage.getItem("splashCount") || 0;
+    let splashCount = localStorage.getItem("splashCount") || 0;
+    if (typeof splashCount === "string") splashCount = parseInt(splashCount);
     // const timing = Math.max(3000 - splashCount * 1000, 1000);
-    if (typeof splashCount === "string" && parseInt(splashCount) > 2)
-      return setShowSplash(false);
+    if (splashCount > 2) return setShowSplash(false);
     const timer = setTimeout(() => {
       localStorage.setItem("splashCount", splashCount + 1);
       setShowSplash(false);

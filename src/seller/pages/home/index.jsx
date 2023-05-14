@@ -2,21 +2,24 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import moment from "moment";
-import { Typography } from "antd";
+import { Typography, App } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { getFirebase } from "@firebase-app";
-import { useProductsByProfileId, useUserProfile } from "./hooks";
+import {
+  useProductsByProfileId,
+  useUserProfile,
+  useGetUserLocation,
+} from "./hooks";
 import { PageContainer } from "@seller/styled-components";
 import { Spinner } from "@components";
 import { CalendarDaysIcon } from "@assets/icons";
-import { ReactComponent as Add } from "@seller/assets/common/plus-circle-filled.svg";
 import AddNew from "./add-new";
+import AddNewPlace from "./add-new-place";
 import Products from "./products";
 
-import { AddDescription, ProfilesList } from "./components";
+import { AddDescription, ProfilesList, FloatButton } from "./components";
 import {
-  StyledStickyFloater,
   ProfileNameContainer,
 } from "@seller/styled-components";
 
@@ -51,6 +54,7 @@ const StyledNameContainer = styled(ProfileNameContainer)`
 `;
 
 const HomePage = () => {
+  const { message } = App.useApp();
   const navigate = useNavigate();
   const theme = useTheme();
   const { auth } = getFirebase();
@@ -58,6 +62,15 @@ const HomePage = () => {
   const [profile, profileLoading] = useUserProfile(user.uid);
   const [, productLoading] = useProductsByProfileId(user.uid);
   const [addNew, setAddNew] = React.useState(false);
+  const [addNewPlace, setAddPlace] = React.useState(false);
+  const [, , locationError] = useGetUserLocation();
+
+  const handleAddNew = (type) => {
+    if (locationError)
+      return message.error("Please allow location access and refresh the page");
+    type === 'product' && setAddNew(true);
+    type === 'place' && setAddPlace(true);
+  };
 
   useEffect(() => {
     if (!profileLoading && !profile?.status) navigate("/seller/onboarding");
@@ -69,10 +82,11 @@ const HomePage = () => {
         <Spinner />
       </StyledContainer>
     );
+  if (!profile) return null;
 
   if (addNew) return <AddNew profile={profile} setAddNew={setAddNew} />;
-
-  if (!profile) return null;
+  if (addNewPlace)
+    return <AddNewPlace profile={profile} setAddPlace={setAddPlace} />;
 
   return (
     <StyledContainer>
@@ -113,12 +127,7 @@ const HomePage = () => {
         </div>
         <Products />
       </div>
-      <StyledStickyFloater>
-        <Add
-          style={{ color: theme.colors.primary }}
-          onClick={() => setAddNew(true)}
-        />
-      </StyledStickyFloater>
+      <FloatButton handleAddNew={handleAddNew} />
     </StyledContainer>
   );
 };

@@ -2,6 +2,7 @@ import slugify from "slugify";
 import omit from "lodash/omit";
 import pick from "lodash/pick";
 import isEmpty from "lodash/isEmpty";
+import { GeoPoint } from "firebase/firestore";
 
 export const createProductData = (data) => {
   return {
@@ -29,6 +30,27 @@ export const createProductData = (data) => {
     createdBy: data.createdBy,
     profileData: pick(data.profileData, ["name", "logo"]),
     listingType: data.listingType,
+    location: new GeoPoint(data.location.latitude, data.location.longitude),
+  };
+};
+
+
+export const createPlaceData = (data) => {
+  return {
+    description: data.description || "",
+    descriptionHtml: null,
+    slug: slugify('places', {
+      lower: true,
+      trim: true,
+      locale: "en",
+    }),
+    thumbnail: data.images[0],
+    status: true,
+    createdBy: data.createdBy,
+    profileData: pick(data.profileData, ["name", "logo"]),
+    listingType: data.listingType,
+    type: 'place',
+    location: new GeoPoint(data.location.latitude, data.location.longitude)
   };
 };
 
@@ -119,7 +141,7 @@ export const getProfileShareData = ({ name, id }) => {
   return shareData;
 };
 
-export const getProductShareData = async ({ name, id, thumbnail }) => {
+export const getProductShareData = async ({ name, slug, id, thumbnail }) => {
   let file = null;
   try {
     const response = await fetch(thumbnail);
@@ -132,7 +154,7 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
   const shareData = {
     title: name,
     text: "Checkout this on The Clock",
-    url: `${window.location.origin}/product-page/${name}?id=${id}`,
+    url: `${window.location.origin}/product-page/${name || slug}?id=${id}`,
     files: file ? [file] : null,
   };
   return shareData;

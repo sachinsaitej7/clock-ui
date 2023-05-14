@@ -10,7 +10,7 @@ const OtherCollection = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const [product, loading] = useProduct(id);
-  const [products, loadingProducts] = useProductsByBrand(product?.brand.id);
+  const [products, loadingProducts] = useProductsByBrand(product?.brand?.id);
 
   if (loading || loadingProducts)
     return (

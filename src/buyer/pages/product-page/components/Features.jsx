@@ -12,20 +12,21 @@ const Container = styled.div`
   }
 `;
 
-const Features = () => {
+const Features = ({ type }) => {
+  if (type === "place") return null;
   return (
-    <Container className="flex items-center justify-around text-primary">
-      <div className="flex flex-col items-center">
-        <TruckIcon width="32px" />
-        <p className="my-2">Free delivery on all orders</p>
+    <Container className='flex items-center justify-around text-primary'>
+      <div className='flex flex-col items-center'>
+        <TruckIcon width='32px' />
+        <p className='my-2'>Free delivery on all orders</p>
       </div>
-      <div className="flex flex-col items-center">
-        <ArrowPathIcon width="32px" />
-        <p className="my-2">7 day return & exchange</p>
+      <div className='flex flex-col items-center'>
+        <ArrowPathIcon width='32px' />
+        <p className='my-2'>7 day return & exchange</p>
       </div>
-      <div className="flex flex-col items-center">
-        <CheckBadgeIcon width="32px" />
-        <p className="my-2">100% genuine products</p>
+      <div className='flex flex-col items-center'>
+        <CheckBadgeIcon width='32px' />
+        <p className='my-2'>100% genuine products</p>
       </div>
     </Container>
   );

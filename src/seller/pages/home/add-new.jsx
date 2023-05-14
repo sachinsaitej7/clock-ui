@@ -15,6 +15,7 @@ import {
   useSizes,
   addProduct,
   addProductVariants,
+  useGetUserLocation
 } from "./hooks";
 
 import {
@@ -107,6 +108,7 @@ export default function AddNew({ profile, setAddNew }) {
   const [categories] = useCategories();
   const [subcategories] = useSubCategories();
   const [sizes] = useSizes();
+  const [location,] = useGetUserLocation();
 
   const handleCategorySelect = (category) => {
     setSelectedSubcategory(category);
@@ -133,6 +135,7 @@ export default function AddNew({ profile, setAddNew }) {
       profileData: profile,
       listingType: "lister",
       tags: selectedHashTags,
+      location,
     };
     const errorMessage = validateProductData(productData);
     if (errorMessage) {

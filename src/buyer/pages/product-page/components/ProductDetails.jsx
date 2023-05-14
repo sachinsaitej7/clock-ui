@@ -18,8 +18,8 @@ const ProductDetails = () => {
 
   return (
     <div>
-      <div className="flex justify-between my-1">
-        <p className="font-semibold">{product.brand.name}</p>
+      <div className='flex justify-between my-1'>
+        {product.brand && <p className='font-semibold'>{product.brand.name}</p>}
         {/* <Link
           to={`/brand-page/${product.brand.name}?id=${product.brand.id}`}
           style={{
@@ -31,29 +31,37 @@ const ProductDetails = () => {
           Visit Store
         </Link> */}
       </div>
-      <div className="my-1">
+      <div className='my-1'>
         <Paragraph
           ellipsis={{
-            rows: 2,
+            rows: 3,
             expandable: true,
-            symbol: <Text className="text-primary text-xs">View more</Text>,
+            symbol: <Text className='text-primary text-xs'>View more</Text>,
           }}
           style={{ color: theme.text.light, fontSize: theme.fontSizes[2] }}
         >
-          <span className="uppercase text-base">{product.name}</span>
+          {product.name && (
+            <>
+              <span className='uppercase text-base'>{product.name}</span>
+              <br />
+            </>
+          )}
+          {product.description}
           <br />
-          <span>{product.description}</span>
-          <br />
-          <span>{product.tags?.map((i) => `# ${i} `)}</span>
+          {product.tags?.map((i) => `# ${i} `)}
         </Paragraph>
       </div>
-      <div style={{ color: theme.text.light }}>
-        <span style={{ fontSize: theme.fontSizes[2] }}>MRP: </span>
-        <span className="font-semibold text-black text-xl">
-          {formatCurrency(product.price.currentPrice)}
-        </span>
-        <p style={{ fontSize: theme.fontSizes[0] }}>(Inclusive of all taxes)</p>
-      </div>
+      {product.price && (
+        <div style={{ color: theme.text.light }}>
+          <span style={{ fontSize: theme.fontSizes[2] }}>MRP: </span>
+          <span className='font-semibold text-black text-xl'>
+            {formatCurrency(product.price.currentPrice)}
+          </span>
+          <p style={{ fontSize: theme.fontSizes[0] }}>
+            (Inclusive of all taxes)
+          </p>
+        </div>
+      )}
     </div>
   );
 };

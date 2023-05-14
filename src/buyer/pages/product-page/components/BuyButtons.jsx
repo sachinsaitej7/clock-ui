@@ -5,6 +5,7 @@ import { Button } from "antd";
 
 import { useCartContext } from "@buyer/store";
 import { useProductContext } from "../store/ProductProvider";
+import VisitButton from "./VisitButton";
 
 const StyledButton = styled(Button)`
   box-shadow: none;
@@ -16,7 +17,7 @@ const StyledButton = styled(Button)`
   line-height: 120%;
 `;
 
-const BuyButtons = () => {
+const BuyButtons = ({ type }) => {
   const navigate = useNavigate();
   const { variant } = useProductContext();
   const { addItem, items } = useCartContext();
@@ -33,18 +34,21 @@ const BuyButtons = () => {
     navigate("/cart");
   };
 
+  if (type === "place") return <VisitButton />;
+
   return (
     <div>
+      <VisitButton />
       <StyledButton
-        className="w-full my-2 text-primary border-primary"
+        className='w-full my-2 text-primary border-primary'
         disabled={!variant}
         onClick={handleAddToCart}
       >
         {checkItem === -1 ? "Add to Cart" : "Go to Cart"}
       </StyledButton>
       <StyledButton
-        type="primary"
-        className="w-full bg-primary my-2"
+        type='primary'
+        className='w-full bg-primary my-2'
         disabled={!variant}
         onClick={handleBuyNow}
       >

@@ -39,8 +39,8 @@ const Login = ({ handleClick }) => {
         className='text-base my-4 block'
         style={{ color: theme.text.white }}
       >
-        Setup your profile and start earning by listing products from our
-        partner stores.
+        Setup your profile and start earning by listing products from
+        nearby stores.
       </Typography.Text>
       <Masonry className='my-4'></Masonry>
       <StyledButton

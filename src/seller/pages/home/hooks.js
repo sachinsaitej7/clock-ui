@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import omit from "lodash/omit";
 import {
   useCollectionDataOnce,
@@ -19,7 +19,7 @@ import {
 
 import { getFirebase } from "@firebase-app";
 import { useAuth } from "@app/store";
-import { createProductData } from "./utils";
+import { createProductData, createPlaceData } from "./utils";
 
 const { db } = getFirebase();
 
@@ -29,7 +29,6 @@ const idConverter = {
     return { ...data, id: snapshot.id };
   },
 };
-
 
 const userConvertor = {
   fromFirestore(snapshot, options) {
@@ -87,7 +86,6 @@ export const useInstantProducts = (uid) => {
   const productQuery = uid
     ? query(
         productRef,
-        where("delivery", "==", "instant"),
         where("status", "==", true),
         where("createdBy", "==", uid)
       ).withConverter(idConverter)
@@ -182,8 +180,9 @@ export const useColors = () => {
 };
 
 // add product data
-export const addProduct = async (data) => {
-  const productData = createProductData(data);
+export const addProduct = async (data, type) => {
+  const productData =
+    type === "place" ? createPlaceData(data) : createProductData(data);
   const newProduct = {
     ...productData,
     createdAt: serverTimestamp(),
@@ -304,4 +303,92 @@ export const useUpdateUserProfile = () => {
   );
 
   return [updateProfile, loading, error];
+};
+
+export const getBrowserLocation = () => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        resolve({ latitude, longitude });
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+};
+
+// get address from lat and long
+export const getAddressFromLatLong = async ({ latitude, longitude }) => {
+  try {
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&type=clothing_store&radius=100&type=store&keyword=clothing&type=shopping_mall`;
+    const response = await fetch(url);
+    const data = await response.json();
+    if (
+      data.status === "ZERO_RESULTS" ||
+      data.status === "OVER_QUERY_LIMIT" ||
+      data.status === "REQUEST_DENIED"
+    ) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const useGetUserAddress = ({ latitude, longitude }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [address, setAddress] = useState(null);
+
+  const getUserAddress = useCallback(async () => {
+    if (!latitude || !longitude) return;
+    try {
+      setLoading(true);
+      const address = await getAddressFromLatLong({ latitude, longitude });
+      setAddress(address);
+    } catch (error) {
+      setError(error);
+    }
+    setLoading(false);
+  }, [latitude, longitude]);
+
+  useEffect(() => {
+    getUserAddress();
+  }, [getUserAddress, latitude, longitude]);
+
+  return [address, loading, error];
+};
+
+// // get lat and long from address
+// export const getLatLongFromAddress = async (address) => {
+//   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   return data;
+// };
+
+export const useGetUserLocation = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [location, setLocation] = useState(null);
+
+  const getUserLocation = useCallback(async () => {
+    try {
+      setLoading(true);
+      const location = await getBrowserLocation();
+      setLocation(location);
+    } catch (error) {
+      setError(error);
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    getUserLocation();
+  }, [getUserLocation]);
+
+  return [location, loading, error, getUserLocation];
 };

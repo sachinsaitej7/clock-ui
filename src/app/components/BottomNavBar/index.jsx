@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 import { useAppMode } from "@app/store";
 
 //icons
-import { HomeIcon, CurrencyRupeeIcon } from "@assets/icons";
+import { HomeIcon, UserIcon } from "@assets/icons";
 
 const BottomBarContainer = styled.div`
   width: 100%;
@@ -47,9 +47,9 @@ const BottomBar = () => {
   return (
     <>
       <div style={{ height: theme.space[9] }}></div>
-      <BottomBarContainer className="flex justify-center items-center">
+      <BottomBarContainer className='flex justify-center items-center'>
         <Item
-          className="flex flex-col justify-center items-center active:none"
+          className='flex flex-col justify-center items-center active:none'
           onClick={() => setMode("buyer")}
           active={active === 0}
         >
@@ -57,12 +57,12 @@ const BottomBar = () => {
           <p>Buy</p>
         </Item>
         <Item
-          className="flex flex-col justify-center items-center active:none"
+          className='flex flex-col justify-center items-center active:none'
           onClick={() => setMode("seller")}
           active={active === 1}
         >
-          <CurrencyRupeeIcon />
-          <p>Earn</p>
+          <UserIcon />
+          <p>Profile</p>
         </Item>
       </BottomBarContainer>
     </>

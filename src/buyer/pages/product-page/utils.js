@@ -54,7 +54,7 @@ export const getProfileShareData = ({ name, id }) => {
   return shareData;
 };
 
-export const getProductShareData = async ({ name, id, thumbnail }) => {
+export const getProductShareData = async ({ name, slug, id, thumbnail }) => {
   let file = null;
   try {
     const response = await fetch(thumbnail);
@@ -67,7 +67,7 @@ export const getProductShareData = async ({ name, id, thumbnail }) => {
   const shareData = {
     title: name,
     text: "Checkout this on The Clock",
-    url: `${window.location.origin}/product-page/${name}?id=${id}`,
+    url: `${window.location.origin}/product-page/${name || slug}?id=${id}`,
     files: file ? [file] : null,
   };
   return shareData;
