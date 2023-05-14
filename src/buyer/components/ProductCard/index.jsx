@@ -41,20 +41,30 @@ const StyledDescription = styled.div`
   }
 `;
 
-const ProductCard = ({ thumbnail, name, brand, price, onClick = () => {} }) => {
+const ProductCard = ({
+  thumbnail,
+  name = "",
+  brand,
+  price,
+  onClick = () => {},
+}) => {
   return (
-    <StyledContainer onClick={onClick} className="cursor-pointer">
+    <StyledContainer onClick={onClick} className='cursor-pointer'>
       <img src={thumbnail} alt={name} />
-      <StyledDescription className="my-1">
-        <Title level={3} className="brand" ellipsis={{ tooltip: brand.name }}>
-          {brand.name}
-        </Title>
-        <Paragraph className="product-name" ellipsis={{ tooltip: name }}>
+      <StyledDescription className='my-1'>
+        {brand && (
+          <Title level={3} className='brand' ellipsis={{ tooltip: brand.name }}>
+            {brand.name}
+          </Title>
+        )}
+        <Paragraph className='product-name' ellipsis={{ tooltip: name }}>
           {name}
         </Paragraph>
-        <Paragraph className="price">
-          {formatCurrency(price.currentPrice)}
-        </Paragraph>
+        {price && (
+          <Paragraph className='price'>
+            {formatCurrency(price.currentPrice)}
+          </Paragraph>
+        )}
       </StyledDescription>
     </StyledContainer>
   );

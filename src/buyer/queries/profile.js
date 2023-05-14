@@ -6,7 +6,9 @@ import {
   where,
   orderBy,
   addDoc,
+  setDoc,
   updateDoc,
+  deleteDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { pick } from "lodash";
@@ -108,6 +110,38 @@ export const addNewAddress = async (id, data) => {
   };
   return await addDoc(collection(db, "delivery-address"), updatedData);
 };
+
+export const fetchCheckProductInSavedQuery = (id, productId) => {
+  if (!id || !productId) return;
+  return doc(db, "userProfile", id, "savedProducts", productId).withConverter(
+    idConverter
+  );
+};
+
+export const saveProduct = async (id, productData) => {
+  if (!id || !productData) return;
+  const { id: productId } = productData;
+  return await setDoc(doc(db, "userProfile", id, "savedProducts", productId), {
+    ...productData,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+};
+
+export const removeSavedProduct = async (id, productId) => { 
+  if (!id || !productId) return;
+  return await deleteDoc(
+    doc(db, "userProfile", id, "savedProducts", productId)
+  );
+};
+
+export const fetchUserSavedPlacesQuery = (id) => {
+  if (!id) return;
+  return query(collection(db, "userProfile", id, "savedPlaces")).withConverter(
+    idConverter
+  );
+};
+
 
 export const fetchUserAddressQuery = (id) => {
   if (!id) return;

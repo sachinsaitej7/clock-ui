@@ -76,6 +76,10 @@ service cloud.firestore {
     match /userProfile/{userId} {
       allow read: if true;
       allow write: if request.auth.uid == request.resource.id;
+      match /savedProducts/{document=**} {
+        allow read: if true;
+        allow write: if request.auth.uid != null;
+      }
     }
 
     match /userFollowers/{id} {
