@@ -54,7 +54,7 @@ const BottomBar = () => {
           active={active === 0}
         >
           <HomeIcon />
-          <p>Buy</p>
+          <p>Home</p>
         </Item>
         <Item
           className='flex flex-col justify-center items-center active:none'

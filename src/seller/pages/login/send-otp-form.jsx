@@ -11,6 +11,7 @@ const SendOtpForm = ({
 }) => {
   const theme = useTheme();
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
   const { message } = App.useApp();
 
   useLayoutEffect(() => {
@@ -35,7 +36,7 @@ const SendOtpForm = ({
   return (
     <Form
       layout='vertical'
-      onFinish={() => sendOtp(phoneNumber)}
+      onFinish={() => sendOtp(countryCode+phoneNumber)}
       style={{ marginTop: theme.space[8] }}
     >
       <Form.Item
@@ -52,7 +53,7 @@ const SendOtpForm = ({
         <Input.Group size='large'>
           <Row gutter={8}>
             <Col span={4}>
-              <Input value='+91' readOnly style={{ padding: theme.space[3] }} />
+              <Input value={countryCode} onChange={(e) => setCountryCode(e.target.value)} style={{ padding: theme.space[3] }} />
             </Col>
             <Col span={20}>
               <Input

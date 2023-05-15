@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import CartComponent from "./CartComponent";
+// import CartComponent from "./CartComponent";
 
 //images
 import { Logo } from "@assets/logo";
@@ -31,7 +31,7 @@ const RightMenuContainer = styled.div`
 
 const RightMenu = (
   <RightMenuContainer>
-    <CartComponent />
+    {/* <CartComponent /> */}
   </RightMenuContainer>
 );
 

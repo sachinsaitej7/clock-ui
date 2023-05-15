@@ -32,7 +32,7 @@ export const useSendOtp = () => {
       setLoading(true);
       const confirmation = await signInWithPhoneNumber(
         auth,
-        `+91${phoneNumber}`,
+        phoneNumber,
         appVerifier
       );
       setVerificationId(confirmation.verificationId);

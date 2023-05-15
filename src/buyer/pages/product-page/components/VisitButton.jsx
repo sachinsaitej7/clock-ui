@@ -53,7 +53,7 @@ const VisitButton = () => {
         className='w-full bg-primary my-2'
         onClick={handleVisitStore}
       >
-        Visit Store
+        See in map
       </StyledButton>
       <StyledButton
         className='w-full my-2 text-primary border-primary'

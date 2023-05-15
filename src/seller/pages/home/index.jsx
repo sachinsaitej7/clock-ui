@@ -120,7 +120,7 @@ const HomePage = () => {
               <CalendarDaysIcon width='14px' />
               <span
                 style={{ marginLeft: theme.space[3] }}
-              >{`Seller since ${moment(profile.createdAt.toDate()).format(
+              >{`User since ${moment(profile.createdAt.toDate()).format(
                 "MMMM YYYY"
               )}`}</span>
             </div>

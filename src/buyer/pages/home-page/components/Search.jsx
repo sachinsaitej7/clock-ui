@@ -50,8 +50,8 @@ const Search = () => {
           searchMode ? "invisible" : "visible"
         }`}
       >
-        <h2>Buy fashion popular among real people around you</h2>
-        <p className="subtitle">Ready to buy? Just search!</p>
+        <h2>Find and share places you love</h2>
+        {/* <p className="subtitle">Ready to buy? Just search!</p> */}
       </Header>
       <div
         style={{

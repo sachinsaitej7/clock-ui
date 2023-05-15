@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-  TrendingCategories,
-  SellBanner,
+  // TrendingCategories,
+  // SellBanner,
   Search,
   Collections,
   DailySearchCount,
@@ -25,8 +25,8 @@ const Home = () => {
   return (
     <HomePageContainer className={searchMode ? "slide-up" : ""}>
       <Search />
-      <SellBanner />
-      <TrendingCategories />
+      {/* <SellBanner /> */}
+      {/* <TrendingCategories /> */}
       <FiltersBar />
       <Collections />
       <DailySearchCount />
