@@ -7,7 +7,7 @@ import {
   Search,
   Collections,
   DailySearchCount,
-  FiltersBar,
+  // FiltersBar,
   AllPosts,
 } from "./components";
 
