@@ -8,6 +8,7 @@ import {
   Collections,
   DailySearchCount,
   FiltersBar,
+  AllPosts,
 } from "./components";
 
 import { SearchProvider, useSearch } from "./store/SearchProvider";
@@ -25,9 +26,10 @@ const Home = () => {
   return (
     <HomePageContainer className={searchMode ? "slide-up" : ""}>
       <Search />
+      <AllPosts />
       {/* <SellBanner /> */}
       {/* <TrendingCategories /> */}
-      <FiltersBar />
+      {/* <FiltersBar /> */}
       <Collections />
       <DailySearchCount />
     </HomePageContainer>

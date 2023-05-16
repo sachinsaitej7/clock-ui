@@ -68,6 +68,16 @@ export const useUserProfile = (id) => {
   return data;
 };
 
+export const useUserSavedProducts = (id) => {
+  const userSavedProductsQuery = id
+    ? collection(db, "userProfile", id, "savedProducts").withConverter(
+        idConverter
+      )
+    : undefined;
+  const data = useCollectionData(userSavedProductsQuery);
+  return data;
+};
+
 // hook to get product data by brand id
 export const useProductsByProfileId = (uid) => {
   const productQuery = uid

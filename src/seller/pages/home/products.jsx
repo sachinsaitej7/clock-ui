@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled, { useTheme } from "styled-components";
-import { Typography, Tabs } from "antd";
+import { Tabs, Typography } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { getFirebase } from "@firebase-app";
 import {
   useInstantProducts,
   useUserProfile,
+  useUserSavedProducts,
   // useOnDemandProducts,
 } from "./hooks";
 import EmptyPage from "./empty-page";
@@ -64,6 +65,8 @@ const Products = () => {
   const { auth } = getFirebase();
   const [user, userLoading] = useAuthState(auth);
   const [profile, profileLoading] = useUserProfile(user?.uid);
+  const [savedProducts, savedProductsLoading] = useUserSavedProducts(user?.uid);
+  console.log("savedProducts", savedProducts);
 
   const [instantProducts, iLoading] = useInstantProducts(profile?.id);
   // const [onDemandProducts, dLoading] = useOnDemandProducts(store?.id);
@@ -79,8 +82,12 @@ const Products = () => {
   };
 
   const getChildren = () => {
-    if (!products || userLoading || profileLoading) return <Spinner />;
-    if (active === "orders")
+    if (userLoading || profileLoading || savedProductsLoading || !products)
+      return <Spinner />;
+    const items = active === "instant" ? instantProducts : savedProducts;
+
+    if (active === "instant" && items?.length === 0) return <EmptyPage />;
+    if (active === "orders" && items?.length === 0)
       return (
         <Typography.Text
           style={{
@@ -90,25 +97,23 @@ const Products = () => {
             margin: theme.space[6],
           }}
         >
-          No orders found
+          No Saved posts found
         </Typography.Text>
       );
 
-    if (products.length === 0) return <EmptyPage />;
-
     return (
       <Collections
-        dataLength={products.length}
+        dataLength={items.length}
         next={() => {}}
         hasMore={false}
         loader={<Spinner />}
         key={active}
       >
-        {products.map((product, index) => {
+        {items.map((product, index) => {
           return (
             <ProductsImage
               src={product.thumbnail}
-              alt={product.name}
+              alt={product.name || product.description}
               key={product.id}
               onClick={() => {
                 setActiveProduct(product);
@@ -142,7 +147,7 @@ const Products = () => {
             },
             {
               key: "orders",
-              label: <h3>Orders </h3>,
+              label: <h3>Saved </h3>,
               children: getChildren(),
               forceRender: true,
             },

@@ -29,7 +29,7 @@ const EmptyPage = () => {
           level={5}
           style={{ margin: theme.space[0], marginLeft: theme.space[2] }}
         >
-          You haven’t listed any products
+          You haven’t post any place or product
         </Typography.Title>
       </div>
       <Typography.Text style={{ color: theme.text.light, textAlign: "center" }}>

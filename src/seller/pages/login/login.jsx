@@ -32,15 +32,14 @@ const Login = ({ handleClick }) => {
         }}
         className='my-2 font-bold'
       >
-        <SparklesIcon width='24px' className='inline' /> Introducing Shop & Sell
+        <SparklesIcon width='24px' className='inline' /> Introducing Share & Sell
       </Typography.Title>
       <Typography.Text
         type='secondary'
         className='text-base my-4 block'
         style={{ color: theme.text.white }}
       >
-        Setup your profile and start earning by listing products from
-        nearby stores.
+        Setup your profile and share your loved places and products.
       </Typography.Text>
       <Masonry className='my-4'></Masonry>
       <StyledButton

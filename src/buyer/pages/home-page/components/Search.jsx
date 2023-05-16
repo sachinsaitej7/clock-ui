@@ -22,7 +22,7 @@ const Header = styled.div`
   transition: all 0.3s ease-out;
 
   h2 {
-    margin-top: ${(props) => props.theme.space[9]};
+    margin-top: ${(props) => props.theme.space[10]};
     font-size: ${(props) => props.theme.fontSizes[6]};
     line-height: 120%;
     font-weight: ${(props) => props.theme.fontWeights.bold};

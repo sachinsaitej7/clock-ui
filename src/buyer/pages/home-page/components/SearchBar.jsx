@@ -39,7 +39,7 @@ const SearchBar = () => {
       debounce((nextValue) => {
         refine(nextValue);
       }, 300),
-    []
+    [refine]
   );
 
   const onClickLeftArrow = (e) => {
@@ -50,7 +50,7 @@ const SearchBar = () => {
 
   return (
     <StyledSearch
-      placeholder={"Search for sarees, kurtis and more...."}
+      placeholder={"Search for places, products and more...."}
       size="large"
       suffix={<SuffixIcon query={query} />}
       onChange={(e) => {
