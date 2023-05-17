@@ -68,7 +68,7 @@ export const validateProductData = (data) => {
     message = "Price is required";
     return message;
   }
-  if (!data.tags || data.tags.length === 0) {
+  if (!data?.tags || data.tags.length === 0) {
     message = "Hash Tags are required";
     return message;
   }

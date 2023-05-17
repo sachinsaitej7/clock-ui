@@ -45,7 +45,7 @@ const ProfileSetup = () => {
   };
 
   const handleUploadImages = (images) => {
-    if (images.length === 0) return;
+    if (!images?.length) return;
     const logo = images[0].response?.downloadURL;
     setProfileImage(logo);
   };

@@ -112,7 +112,7 @@ export default function AddNewPlace({ profile, setAddPlace }) {
     setLoading(false);
   };
 
-  const handleProductImages = (images) => {
+  const handleProductImages = (images=[]) => {
     const imagesUrls = images
       .filter((i) => i.response)
       .map((image) => image.response.downloadURL);
@@ -130,9 +130,13 @@ export default function AddNewPlace({ profile, setAddPlace }) {
       </TopBarContainer>
       <StyledCard>
         <Typography.Title level={4}>
-          Images * ({images.length}/4)
+          Images * ({images?.length || 0}/4)
         </Typography.Title>
-        <UploadImages limit={4} onSuccess={handleProductImages} />
+        <UploadImages
+          limit={4}
+          onSuccess={handleProductImages}
+          capture='environment'
+        />
         <Typography.Text style={{ color: "#8C8C8C" }}>
           Add some cool pictures of this post!
         </Typography.Text>

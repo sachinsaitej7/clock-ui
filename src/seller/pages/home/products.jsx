@@ -103,7 +103,7 @@ const Products = () => {
 
     return (
       <Collections
-        dataLength={items.length}
+        dataLength={items?.length || 0}
         next={() => {}}
         hasMore={false}
         loader={<Spinner />}

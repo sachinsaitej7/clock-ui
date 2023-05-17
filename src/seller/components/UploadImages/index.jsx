@@ -26,7 +26,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-const UploadImages = ({ limit = 8, onSuccess }) => {
+const UploadImages = ({ limit = 8, onSuccess, capture }) => {
   const theme = useTheme();
   const { message } = App.useApp();
 
@@ -107,7 +107,7 @@ const UploadImages = ({ limit = 8, onSuccess }) => {
         onPreview={handlePreview}
         onChange={handleChange}
         accept="image/*"
-        capture="environment"
+        capture={capture}
         beforeUpload={beforeUpload}
         customRequest={handleUpload}
         onRemove={handleRemove}
@@ -122,7 +122,7 @@ const UploadImages = ({ limit = 8, onSuccess }) => {
         disabled={uploadImageLoading || deleteImageLoading}
         multiple
       >
-        {fileList.length >= limit ? null : (
+        {fileList?.length >= limit ? null : (
           <UploadImagePlaceholder width={"56px"} height={"56px"} />
         )}
       </StyledUpload>
